@@ -4,7 +4,7 @@ channels:
   - defaults
 dependencies:
   - python=3.13
-  - jupyter-book
+  - jupyter-book<2
   - ipykernel
   - numpy
   - pandas
