@@ -5,17 +5,9 @@ on:
     branches:
       - main
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
 jobs:
   build-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repo
@@ -33,18 +25,17 @@ jobs:
       - name: Add kernel
         shell: bash -l {0}
         run: |
-          python -m ipykernel install --name astrostat-school --display-name "Python (astrostat-school-7)" --user
+          python -m ipykernel install --name astrostat-school --display-name "Python (astrostat-school)" --user
 
       - name: Build the book
         shell: bash -l {0}
         run: |
-          jupyter-book build . && test -d _build/html
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _build/html
+          jupyter-book build .
 
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: _build/html
+          force_orphan: true
