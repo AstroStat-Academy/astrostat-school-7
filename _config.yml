@@ -10,6 +10,9 @@ repository:
 launch_buttons:
   colab_url: "https://colab.research.google.com"
 
+execute:
+  execute_notebooks: "off"
+
 parse:
   myst_enable_extensions:
     - html_image

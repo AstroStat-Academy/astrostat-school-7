@@ -38,7 +38,7 @@ jobs:
       - name: Build the book
         shell: bash -l {0}
         run: |
-          jupyter-book build .
+          jupyter-book build . && test -d _build/html
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
