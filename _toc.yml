@@ -5,7 +5,5 @@ options:
   numbered: false
 
 chapters:
-  - caption: "Gaussian Processes"
-    chapters:
-      - file: 08_Gaussian_Processes/Gaussian_Processes
-      - file: 08_Gaussian_Processes/Gaussian_Processes_answerkey
+  - file: 08_Gaussian_Processes/Gaussian_Processes
+  - file: 08_Gaussian_Processes/Gaussian_Processes_answerkey
