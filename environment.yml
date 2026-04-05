@@ -1,0 +1,17 @@
+name: astrostat-school
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.13
+  - jupyter-book
+  - ipykernel
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - scipy
+  - scikit-learn
+  - scikit-image
+  - astropy
+  - requests

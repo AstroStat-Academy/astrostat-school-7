@@ -1,0 +1,41 @@
+name: deploy-book
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Micromamba
+        uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-file: environment.yml
+          cache-environment: true
+          cache-downloads: true
+          init-shell: bash
+          activate-environment: astrostat-school
+
+      - name: Add kernel
+        shell: bash -l {0}
+        run: |
+          python -m ipykernel install --name astrostat-school --display-name "Python (astrostat-school-7)" --user
+
+      - name: Build the book
+        shell: bash -l {0}
+        run: |
+          jupyter-book build .
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: _build/html
+          force_orphan: true
