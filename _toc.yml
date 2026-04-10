@@ -5,4 +5,4 @@ options:
   numbered: false
 
 chapters:
-  - file: 08_Gaussian_Processes/Gaussian_Processes_answerkey
+  - file: Gaussian_Processes/Gaussian_Processes_answerkey
