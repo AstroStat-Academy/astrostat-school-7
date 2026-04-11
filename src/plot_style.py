@@ -22,10 +22,10 @@ plt.rcParams.update({
     "savefig.dpi": 300,         # Resolution for saved figures
     "axes.spines.top": False,   # Remove top spine
     "axes.spines.right": False, # Remove right spine
-    "text.color": "gray",   # Set all text color
+    "text.color": "gray",       # Set all text color
     "axes.labelcolor": "gray",  # Set axis labels color
-    "xtick.color": "gray",  # Set x-axis tick labels color
-    "ytick.color": "gray",  # Set y-axis tick labels color
-    "legend.edgecolor": "gray",  # Set legend edge color
-    "legend.labelcolor": "gray"  # Set legend text color    
+    "xtick.color": "gray",      # Set x-axis tick labels color
+    "ytick.color": "gray",      # Set y-axis tick labels color
+    "legend.edgecolor": "gray", # Set legend edge color
+    "legend.labelcolor": "gray" # Set legend text color    
 })
