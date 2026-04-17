@@ -6,4 +6,4 @@ options:
 
 chapters:
   - file: Gaussian_Processes/Gaussian_Processes_answerkey
-  - file: Template/
+  - file: Template_Notebook/Template_Notebook.ipynb
