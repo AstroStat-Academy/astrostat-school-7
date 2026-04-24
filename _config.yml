@@ -2,12 +2,6 @@ title: "AstroStat School 2026 — Rome"
 author: "AstroStat Academy"
 copyright: "2026"
 
-repository:
-  url: https://github.com/AstroStat-Academy/astrostat-school-7
-  path_to_book: .
-  branch: main
-
-
 html:
   extra_css:
     - _static/custom.css
@@ -17,6 +11,11 @@ html:
     - Template_Notebook/images
     - Template_Notebook/data
   
+repository:
+  url: https://github.com/AstroStat-Academy/astrostat-school-7
+  path_to_book: .
+  branch: main
+
 launch_buttons:
   colab_url: "https://colab.research.google.com"
   # thebe: true
