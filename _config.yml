@@ -7,6 +7,16 @@ repository:
   path_to_book: .
   branch: main
 
+
+html:
+  extra_css:
+    - _static/custom.css
+  static_path:
+    - Gaussian_Processes/images
+    - Gaussian_Processes/data
+    - Template_Notebook/images
+    - Template_Notebook/data
+  
 launch_buttons:
   colab_url: "https://colab.research.google.com"
   # thebe: true
