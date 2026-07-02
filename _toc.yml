@@ -9,4 +9,5 @@ chapters:
   - file: Bayesian/Bayesian_1.ipynb
   - file: Bayesian/Bayesian_2.ipynb
   - file: GPU_Parallelization/GPU_parallelization.ipynb
+  - file: Time_Series/Time_Series.ipynb
   - file: Template_Notebook/Template_Notebook.ipynb
