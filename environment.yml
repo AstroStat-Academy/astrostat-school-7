@@ -15,3 +15,4 @@ dependencies:
   - scikit-image
   - astropy
   - requests
+  - emcee=3.1.6
