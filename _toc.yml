@@ -6,4 +6,7 @@ options:
 
 chapters:
   - file: Gaussian_Processes/Gaussian_Processes_answerkey
+  - file: Bayesian/Bayesian_1.ipynb
+  - file: Bayesian/Bayesian_2.ipynb
+  - file: GPU_Parallelization/GPU_parallelization.ipynb
   - file: Template_Notebook/Template_Notebook.ipynb
