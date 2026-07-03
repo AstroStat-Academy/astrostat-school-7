@@ -18,3 +18,7 @@ Thumbs.db
 # Environment
 .env
 *.log
+
+# Lecture Specific
+AI_Agents/.env
+AI_Agents/models
