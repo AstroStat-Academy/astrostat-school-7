@@ -8,6 +8,8 @@ html:
   static_path:
     - Gaussian_Processes/images
     - Gaussian_Processes/data
+    - Time_Series/images
+    - Time_Series/data
     - Template_Notebook/images
     - Template_Notebook/data
   
