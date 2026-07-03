@@ -10,6 +10,7 @@ html:
     - Gaussian_Processes/data
     - Time_Series/images
     - Time_Series/data
+    - AI_Agents/images
     - Template_Notebook/images
     - Template_Notebook/data
   
