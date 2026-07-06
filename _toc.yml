@@ -11,4 +11,6 @@ chapters:
   - file: GPU_Parallelization/GPU_parallelization.ipynb
   - file: Time_Series/Time_Series.ipynb
   - file: AI_Agents/AI_Agents.ipynb
+  - file: Machine_Learning/Classification.ipynb
+  - file: Machine_Learning/Intro_and_Clustering.ipynb
   - file: Template_Notebook/Template_Notebook.ipynb

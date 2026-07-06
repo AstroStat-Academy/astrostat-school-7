@@ -11,6 +11,8 @@ html:
     - Time_Series/images
     - Time_Series/data
     - AI_Agents/images
+    - Machine_Learning/images
+    - Machine_Learning/data
     - Template_Notebook/images
     - Template_Notebook/data
   
