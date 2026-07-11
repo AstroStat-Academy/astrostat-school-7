@@ -1,4 +1,6 @@
+# Agents
 CLAUDE.md
+AGENTS.md
 
 # Jupyter notebook checkpoints
 **/.ipynb_checkpoints/
@@ -18,3 +20,8 @@ Thumbs.db
 # Environment
 .env
 *.log
+
+# Lecture Specific
+AI_Agents/.env
+AI_Agents/models
+CLAUDE.md

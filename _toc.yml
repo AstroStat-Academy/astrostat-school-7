@@ -5,10 +5,13 @@ options:
   numbered: false
 
 chapters:
-  - file: Gaussian_Processes/Gaussian_Processes_answerkey
+  - file: Hypothesis_Testing/Hypothesis_Testing
+  - file: Machine_Learning/Intro_and_Clustering.ipynb
   - file: Bayesian/Bayesian_1.ipynb
   - file: Bayesian/Bayesian_2.ipynb
-  - file: GPU_Parallelization/GPU_parallelization.ipynb
+  - file: Machine_Learning/Classification.ipynb
+  - file: Gaussian_Processes/Gaussian_Processes_answerkey
   - file: Time_Series/Time_Series.ipynb
+  - file: GPU_Parallelization/GPU_parallelization.ipynb
   - file: SBI/SBI_short.ipynb
-  - file: Template_Notebook/Template_Notebook.ipynb
+  - file: AI_Agents/AI_Agents.ipynb
