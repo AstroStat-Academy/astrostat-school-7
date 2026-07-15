@@ -182,10 +182,16 @@ Use `<details><b><summary>[Label] (click here to expand)</summary></b> ... </det
 **Warning:** Color blocks do not render on Colab: **never** use any other variant that is not specified above.
 
 ### Exercises
-- Do not number Exercises, the markdown hash (`#`, `##`, `###`, etc.) will do the job.
-- The indexing level (`#`, `##`, `###`, etc.) shall be relevant to the section the exercise refer to: an exercise shall be a sub-section of the section it refers to.
+- Do not number Exercises, do not use markdowns (`#`, `##`, `###`, etc.): they will break Jupyter Book.
+- Each exercise title must include a time estimate in brackets, e.g. `**Exercise — Title [20 min]**`.
+- Use a <font size=...></font> tags to wrap the title, e.g. <font size=6>**Exercise [45 min]**</font>
+- The font size shall be relevant to the section the exercise refer to: an exercise shall be a sub-section of the section it refers to.
+  In this sense:
+  - <font size=6> corresponds to a markdown chapter ("#")
+  - <font size=4> corresponds to a markdown sub-chapter ("##")
+  - <font size=3> corresponds to a markdown sub-sub-chapter ("###")
 - Overestimate time — students see the topic for the first time
-- Each exercise title must include a time estimate in brackets, e.g. `## Exercise — Title [20 min]`.
+
 - **Exercises are applications, not extensions.** If asked to create an exercise, only demand students to use Python features, functions, and patterns that have already been introduced earlier in the same notebook. Never introduce new syntax, new library methods, or new concepts inside an exercise.
 - Always provide a solution when asked to generate an exercise.
 - Solution stays in the same notebook (not a separate file)
