@@ -9,9 +9,13 @@ chapters:
   - file: Machine_Learning/Intro_and_Clustering.ipynb
   - file: Bayesian/Bayesian_1.ipynb
   - file: Bayesian/Bayesian_2.ipynb
+  - file: MCMC/MCMC.ipynb
   - file: Machine_Learning/Classification.ipynb
   - file: Gaussian_Processes/Gaussian_Processes_answerkey
   - file: Time_Series/Time_Series.ipynb
+  - file: Machine_Learning/Best_Practices.ipynb
+  - file: DL_Intro_n_Regression/Intro_n_Regression.ipynb
   - file: GPU_Parallelization/GPU_parallelization.ipynb
   - file: SBI/SBI_short.ipynb
+  - file: DL_Diffusion/Diffusion.ipynb
   - file: AI_Agents/AI_Agents.ipynb
