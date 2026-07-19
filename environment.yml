@@ -16,3 +16,4 @@ dependencies:
   - astropy
   - requests
   - emcee=3.1.6
+  - pymannkendall

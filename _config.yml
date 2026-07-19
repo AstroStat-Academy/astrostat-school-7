@@ -6,6 +6,8 @@ html:
   extra_css:
     - _static/custom.css
   static_path:
+    - Hypothesis_Testing/images
+    - Hypothesis_Testing/data
     - Gaussian_Processes/images
     - Gaussian_Processes/data
     - Time_Series/images
