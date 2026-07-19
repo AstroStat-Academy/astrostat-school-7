@@ -6,6 +6,8 @@ html:
   extra_css:
     - _static/custom.css
   static_path:
+    - Intro/images
+    - Intro/data
     - Hypothesis_Testing/images
     - Hypothesis_Testing/data
     - MLE/data
