@@ -9,6 +9,7 @@ html:
     - Hypothesis_Testing/images
     - Hypothesis_Testing/data
     - MLE/data
+    - MCMC/images
     - Gaussian_Processes/images
     - Gaussian_Processes/data
     - Time_Series/images
