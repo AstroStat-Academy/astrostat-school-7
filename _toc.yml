@@ -5,7 +5,9 @@ options:
   numbered: false
 
 chapters:
+  - file: Intro/Intro.ipynb
   - file: Hypothesis_Testing/Hypothesis_Testing
+  - file: MLE/MLE.ipynb
   - file: Machine_Learning/Intro_and_Clustering.ipynb
   - file: Bayesian/Bayesian_1.ipynb
   - file: Bayesian/Bayesian_2.ipynb
