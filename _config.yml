@@ -11,14 +11,14 @@ html:
     - Hypothesis_Testing/images
     - Hypothesis_Testing/data
     - MLE/data
+    - Machine_Learning/images
+    - Machine_Learning/data
     - MCMC/images
     - Gaussian_Processes/images
     - Time_Series/images
     - Time_Series/data
-    - AI_Agents/images
-    - Machine_Learning/images
-    - Machine_Learning/data
     - SBI/images
+    - AI_Agents/images
     - Template_Notebook/images
     - Template_Notebook/data
 
