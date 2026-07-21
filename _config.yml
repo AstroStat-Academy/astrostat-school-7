@@ -18,6 +18,7 @@ html:
     - AI_Agents/images
     - Machine_Learning/images
     - Machine_Learning/data
+    - SBI/images
     - Template_Notebook/images
     - Template_Notebook/data
 
