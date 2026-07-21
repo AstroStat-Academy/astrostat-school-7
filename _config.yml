@@ -13,7 +13,6 @@ html:
     - MLE/data
     - MCMC/images
     - Gaussian_Processes/images
-    - Gaussian_Processes/data
     - Time_Series/images
     - Time_Series/data
     - AI_Agents/images
