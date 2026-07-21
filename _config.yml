@@ -19,6 +19,7 @@ html:
     - Time_Series/data
     - SBI/images
     - AI_Agents/images
+    - NN_Interpretability/images
     - Template_Notebook/images
     - Template_Notebook/data
 

@@ -18,7 +18,7 @@ chapters:
   - file: Machine_Learning/Best_Practices.ipynb
   - file: DL_Intro_n_Regression/Intro_n_Regression.ipynb
   - file: GPU_Parallelization/GPU_parallelization.ipynb
-  - file: NN_interpretability/NN_interpretability.ipynb
+  - file: NN_Interpretability/NN_explainability.ipynb
   - file: SBI/SBI_short.ipynb
   - file: DL_Diffusion/Diffusion.ipynb
   - file: AI_Agents/AI_Agents.ipynb
