@@ -16,7 +16,7 @@ chapters:
   - file: Gaussian_Processes/Gaussian_Processes.ipynb
   - file: Time_Series/Time_Series.ipynb
   - file: Machine_Learning/Best_Practices.ipynb
-  - file: DL_Intro_n_Regression/Intro_n_Regression.ipynb
+  - file: DL_Intro_n_Regression/Intro_n_Regression.ipynb 
   - file: GPU_Parallelization/GPU_parallelization.ipynb
   - file: NN_Explainability/NN_explainability.ipynb
   - file: SBI/SBI_short.ipynb
