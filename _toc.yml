@@ -21,4 +21,6 @@ chapters:
   - file: NN_Explainability/NN_explainability.ipynb
   - file: SBI/SBI_short.ipynb
   - file: DL_Diffusion/Diffusion.ipynb
+  - file: DL_Diffusion/test.ipynb
   - file: AI_Agents/AI_Agents.ipynb
+
