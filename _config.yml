@@ -17,6 +17,10 @@ html:
     - Gaussian_Processes/images
     - Time_Series/images
     - Time_Series/data
+    - DL_Diffusion/images
+    - DL_Diffusion/data
+    - DL_Intro_n_Regression/images
+    - DL_Intro_n_Regression/data    
     - SBI/images
     - AI_Agents/images
     - NN_Interpretability/images
