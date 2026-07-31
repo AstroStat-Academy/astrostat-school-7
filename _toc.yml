@@ -20,6 +20,7 @@ chapters:
   - file: GPU_Parallelization/GPU_parallelization.ipynb
   - file: NN_Explainability/NN_explainability.ipynb
   - file: SBI/SBI_short.ipynb
+  - file: SBI/SBI_exercise.ipynb
   - file: DL_Diffusion/Diffusion.ipynb
   - file: AI_Agents/AI_Agents.ipynb
 
