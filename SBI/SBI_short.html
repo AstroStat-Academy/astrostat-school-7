@@ -1,0 +1,1705 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to Simulation Based Inference &#8212; AstroStat School 2026 — Rome</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'SBI/SBI_short';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Simulation Based Inference: Exercises" href="SBI_exercise.html" />
+    <link rel="prev" title="Neural Network Explainability" href="../NN_Explainability/NN_explainability.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — Rome</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — Rome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Intro/Intro.html">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Hypothesis_Testing/Hypothesis_Testing.html">Hypothesis Testing <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MLE/MLE.html">Maximum Likelihood Estimation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Intro_and_Clustering.html">Introduction to Machine Learning and Clustering <a class="tocSkip"></a></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_1.html">Introduction to Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_2.html">Applied Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">Basics of Markov Chain Monte Carlo <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Classification.html">Classification <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Gaussian_Processes/Gaussian_Processes.html">Gaussian Processes <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Time_Series/Time_Series.html">Time Series Analysis <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Best_Practices.html">Machine Learning Practices and Protocols</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Intro_n_Regression/Intro_n_Regression.html">Introduction to Deep Learning and Regression Workshop</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../GPU_Parallelization/GPU_parallelization.html">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../NN_Explainability/NN_explainability.html">Neural Network Explainability <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Simulation Based Inference</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="SBI_exercise.html">Simulation Based Inference: Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Diffusion/Diffusion.html">Diffusion Models</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../AI_Agents/AI_Agents.html">Intro to AI Agents<a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroStat-Academy/astrostat-school-7/blob/main/./SBI/SBI_short.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/SBI/SBI_short.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Simulation Based Inference</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Simulation Based Inference</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisiting-bayesian-inference">Revisiting Bayesian Inference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-remind-ourselves-of-what-the-likelihood-function-is">Let’s remind ourselves of what the Likelihood function is:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-limits-of-traditional-inference">The limits of traditional inference:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulators">Simulators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-based-inference-the-basic-idea">Simulation-based inference: The basic idea</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-challenge-of-simulation-based-inference">The challenge of simulation-based inference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#working-example-cosmology-with-supernovae">Working Example: Cosmology with Supernovae</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-bayesian-inference">Standard Bayesian Inference</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-based-inference">Simulation-based Inference</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-sbi-approximate-bayesian-computation-abc">Traditional SBI - Approximate Bayesian Computation (ABC)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-posterior-estimation-npe">Neural Posterior Estimation (NPE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interlude-normalizing-flows">Interlude: Normalizing Flows</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizing-flows-summary">Normalizing Flows summary:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-npe">Back to NPE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-npe-to-our-problem">Applying NPE to our problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-generation">Sample generation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#npe-class">NPE class</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inference">Inference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-we-wanted-to-make-everything-from-scratch-optional-bonus">What if we wanted to make everything from scratch? <em>(optional / bonus)</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#featurizer">Featurizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">NPE class</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Inference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-further-reading">Sources &amp; Further Reading</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <fieldset style="padding:10px; border:1px solid #ccc; box-shadow:2px 2px 5px rgba(0,0,0,0.1);">
+<legend style="font-size: 10px; color:#555;">Credits</legend>
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 80px; vertical-align: top;">
+            <img src="https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/logo/logo_b_text_lowres.png" alt="AstroStat Academy logo" width="100">
+        </td>
+        <td style="vertical-align: center; padding-left: 15px; font-size: 10px; line-height: 1.2;">
+            This notebook contains original work by the authors unless stated otherwise.
+            Any external material is properly credited to its sources.<br>
+            References to papers, datasets, and software are acknowledged.
+            Original content is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0 (GNU GPLv3)</a>.
+        </td>
+    </tr>
+</table>
+</fieldset>
+<!-- Allow these <br> or it will look ugly once rendered on Jupyter Book. -->
+<br><section class="tex2jax_ignore mathjax_ignore" id="introduction-to-simulation-based-inference">
+<h1>Introduction to Simulation Based Inference<a class="headerlink" href="#introduction-to-simulation-based-inference" title="Link to this heading">#</a></h1>
+<p>Having a simulator - a “black box” that can produce data under any model parameters - can prove very valuable because in some problems it is impractical or even impossible to write down a form of the likelihood.</p>
+<ul class="simple">
+<li><p>A simulator can help sample from an untractable likelihood</p></li>
+<li><p>This can prevent wrong result if a wrong likelihood is chosen</p></li>
+<li><p>Perform Simulation-Based parameter inference using:</p>
+<ul>
+<li><p>Approximate Bayesian Computation, and</p></li>
+<li><p>Neural Posterior Estimation</p></li>
+</ul>
+</li>
+<li><p>How Normalizing Flows can create very expressive generative models to sample from</p></li>
+</ul>
+<p><strong>Disclaimer:</strong> This is probably the most demanding lecture of the school, containing multiple notions and tools that you learned in previous lectures and linking them in intricate ways.</p>
+<p><strong>Note:</strong> This notebook is shortened compared to the full version that can be found in the <a class="reference external" href="https://github.com/astrostatistics-in-crete/2025_summer_school/blob/main/14_SBI/SBI_full.ipynb">material of previous schools</a>, where all the methods and more details can be found.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Compatibility patch for GetDist + NumPy 2.0 ---</span>
+<span class="c1"># NumPy 2.0 removed np.infty, but older versions of GetDist still use it.</span>
+<span class="c1"># This patch restores it at runtime before importing GetDist.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s1">&#39;infty&#39;</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">infty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># Restore deprecated alias for compatibility</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">TensorDataset</span><span class="p">,</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">random_split</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">emcee</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">poisson</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">chi2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">basinhopping</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytorch_lightning</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">getdist</span><span class="w"> </span><span class="kn">import</span> <span class="n">plots</span><span class="p">,</span> <span class="n">MCSamples</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pool</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">nflows.flows.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nflows.distributions.normal</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardNormal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nflows.transforms.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompositeTransform</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nflows.transforms.autoregressive</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaskedAffineAutoregressiveTransform</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nflows.transforms.permutations</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReversePermutation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sbi.inference</span><span class="w"> </span><span class="kn">import</span> <span class="n">SNPE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sbi.utils.torchutils</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoxUniform</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/colab/clone_and_cd_colab.py&quot;</span>
+<span class="n">colab</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">colab</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/styles/plot_style.py&quot;</span>
+<span class="n">style</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<section id="revisiting-bayesian-inference">
+<h2>Revisiting Bayesian Inference<a class="headerlink" href="#revisiting-bayesian-inference" title="Link to this heading">#</a></h2>
+<p>The goal of Bayesian inference is given some observed data <span class="math notranslate nohighlight">\(x\)</span>, to infer the distribution of the parameters <span class="math notranslate nohighlight">\(\theta\)</span> of some model that is consistent with the data, i.e. the posterior distribution <span class="math notranslate nohighlight">\(p(\theta|x)\)</span>. This is achieved using Bayes’ theorem:</p>
+<div class="math notranslate nohighlight">
+\[ \Large p(\theta|x) = \frac{p(x|\theta)p(\theta)}{p(x)}\]</div>
+<p>Some examples from astronomy for the observed data <span class="math notranslate nohighlight">\(x\)</span> and the model parameters <span class="math notranslate nohighlight">\(\theta\)</span> are:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><center> x </center></p></th>
+<th class="head"><p><center> θ </center></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>observed X-ray photon count of a galaxy cluster</p></td>
+<td><p>the mass of the cluster</p></td>
+</tr>
+<tr class="row-odd"><td><p>gravitational wave signal from a collapsing black hole binary</p></td>
+<td><p>the mass ratio and ellipticity of the binary</p></td>
+</tr>
+<tr class="row-even"><td><p>2D sky projection of galaxy weak lensing measurements</p></td>
+<td><p>the cosmological parameters governing dark matter and dark energy</p></td>
+</tr>
+<tr class="row-odd"><td><p>the distorted arcs of a strongly lensed galaxy</p></td>
+<td><p>the mass distribution of the lensing galaxy</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<a class="reference internal image-reference" href="../_images/likelihood_prior_posterior.png"><img alt="../_images/likelihood_prior_posterior.png" src="../_images/likelihood_prior_posterior.png" style="width: 700px;" />
+</a>
+<table><tr><td width=800><center><br>
+    Figure 1. Example of Bayesian inference with a prior distribution, a posterior distribution, and a likelihood function. Taken from <a href="https://doi.org/10.3389/fncom.2019.00002" target="_blank">Yanagisawa, Kawamata, and Ueda (2019)</a>.
+<br></center></td></tr></table><a class="reference internal image-reference" href="../_images/prior_lh_post.png"><img alt="../_images/prior_lh_post.png" src="../_images/prior_lh_post.png" style="width: 65%;" />
+</a>
+<table><tr><td width=800><center><br>
+    Figure 2. Prior, likelihood and posterior distributions for an arbitrary 1D inference problem. The observed data point $x_0$ and the true parameter $\theta_0$ are indicated in black. In a Bayesian setting, we want to infer the posterior distribution on the model parameter $\theta$ given the data (blue). Conversely, if we know the true parameter $\theta_0$ then we get the likehood (red), i.e. the probability distribution of the data. Taken from <a href="https://doi.org/10.48550/arXiv.2402.05137" target="_blank">Ho et al. (2024)</a>.
+<br></center></td></tr></table><section id="let-s-remind-ourselves-of-what-the-likelihood-function-is">
+<h3>Let’s remind ourselves of what the Likelihood function is:<a class="headerlink" href="#let-s-remind-ourselves-of-what-the-likelihood-function-is" title="Link to this heading">#</a></h3>
+<p>The likelihood function quantifies how likely the <span style="color:#d87c3a"><em>observed data</em></span> is given a set of <span style="color:#d87c3a"><em>model parameters</em></span> that describe our theory. Essentially, the likelihood is what we know about how the data was generated and it describes the underlying probabilistic process the data has to go through based on the model and its parameters.</p>
+<p>Given some data/observations <span class="math notranslate nohighlight">\(x\)</span>, generated through some stochastic process, we can sometimes <span style="color:#d87c3a"><em>construct</em></span> a likelihood function that describes the probability of observing the data given some parameters <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Normally, we derive the analytical form of the likelihood function from the <span style="color:#d87c3a">theory</span>, combined with some <span style="color:#d87c3a">assumptions about the noise</span> in the data or <span style="color:#d87c3a">unknown physics</span> (e.g. assume Gaussian distribution for continuous data, Poisson distribution for count data).</p>
+</section>
+<section id="the-limits-of-traditional-inference">
+<h3>The limits of traditional inference:<a class="headerlink" href="#the-limits-of-traditional-inference" title="Link to this heading">#</a></h3>
+<p>What we have described so far is the traditional Bayesian inference, where we write down an <span style="color:#d87c3a"><em>analytical</em></span> form of the likelihood. Afterwards, we can sometimes analytically compute the posterior distribution (if the evidence term is tractable)
+or use sampling methods (e.g. MCMC) to sample from it.</p>
+<p>However, we often encounter complex systems where the underlying processes are not fully understood or are too complicated to model analytically → <span style="color:#d87c3a">for a general inference problem, we may not know which likelihood function to choose or whether this choice is valid.</span></p>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<b>In-class discussion: What happens when we cannot write down an analytical form of the likelihood?</b>
+<br>
+<i>Discuss with your teammate, then report.</i>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<p>We can resort to…
+<a class="reference internal" href="../_images/sponge_bob.jpg"><img alt="../_images/sponge_bob.jpg" src="../_images/sponge_bob.jpg" style="width: 400px;" /></a></p>
+</details>
+</div></section>
+</section>
+<section id="simulators">
+<h2>Simulators<a class="headerlink" href="#simulators" title="Link to this heading">#</a></h2>
+<p>Simulators are <span style="color:#d87c3a">computer programs that generate synthetic data from a model</span>. They take as <strong>input</strong> a set of parameters <span class="math notranslate nohighlight">\(\theta\)</span>, sample a series of internal states or <strong>latent variables</strong>, <span class="math notranslate nohighlight">\(z_i \sim p(z_i | z_{&lt;i}, \theta)\)</span>, where <em>“~”</em> means <em>“sampling from”</em>, and then <strong>generate</strong> a data vector <span class="math notranslate nohighlight">\(x \sim p(x | z, \theta)\)</span>.</p>
+<p>In astronomy, some examples of simulators are:</p>
+<ul class="simple">
+<li><p><strong>N-body simulations</strong>: simulate the evolution of a system of particles under the influence of gravity.</p></li>
+<li><p><strong>Galaxy formation simulations</strong>: simulate the formation and evolution of galaxies (N-body, hydrodynamics, magnetic fields, etc).</p></li>
+<li><p><strong>Stellar population synthesis</strong>: simulate the spectral energy distribution of a stellar population.</p></li>
+</ul>
+<p>The <strong>latent variables</strong> <span class="math notranslate nohighlight">\(z\)</span> can be:</p>
+<ul class="simple">
+<li><p><strong>physical quantities</strong> that are not directly observable (e.g. position of a particle in an N-body simulation). This may include instrumental effects (e.g. seeing, telescope properties).</p></li>
+<li><p><strong>non-physical quantities</strong> that are internal to the simulator, and do not have a direct physical interpretation (e.g. some random seed).</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/lfi_sim_green.png"><img alt="../_images/lfi_sim_green.png" src="../_images/lfi_sim_green.png" style="width: 800px;" />
+</a>
+<table><tr><td width=800><center><br>
+    Figure 3. The simulator takes as input the model parameters $\theta$ and generates synthetic data $x$. We can view the simulator as a black box function that can be used to generate data for any set of parameters.</a>.
+<br></center></td></tr></table><p>The question is:</p>
+<p><em><strong>How can we use simulations to perform inference?</strong></em></p>
+</section>
+<section id="simulation-based-inference-the-basic-idea">
+<h2>Simulation-based inference: The basic idea<a class="headerlink" href="#simulation-based-inference-the-basic-idea" title="Link to this heading">#</a></h2>
+<p>Instead of trying to analytically evaluate the likelihood, we can build a <strong>forward model</strong> of the data → the stochastic <strong>simulator</strong> becomes the physical <strong>model</strong>.</p>
+<p>The <span style="color:#d87c3a">outputs of the simulator</span> become in this way <span style="color:#d87c3a">samples of the observational data</span> that we would expect to observe given the parameters <span class="math notranslate nohighlight">\(\theta\)</span>. So, running the simulator at a fixed <span class="math notranslate nohighlight">\(\theta\)</span> draws a sample <span class="math notranslate nohighlight">\(x \sim p(x \mid \theta)\)</span>.</p>
+<p>Therefore, if we simulate enough examples, their relative frequency traces out the full distribution <span class="math notranslate nohighlight">\(p(x \mid \theta)\)</span>. That is, we can <span style="color:#d87c3a">characterize the likelihood directly from simulations</span>, without ever writing it down analytically!</p>
+<p>This way, we can:</p>
+<ul class="simple">
+<li><p>bypass the need to evaluate the likelihood analytically</p></li>
+<li><p>fully exploit the information content of the data</p></li>
+<li><p>incorporate complex physical models, and systematic effects</p></li>
+<li><p>combine multiple probes via joint simulations</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/problem_solved.gif"><img alt="../_images/problem_solved.gif" src="../_images/problem_solved.gif" style="width: 400px;" />
+</a>
+<br>
+<p><em><strong>So why hasn’t this been mainstream until now?</strong></em></p>
+<section id="the-challenge-of-simulation-based-inference">
+<h3>The challenge of simulation-based inference<a class="headerlink" href="#the-challenge-of-simulation-based-inference" title="Link to this heading">#</a></h3>
+<p>The probability of a simulation run depends jointly on the observation and the <em>stochastic latent variables</em> <span class="math notranslate nohighlight">\(z\)</span> of the simulator: <span class="math notranslate nohighlight">\(p(x,z | \theta)\)</span>.</p>
+<p>However, <span style="color:#d87c3a"> we only observe the data</span> <span class="math notranslate nohighlight">\(x\)</span>, so the likelihood we need should be marginalized over the latent variables:</p>
+<div class="math notranslate nohighlight">
+\[ \Large p(x | \theta) = \int p(x,z | \theta) dz = \int p(x | z, \theta) p(z | \theta) dz\]</div>
+<p>This is an <span style="color:#d87c3a">integral over all possible trajectories</span> through the latent space (i.e. all possible execution traces of the simulator). For realistic simulators, with large latent spaces, it is not feasible to evaluate this integral explicitly.</p>
+<p>⮕ <strong>the marginal likelihood is intractable!</strong></p>
+<a class="reference internal image-reference" href="../_images/sbi.png"><img alt="../_images/sbi.png" src="../_images/sbi.png" style="width: 800px;" />
+</a>
+<table><tr><td width=900><center><br>
+    Figure 4. The simulation-based inference (SBI) framework. The simulator is used to generate synthetic data $x \sim p(x | \theta)$ for a range of parameters $\theta$. However, doing inference in this setting is challenging because the likelihood function is intractable. Image credit: Siddharth Mishra-Sharma.
+<br></center></td></tr></table>
+<br>
+<p><em><strong>So, how do we deal with this?</strong></em></p>
+<p>A variety of algorithms:</p>
+<a class="reference internal image-reference" href="../_images/sbi_methods.png"><img alt="../_images/sbi_methods.png" src="../_images/sbi_methods.png" style="width: 98%;" />
+</a>
+<table><tr><td width=98%><center><br>
+    Figure 5. Different simulation-based inference methods. Taken from <a href="https://doi.org/10.48550/arXiv.2101.04653" target="_blank">Lueckmann et al. (2021)</a>.
+<br></center></td></tr></table>
+<br>
+<p>In this version of the lecture, we will cover the first (Approximate Bayesian Computation) and the third (Neural Posterior Estimation) methods. For the other two methods, you can refer to the <a class="reference external" href="https://github.com/astrostatistics-in-crete/2025_summer_school/blob/main/14_SBI/SBI_full.ipynb">extended versions of the notebook from previous schools</a>.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="working-example-cosmology-with-supernovae">
+<h1>Working Example: Cosmology with Supernovae<a class="headerlink" href="#working-example-cosmology-with-supernovae" title="Link to this heading">#</a></h1>
+<p>We’ll consider a simplified model for the luminosity distance to supernovae, which depends on the cosmological parameters <span class="math notranslate nohighlight">\(\Omega_m\)</span> (matter density parameter) and <span class="math notranslate nohighlight">\(H_0\)</span> (Hubble constant).</p>
+<p><strong>Key concepts:</strong></p>
+<ul class="simple">
+<li><p><strong>Luminosity</strong>: the total energy output of a supernova in the form of light. Linked to the absolute magnitude.</p></li>
+<li><p><strong>Apparent magnitude <span class="math notranslate nohighlight">\(m\)</span></strong>: how bright the supernova appears to us.</p></li>
+<li><p><strong>Luminosity distance <span class="math notranslate nohighlight">\(d_L\)</span></strong>: a measure of how far away an object is, based on how faint its light appears compared to its luminosity.</p></li>
+</ul>
+<p>We observe a set of supernovae with <span style="color:#d87c3a">apparent magnitudes</span> <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span> at known <span style="color:#d87c3a">redshifts</span> <span class="math notranslate nohighlight">\(z\)</span>. Our model links them to cosmology in two steps. The <span style="color:#d87c3a">theoretical apparent magnitude</span> <span class="math notranslate nohighlight">\(m_{\text{th}}\)</span> follows from the <span style="color:#d87c3a">luminosity distance</span> <span class="math notranslate nohighlight">\(d_L\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Large m_{\text{th}} = 5 \log_{10}(d_L) + 19.3, \tag{1}\]</div>
+<p>where the absolute magnitude for a type Ia supernova is -19.3 (in the V band).
+For a flat universe (<span class="math notranslate nohighlight">\(\Omega_k = 0\)</span>), <span class="math notranslate nohighlight">\(d_L\)</span> is set by the <span style="color:#d87c3a">cosmological parameters</span> <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span> at redshift <span class="math notranslate nohighlight">\(z\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Large d_L (z) = \frac{c(1+z)}{H_0} \int_0^z \frac{dz'}{\sqrt{\Omega_m(1+z')^3 + (1-\Omega_m)}}, \tag{2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> is the speed of light.</p>
+<p>The problem we will solve is to <span style="color:red"><em>infer the cosmological parameters <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span> from the observed apparent magnitudes <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span> and redshifts <span class="math notranslate nohighlight">\(z\)</span>.</em></span></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="standard-bayesian-inference">
+<h1>Standard Bayesian Inference<a class="headerlink" href="#standard-bayesian-inference" title="Link to this heading">#</a></h1>
+<p>Let’s first try to solve this problem using standard Bayesian inference. We’ll assume that the observed apparent magnitudes <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span> have <span style="color:#d87c3a">Gaussian errors</span>, and therefore, we can write down the likelihood function as a <span style="color:#d87c3a">Gaussian over the observed data</span> given the parameters <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Large \mathcal{L}(\Omega_m, H_0) = \prod_{i=1}^N \frac{1}{\sqrt{2\pi\sigma_i^2}} \exp\left[-\frac{(m_{\text{obs},i} - m_{\text{th},i})^2}{2\sigma_i^2}\right], \tag{3}\]</div>
+<p>where <span class="math notranslate nohighlight">\(N\)</span> is the number of supernovae, <span class="math notranslate nohighlight">\(m_{\text{obs},i}\)</span> is the observed apparent magnitude of the <span class="math notranslate nohighlight">\(i\)</span>-th supernova, <span class="math notranslate nohighlight">\(\sigma_i\)</span> is the error in this measurement, and <span class="math notranslate nohighlight">\(m_{\text{th},i}\)</span> is the corresponding theoretical apparent magnitude.</p>
+<p>First, let’s create some <span style="color:#d87c3a">mock observed data</span> to work with. We’ll assume that the redshifts <span class="math notranslate nohighlight">\(z\)</span> of the supernovae are known and generate the observed apparent magnitudes <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span> by adding random (Gaussian) noise to the theoretical apparent magnitudes <span class="math notranslate nohighlight">\(m_{\text{th}}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Large m_{\text{obs}} = m_{\text{th}} + \mathcal{N}(0, \sigma^2)\]</div>
+<p>where
+$<span class="math notranslate nohighlight">\( \Large \left\{z, H_0, \Omega_m \right\} \xrightarrow{(2)} d_L \xrightarrow{(1)} m_{\text{th}} \; .\)</span>$</p>
+<p>The following function calculates the luminosity distance given the redshift and cosmological parameters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Luminosity distance function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">luminosity_distance</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculate the luminosity distance for a given redshift, Omega_m and H0 &quot;&quot;&quot;</span>
+    <span class="n">integrand</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z_prime</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Omega_m</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z_prime</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Omega_m</span><span class="p">))</span>
+    <span class="n">d_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">quad</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">z_i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">z_i</span> <span class="ow">in</span> <span class="n">z</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">d_L</span><span class="p">)</span> <span class="o">/</span> <span class="n">H0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#random seed</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+
+<span class="c1"># Constants</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">299792.458</span>  <span class="c1"># Speed of light in km/s</span>
+
+<span class="c1"># True cosmological parameters</span>
+<span class="n">true_Omega_m</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">true_H0</span> <span class="o">=</span> <span class="mf">70.0</span>  <span class="c1"># Hubble constant in km/s/Mpc</span>
+
+<span class="c1"># Redshifts of the supernovae</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Noise level in the observed magnitudes</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="c1"># Generate synthetic data</span>
+<span class="n">d_L_true</span> <span class="o">=</span> <span class="n">luminosity_distance</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">true_Omega_m</span><span class="p">,</span> <span class="n">true_H0</span><span class="p">)</span>
+<span class="n">m_true</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">d_L_true</span><span class="p">)</span> <span class="o">+</span> <span class="mf">19.3</span>  <span class="c1"># Apparent magnitude formula</span>
+<span class="n">m_obs</span> <span class="o">=</span> <span class="n">m_true</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">m_true</span><span class="p">))</span>  <span class="c1"># Adding Gaussian noise</span>
+
+<span class="c1"># Plot synthetic data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed magnitudes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">m_true</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True magnitudes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Redshift $z$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Apparent magnitude $m$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we will adopt a <span style="color:#d87c3a">uniform prior</span> for <span class="math notranslate nohighlight">\( 0 &lt; \Omega_m &lt; 1\)</span> and <span class="math notranslate nohighlight">\(50 &lt; H_0 &lt; 100\)</span>, define the likelihood function from Eq. <span class="math notranslate nohighlight">\((3)\)</span>, and the posterior from the Bayes theorem.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Log-prior function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_prior</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">Omega_m</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="mi">50</span> <span class="o">&lt;</span> <span class="n">H0</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    
+<span class="c1"># Define the log-likelihood function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_like</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">):</span>
+    <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">d_L</span> <span class="o">=</span> <span class="n">luminosity_distance</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span><span class="p">)</span>
+    <span class="n">m_th</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">d_L</span><span class="p">)</span> <span class="o">+</span> <span class="mf">19.3</span>  <span class="c1"># Theoretical magnitudes</span>
+    <span class="n">sigma_m</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># Assumed standard deviation of magnitudes</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">m_obs</span> <span class="o">-</span> <span class="n">m_th</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma_m</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>    
+
+<span class="c1"># Log-posterior function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_post</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">):</span>
+    <span class="n">lp</span> <span class="o">=</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">lp</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lp</span> <span class="o">+</span> <span class="n">log_like</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, we just need to sample from the posterior using MCMC to get the distribution of the parameters <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sampling with `emcee` </span>
+<span class="n">ndim</span><span class="p">,</span> <span class="n">nwalkers</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span>
+<span class="n">ncpus</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+
+<span class="c1"># Initialize walkers around a random position withing the prior volume</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+
+<span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">ncpus</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+    <span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_post</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">),</span> <span class="n">pool</span><span class="o">=</span><span class="n">pool</span><span class="p">)</span>
+    <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get samples and convert to GetDist MCSamples</span>
+<span class="n">flat_samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">get_chain</span><span class="p">(</span><span class="n">discard</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># GetDist plotting</span>
+<span class="n">standard_samples</span> <span class="o">=</span> <span class="n">MCSamples</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">flat_samples</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">])</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">plots</span><span class="o">.</span><span class="n">get_subplot_plotter</span><span class="p">(</span><span class="n">width_inch</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">triangle_plot</span><span class="p">([</span><span class="n">standard_samples</span><span class="p">],</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">:</span> <span class="n">true_Omega_m</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">:</span> <span class="n">true_H0</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="simulation-based-inference">
+<h1>Simulation-based Inference<a class="headerlink" href="#simulation-based-inference" title="Link to this heading">#</a></h1>
+<p>Now, let’s try to solve the same problem using simulation-based inference methods. To do this, we will first need to construct a <span style="color:#d87c3a">simulator for the luminosity distance to supernovae</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># noise level</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="c1"># Forward model to simulate observed magnitudes</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">luminosity_distance_simulator</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">d_L</span> <span class="o">=</span> <span class="n">luminosity_distance</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span><span class="p">)</span>
+    <span class="n">m_th</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">d_L</span><span class="p">)</span> <span class="o">+</span> <span class="mf">19.3</span>  <span class="c1"># Theoretical magnitudes</span>
+    <span class="n">m_sim</span> <span class="o">=</span> <span class="n">m_th</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">m_th</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">m_sim</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This very simple simulator uses the theoretical models for the apparent magnitude and luminosity distance, for fixed cosmological parameters <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span>, given by Eqs. <span class="math notranslate nohighlight">\((1)\)</span> and <span class="math notranslate nohighlight">\((2)\)</span>, and adds Gaussian noise to generate the observed apparent magnitudes <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span>.</p>
+<section id="traditional-sbi-approximate-bayesian-computation-abc">
+<h2>Traditional SBI - Approximate Bayesian Computation (ABC)<a class="headerlink" href="#traditional-sbi-approximate-bayesian-computation-abc" title="Link to this heading">#</a></h2>
+<p>ABC was one of the first simulation-based inference methods developed and is centered on the idea of <span style="color:#d87c3a">approximating the posterior</span> distribution by <span style="color:#d87c3a">sampling from the prior</span> distribution and <span style="color:#d87c3a">accepting samples that are “close enough” to the observed data</span>.</p>
+<p>General procedure:</p>
+<ol class="arabic simple">
+<li><p><strong>Sample</strong> parameters from the prior distribution <span class="math notranslate nohighlight">\(\theta \sim p(\theta)\)</span>.</p></li>
+<li><p><strong>Forward simulate</strong> using these parameters to generate <strong>synthetic observations</strong> <span class="math notranslate nohighlight">\(x \sim p(x | \theta)\)</span>.</p></li>
+<li><p><strong>Compare</strong> the synthetic observations to the real observed data <span class="math notranslate nohighlight">\(x_{\text{obs}}\)</span> using a distance metric <span class="math notranslate nohighlight">\(d(x, x_{\text{obs}})\)</span>.</p></li>
+<li><p>If the synthetic observations are “close enough” to the real observed data, i.e., <span class="math notranslate nohighlight">\(d(x, x_{\text{obs}}) &lt; \epsilon\)</span>, for some threshold <span class="math notranslate nohighlight">\(\epsilon\)</span>, then <strong>accept the parameters</strong> <span class="math notranslate nohighlight">\(\theta\)</span> as samples from the posterior <span class="math notranslate nohighlight">\(p(\theta | x_{\text{obs}})\)</span>.</p></li>
+</ol>
+<p>ABC does not require the likelihood function to be known, instead the likelihood is approximated by the probability that the condition <span class="math notranslate nohighlight">\(d(x, x_{\text{obs}}) &lt; \epsilon\)</span> is satisfied.</p>
+<p>As the <span style="color:#d87c3a">threshold</span> <span class="math notranslate nohighlight">\(\epsilon \to 0\)</span>, the <span style="color:#d87c3a">accepted samples converge to the true posterior</span>. For <span class="math notranslate nohighlight">\(\epsilon &gt; 0\)</span>, the inferred posterior will be <span style="color:#d87c3a">broader than the true posterior</span>, therefore the inference will result in a <span style="color:#d87c3a">conservative estimate</span>.</p>
+<a class="reference internal image-reference" href="../_images/abc.png"><img alt="../_images/abc.png" src="../_images/abc.png" style="width: 98%;" />
+</a>
+<table><tr><td width=900><center><br>
+Figure 6: Approximate Bayesian computation (ABC) algorithm. The simulator is used to generate synthetic data $x \sim p(x | \theta)$ for a range of parameters $\theta$. The distance function $d(x, x_{\text{obs}})$ is used to compare the synthetic data to the observed data. Image credit: Siddharth Mishra-Sharma.
+<br></center></td></tr></table><p>Let’s now try to apply ABC to our problem of inferring the cosmological parameters <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span> from supernova data. As a distance metric, we’ll use the mean squared error (MSE):</p>
+<div class="math notranslate nohighlight">
+\[ \Large d(x, x_{\text{obs}}) = \frac{1}{N} \sum_{i=1}^N (x_i - x_{\text{obs},i})^2 \]</div>
+<p>between the observed apparent magnitudes <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span> and the synthetic apparent magnitudes <span class="math notranslate nohighlight">\(m_{\text{th}}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Distance metric: Mean Squared Error</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_sim</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">x_sim</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># ABC Algorithm</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">abc</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">eps_thresh</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Approximate Bayesian Computation (ABC) algorithm &quot;&quot;&quot;</span>
+    <span class="n">accepted_samples</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">trials</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">progress_bar</span> <span class="o">=</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Accepted Samples (eps=</span><span class="si">{</span><span class="n">eps_thresh</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">accepted_samples</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">num_samples</span><span class="p">:</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>  <span class="c1"># θ ~ p(θ) (Step 1)</span>
+        <span class="n">x_sim</span> <span class="o">=</span> <span class="n">luminosity_distance_simulator</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>  <span class="c1"># x ~ p(x|θ) (Step 2)</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="n">mse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x_sim</span><span class="p">)</span>  <span class="c1"># Distance metric; d(x, x_sim) (Step 3)</span>
+        <span class="n">trials</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="c1"># If accepted, add to samples (Step 4)</span>
+        <span class="k">if</span> <span class="n">eps</span> <span class="o">&lt;</span> <span class="n">eps_thresh</span><span class="p">:</span>
+            <span class="n">accepted_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> 
+            <span class="n">acceptance_ratio</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">accepted_samples</span><span class="p">)</span> <span class="o">/</span> <span class="n">trials</span> 
+            <span class="n">progress_bar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">progress_bar</span><span class="o">.</span><span class="n">set_postfix</span><span class="p">(</span><span class="n">acceptance_ratio</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">acceptance_ratio</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">progress_bar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">accepted_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will run the ABC algorithm for two different values of <span class="math notranslate nohighlight">\(\epsilon\)</span>: <span class="math notranslate nohighlight">\(0.4\)</span> and <span class="math notranslate nohighlight">\(0.6\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run ABC</span>
+<span class="n">eps_thresh</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]</span>
+
+<span class="c1"># Run ABC for each epsilon threshold</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">eps</span> <span class="ow">in</span> <span class="n">eps_thresh</span><span class="p">:</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">eps</span><span class="p">]</span> <span class="o">=</span> <span class="n">abc</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">,</span> <span class="n">eps_thresh</span><span class="o">=</span><span class="n">eps</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># GetDist plotting</span>
+<span class="n">samples1</span> <span class="o">=</span> <span class="n">MCSamples</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mf">0.6</span><span class="p">],</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H0&#39;</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">])</span>
+<span class="n">samples2</span> <span class="o">=</span> <span class="n">MCSamples</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mf">0.4</span><span class="p">],</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H0&#39;</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">])</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">plots</span><span class="o">.</span><span class="n">get_subplot_plotter</span><span class="p">(</span><span class="n">width_inch</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">triangle_plot</span><span class="p">([</span><span class="n">samples1</span><span class="p">,</span> <span class="n">samples2</span><span class="p">],</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Omega_m&#39;</span><span class="p">:</span> <span class="n">true_Omega_m</span><span class="p">,</span> <span class="s1">&#39;H0&#39;</span><span class="p">:</span> <span class="n">true_H0</span><span class="p">},</span> <span class="n">legend_labels</span><span class="o">=</span><span class="p">[</span> <span class="sa">f</span><span class="s2">&quot;eps=</span><span class="si">{</span><span class="n">eps_thresh</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;eps=</span><span class="si">{</span><span class="n">eps_thresh</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<b>In-class discussion: What can you see from running the ABC algorithm and the plot?</b>
+<br>
+<i>Discuss with your teammate, then report.</i>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<p>We see that first of all, the posteriors that we get from ABC are reasonably close to the “true” posterior that we got from standard Bayesian inference. However, as expected, the posteriors from ABC are broader than the true posterior, because of the relatively large values of ε that we used, and indeed, the bigger the ε, the broader the posterior.</p>
+</details>
+</div><div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<b>In-class discussion: What do you think are the main drawbacks of ABC?</b>
+<br>
+<i>Discuss with your teammate, then report.</i>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<ul class="simple">
+<li><p>We need to <span style="color:#d87c3a">choose a distance metric</span> that is appropriate for the problem.</p></li>
+<li><p>We have an <span style="color:#d87c3a">extra hyperparameter</span> to tune: the threshold ε.</p></li>
+<li><p>Small values of ε <span style="color:#d87c3a">require unfeasibly many simulations</span>, while large values lead to reduced accuracy.</p></li>
+<li><p>The sample efficiency of ABC <span style="color:#d87c3a">scales poorly to high-dimensional</span> data x and high-dimensional parameters θ.</p></li>
+<li><p>Inference for new data or different choice of prior requires <span style="color:#d87c3a">re-running the entire algorithm</span>.</p></li>
+</ul>
+</details>
+</div></section>
+<section id="neural-posterior-estimation-npe">
+<h2>Neural Posterior Estimation (NPE)<a class="headerlink" href="#neural-posterior-estimation-npe" title="Link to this heading">#</a></h2>
+<p>This method is a Deep Learning implementation of <em><strong>density estimation</strong></em>: given a set of points <span class="math notranslate nohighlight">\(\{u\} \sim \mathcal{P}(u)\)</span>, we want to learn the distribution <span class="math notranslate nohighlight">\(\mathcal{P}(u)\)</span>.</p>
+<p>The way that we would normally do this for inference is by creating a model for the likelihood via estimating the distribution of the simulated data using <span style="color:#d87c3a">histograms</span> or <span style="color:#d87c3a">kernel density estimation</span>. However, these methods are not very flexible and <strong>do not scale well to high-dimensional data</strong> (curse of dimensionality).</p>
+<p>This is where recent advances in <span style="color:#d87c3a">density estimation techniques using neural networks</span> come in.</p>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<p>To understand how neural networks can be used for density estimation, let’s first consider a simple example where we want to estimate the <strong>distribution</strong> over <span class="math notranslate nohighlight">\(\theta\)</span>, in the case when this distribution is a 1D Gaussian. Here, we can use a neural network to model the mean and variance of the Gaussian as a function of some input <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Large p(\theta | x) = \mathcal{N}\big(\mu = f(x), \sigma = g(x)\big),\]</div>
+<p>where <span class="math notranslate nohighlight">\(f(x)\)</span> and <span class="math notranslate nohighlight">\(g(x)\)</span> are the outputs of the neural network. The neural network will be trained to fit the training data by tuning the parameters of <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span>.</p>
+</div>
+<p>However, in general, we do not expect the posterior to be Gaussian. In this case, we can use a more general neural network architecture to model the posterior.
+One class of these neural density estimation methods is <strong>Normalizing Flows</strong>.</p>
+<section id="interlude-normalizing-flows">
+<h3>Interlude: Normalizing Flows<a class="headerlink" href="#interlude-normalizing-flows" title="Link to this heading">#</a></h3>
+<p>Normalizing Flows are a class of <strong>generative models</strong> — the same family behind the AI image generators you may have heard so much about (DALL·E, Stable Diffusion, Midjourney). A generative model <span style="color:#d87c3a">learns a probability distribution</span> from data and can then <span style="color:#d87c3a">draw new samples</span> from it: an image generator trained on millions of pictures effectively learns the distribution of natural images, and “generating an image” is just sampling from that distribution.</p>
+<p>A Normalizing Flow does this through <span style="color:#d87c3a">invertible transformations</span> of the probability space that <span style="color:#d87c3a">map a simple distribution to a more complex one</span>.</p>
+<a class="reference internal image-reference" href="../_images/normalizing-flow.png"><img alt="../_images/normalizing-flow.png" src="../_images/normalizing-flow.png" style="width: 98%;" />
+</a>
+<table><tr><td width=900><center><br>
+Figure 7: Illustration of a Normalizing Flow model, transforming a simple distribution $p_0(z_0)$ (left) to a complex one $p_K(z_K)$ (right) through a series of invertible transformations $f_k$. Image credit: Lilian Weng.
+<br></center></td></tr></table><p>The key idea behind Normalizing Flows is to start with a <span style="color:#d87c3a">simple base distribution</span> <span class="math notranslate nohighlight">\(\pi(\mathbf{u})\)</span> (e.g. a standard normal) and <strong>transform</strong> it through a series of <span style="color:#d87c3a">invertible transformations</span> <span class="math notranslate nohighlight">\(f\)</span> (bijections) to obtain a more <span style="color:#d87c3a">complex target distribution</span> <span class="math notranslate nohighlight">\(p(\mathbf{x})\)</span>. This is formalized using the change of variables formula:</p>
+<div class="math notranslate nohighlight">
+\[ \Large \mathbf{u} \sim \pi(\mathbf{u}), \quad \mathbf{x} = f(\mathbf{u}), \quad \mathbf{u} = f^{-1}(\mathbf{x}) \]</div>
+<div class="math notranslate nohighlight">
+\[ \Large p(\mathbf{x}) = \pi(\mathbf{u}) \left| \det \frac{d\mathbf{u}}{d\mathbf{x}} \right| = \pi(f^{-1}(\mathbf{x})) \left| \det \frac{df^{-1}(\mathbf{x})}{d\mathbf{x}} \right|\]</div>
+<p>where <span class="math notranslate nohighlight">\(f^{-1}\)</span> is the inverse transformation of <span class="math notranslate nohighlight">\(f\)</span>, and the Jacobian determinant <span class="math notranslate nohighlight">\(\left| \det \frac{df^{-1}(\mathbf{x})}{d\mathbf{x}} \right|\)</span> accounts for the change in probability volume corresponding to and element <span class="math notranslate nohighlight">\(\mathrm{d} \mathbf{u}\)</span> when transforming from <span class="math notranslate nohighlight">\(\mathbf{u}\)</span> to <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> space. This factor compensates for how <span class="math notranslate nohighlight">\(f\)</span> <span style="color:#d87c3a">transforms, stretches, or compresses volume</span> locally, so that the resulting density <span class="math notranslate nohighlight">\(p(\mathbf{x})\)</span> remains correctly normalized (integrates to 1). Normalizing Flows allow constructing expressive distributions by composing simple, invertible transformations.</p>
+<p>The challenge is in designing mappings <span class="math notranslate nohighlight">\(f\)</span> that are both: <strong>easy to invert</strong> and <strong>easy to compute the Jacobian of</strong>.</p>
+<a class="reference internal image-reference" href="../_images/forward.gif"><img alt="../_images/forward.gif" src="../_images/forward.gif" style="width: 48%;" />
+</a>
+<table><tr><td width=900><center><br>
+Figure 8: The Normalizing Flow transforms the simple base distribution to the target distribution by applying a series of invertible transformations one after the other. Axes are in arbitrary units. Image credit: Eric Jang.
+<br></center></td></tr></table><details>
+<summary><span style="color:red">Training a Normalizing Flow <em>(Open at your own risk)</em> </span></summary>
+<section id="training">
+<h4>Training<a class="headerlink" href="#training" title="Link to this heading">#</a></h4>
+<p>Normalizing Flows are trained to <strong>maximize the likelihood of training data <span class="math notranslate nohighlight">\(x\)</span> under the transformed distribution <span class="math notranslate nohighlight">\(p(x)\)</span></strong>. This is equivalent to minimizing the Kullback-Leibler divergence between the data and model distributions.</p>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<p><strong>Kullback-Leibler (KL) divergence</strong> measures the difference between two probability distributions <span class="math notranslate nohighlight">\(p(x)\)</span> and <span class="math notranslate nohighlight">\(q(x)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ D_{KL}(p||q) = \mathbb{E}_{p(x)}\left[\log \frac{p(x)}{q(x)}\right] = \int p(x) \log \frac{p(x)}{q(x)} dx.\]</div>
+<p>The KL divergence is non-negative and is zero if and only if <span class="math notranslate nohighlight">\(p(x) = q(x)\)</span>.
+Minimizing the KL divergence is equivalent to maximizing the likelihood of the data under the model distribution.</p>
+</div>
+<p>Let’s see how we would train a Normalizing Flow to estimate the posterior <span class="math notranslate nohighlight">\(p(\theta | x)\)</span>. So far, we have the tools to emulate a probability distribution with a neural network. We’ll write such a probability distribution <span class="math notranslate nohighlight">\(q_\phi\)</span> where <span class="math notranslate nohighlight">\(\phi\)</span> are the parameters of the neural network.</p>
+<p>A way to learn the distribution <span class="math notranslate nohighlight">\(p(\theta | x)\)</span> by a Neural Network with weights <span class="math notranslate nohighlight">\(\phi\)</span> is to minimize <span class="math notranslate nohighlight">\(D_{KL}\Big(p(\theta | x) || q_\phi(\theta | x)\Big)\)</span> with respect to the network parameters <span class="math notranslate nohighlight">\(\phi\)</span>. Let’s do the math:</p>
+<div class="math notranslate nohighlight">
+\[ D_{KL}\Big(p(\theta | x) || q_\phi(\theta | x)\Big) = \mathbb{E}_{p(\theta | x)}\left[\log \frac{p(\theta | x)}{q_\phi(\theta | x)}\right] \]</div>
+<p>However, we want our model to work for different values of <span class="math notranslate nohighlight">\(x\)</span>, so we need to take the expectation of this expression with respect to <span class="math notranslate nohighlight">\(p(x)\)</span>:</p>
+<div class="amsmath math notranslate nohighlight">
+\[\begin{align*}
+\mathbb{E}_{p(x)} \Big[ D_{KL}\big(p(\theta | x) || q_\phi(\theta | x)\big) \Big] &amp;= \mathbb{E}_{p(x)}\mathbb{E}_{p(\theta | x)}\left[\log \frac{p(\theta | x)}{q_\phi(\theta | x)}\right] = \mathbb{E}_{p(\theta,x)}\left[\log \frac{p(\theta | x)}{q_\phi(\theta | x)}\right] \\\\
+&amp;= \mathbb{E}_{p(\theta,x)} \left[ - \log q_\phi(\theta | x)\right] + \mathrm{const}_{w.r.t. \phi}
+\end{align*}\]</div>
+<p>where in the second equality we used <span class="math notranslate nohighlight">\(p(\theta,x) = p(\theta | x)p(x)\)</span>.
+Therefore, to optimize our neural network, we need to minimize:</p>
+<div class="math notranslate nohighlight">
+\[ \min_\phi \mathbb{E}_{p(x)} \Big[ D_{KL}\big(p(\theta | x) || q_\phi(\theta | x)\big) \Big] = \min_\phi \mathbb{E}_{p(\theta,x)} \left[ - \log q_\phi(\theta | x)\right] + \cancel{\mathrm{const}_{w.r.t. \phi}} \]</div>
+<p>which we can estimate because we have samples of <span class="math notranslate nohighlight">\(p(\theta,x)\)</span> from the simulator!</p>
+<center>
+<img src="images/monty_python.gif" width="400" />
+</center>
+</details><p>Once we have trained the Normalizing Flow, we can sample the model <span class="math notranslate nohighlight">\(q_\phi(\theta | x_{\text{obs}})\)</span> directly to obtain samples from the approximate posterior distribution <span class="math notranslate nohighlight">\(p(\theta | x_{\text{obs}})\)</span>. To do this, we simply sample <span class="math notranslate nohighlight">\(z\)</span> from the base distribution (e.g. a standard normal) and apply the inverse transformation <span class="math notranslate nohighlight">\(f^{-1}\)</span> to obtain samples from the posterior.</p>
+</section>
+<section id="normalizing-flows-summary">
+<h4>Normalizing Flows summary:<a class="headerlink" href="#normalizing-flows-summary" title="Link to this heading">#</a></h4>
+<ol class="arabic simple">
+<li><p>Start from a <span style="color:#d87c3a">simple base distribution</span> that is easy to sample from and evaluate the Jacobian of, like a standard normal.</p></li>
+<li><p>Apply a <span style="color:#d87c3a">sequence of invertible transformations</span> to this base distribution. Each transformation is designed to be efficient to compute and have a tractable Jacobian.</p></li>
+<li><p>The transformed distribution at the end of this sequence of transformations is the <span style="color:#d87c3a">final Normalizing Flow distribution</span>. It can be much more complex and expressive than the base distribution.</p></li>
+<li><p><span style="color:#d87c3a">Sampling</span> from the Normalizing Flow is <span style="color:#d87c3a">efficient</span> - just sample from the base distribution and pass it through the sequence of transformations. <span style="color:#d87c3a">Evaluating the density of a volume element</span> is also <span style="color:#d87c3a">tractable</span> using the change of variables formula.</p></li>
+<li><p>The transformations are <span style="color:#d87c3a">parameterized</span> by <span style="color:#d87c3a">neural networks</span> and <span style="color:#d87c3a">trained to maximize the likelihood of observed data</span>. This allows learning complex, data-driven distributions.</p></li>
+</ol>
+<blockquote>
+<div><p>If you want to learn more about Normalizing Flows, you can check out the paper by <a class="reference external" href="https://arxiv.org/abs/1912.02762">Papamakarios et al. (2019)</a> and the blog post by <a class="reference external" href="https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models.html">Lilian Weng</a>.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="back-to-npe">
+<h3>Back to NPE<a class="headerlink" href="#back-to-npe" title="Link to this heading">#</a></h3>
+<p>Now that we are OK with Normalizing Flows, let’s see the specifics of how we can use them for Neural Posterior Estimation.
+The steps of the algorithm are:</p>
+<ol>
+<li>
+<b>Generating the training data</b>: Sample a large number of parameter values $\theta$ from the prior, run the simulator to generate corresponding data $x$, and store the $(\theta, x)$ pairs as training data.
+<br>
+<br>
+</li>
+<li>
+<b>Training the conditional density estimator</b>:
+<ul>
+    <li>evaluate the log-density of the Normalizing Flow, $\log q_\phi(\theta | x)$, at the training data points $(\theta, x)$.</li>
+    <li>train for the parameters $\phi$ of the Normalizing Flow until the log-likelihood of the training data is maximized.</li>
+    <li>the exact loss function is:
+$$ \Large \mathcal{L}(\phi) = -\frac{1}{N} \sum_{i=1}^N \log q_\phi(\theta_i | x_i),$$
+where $N$ is the number of training samples, and $\phi$ are the parameters of the Normalizing Flow.</li>
+</ul>
+<br>
+</li>
+<li>
+<b>Inference</b>: To perform inference for new data $x_{\text{obs}}$, just sample from the model $q_\phi(\theta | x_{\text{obs}})$ to obtain samples from the posterior distribution $p(\theta | x_{\text{obs}})$!
+</li>
+</ol><a class="reference internal image-reference" href="../_images/npe.png"><img alt="../_images/npe.png" src="../_images/npe.png" style="width: 98%;" />
+</a>
+<table><tr><td width=900><center><br>
+Figure 9: Neural Posterior Estimation (NPE) algorithm. The simulator is used to generate synthetic data $x$ for a range of parameters $\theta$. The Normalizing Flow is trained to model the posterior distribution $p(\theta | x)$ conditioned on the training data. Image credit: Siddharth Mishra-Sharma.
+<br></center></td></tr></table></section>
+<section id="applying-npe-to-our-problem">
+<h3>Applying NPE to our problem<a class="headerlink" href="#applying-npe-to-our-problem" title="Link to this heading">#</a></h3>
+<p>To use SBI methods like NPE, we can leverage existing libraries that implement these algorithms.
+Those can make your life much easier, and you can use them to perform SBI without having to make everything from scratch. Some of the most popular libraries are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/mackelab/sbi"><code class="docutils literal notranslate"><span class="pre">sbi</span></code></a></p></li>
+<li><p><a class="reference external" href="https://github.com/justinalsing/pydelfi"><code class="docutils literal notranslate"><span class="pre">pydelfi</span></code></a></p></li>
+<li><p><a class="reference external" href="https://github.com/maho3/ltu-ili"><code class="docutils literal notranslate"><span class="pre">ltu-ili</span></code></a></p></li>
+</ul>
+<p>Let’s see how easy things can be using e.g. the <code class="docutils literal notranslate"><span class="pre">sbi</span></code> library. We just need to take our simulated pairs of <span class="math notranslate nohighlight">\((\theta, x)\)</span> and choose an SBI method. So let’s do it with NPE:</p>
+<section id="sample-generation">
+<h4>Sample generation<a class="headerlink" href="#sample-generation" title="Link to this heading">#</a></h4>
+<p>This method is based on Neural Networks, and to train them, we need to generate a large number of samples from the simulator. So let’s sample from the prior distribution of the parameters <span class="math notranslate nohighlight">\(\theta\)</span> and then simulate the data <span class="math notranslate nohighlight">\(x\)</span> for each of these parameters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span> <span class="c1"># use random seed for reproducibility</span>
+
+<span class="c1"># Generate training data</span>
+<span class="n">n_train</span> <span class="o">=</span> <span class="mi">20_000</span>
+<span class="n">param_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_train</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1"># Parameter proposal</span>
+<span class="n">x_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">luminosity_distance_simulator</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">param_samples</span><span class="p">)])</span>
+
+<span class="c1"># Convert from numpy arrays to pytorch tensors</span>
+<span class="n">param_samples</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">param_samples</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">x_samples</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">x_samples</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Check one of the generated samples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># plot the training data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">x_samples</span><span class="p">[</span><span class="mi">42</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">sigma</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Simulated data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Redshift $z$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Apparent magnitude $m$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="npe-class">
+<h4>NPE class<a class="headerlink" href="#npe-class" title="Link to this heading">#</a></h4>
+<p>Now the important part: we will define our SBI model that will learn the posterior distribution <span class="math notranslate nohighlight">\(p(\theta | x)\)</span>.</p>
+<blockquote>
+<div><p>It will be trying to model the distribution of the <em>parameters</em> <span class="math notranslate nohighlight">\(\theta\)</span> given the <em>data</em> <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prior</span> <span class="o">=</span> <span class="n">BoxUniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">]),</span> <span class="n">high</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">]))</span>
+
+<span class="c1"># Define the SBI model and give it the prior</span>
+<span class="n">inference</span> <span class="o">=</span> <span class="n">SNPE</span><span class="p">(</span><span class="n">prior</span><span class="o">=</span><span class="n">prior</span><span class="p">)</span>
+
+<span class="c1"># append the parameter-simulation pairs</span>
+<span class="n">inference</span><span class="o">.</span><span class="n">append_simulations</span><span class="p">(</span><span class="n">param_samples</span><span class="p">,</span> <span class="n">x_samples</span><span class="p">)</span>
+
+<span class="c1"># train() the density estimator</span>
+<span class="n">density_estimator</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+<span class="c1"># build posterior using the trained density estimator</span>
+<span class="n">posterior</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">build_posterior</span><span class="p">(</span><span class="n">density_estimator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="background-color: #F0FFF0; border: 2px solid #C0DCC0; padding: 15px; border-radius: 5px;">
+<p>⚠️ NOTE: in the newer versions of <code class="docutils literal notranslate"><span class="pre">sbi</span></code>, the API has changed a bit. So the cell above would look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sbi</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sbi.inference</span><span class="w"> </span><span class="kn">import</span> <span class="n">NPE</span>
+
+<span class="n">inference</span> <span class="o">=</span> <span class="n">NPE</span><span class="p">()</span>
+<span class="n">inference</span><span class="o">.</span><span class="n">append_simulations</span><span class="p">(</span><span class="n">param_samples</span><span class="p">,</span> <span class="n">x_samples</span><span class="p">)</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+<span class="n">posterior</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">build_posterior</span><span class="p">()</span>
+</pre></div>
+</div>
+</div><p>We have trained the Normalizing Flow model to estimate the posterior distribution <span class="math notranslate nohighlight">\(p(\theta | x)\)</span> given <strong>any</strong> observed data <span class="math notranslate nohighlight">\(x\)</span>! We can now sample from this model to obtain samples from the posterior distribution for <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
+</section>
+<section id="inference">
+<h4>Inference<a class="headerlink" href="#inference" title="Link to this heading">#</a></h4>
+<p>Let’s generate a mock set of observed data <span class="math notranslate nohighlight">\(x_{test} = x_{\text{obs}}\)</span> and obtain samples of the posterior distribution <span class="math notranslate nohighlight">\(p(\theta | x_{\text{obs}})\)</span> from the trained model. <em>Don’t get confused</em> - in a real application, <span class="math notranslate nohighlight">\(x_{\text{obs}}\)</span> would be the <span style="color:#d87c3a">actual observed data</span>, and we would use the model to infer the posterior distribution of the parameters <span class="math notranslate nohighlight">\(\theta\)</span> given this data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Obtain a mock observation from the trained model</span>
+<span class="n">param_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">])</span>
+<span class="n">x_obs</span> <span class="o">=</span> <span class="n">luminosity_distance_simulator</span><span class="p">(</span><span class="n">param_test</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># assume that the observed data &quot;comes from&quot; the above parameters</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Nice, now we can just sample from the posterior distribution using the trained model, conditioned on the observed data <span class="math notranslate nohighlight">\(x_{\text{obs}}\)</span>, and make the corner plot of the posteriors:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples_npe</span> <span class="o">=</span> <span class="n">posterior</span><span class="o">.</span><span class="n">sample</span><span class="p">((</span><span class="mi">10000</span><span class="p">,),</span> <span class="n">x</span><span class="o">=</span><span class="n">x_obs</span><span class="p">)</span>
+
+<span class="c1"># Convert to numpy (ensure on CPU and detached from graph)</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">samples_npe</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+    <span class="n">samples_npe</span> <span class="o">=</span> <span class="n">samples_npe</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">samples_npe</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">samples_npe</span><span class="p">)</span>
+
+
+<span class="c1"># Create a getdist MCSamples object</span>
+<span class="n">samples</span>  <span class="o">=</span> <span class="n">MCSamples</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">flat_samples</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H0&#39;</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">])</span>
+<span class="n">gd_samples_npe</span> <span class="o">=</span> <span class="n">MCSamples</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">samples_npe</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">],</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">])</span>
+
+<span class="c1"># Make a triangle/contour plot with getdist</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">plots</span><span class="o">.</span><span class="n">get_subplot_plotter</span><span class="p">(</span><span class="n">width_inch</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">triangle_plot</span><span class="p">([</span><span class="n">gd_samples_npe</span><span class="p">],</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">:</span> <span class="n">true_Omega_m</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">:</span> <span class="n">true_H0</span><span class="p">},</span> <span class="n">legend_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NPE&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that the posteriors that we get from NPE are very similar to the “true” posterior that we got from standard Bayesian inference!</p>
+<a class="reference internal image-reference" href="../_images/almost_too_easy.gif"><img alt="../_images/almost_too_easy.gif" src="../_images/almost_too_easy.gif" style="width: 400px;" />
+</a>
+<p>But be careful, sometimes things can go wrong , so you may have to look in the details of the code of the library, change stuff, and all those horrible things that you don’t want to do. But now you know how everything works under the hood, so you can do it!</p>
+</section>
+</section>
+</section>
+<section id="what-if-we-wanted-to-make-everything-from-scratch-optional-bonus">
+<h2>What if we wanted to make everything from scratch? <em>(optional / bonus)</em><a class="headerlink" href="#what-if-we-wanted-to-make-everything-from-scratch-optional-bonus" title="Link to this heading">#</a></h2>
+<p><em>Let’s see what happens behind the scenes…</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span> <span class="c1"># use random seed for reproducibility</span>
+
+<span class="c1"># Generate training data</span>
+<span class="n">n_train</span> <span class="o">=</span> <span class="mi">50_000</span>
+<span class="n">param_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_train</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1"># Parameter proposal</span>
+<span class="n">x_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">luminosity_distance_simulator</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">param_samples</span><span class="p">)])</span>
+
+<span class="c1"># Convert to tensors</span>
+<span class="n">param_samples</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">param_samples</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">x_samples</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">x_samples</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will try to implement NPE from scratch using PyTorch and a Normalizing Flow model.</p>
+<p>For the training data, we will use the same samples that we generated before: pairs of <span class="math notranslate nohighlight">\((\theta, x)\)</span>.</p>
+<p>In machine learning, it is common to normalize the input data to have zero mean and unit variance (this is done automatically in the <code class="docutils literal notranslate"><span class="pre">sbi</span></code> package). This helps the neural network to learn more efficiently:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Normalizes the data to have mean 0 and standard deviation 1. &quot;&quot;&quot;</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">std</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">data</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">std</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normalize the training data</span>
+<span class="n">x_norm</span><span class="p">,</span> <span class="n">x_mean</span><span class="p">,</span> <span class="n">x_std</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">x_samples</span><span class="p">)</span>
+<span class="n">param_norm</span><span class="p">,</span> <span class="n">param_mean</span><span class="p">,</span> <span class="n">param_std</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">param_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="featurizer">
+<h3>Featurizer<a class="headerlink" href="#featurizer" title="Link to this heading">#</a></h3>
+<p>We will define a simple Mutli-Layer Perceptron, which will reduce the dimensionality of the data <span class="math notranslate nohighlight">\(x\)</span> and serve as the feature extractor <span class="math notranslate nohighlight">\(s_\phi(x)\)</span> in the NPE algorithm (see Fig. 9). Don’t worry too much about this for now, just consider <span class="math notranslate nohighlight">\(s_\phi(x) = x\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">build_mlp</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">,</span> <span class="n">num_layers</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="n">nn</span><span class="o">.</span><span class="n">GELU</span><span class="p">()):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Builds a multi-layer perceptron (MLP) neural network.&quot;&quot;&quot;</span>
+    <span class="n">layers</span> <span class="o">=</span> <span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span> <span class="n">activation</span><span class="p">]</span>  <span class="c1"># First layer and activation</span>
+    
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_layers</span><span class="p">):</span>
+        <span class="n">layers</span> <span class="o">+=</span> <span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span> <span class="n">activation</span><span class="p">]</span> <span class="c1"># Hidden layers and activations</span>
+        
+    <span class="n">layers</span> <span class="o">+=</span> <span class="p">[</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)]</span> <span class="c1"># Output layer</span>
+    
+    <span class="k">return</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">layers</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>NPE class<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Now the important part: we will define our conditional Normalizing Flow model that will learn the posterior distribution <span class="math notranslate nohighlight">\(p(\theta | x)\)</span>.</p>
+<blockquote>
+<div><p>The Normalizing Flow will be trying to model the distribution of the <em>parameters</em> <span class="math notranslate nohighlight">\(\theta\)</span> given the <strong>context</strong> (condition) of the <em>data</em> <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">NeuralPosteriorEstimator</span><span class="p">(</span><span class="n">pl</span><span class="o">.</span><span class="n">LightningModule</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Neural Posterior Estimator using a normalizing flow as the posterior density estimator.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        featurizer (nn.Module): Neural network for feature extraction.</span>
+<span class="sd">        d_context (int): Dimension of the context vector.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">featurizer</span><span class="p">,</span> <span class="n">d_context</span><span class="o">=</span><span class="mi">16</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span> <span class="o">=</span> <span class="n">featurizer</span> <span class="c1"># Featurizer network for context extraction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flow</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_flow</span><span class="p">(</span><span class="n">d_in</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">d_hidden</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">d_context</span><span class="o">=</span><span class="n">d_context</span><span class="p">,</span> <span class="n">n_layers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># Normalizing flow</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d_in</span><span class="p">,</span> <span class="n">d_hidden</span><span class="p">,</span> <span class="n">d_context</span><span class="p">,</span> <span class="n">n_layers</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Instantiate a normalizing flow with Masked Autoregressive Transformations. &quot;&quot;&quot;</span>
+        <span class="n">base_dist</span> <span class="o">=</span> <span class="n">StandardNormal</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="n">d_in</span><span class="p">])</span> <span class="c1"># base distribution of NF = standard normal </span>
+        <span class="n">transforms</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># List to hold the series of transformations</span>
+        
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_layers</span><span class="p">):</span>
+            <span class="c1"># Reverse permutation to shuffle the features</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ReversePermutation</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="n">d_in</span><span class="p">))</span>
+            
+            <span class="c1"># Masked Autoregressive Transform for flexible and expressive transformations</span>
+            <span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">MaskedAffineAutoregressiveTransform</span><span class="p">(</span><span class="n">features</span><span class="o">=</span><span class="n">d_in</span><span class="p">,</span> <span class="n">hidden_features</span><span class="o">=</span><span class="n">d_hidden</span><span class="p">,</span> <span class="n">context_features</span><span class="o">=</span><span class="n">d_context</span><span class="p">))</span>
+            
+        <span class="c1"># Combine all transformations into a composite transform</span>
+        <span class="n">transform</span> <span class="o">=</span> <span class="n">CompositeTransform</span><span class="p">(</span><span class="n">transforms</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">Flow</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">base_dist</span><span class="p">)</span>    
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">featurizer</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Extract features using the featurizer</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">loss</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># Extract context from x using the featurizer</span>
+        <span class="k">return</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">log_prob</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span> <span class="c1"># Compute negative log probability</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">training_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">batch</span> 
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>  <span class="c1"># Compute mean loss</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;train_loss&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="p">)</span> <span class="c1"># Log the training loss</span>
+        <span class="k">return</span> <span class="n">loss</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">validation_step</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">batch</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1"># Compute mean validation loss</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">&quot;val_loss&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="p">)</span> <span class="c1"># Log the validation loss</span>
+        <span class="k">return</span> <span class="n">loss</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">configure_optimizers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">3e-4</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Instantiate the featurizer and NeuralPosteriorEstimator</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">featurizer</span> <span class="o">=</span> <span class="n">build_mlp</span><span class="p">(</span><span class="n">input_dim</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">output_dim</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">npe</span> <span class="o">=</span> <span class="n">NeuralPosteriorEstimator</span><span class="p">(</span><span class="n">featurizer</span><span class="o">=</span><span class="n">featurizer</span><span class="p">,</span> <span class="n">d_context</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Create the dataset and dataloader, using the PyTorch DataLoader class:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">val_fraction</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># Fraction of data to use for validation</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span> 
+<span class="n">n_samples_val</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val_fraction</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x_norm</span><span class="p">))</span> 
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">TensorDataset</span><span class="p">(</span><span class="n">x_norm</span><span class="p">,</span> <span class="n">param_norm</span><span class="p">)</span> 
+<span class="n">dataset_train</span><span class="p">,</span> <span class="n">dataset_val</span> <span class="o">=</span> <span class="n">random_split</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">x_samples</span><span class="p">)</span> <span class="o">-</span> <span class="n">n_samples_val</span><span class="p">,</span> <span class="n">n_samples_val</span><span class="p">])</span> 
+
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">val_loader</span> <span class="o">=</span> <span class="n">DataLoader</span><span class="p">(</span><span class="n">dataset_val</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">pin_memory</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Train the model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trainer</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">Trainer</span><span class="p">(</span><span class="n">max_epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">trainer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">npe</span><span class="p">,</span> <span class="n">train_dataloaders</span><span class="o">=</span><span class="n">train_loader</span><span class="p">,</span> <span class="n">val_dataloaders</span><span class="o">=</span><span class="n">val_loader</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have trained the Normalizing Flow model to estimate the posterior distribution <span class="math notranslate nohighlight">\(p(\theta | x)\)</span> given <strong>any</strong> observed data <span class="math notranslate nohighlight">\(x\)</span>! We can now sample from this model to obtain samples from the posterior distribution for <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
+</section>
+<section id="id2">
+<h3>Inference<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>So let’s generate a mock observed data <span class="math notranslate nohighlight">\(x_{test} = x_{\text{obs}}\)</span> and sample from the model to obtain samples from the posterior distribution <span class="math notranslate nohighlight">\(p(\theta | x_{\text{obs}})\)</span>. <span style="color:#d87c3a">Don’t get confused</span> - in a real application, <span class="math notranslate nohighlight">\(x_{\text{obs}}\)</span> would be the <span style="color:#d87c3a">actual observed data</span>, and we would use the model to infer the posterior distribution of the parameters <span class="math notranslate nohighlight">\(\theta\)</span> given this data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test the trained model</span>
+<span class="n">param_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">])</span>
+<span class="n">x_obs</span> <span class="o">=</span> <span class="n">luminosity_distance_simulator</span><span class="p">(</span><span class="n">param_test</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="c1"># assume that the observed data &quot;comes from&quot; the above parameters</span>
+
+<span class="n">x_obs_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">(</span><span class="n">x_obs</span><span class="p">)</span> <span class="o">-</span> <span class="n">x_mean</span><span class="p">)</span> <span class="o">/</span> <span class="n">x_std</span> <span class="c1"># normalize the test data</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">npe</span><span class="o">.</span><span class="n">featurizer</span><span class="p">(</span><span class="n">x_obs_norm</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sample from the trained normalizing flow</span>
+<span class="n">test_samples</span> <span class="o">=</span> <span class="n">npe</span><span class="o">.</span><span class="n">flow</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_samples</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span> <span class="o">*</span> <span class="n">param_std</span> <span class="o">+</span> <span class="n">param_mean</span>
+<span class="n">test_samples</span> <span class="o">=</span> <span class="n">test_samples</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a MCSamples instance</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">MCSamples</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">test_samples</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">],</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">])</span>
+
+<span class="n">true_Omega_m</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">true_H0</span> <span class="o">=</span> <span class="mi">70</span>
+
+<span class="c1"># Create a GetDist plot</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">plots</span><span class="o">.</span><span class="n">get_subplot_plotter</span><span class="p">(</span><span class="n">width_inch</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">triangle_plot</span><span class="p">([</span><span class="n">samples</span><span class="p">],</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Omega_m&#39;</span><span class="p">:</span> <span class="n">true_Omega_m</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">:</span> <span class="n">true_H0</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="conclusion">
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h1>
+<p><strong>Advantages of NPE:</strong></p>
+<ul class="simple">
+<li><p>No need for a <span style="color:#d87c3a">likelihood</span> function.</p></li>
+<li><p>Get direct samples from the <span style="color:#d87c3a">posterior</span>.</p></li>
+<li><p><span style="color:#d87c3a">Flexible posterior modeling</span> with Normalizing Flows.</p></li>
+<li><p><span style="color:#d87c3a">Scalable to high-dimensional</span> data and parameters: Normalizing Flows allow NPE to scale to high-dimensional parameter and data spaces.</p></li>
+<li><p><span style="color:#d87c3a">Amortized inference</span>: Once the Normalizing Flow model is trained on simulated data, it can quickly produce posterior samples for any new observed data <span class="math notranslate nohighlight">\(x_{obs}\)</span> through a simple forward pass. This means that we don’t need to re-run the inference algorithm for new data.</p></li>
+</ul>
+<p><strong>Drawbacks of NPE:</strong></p>
+<ul class="simple">
+<li><p>We must <span style="color:#d87c3a">retrain</span> the model if we want to change the prior.</p></li>
+<li><p>If the prior and the posterior are <span style="color:#d87c3a">very different</span>, the model may not be able to capture the posterior distribution well.</p></li>
+<li><p>Still, in <span style="color:#d87c3a">high-dimensional spaces</span>, the model may struggle to capture the posterior distribution accurately if we don’t have a huge amount of training data.</p></li>
+</ul>
+<center>
+<img src="https://raw.githubusercontent.com/AstroStat-Academy/astrostat-school-8/main/SBI/assets/meme_chad_sbi.jpeg" width="800" />
+</center></section>
+<section class="tex2jax_ignore mathjax_ignore" id="sources-further-reading">
+<h1>Sources &amp; Further Reading<a class="headerlink" href="#sources-further-reading" title="Link to this heading">#</a></h1>
+<p><strong>This notebook is based on the following sources:</strong></p>
+<ul class="simple">
+<li><p>https://github.com/smsharma/sbi-lecture-mit</p></li>
+<li><p>https://astroautomata.com/blog/simulation-based-inference/</p></li>
+<li><p>https://github.com/maho3/ltu-ili/tree/main</p></li>
+<li><p>https://indico.mitp.uni-mainz.de/event/332/contributions/4532/</p></li>
+<li><p>https://indico.cern.ch/event/768915/contributions/3474655/</p></li>
+<li><p>https://github.com/glouppe/ssi2023</p></li>
+<li><p>https://lilianweng.github.io/posts/2018-10-13-flow-models/</p></li>
+<li><p>https://gebob19.github.io/normalizing-flows/</p></li>
+<li><p>https://arxiv.org/abs/1911.01429</p></li>
+<li><p>https://arxiv.org/abs/2402.05137</p></li>
+<li><p>https://arxiv.org/abs/2101.04653</p></li>
+<li><p>https://arxiv.org/abs/2403.14750</p></li>
+</ul>
+<p><strong>Suggestions for further reading:</strong></p>
+<ul>
+<li>Blogs and general papers:
+    <ul>
+    <li><a href="https://github.com/smsharma/awesome-neural-sbi" target="_blank">Awesome Neural SBI (great list of resources on SBI that is frequently updated)</a></li>
+    <li><a href="https://gebob19.github.io/normalizing-flows/" target="_blank">This blog post on Normalizing Flows</a></li>
+    <li><a href="https://lilianweng.github.io/lil-log/2018/10/13/flow-based-deep-generative-models.html" target="_blank">This other blog post on Normalizing Flows</a></li>
+    <li><a href="https://arxiv.org/abs/1911.01429" target="_blank">This review paper on SBI</a></li>
+    <li><a href="https://arxiv.org/abs/2101.04653" target="_blank">This paper on benchmarking SBI methods</a></li>
+</li>
+<br>
+<li>
+Some indicative papers on SBI applications in cosmology and astrophysics:
+    <ul>
+    <li><a href="https://arxiv.org/abs/1903.00007" target="_blank">Fast likelihood-free cosmology with neural density estimators and active learning</a></li>
+    <li><a href="https://arxiv.org/abs/2403.14750" target="_blank">Fast likelihood-free inference in the LSS Stage IV era</a></li>
+    <li><a href="https://arxiv.org/abs/2404.04228" target="_blank">SimBIG: Cosmological Constraints using Simulation-Based Inference of Galaxy Clustering with Marked Power Spectra</a></li>
+    <li><a href="https://arxiv.org/abs/2106.12594" target="_blank">Real-time gravitational-wave science with neural posterior estimation</a></li>
+    <li><a href="https://arxiv.org/abs/2303.07339" target="_blank">Constraining the X-ray heating and reionization using 21-cm power spectra with Marginal Neural Ratio Estimation</a></li>
+    <li><a href="https://arxiv.org/abs/2301.06575" target="_blank">Neural posterior estimation for exoplanetary atmospheric retrieval</a></li>
+    </ul>
+</li>
+</ul><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># EOF</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./SBI"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../NN_Explainability/NN_explainability.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Neural Network Explainability <a class="tocSkip"></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="SBI_exercise.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Simulation Based Inference: Exercises</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Simulation Based Inference</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisiting-bayesian-inference">Revisiting Bayesian Inference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-remind-ourselves-of-what-the-likelihood-function-is">Let’s remind ourselves of what the Likelihood function is:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-limits-of-traditional-inference">The limits of traditional inference:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulators">Simulators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-based-inference-the-basic-idea">Simulation-based inference: The basic idea</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-challenge-of-simulation-based-inference">The challenge of simulation-based inference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#working-example-cosmology-with-supernovae">Working Example: Cosmology with Supernovae</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#standard-bayesian-inference">Standard Bayesian Inference</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#simulation-based-inference">Simulation-based Inference</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#traditional-sbi-approximate-bayesian-computation-abc">Traditional SBI - Approximate Bayesian Computation (ABC)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-posterior-estimation-npe">Neural Posterior Estimation (NPE)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interlude-normalizing-flows">Interlude: Normalizing Flows</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#training">Training</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#normalizing-flows-summary">Normalizing Flows summary:</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#back-to-npe">Back to NPE</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-npe-to-our-problem">Applying NPE to our problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-generation">Sample generation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#npe-class">NPE class</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inference">Inference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-if-we-wanted-to-make-everything-from-scratch-optional-bonus">What if we wanted to make everything from scratch? <em>(optional / bonus)</em></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#featurizer">Featurizer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">NPE class</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Inference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sources-further-reading">Sources &amp; Further Reading</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

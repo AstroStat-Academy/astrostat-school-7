@@ -1,0 +1,1747 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Intro to AI Agents &#8212; AstroStat School 2026 — Rome</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'AI_Agents/AI_Agents';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Diffusion Models" href="../DL_Diffusion/Diffusion.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — Rome</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — Rome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Intro/Intro.html">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Hypothesis_Testing/Hypothesis_Testing.html">Hypothesis Testing <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MLE/MLE.html">Maximum Likelihood Estimation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Intro_and_Clustering.html">Introduction to Machine Learning and Clustering <a class="tocSkip"></a></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_1.html">Introduction to Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_2.html">Applied Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">Basics of Markov Chain Monte Carlo <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Classification.html">Classification <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Gaussian_Processes/Gaussian_Processes.html">Gaussian Processes <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Time_Series/Time_Series.html">Time Series Analysis <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Best_Practices.html">Machine Learning Practices and Protocols</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Intro_n_Regression/Intro_n_Regression.html">Introduction to Deep Learning and Regression Workshop</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../GPU_Parallelization/GPU_parallelization.html">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../NN_Explainability/NN_explainability.html">Neural Network Explainability <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_short.html">Introduction to Simulation Based Inference</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_exercise.html">Simulation Based Inference: Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Diffusion/Diffusion.html">Diffusion Models</a></li>
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Intro to AI Agents<a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroStat-Academy/astrostat-school-7/blob/main/./AI_Agents/AI_Agents.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/AI_Agents/AI_Agents.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Intro to AI Agents<a class="tocSkip"></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Intro to AI Agents<a class="tocSkip"></a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-an-agent">What is an Agent?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#use-case">Use case</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-an-llm">Using an LLM</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-an-llm-generates-text">How an LLM generates text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-model-vs-api">Local model vs. API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-local-model-ministral">Calling a local model — Ministral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-remote-model-via-api-openrouter">Calling a remote model via API — OpenRouter</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-tool">Defining a tool</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-tools-to-llm">Connect tools to LLM</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-agent">Build the Agent</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-agent">Execute Agent</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <fieldset style="padding:10px; border:1px solid #ccc; box-shadow:2px 2px 5px rgba(0,0,0,0.1);">
+<legend style="font-size: 10px; color:#555;">Credits</legend>
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 80px; vertical-align: top;">
+            <img src="https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/logo/logo_b_text_lowres.png" alt="AstroStat Academy logo" width="100">
+        </td>
+        <td style="vertical-align: center; padding-left: 15px; font-size: 10px; line-height: 1.2;">
+            This notebook contains original work by the authors unless stated otherwise.
+            Any external material is properly credited to its sources.<br>
+            References to papers, datasets, and software are acknowledged.
+            Original content is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0 (GNU GPLv3)</a>.
+        </td>
+    </tr>
+</table>
+</fieldset>
+<!-- Allow these <br> or it will look ugly once rendered on Jupyter Book. -->
+<br><section class="tex2jax_ignore mathjax_ignore" id="intro-to-ai-agents">
+<h1>Intro to AI Agents<a class="tocSkip"><a class="headerlink" href="#intro-to-ai-agents" title="Link to this heading">#</a></h1>
+<p>In this notebook we will see how to build <strong>AI Agents</strong> via the <code class="docutils literal notranslate"><span class="pre">LangGraph</span></code> library.</p>
+<p>The focus is on making Agent behavior explicit and testable (<em>as opposed to a single LLM prompt</em>).</p>
+<p><strong>Study case:</strong> We will build an Agent that answers scientific questions.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
+<p>On <strong>Colab</strong>, allow GPU usage:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Connect → Change runtime type → T4 GPU
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install --quiet -U ipywidgets==8.1.8 arxiv python-dotenv huggingface_hub transformers mistral-common==1.8.6 accelerate langchain_openai langchain_core langgraph langgraph-prebuilt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/colab/clone_and_cd_colab.py&quot;</span>
+<span class="n">colab</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">colab</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running locally, skipping Colab setup.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/styles/plot_style.py&quot;</span>
+<span class="n">style</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Imported matplotlib.
+Imported seaborn.
+Plotting style set.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-is-an-agent">
+<h1>What is an Agent?<a class="headerlink" href="#what-is-an-agent" title="Link to this heading">#</a></h1>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p>An <strong>Artificial Intelligence (AI) Agent</strong> is a program that pairs a Large Language Model (LLM) with the ability to take actions.</p>
+<p>Instead of returning a single answer, the Agent works in a <strong>Reasoning and Acting (ReAct)</strong> loop:</p>
+<ul class="simple">
+<li><p>it <strong>reasons</strong> about the task,</p></li>
+<li><p>takes an <strong>action</strong>,</p></li>
+<li><p><strong>observes</strong> the result, and</p></li>
+<li><p><strong>decides</strong> the next step.</p></li>
+</ul>
+</div>
+<p>There are 2 defining aspects:</p>
+<p><strong><u>The LLM is the reasoning engine</u></strong></p>
+<div style="margin-left: 2em;">
+<p>At each step, it reads the task and the results collected so far.<br>
+Based on that, it <strong>decides</strong> what to do next: answer directly, or take an action.</p>
+</div>
+<p><strong><u>Tools go beyond text generation</u></strong></p>
+<div style="margin-left: 2em;">
+<p>By itself, an LLM is a <strong>text</strong> generator: it can only turn input text into output text.<br>
+A <strong>tool</strong> is a function the Agent can call to perform one such action (<em>e.g., search the web, run code, or read files</em>).<br></p>
+</div>
+<p>Endowing the LLM with tools is <em>what turns</em> a plain text generator into an Agent.</p>
+<a class="reference internal image-reference" href="../_images/fig_agent_anatomy_anim.gif"><img alt="../_images/fig_agent_anatomy_anim.gif" src="../_images/fig_agent_anatomy_anim.gif" style="width: 800px;" />
+</a>
+<table><tr><td width=800><center><br>
+Figure 1. Anatomy of an AI Agent: 1 full loop of its interactions.
+<br></center></td></tr></table>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<p><strong>NOTE:</strong> Beside the LLM and its tools, 2 more support components:</p>
+<ul class="simple">
+<li><p><strong>History</strong> — the running list of messages (<em>task, tool calls, tool results</em>), which the LLM re-reads at each step of the loop.</p></li>
+<li><p><strong>Human-in-the-loop</strong> [optional] — a person who reviews or approves the Agent’s steps before they are executed.</p></li>
+</ul>
+</div></section>
+<section class="tex2jax_ignore mathjax_ignore" id="use-case">
+<h1>Use case<a class="headerlink" href="#use-case" title="Link to this heading">#</a></h1>
+<p>To showcase the advantages of Agents, we will try to answer the following query:</p>
+<blockquote>
+<div><p><em>Explain how to constrain compact dark matter with time-varying quasar equivalent widths.</em></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>first, with a simple <strong>LLM</strong></p></li>
+<li><p>then, with an <strong>Agent</strong></p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="using-an-llm">
+<h1>Using an LLM<a class="headerlink" href="#using-an-llm" title="Link to this heading">#</a></h1>
+<section id="how-an-llm-generates-text">
+<h2>How an LLM generates text<a class="headerlink" href="#how-an-llm-generates-text" title="Link to this heading">#</a></h2>
+<p>An LLM does not “know” the answer — it <strong>samples</strong> it, one token at a time.</p>
+<p>At each step, the model <strong>samples</strong> the next token from a <strong>probability distribution</strong> over its vocabulary:</p>
+<a class="reference internal image-reference" href="../_images/fig0_distribution.png"><img alt="../_images/fig0_distribution.png" src="../_images/fig0_distribution.png" style="width: 580px;" />
+</a>
+<table><tr><td width=580><center><br>
+Figure 2. Example next-token distribution over a toy astronomy vocabulary.
+The model assigns a distinct probability to every candidate token; the next word is sampled from this distribution.
+<br></center></td></tr></table>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<p>Formally, at each step <span class="math notranslate nohighlight">\(t\)</span> the model computes:</p>
+<div class="math notranslate nohighlight">
+\[P(x_t \mid x_1, \dots, x_{t-1}, \text{prompt})\]</div>
+<p>i.e., a probability for <strong>every token in the vocabulary</strong>, conditioned on:</p>
+<ul class="simple">
+<li><p>the <strong>prompt</strong>, and</p></li>
+<li><p>all the <strong>tokens generated so far</strong>.</p></li>
+</ul>
+</div>
+<p>The <strong>temperature</strong> (<span class="math notranslate nohighlight">\(T)\)</span> is a <em>hyperparameter</em> of the model, and reshapes the distribution before sampling:</p>
+<ul class="simple">
+<li><p><strong>Low <span class="math notranslate nohighlight">\(T\)</span></strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> peaked distribution <span class="math notranslate nohighlight">\(\rightarrow\)</span> the model almost always picks the highest-probability token (<em>deterministic</em>)</p></li>
+<li><p><strong>High <span class="math notranslate nohighlight">\(T\)</span></strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> flat distribution <span class="math notranslate nohighlight">\(\rightarrow\)</span> lower-probability tokens get more chances (<em>creative, but less reliable</em>)</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/fig1_temperature.png"><img alt="../_images/fig1_temperature.png" src="../_images/fig1_temperature.png" style="width: 800px;" />
+</a>
+<table><tr><td width=800><center><br>
+Figure 3. Token probability distributions for a toy astronomy vocabulary at three temperatures.
+At low $T$ the model concentrates mass on the top token; at high $T$ the distribution flattens and less likely tokens become reachable.
+<br></center></td></tr></table>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<details>
+<p><b><summary>[How T is used in the computation] (click here to expand)</summary></b></p>
+<p>The model produces a vector of <strong>logits</strong> <span class="math notranslate nohighlight">\(z_i\)</span> — one per vocabulary token.<br>
+These are converted to probabilities via the <strong>softmax</strong> function:</p>
+<div class="math notranslate nohighlight">
+\[p_i = \frac{e^{z_i / T}}{\sum_j e^{z_j / T}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(T\)</span> is the <strong>temperature</strong> — a parameter you control.<br>
+The next token is then sampled from this distribution.</p>
+</details>
+</div>
+<p>For <strong>Agents</strong> we want <em>deterministic</em>, <em>reproducible</em> behavior, not creative variation <span class="math notranslate nohighlight">\(\rightarrow\)</span> We will use <span class="math notranslate nohighlight">\(T = 0\)</span>.</p>
+</section>
+<section id="local-model-vs-api">
+<h2>Local model vs. API<a class="headerlink" href="#local-model-vs-api" title="Link to this heading">#</a></h2>
+<p>There are two ways to use a language model from Python:</p>
+<ul class="simple">
+<li><p><strong>run it locally</strong> on your machine, or</p></li>
+<li><p><strong>call a remote API</strong> where the model runs on someone else’s server.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Local model</p></th>
+<th class="head"><p>API</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Cost</strong></p></td>
+<td><p>Free after download</p></td>
+<td><p>Pay per token</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Privacy</strong></p></td>
+<td><p>Data stays on your machine</p></td>
+<td><p>Data sent to a third party</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Setup</strong></p></td>
+<td><p>Heavier (~4–14 GB download) + GPU</p></td>
+<td><p>Just an API key</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Speed</strong></p></td>
+<td><p>Depends on your hardware</p></td>
+<td><p>Fast, always-on</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p><strong>NOTE:</strong> In the Agent section we will access the model only through OpenRouter.</p>
+</div></section>
+<section id="calling-a-local-model-ministral">
+<h2>Calling a local model — Ministral<a class="headerlink" href="#calling-a-local-model-ministral" title="Link to this heading">#</a></h2>
+<p><strong><u>Load the model</u></strong></p>
+<p>We load <strong>Ministral 3 3B Instruct</strong> locally with <code class="docutils literal notranslate"><span class="pre">transformers</span></code>. This smaller model is designed for low-resource devices, and its weights download from Hugging Face on first use and are cached afterwards.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CUDA available?&#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">())</span>
+<span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GPU:&#39;</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CUDA available? True
+GPU: NVIDIA GeForce RTX 4090 Laptop GPU
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transformers</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">Mistral3ForConditionalGeneration</span>
+
+<span class="n">MODEL</span> <span class="o">=</span> <span class="s2">&quot;mistralai/Ministral-3-3B-Instruct-2512-BF16&quot;</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Mistral3ForConditionalGeneration</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+    <span class="n">MODEL</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">bfloat16</span><span class="p">,</span>
+    <span class="n">attn_implementation</span><span class="o">=</span><span class="s2">&quot;sdpa&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;bfloat16 keeps the model weights near 8 GB instead of about 16 GB in</span>
+<span class="sd">float32. This leaves more room on a Colab GPU than the 7B model used before.</span>
+
+<span class="sd">SDPA (Scaled Dot Product Attention) uses PyTorch&#39;s built-in optimized attention</span>
+<span class="sd">backend to use efficient GPU attention kernels when the installed PyTorch/CUDA</span>
+<span class="sd">stack supports them.&quot;&quot;&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "37c4ddb01c4b451fa6aa1ca9645f45ad", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "3c287aaf5ff543cd88b205d55e12b6d7", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "382d4599e9dc4925aed967c2da07b582", "version_major": 2, "version_minor": 0}</script></div>
+</div>
+<p><strong><u>Build the prompt</u></strong></p>
+<p>We turn the role-tagged messages into the exact prompt format Ministral expects using the tokenizer’s <strong>chat template</strong>, then tokenize it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">system</span> <span class="o">=</span> <span class="s2">&quot;You are a helpful astrophysics assistant.&quot;</span>
+<span class="n">user</span> <span class="o">=</span> <span class="s2">&quot;Explain how to constrain compact dark matter with time-varying quasar equivalent widths.&quot;</span>
+
+<span class="n">messages</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">system</span><span class="p">},</span>
+    <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user</span><span class="p">},</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tok</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">MODEL</span><span class="p">,</span> <span class="n">fix_mistral_regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">tok</span><span class="o">.</span><span class="n">apply_chat_template</span><span class="p">(</span>
+    <span class="n">messages</span><span class="p">,</span>
+    <span class="n">add_generation_prompt</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">return_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">return_tensors</span><span class="o">=</span><span class="s2">&quot;pt&quot;</span><span class="p">,</span>
+<span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;apply_chat_template renders the role-tagged messages into the exact</span>
+<span class="sd">prompt string Ministral was trained on, then tokenizes it.</span>
+<span class="sd">- add_generation_prompt=True appends the opening that cues the model to start its reply.</span>
+<span class="sd">- return_dict=True keeps the token identifiers and attention mask together.</span>
+<span class="sd">- return_tensors=&quot;pt&quot; gives PyTorch tensors;&quot;&quot;&quot;</span><span class="p">;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of input tokens:&#39;</span><span class="p">,</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of input tokens: 32
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">tok</span><span class="o">.</span><span class="n">pad_token</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">tok</span><span class="o">.</span><span class="n">pad_token</span> <span class="o">=</span> <span class="n">tok</span><span class="o">.</span><span class="n">eos_token</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">generation_config</span><span class="o">.</span><span class="n">pad_token_id</span> <span class="o">=</span> <span class="n">tok</span><span class="o">.</span><span class="n">pad_token_id</span>
+
+<span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
+    <span class="o">**</span><span class="n">inputs</span><span class="p">,</span>
+    <span class="n">max_new_tokens</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+    <span class="n">do_sample</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;Generate a deterministic continuation.</span>
+
+<span class="sd">- pad_token sets a valid tokenizer padding token when the model has none.</span>
+<span class="sd">- generation_config.pad_token_id prevents generate() from inferring the pad token at runtime.</span>
+<span class="sd">- the tokenizer provides the input identifiers and attention mask together.</span>
+<span class="sd">- do_sample=False uses greedy decoding, so the same prompt gives the same output.&quot;&quot;&quot;</span>
+
+<span class="n">answer_ids</span> <span class="o">=</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;input_ids&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:]</span>   <span class="c1"># keep only the newly generated tokens, not the prompt</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tok</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">answer_ids</span><span class="p">,</span> <span class="n">skip_special_tokens</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[transformers] Both `max_new_tokens` (=60) and `max_length`(=262144) seem to have been set. `max_new_tokens` will take precedence. Please refer to the documentation for more information. (https://huggingface.co/docs/transformers/main/en/main_classes/text_generation)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Constraining compact dark matter (CDM) using time-varying quasar equivalent widths (EWs) is an intriguing and relatively recent approach that leverages the gravitational lensing effects of dark matter halos on quasars. Here’s a step-by-step breakdown of the method and its underlying physics:
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calling-a-remote-model-via-api-openrouter">
+<h2>Calling a remote model via API — OpenRouter<a class="headerlink" href="#calling-a-remote-model-via-api-openrouter" title="Link to this heading">#</a></h2>
+<p>Local models are free to use, but sometimes we need larger models hosted by some <strong>provider</strong>.<br>
+(<em>e.g., OpenAI, Mistral AI, Anthropic, Alibaba Cloud, etc.</em>).</p>
+<p><strong><u>Obtaining an API key</u></strong></p>
+<p>In this lecture, we access models through <strong>OpenRouter</strong> — a service which connects to several providers.</p>
+<blockquote>
+<div><p><em>OpenRouter provides limited token access to these models, but sufficient for this demonstration.</em></p>
+</div></blockquote>
+<p>OpenRouter has its own <strong>Application Programming Interface</strong> (<strong>API</strong>) — To obtain an OpenRouter API key:</p>
+<ol class="arabic simple">
+<li><p>Create an account or sign in at <a class="reference external" href="https://openrouter.ai/">openrouter.ai</a>.<br></p></li>
+<li><p>Open the <a class="reference external" href="https://openrouter.ai/settings/keys">API keys page</a>.</p></li>
+<li><p>Click <strong>Create Key</strong>, choose a name and an optional credit limit, then confirm.</p></li>
+<li><p><strong>Copy the key</strong> right away and store it as described below.</p></li>
+</ol>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<p><strong>WARNING:</strong> The key is displayed only 1 time, at creation.</p>
+<p>If you lose it, you <u>cannot</u> recover it <span class="math notranslate nohighlight">\(\rightarrow\)</span> you must generate a new key.</p>
+</div><p><strong><u>Storing the API key</u></strong></p>
+<p>The <strong>API key</strong> is a secret string that identifies and authenticates you to a remote service.</p>
+<p>For good manners, API keys shall <u>not</u> be part of the code.<br>
+One way is to “hide” them in a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file, then load them from there.</p>
+<blockquote>
+<div><p><em>Place the OpenRouter key in a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file in the same folder as this notebook.</em></p>
+</div></blockquote>
+<p>Example content of the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">OPENROUTER_API_KEY</span><span class="o">=</span><span class="s2">&quot;&lt;your_openrouter_api_key_here&gt;&quot;</span>
+</pre></div>
+</div>
+<p>then load it with:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="n">load_dotenv</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The key is now stored in a system variable:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENROUTER_API_KEY&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="n">load_dotenv</span><span class="p">();</span>  <span class="c1"># loads .env if present, skips if key already in system env</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On <strong>Colab</strong>, use the Secrets manager instead (<em>left sidebar → 🔑 icon</em>). Add a secret named <code class="docutils literal notranslate"><span class="pre">OPENROUTER_API_KEY</span></code>, then load it with:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+
+<span class="k">if</span> <span class="s2">&quot;google.colab&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">google.colab</span><span class="w"> </span><span class="kn">import</span> <span class="n">userdata</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;OPENROUTER_API_KEY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">userdata</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OPENROUTER_API_KEY&quot;</span><span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENROUTER_API_KEY&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OPENROUTER_API_KEY not found in env.&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OPENROUTER_API_KEY has been set.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>OPENROUTER_API_KEY has been set.
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong><u>Run the model</u></strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">langchain_openai</span></code> library sends the prompt to OpenRouter when we set its <em>API key</em> and <em>base address</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;openai/gpt-5.4-mini&quot;</span><span class="p">,</span>  <span class="c1"># &lt;-- asking for an OpenAI model, here</span>
+    <span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;OPENROUTER_API_KEY&quot;</span><span class="p">),</span>
+    <span class="n">openai_api_base</span><span class="o">=</span><span class="s2">&quot;https://openrouter.ai/api/v1&quot;</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">max_completion_tokens</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">&quot;Explain how to constrain compact dark matter with time-varying quasar equivalent widths.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compact dark matter can be constrained using **time-variable quasar equivalent widths (EWs)** because some forms of compact dark matter act as **gravitational microlenses**, which can magnify one part of a quasar’s emission more than another. Since different quasar spectral features come from regions of different sizes, lensing can change the **continuum** and **emission lines** by different amounts. That changes the observed **equivalent width** over time.
+
+## Core idea
+
+The equivalent width of a spectral line is roughly
+
+\[
+\mathrm{EW} \sim \frac{\text{line flux}}{\text{continuum flux}}
+\]
+
+more precisely the line flux relative to the local continuum. If a compact object in the foreground passes close to the line of sight, it can **microlens** the quasar.
+
+- The **continuum-emitting region** is very small, so it is easier to magnify.
+- The **broad-line region** is much larger, so it is less strongly magnified.
+- Therefore, microlensing can change the line-to-continuum ratio and thus the EW.
+
+If compact dark matter makes up a significant fraction of the halo, then such microlensing-induced EW variability should occur with a characteristic rate and amplitude.
+
+---
+
+## Why this constrains compact dark matter
+
+The abundance of compact objects determines:
+
+1. **How often** quasars are microlensed
+2. **How large** the EW fluctuations are
+3. **How the EW distribution evolves with time**
+
+If observations show that quasars do **not** exhibit the expected level of EW variability, then there cannot be too many compact lenses of the relevant mass range.
+
+This gives an upper bound on the fraction \(f_{\rm DM}\) of dark matter in compact objects such as:
+
+- primordial black holes
+- MACHOs
+- other compact lenses in a given mass range
+
+---
+
+## Practical observational method
+
+### 1. Build a quasar sample
+Use a large sample of quasars with repeated spectroscopy over years to decades.
+
+### 2. Measure equivalent widths at multiple epochs
+For each quasar and each strong emission line, measure EW at different times.
+
+### 3. Quantify variability
+Look for:
+- changes in EW beyond intrinsic quasar spectral variability
+- correlations between line and continuum changes
+- distributions of EW differences over time
+
+### 4. Compare to microlensing predictions
+Microlensing models predict the statistics of EW changes as a
+CPU times: user 25 ms, sys: 6.07 ms, total: 31.1 ms
+Wall time: 4.08 s
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<p><strong>NOTES:</strong></p>
+<ul>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">temperature</span></code> parameter allows to set how <strong>deterministic</strong> we want the LLM to be<br></p>
+<p>   <strong>lower</strong> temperature <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> more <strong>deterministic</strong></p>
+<p>   <strong>higher</strong> temperature [max=1] <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> more <strong>stochastic</strong></p>
+<p>Usually, in an Agent framework, we wish to have <strong>low</strong> temperature since we need a more systematic behavior</p>
+</li>
+<li><p>Notice that <code class="docutils literal notranslate"><span class="pre">llm</span></code> is a <code class="docutils literal notranslate"><span class="pre">langchain_openai</span></code> object.</p>
+<p>This has several methods we will need later, such as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">llm</span><span class="o">.</span><span class="n">bind_tools</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="tools">
+<h1>Tools<a class="headerlink" href="#tools" title="Link to this heading">#</a></h1>
+<p>We now wish to empower our LLM by providing it with a tool to <strong>search for papers</strong>.</p>
+<p>In particular, we will use the <code class="docutils literal notranslate"><span class="pre">arXiv</span></code> search <span class="math notranslate nohighlight">\(\rightarrow\)</span> we just need to make it a “<strong>tool</strong>”.<br>
+[<a class="reference external" href="https://info.arxiv.org/help/api/user-manual.html">arXiv search docs</a>]</p>
+<section id="defining-a-tool">
+<h2>Defining a tool<a class="headerlink" href="#defining-a-tool" title="Link to this heading">#</a></h2>
+<p>Luckily, that is easy: a tool is basically a <strong>function</strong>.</p>
+<p>This is what <code class="docutils literal notranslate"><span class="pre">LangGraph</span></code> expects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">arxiv</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">arxiv_tool</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Search arXiv for `query` and return the top 3 results.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    query : str</span>
+<span class="sd">        Search expression passed to arXiv.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        JSON-formatted string containing a list of result objects. Each object</span>
+<span class="sd">        contains title, link, publication date, and abstract. If no results are</span>
+<span class="sd">        returned, the JSON list is empty.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">search</span> <span class="o">=</span> <span class="n">arxiv</span><span class="o">.</span><span class="n">Search</span><span class="p">(</span>
+        <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">,</span>
+        <span class="n">max_results</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">sort_by</span><span class="o">=</span><span class="n">arxiv</span><span class="o">.</span><span class="n">SortCriterion</span><span class="o">.</span><span class="n">Relevance</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">client</span> <span class="o">=</span> <span class="n">arxiv</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+    <span class="n">entries</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">results</span><span class="p">(</span><span class="n">search</span><span class="p">):</span>
+        <span class="n">title</span>     <span class="o">=</span> <span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">title</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">link</span>      <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;entry_id&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;pdf_url&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">abstract</span>  <span class="o">=</span> <span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;summary&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="n">published</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;published&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="n">entries</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">title</span><span class="p">,</span>
+            <span class="s2">&quot;link&quot;</span><span class="p">:</span> <span class="n">link</span><span class="p">,</span>
+            <span class="s2">&quot;published&quot;</span><span class="p">:</span> <span class="n">published</span><span class="p">,</span>
+            <span class="s2">&quot;abstract&quot;</span><span class="p">:</span> <span class="n">abstract</span><span class="p">,</span>
+        <span class="p">})</span>
+
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The tool only requires the search <code class="docutils literal notranslate"><span class="pre">query</span></code> as input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">arxiv_tool</span><span class="p">(</span>
+    <span class="n">query</span><span class="o">=</span><span class="s2">&quot;Constraining compact dark matter with time-varying quasar equivalent widths&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[
+  {
+    &quot;title&quot;: &quot;The Dark Energy Survey&quot;,
+    &quot;link&quot;: &quot;http://arxiv.org/abs/astro-ph/0510346v1&quot;,
+    &quot;published&quot;: &quot;2005-10-12 13:33:59+00:00&quot;,
+    &quot;abstract&quot;: &quot;We describe the Dark Energy Survey (DES), a proposed optical-near infrared survey of 5000 sq. deg of the South Galactic Cap to ~24th magnitude in SDSS griz, that would use a new 3 sq. deg CCD camera to be mounted on the Blanco 4-m telescope at Cerro Telolo Inter-American Observatory (CTIO). The survey data will allow us to measure the dark energy and dark matter densities and the dark energy equation of state through four independent methods: galaxy clusters, weak gravitational lensing tomography, galaxy angular clustering, and supernova distances. These methods are doubly complementary: they constrain different combinations of cosmological model parameters and are subject to different systematic errors. By deriving the four sets of measurements from the same data set with a common analysis framework, we will obtain important cross checks of the systematic errors and thereby make a substantial and robust advance in the precision of dark energy measurements.&quot;
+  },
+  {
+    &quot;title&quot;: &quot;Possible Couplings of Dark Matter&quot;,
+    &quot;link&quot;: &quot;http://arxiv.org/abs/1809.09971v1&quot;,
+    &quot;published&quot;: &quot;2018-09-24 19:05:16+00:00&quot;,
+    &quot;abstract&quot;: &quot;Dark matter interacts gravitationally, but it presumably interacts weakly through other channels, especially with respect to regular luminous matter. We look at different ways in which dark matter may couple to other fields. We briefly review some example approaches in the literature for modeling the coupling between dark energy and dark matter and examine the possibility of an arguably better-motivated approach via non-minimal coupling between a scalar field and the Ricci scalar, which is necessary for renormalization of the scalar field in curved space-time. We also show an example of a theory beyond the Standard Model in which dark matter is uniquely connected to the inflaton, and we use observational astrophysical constraints to specify an upper bound on the dark matter mass. In turn, this mass constraint implies a limit on the unification scale of the theory, a decoupling scale of the theory, and the number of $e$-folds of inflation allowed.&quot;
+  },
+  {
+    &quot;title&quot;: &quot;Constraining compact dark matter with time-varying quasar equivalent widths&quot;,
+    &quot;link&quot;: &quot;http://arxiv.org/abs/2507.02046v1&quot;,
+    &quot;published&quot;: &quot;2025-07-02 18:00:02+00:00&quot;,
+    &quot;abstract&quot;: &quot;One of the possible explanations for dark matter is that of compact dark objects of baryonic origin, such as black holes or even planets. Accumulating evidence, including the discovery of merging stellar mass black holes through gravitational waves, point to a population of such objects making up at least some fraction of dark matter. We revisit a historically heavily used probe, quasar spectra, from the new perspective of time variability and gravitational lensing. From a sample of 777 quasars selected from archival data we identify 19 that show decisive evidence of lensing by compact objects with masses measured in the range $5\\times 10^{-5} &lt; M/\\mathrm{M}_{\\odot} &lt; 2\\times 10^{-2}$ with 99\\% confidence. This is much lower than what is hoped to be detected by even the most futuristic gravitational wave detectors and analysis strategies, but is crucial for theories of compact dark matter, such as primordial black holes predicted from quantum phase transitions in the early Universe.&quot;
+  }
+]
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<p><strong>IMPORTANT:</strong> The function docstring is <strong>what</strong> the Agent will kown about the tool — describe clearly what the tool does!</p>
+</div></section>
+<section id="connect-tools-to-llm">
+<h2>Connect tools to LLM<a class="headerlink" href="#connect-tools-to-llm" title="Link to this heading">#</a></h2>
+<p>First of all, <code class="docutils literal notranslate"><span class="pre">LangGraph</span></code> wants the tools in a list, even when we have only 1, like in this case:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># list of tools</span>
+<span class="n">tools</span> <span class="o">=</span> <span class="p">[</span><span class="n">arxiv_tool</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To connect the tools to the LLM, we use the method <code class="docutils literal notranslate"><span class="pre">.bind_tools()</span></code>.</p>
+<p>This will modify the <code class="docutils literal notranslate"><span class="pre">llm</span></code> object, and inform it that it has some tools available.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">llm_with_tools</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">bind_tools</span><span class="p">(</span><span class="n">tools</span><span class="p">,</span> <span class="n">parallel_tool_calls</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="sd">&#39;&#39;&#39;About the `parallel_tool_calls`:</span>
+<span class="sd">    - If False: at most one tool call at a time, then it waits for the result.</span>
+<span class="sd">    - If True: it may call multiple tools in parallel in a single response.</span>
+
+<span class="sd">Selecting False makes the tool calls be sequential. In this case it does not</span>
+<span class="sd">really matter as we only have 1 tool.&#39;&#39;&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need one more wrapping: <code class="docutils literal notranslate"><span class="pre">LangGraph</span></code> expects a function that returns a graph state <span class="math notranslate nohighlight">\(\rightarrow\)</span> we define an <code class="docutils literal notranslate"><span class="pre">assistant</span></code> function.</p>
+<blockquote>
+<div><p><em>We will see what “graph state” means later <span class="math notranslate nohighlight">\(\rightarrow\)</span> For now consider that, in our example, the “state” is just … messages:</em><br>
+    <em>state = message history</em></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">MessagesState</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">SystemMessage</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">assistant</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">MessagesState</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the next graph state for the assistant node.</span>
+
+<span class="sd">    LangGraph expects each node to be a function that accepts and returns</span>
+<span class="sd">    a graph state. In this tutorial the state is just the conversation</span>
+<span class="sd">    history: a list of messages representing the user -&gt; assistant loop.</span>
+<span class="sd">    The assistant wraps the LLM call and returns the updated messages.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># System prompt: the prior instruction to the model</span>
+    <span class="c1"># (at inference time, it will take the user input as additional prompt)    </span>
+    <span class="n">sys_msg</span> <span class="o">=</span> <span class="n">SystemMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span>
+        <span class="s1">&#39;You are an assistant specialized in astrophysics.&#39;</span> \
+        <span class="s1">&#39;You may call the arXiv search tool when helpful and should otherwise&#39;</span> \
+        <span class="s1">&#39;answer directly.&#39;</span><span class="p">)</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Here, we are providing the LLM with its main context.</span>
+<span class="sd">       We are instructing it on:</span>
+<span class="sd">        - its role</span>
+<span class="sd">        - the fact that it can use tools &lt;-- important!</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># Run the model and return the next assistant message.</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;messages&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">llm_with_tools</span><span class="o">.</span><span class="n">invoke</span><span class="p">([</span><span class="n">sys_msg</span><span class="p">]</span> <span class="o">+</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;messages&#39;</span><span class="p">])]}</span>
+
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;The returned dict IS the next graph state.</span>
+<span class="sd">        </span>
+<span class="sd">        The list concatenation</span>
+<span class="sd">            `[sys_msg] + state[&#39;messages&#39;]`</span>
+<span class="sd">        rebuilds the prompt each loop by prepending the system instruction once</span>
+<span class="sd">        and then appending the accumulated user/assistant/tool messages from</span>
+<span class="sd">        prior turns.</span>
+<span class="sd">        The system message is not stored in state; only the conversation</span>
+<span class="sd">        grows across loops.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="build-the-agent">
+<h1>Build the Agent<a class="headerlink" href="#build-the-agent" title="Link to this heading">#</a></h1>
+<p>We will now <strong>assemble</strong> the Agent using the components we defined — using the <code class="docutils literal notranslate"><span class="pre">LangGraph</span></code> library.</p>
+<p>We will create as a <strong>graph</strong>, so we have to think it in terms of:</p>
+<ul class="simple">
+<li><p><strong>nodes</strong> (<em>functions</em>), and</p></li>
+<li><p><strong>edges</strong> (<em>connections between functions</em>).</p></li>
+</ul>
+<p>These act on the graph, which has a <strong>state</strong>.</p>
+<p><em>Hint: To better understand, look at the resulting figure to grasp the resulting structure, then inverse-engineer the code.</em></p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>Let’s begin by defining the graph state, then add nodes and edges:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">MessagesState</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">StateGraph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.prebuilt</span><span class="w"> </span><span class="kn">import</span> <span class="n">tools_condition</span><span class="p">,</span> <span class="n">ToolNode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="c1"># Instantiate the graph (we care about states as messages, so we inform LangGraph about it)</span>
+<span class="n">builder</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">MessagesState</span><span class="p">)</span>
+
+<span class="c1"># We add the assistant and tools nodes, and give them a label</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span> <span class="n">assistant</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;tools&#39;</span><span class="p">,</span> <span class="n">ToolNode</span><span class="p">(</span><span class="n">tools</span><span class="p">))</span>
+
+<span class="c1"># Join the nodes using edges</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s1">&#39;assistant&#39;</span><span class="p">)</span>  <span class="c1"># the entry node is always the special one: &#39;START&#39;, and from there to node &#39;assistant&#39;</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span><span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="n">tools_condition</span><span class="p">)</span>  <span class="c1"># this edge is conditional</span>
+<span class="sd">&#39;&#39;&#39;^Here, `tools_condition` is a special prebuild node --- If the latest message (result) from assistant:</span>
+<span class="sd">    - is a tool call         -&gt; tools_condition routes to &#39;tools&#39;</span>
+<span class="sd">    - is a _not _a tool call -&gt; tools_condition routes to &#39;END&#39;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;tools&#39;</span><span class="p">,</span> <span class="s1">&#39;assistant&#39;</span><span class="p">)</span>  <span class="c1"># additional edge that always sends _back_ from &#39;tools&#39; to &#39;assistant&#39;, for a re-evaluation</span>
+
+<span class="c1"># Actual build</span>
+<span class="n">article_graph</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+
+<span class="c1"># Show the compiled graph as a mermaid PNG</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">article_graph</span><span class="o">.</span><span class="n">get_graph</span><span class="p">(</span><span class="n">xray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">draw_mermaid_png</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1bf561f9ccf80b1e76e0e7acce1c30753921505bca6c5ae17ab8792d3f3df637.png" src="../_images/1bf561f9ccf80b1e76e0e7acce1c30753921505bca6c5ae17ab8792d3f3df637.png" />
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="execute-agent">
+<h1>Execute Agent<a class="headerlink" href="#execute-agent" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="c1"># Here we place our task to the Agent in natural language</span>
+<span class="n">user_prompt</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;Explain how to constrain compact dark matter with time-varying quasar equivalent widths.</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;If you are unsure, look for papers more recent than 2023.</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;Respond combining the information you collected from the abstracts you retrieved.</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Convert from string to a LangGraph message</span>
+<span class="n">user_messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">user_prompt</span><span class="p">)]</span>
+
+<span class="c1"># Actual agent invocation: this executes the graph</span>
+<span class="n">response_messages</span> <span class="o">=</span> <span class="n">article_graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s1">&#39;messages&#39;</span><span class="p">:</span> <span class="n">user_messages</span><span class="p">})</span>
+
+<span class="c1"># Check the sequence of performed actions</span>
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">response_messages</span><span class="p">[</span><span class="s1">&#39;messages&#39;</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">pretty_print</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================<span class=" -Color -Color-Bold"> Human Message </span>=================================
+
+Explain how to constrain compact dark matter with time-varying quasar equivalent widths.
+If you are unsure, look for papers more recent than 2023.
+Respond combining the information you collected from the abstracts you retrieved.
+
+==================================<span class=" -Color -Color-Bold"> Ai Message </span>==================================
+Tool Calls:
+  arxiv_tool (call_iV0VMSM1IkpqhBGpQcUspUp8)
+ Call ID: call_iV0VMSM1IkpqhBGpQcUspUp8
+  Args:
+    query: compact dark matter time-varying quasar equivalent widths microlensing equivalent width quasar absorption lines 2024
+=================================<span class=" -Color -Color-Bold"> Tool Message </span>=================================
+Name: arxiv_tool
+
+[
+  {
+    &quot;title&quot;: &quot;Constraining Compact Dark Matter with Quasar Equivalent Widths from the Sloan Digital Sky Survey Early Data Release&quot;,
+    &quot;link&quot;: &quot;http://arxiv.org/abs/astro-ph/0307465v1&quot;,
+    &quot;published&quot;: &quot;2003-07-27 03:51:42+00:00&quot;,
+    &quot;abstract&quot;: &quot;Cosmologically distributed compact dark matter objects with masses in the approximate range of 0.001 to 1 solar masses can amplify the continuum emission of a quasar through gravitational microlensing, without appreciably affecting its broad emission lines. This will produce a statistical excess of weak-lined quasars in the observed distribution of spectral line equivalent widths, an effect that scales with the amount of compact dark matter in the universe. Using the large flux-limited sample of quasar spectra from the Early Data Release of the Sloan Digital Sky Survey (SDSS), I demonstrate the absence of a strong microlensing signal. This leads to a constraint on the cosmological density of compact objects of Omega_c &lt; 0.03, relative to the critical density, on Jupiter- to solar-mass scales. For compact objects clustered in galaxy halos, this limit is expected to be weaker by at most a factor of two. I also forecast the improvements to this constraint that may be possible in a few years with the full SDSS quasar catalog.&quot;
+  },
+  {
+    &quot;title&quot;: &quot;Implications of Dramatic Broad Absorption Line Variability in the Quasar FBQS J1408+3054&quot;,
+    &quot;link&quot;: &quot;http://arxiv.org/abs/1010.3728v2&quot;,
+    &quot;published&quot;: &quot;2010-10-18 20:47:09+00:00&quot;,
+    &quot;abstract&quot;: &quot;We have observed a dramatic change in the spectrum of the formerly heavily absorbed `overlapping-trough&#39; iron low-ionization broad absorption line (FeLoBAL) quasar FBQS J1408+3054. Over a time span of between 0.6 to 5 rest-frame years, the Mg II trough outflowing at 12,000 km/s decreased in equivalent width by a factor of two and the Fe II troughs at the same velocity disappeared. The most likely explanation for the variability is that a structure in the BAL outflow moved out of our line of sight to the ultraviolet continuum emitting region of the quasar&#39;s accretion disk. Given the size of that region, this structure must have a transverse velocity of between 2600 km/s and 22,000 km/s. In the context of a simple outflow model, we show that this BAL structure is located between approximately 5800 and 46,000 Schwarzschild radii from the black hole. That distance corresponds to 1.7 to 14 pc, 11 to 88 times farther from the black hole than the H-beta broad-line region. The high velocities and the parsec-scale distance for at least this one FeLoBAL outflow mean that not all FeLoBAL outflows can be associated with galaxy-scale outflows in ultraluminous infrared galaxies transitioning to unobscured quasars. The change of FBQS J1408+3054 from an FeLoBAL to a LoBAL quasar also means that if (some) FeLoBAL quasars have multiwavelength properties which distinguish them from HiBAL quasars, then some LoBAL quasars will share those properties. Finally, we extend previous work on how multiple-epoch spectroscopy of BAL and non-BAL quasars can be used to constrain the average lifetime of BAL episodes (currently &gt;60 rest-frame years at 90% confidence).&quot;
+  },
+  {
+    &quot;title&quot;: &quot;Numerical simulations of quasar absorbers&quot;,
+    &quot;link&quot;: &quot;http://arxiv.org/abs/astro-ph/0507570v1&quot;,
+    &quot;published&quot;: &quot;2005-07-25 09:43:34+00:00&quot;,
+    &quot;abstract&quot;: &quot;The physical state of the intergalactic medium can be probed in great detail with the intervening absorption systems seen in quasar spectra. The properties of the Hydrogen absorbers depend on many cosmological parameters, such as the matter-power spectrum, reionisation history, ionising background and the nature of the dark matter. The spectra also contain metal lines, which can be used to constrain the star formation history and the feedback processes acting in large and small galaxies. Simulations have been instrumental in investigating to what extent these parameters can be unambiguously constrained with current and future data. This paper is meant as an introduction to this subject, and reviews techniques and methods for simulating the intergalactic medium.&quot;
+  }
+]
+==================================<span class=" -Color -Color-Bold"> Ai Message </span>==================================
+
+Compact dark matter can be constrained with **time-varying quasar equivalent widths** because **gravitational microlensing** by compact objects preferentially magnifies the **quasar continuum** more than the **broad-line region**.
+
+### Core idea
+- A quasar spectrum has:
+  - a compact **continuum source**
+  - a much larger **emission-line region**
+- A compact lens along the line of sight can magnify the continuum strongly, but the broad emission lines much less.
+- That makes the **equivalent width (EW)** of emission lines appear **smaller** than usual, since EW is roughly line flux divided by continuum flux.
+- If compact dark matter is common, flux-limited quasar samples should contain an **excess of weak-lined quasars**.
+
+### How the constraint is obtained
+From the abstract of the classic SDSS Early Data Release study:
+- Look at a large sample of quasar spectra.
+- Compare the observed EW distribution to what is expected without microlensing.
+- A significant microlensing population would skew the distribution toward **lower EWs**.
+- The reported absence of a strong signal led to a bound:
+  - **\(\Omega_c &lt; 0.03\)** for compact objects on roughly **Jupiter- to solar-mass scales**
+  - If the objects are clustered in galaxy halos rather than cosmologically distributed, the limit is expected to weaken by at most about a factor of two.
+
+### Where time variability comes in
+Time-varying EW measurements add extra leverage because:
+- microlensing magnification can **change with time** as the lens-source geometry evolves,
+- so repeated spectra can reveal **EW changes uncorrelated with intrinsic quasar line variability**,
+- and a persistent or recurrent pattern of continuum enhancement without matching line enhancement is a microlensing signature.
+
+The idea is to monitor quasars spectroscopically over time and ask:
+1. Does the continuum change by more than the line flux?
+2. Do the equivalent widths vary in the direction expected from microlensing?
+3. Is the rate and amplitude of EW variability consistent with a population of compact lenses?
+
+### Practical logic of the test
+For each quasar:
+- measure EW at multiple epochs,
+- model expected intrinsic variability,
+- compare to a microlensing model that predicts the probability distribution of EW changes,
+- infer what fraction of the dark matter can be in compact lenses.
+
+The key observable is not just a low EW once,
+CPU times: user 93.7 ms, sys: 13.8 ms, total: 108 ms
+Wall time: 19.7 s
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=6><strong>Exercise — Build a hypothesis-testing agent [40 min]</strong></font></p>
+<p><strong>Objective:</strong> Turn a statistical test into a <strong>tool</strong>, and plug it into an Agent that runs the test on demand.</p>
+<p><strong>Task:</strong> Write the tool that performs a 2-sample <strong>Kolmogorov-Smirnov (K-S) test</strong>, then let the Agent call it.</p>
+</div><div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p>The user will ask the following question:</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">user_prompt</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;I have two samples of a measured quantity.</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;Sample A: [10.0, 10.3, 9.73, 9.11, 9.55, 9.01, 10.06, 11.34, 9.51]</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;Sample B: [11.26, 12.59, 12.43, 12.13, 10.88, 11.96, 12.83, 10.39, 11.45]</span><span class="se">\n</span><span class="s2">&quot;</span>
+    <span class="s2">&quot;Check whether they come from the same distribution.</span><span class="se">\n</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Task A</strong>: Prepare the tool.</p>
+<ol class="arabic simple">
+<li><p><strong>Write</strong> a function <code class="docutils literal notranslate"><span class="pre">ks_tool</span></code> that:</p>
+<ul class="simple">
+<li><p>Takes 2 lists (samples) as inputs</p></li>
+<li><p>Uses <code class="docutils literal notranslate"><span class="pre">stats.ks_2samp</span></code> from <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code></p></li>
+<li><p>Returns the p-value.</p></li>
+</ul>
+</li>
+<li><p>Write an accurate <strong>docstring</strong> that says what the tool does and what it returns: the Agent reads it to decide when to call the tool.</p></li>
+<li><p><strong>Test</strong> your tool directly on 2 validation samples.</p></li>
+<li><p><strong>Run</strong> the pre-filled cells to link the tool.</p></li>
+</ol>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Student: Write your tool here. Edit as you deem fit.</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ks_tool</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Returns p.&#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="mf">0.0000000001</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span> <span class="o">=</span> <span class="p">[</span><span class="n">ks_tool</span><span class="p">]</span>
+
+<span class="n">llm_with_tools</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">bind_tools</span><span class="p">(</span><span class="n">tools</span><span class="p">,</span> <span class="n">parallel_tool_calls</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Task B</strong>: Write a proper <code class="docutils literal notranslate"><span class="pre">sys_msg</span></code> for the Agent — it must provide the rule.</p>
+<p><strong>Hint</strong>: Basically, you have to instruct the Agnet to use the KS test and decide based on some threshold <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">MessagesState</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">SystemMessage</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">assistant</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">MessagesState</span><span class="p">):</span>
+    <span class="n">sys_msg</span> <span class="o">=</span> <span class="n">SystemMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span>
+        <span class="s1">&#39;You do not calcualte statistic stuff. Ever. Reply that you cannot comply.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;messages&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">llm_with_tools</span><span class="o">.</span><span class="n">invoke</span><span class="p">([</span><span class="n">sys_msg</span><span class="p">]</span> <span class="o">+</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;messages&#39;</span><span class="p">])]}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Task C</strong>: Just run the cells below to assess your Agent.</p>
+<p>Iterate the previous steps until satisfied.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">MessagesState</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">StateGraph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.prebuilt</span><span class="w"> </span><span class="kn">import</span> <span class="n">tools_condition</span><span class="p">,</span> <span class="n">ToolNode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="n">builder</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">MessagesState</span><span class="p">)</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span> <span class="n">assistant</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;tools&#39;</span><span class="p">,</span> <span class="n">ToolNode</span><span class="p">(</span><span class="n">tools</span><span class="p">))</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s1">&#39;assistant&#39;</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span><span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="n">tools_condition</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;tools&#39;</span><span class="p">,</span> <span class="s1">&#39;assistant&#39;</span><span class="p">)</span>
+
+<span class="n">ks_graph</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">ks_graph</span><span class="o">.</span><span class="n">get_graph</span><span class="p">(</span><span class="n">xray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">draw_mermaid_png</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1bf561f9ccf80b1e76e0e7acce1c30753921505bca6c5ae17ab8792d3f3df637.png" src="../_images/1bf561f9ccf80b1e76e0e7acce1c30753921505bca6c5ae17ab8792d3f3df637.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">user_messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">user_prompt</span><span class="p">)]</span>
+
+<span class="n">response_messages</span> <span class="o">=</span> <span class="n">ks_graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s1">&#39;messages&#39;</span><span class="p">:</span> <span class="n">user_messages</span><span class="p">})</span>
+
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">response_messages</span><span class="p">[</span><span class="s1">&#39;messages&#39;</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">pretty_print</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================<span class=" -Color -Color-Bold"> Human Message </span>=================================
+
+I have two samples of a measured quantity.
+Sample A: [10.0, 10.3, 9.73, 9.11, 9.55, 9.01, 10.06, 11.34, 9.51]
+Sample B: [11.26, 12.59, 12.43, 12.13, 10.88, 11.96, 12.83, 10.39, 11.45]
+Check whether they come from the same distribution.
+
+==================================<span class=" -Color -Color-Bold"> Ai Message </span>==================================
+
+I cannot comply.
+CPU times: user 9.4 ms, sys: 3.21 ms, total: 12.6 ms
+Wall time: 921 ms
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Task D [optional]</strong>: Edit the <code class="docutils literal notranslate"><span class="pre">user_prompt</span></code> slightly, and test if your Agent is solid with respect to prompt variations.</p>
+</div><div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution below]</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ks_tool</span><span class="p">(</span><span class="n">sample_a</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">sample_b</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run a 2-sample Kolmogorov-Smirnov test and report the outcome.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sample_a : list of float</span>
+<span class="sd">        First sample of measurements.</span>
+<span class="sd">    sample_b : list of float</span>
+<span class="sd">        Second sample of measurements.</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    str</span>
+<span class="sd">        JSON-formatted string with the D-statistic and the p-value of the</span>
+<span class="sd">        2-sample Kolmogorov-Smirnov test comparing the two samples.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Run the 2-sample KS test from scipy: it returns the D-statistic and the p-value.</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ks_2samp</span><span class="p">(</span><span class="n">sample_a</span><span class="p">,</span> <span class="n">sample_b</span><span class="p">)</span>
+
+    <span class="c1"># Convert to plain Python floats so they can be serialised to JSON.</span>
+    <span class="n">d_statistic</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">statistic</span><span class="p">)</span>
+    <span class="n">p_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">pvalue</span><span class="p">)</span>
+
+    <span class="n">output</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;d_statistic&quot;</span><span class="p">:</span> <span class="n">d_statistic</span><span class="p">,</span>
+        <span class="s2">&quot;p_value&quot;</span><span class="p">:</span> <span class="n">p_value</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span> <span class="o">=</span> <span class="p">[</span><span class="n">ks_tool</span><span class="p">]</span>
+
+<span class="n">llm_with_tools</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">bind_tools</span><span class="p">(</span><span class="n">tools</span><span class="p">,</span> <span class="n">parallel_tool_calls</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">MessagesState</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">SystemMessage</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">assistant</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">MessagesState</span><span class="p">):</span>
+    <span class="n">sys_msg</span> <span class="o">=</span> <span class="n">SystemMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span>
+        <span class="s1">&#39;You are an assistant specialized in astrophysics and statistics.&#39;</span> \
+        <span class="s1">&#39;You may call the Kolmogorov-Smirnov test tool when helpful and should otherwise&#39;</span> \
+        <span class="s1">&#39;answer directly. Use a significance level of 0.05.&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;messages&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">llm_with_tools</span><span class="o">.</span><span class="n">invoke</span><span class="p">([</span><span class="n">sys_msg</span><span class="p">]</span> <span class="o">+</span> <span class="n">state</span><span class="p">[</span><span class="s1">&#39;messages&#39;</span><span class="p">])]}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">MessagesState</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">StateGraph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.prebuilt</span><span class="w"> </span><span class="kn">import</span> <span class="n">tools_condition</span><span class="p">,</span> <span class="n">ToolNode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
+
+<span class="n">builder</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">MessagesState</span><span class="p">)</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;assistant&#39;</span><span class="p">,</span> <span class="n">assistant</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s1">&#39;tools&#39;</span><span class="p">,</span> <span class="n">ToolNode</span><span class="p">(</span><span class="n">tools</span><span class="p">))</span>
+
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s1">&#39;assistant&#39;</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span><span class="s2">&quot;assistant&quot;</span><span class="p">,</span> <span class="n">tools_condition</span><span class="p">)</span>
+<span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s1">&#39;tools&#39;</span><span class="p">,</span> <span class="s1">&#39;assistant&#39;</span><span class="p">)</span>
+
+<span class="n">ks_graph</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">ks_graph</span><span class="o">.</span><span class="n">get_graph</span><span class="p">(</span><span class="n">xray</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">draw_mermaid_png</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1bf561f9ccf80b1e76e0e7acce1c30753921505bca6c5ae17ab8792d3f3df637.png" src="../_images/1bf561f9ccf80b1e76e0e7acce1c30753921505bca6c5ae17ab8792d3f3df637.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">user_messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">user_prompt</span><span class="p">)]</span>
+
+<span class="n">response_messages</span> <span class="o">=</span> <span class="n">ks_graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s1">&#39;messages&#39;</span><span class="p">:</span> <span class="n">user_messages</span><span class="p">})</span>
+
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">response_messages</span><span class="p">[</span><span class="s1">&#39;messages&#39;</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">m</span><span class="o">.</span><span class="n">pretty_print</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================<span class=" -Color -Color-Bold"> Human Message </span>=================================
+
+I have two samples of a measured quantity.
+Sample A: [10.0, 10.3, 9.73, 9.11, 9.55, 9.01, 10.06, 11.34, 9.51]
+Sample B: [11.26, 12.59, 12.43, 12.13, 10.88, 11.96, 12.83, 10.39, 11.45]
+Check whether they come from the same distribution.
+
+==================================<span class=" -Color -Color-Bold"> Ai Message </span>==================================
+Tool Calls:
+  ks_tool (call_ULn4ICKZ6QBMOWuK57NNKnDn)
+ Call ID: call_ULn4ICKZ6QBMOWuK57NNKnDn
+  Args:
+    sample_a: [10.0, 10.3, 9.73, 9.11, 9.55, 9.01, 10.06, 11.34, 9.51]
+    sample_b: [11.26, 12.59, 12.43, 12.13, 10.88, 11.96, 12.83, 10.39, 11.45]
+=================================<span class=" -Color -Color-Bold"> Tool Message </span>=================================
+Name: ks_tool
+
+{
+  &quot;d_statistic&quot;: 0.8888888888888888,
+  &quot;p_value&quot;: 0.0007404360345536814
+}
+==================================<span class=" -Color -Color-Bold"> Ai Message </span>==================================
+
+Using a two-sample Kolmogorov–Smirnov test:
+
+- KS statistic: **D = 0.889**
+- p-value: **0.00074**
+
+At the significance level of **0.05**, the p-value is much smaller than 0.05, so we **reject the null hypothesis** that the two samples are drawn from the same distribution.
+
+Conclusion: **The two samples are very likely from different distributions.**
+CPU times: user 23.6 ms, sys: 2.82 ms, total: 26.4 ms
+Wall time: 2.21 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[End of solution]</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#EOF</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "astrostat-7"
+        },
+        kernelOptions: {
+            name: "astrostat-7",
+            path: "./AI_Agents"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'astrostat-7'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../DL_Diffusion/Diffusion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Diffusion Models</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Intro to AI Agents<a class="tocSkip"></a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-an-agent">What is an Agent?</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#use-case">Use case</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#using-an-llm">Using an LLM</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-an-llm-generates-text">How an LLM generates text</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-model-vs-api">Local model vs. API</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-local-model-ministral">Calling a local model — Ministral</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calling-a-remote-model-via-api-openrouter">Calling a remote model via API — OpenRouter</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#tools">Tools</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defining-a-tool">Defining a tool</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-tools-to-llm">Connect tools to LLM</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-agent">Build the Agent</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-agent">Execute Agent</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

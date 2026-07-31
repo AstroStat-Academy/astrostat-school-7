@@ -1,0 +1,1262 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Optimization with Graphics Processing Units &#8212; AstroStat School 2026 — Rome</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'GPU_Parallelization/GPU_parallelization';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Neural Network Explainability" href="../NN_Explainability/NN_explainability.html" />
+    <link rel="prev" title="Introduction to Deep Learning and Regression Workshop" href="../DL_Intro_n_Regression/Intro_n_Regression.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — Rome</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — Rome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Intro/Intro.html">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Hypothesis_Testing/Hypothesis_Testing.html">Hypothesis Testing <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MLE/MLE.html">Maximum Likelihood Estimation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Intro_and_Clustering.html">Introduction to Machine Learning and Clustering <a class="tocSkip"></a></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_1.html">Introduction to Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_2.html">Applied Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">Basics of Markov Chain Monte Carlo <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Classification.html">Classification <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Gaussian_Processes/Gaussian_Processes.html">Gaussian Processes <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Time_Series/Time_Series.html">Time Series Analysis <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Best_Practices.html">Machine Learning Practices and Protocols</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Intro_n_Regression/Intro_n_Regression.html">Introduction to Deep Learning and Regression Workshop</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../NN_Explainability/NN_explainability.html">Neural Network Explainability <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_short.html">Introduction to Simulation Based Inference</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_exercise.html">Simulation Based Inference: Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Diffusion/Diffusion.html">Diffusion Models</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../AI_Agents/AI_Agents.html">Intro to AI Agents<a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroStat-Academy/astrostat-school-7/blob/main/./GPU_Parallelization/GPU_parallelization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/GPU_Parallelization/GPU_parallelization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Optimization with Graphics Processing Units <a class="tocSkip"></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#excitement-vs-routine">Excitement vs Routine</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#have-you-heard-of-vectorization">Have you heard of “vectorization”?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-good-gpu-use-cases">Examples of good GPU use cases</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-gpu-codes-work">How do GPU codes work?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-memory">Managing memory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#threads-blocks-and-memory-access">Threads, Blocks, and memory access</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#working-example-a-simple-chi-2">Working example: a simple <span class="math notranslate nohighlight">\(\chi^2\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-we-define-the-light-curve-data-as-a-list-of-observations-time-flux-error">First, we define the light curve data as a list of observations (time, flux, error)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-we-define-the-model">Second, we define the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#third-we-compare-the-model-to-the-data-by-calculating-the-corresponding-chi-2">Third, we compare the model to the data by calculating the corresponding <span class="math notranslate nohighlight">\(\chi^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finally-let-s-plot-the-data-our-model-and-its-chi-2-value">Finally, let’s plot the data, our model, and its <span class="math notranslate nohighlight">\(\chi^2\)</span> value</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#brute-force-parameter-estimation-cpu-vs-gpu">Brute force parameter estimation - CPU vs GPU</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-define-a-plotting-function-for-convenience">Let’s define a plotting function for convenience.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-define-a-convenient-function-that-calculates-the-chi-2-on-the-cpu-3-nested-loops">Let’s define a convenient function that calculates the <span class="math notranslate nohighlight">\(\chi^2\)</span> on the CPU (3 nested loops).</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-define-the-gpu-kernel-that-calculates-chi-2-and-a-convenient-function-that-transfers-memory-to-and-from-the-gpu">Let’s define the GPU kernel that calculates <span class="math notranslate nohighlight">\(\chi^2\)</span> and a convenient function that transfers memory to and from the GPU.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-define-a-grid-of-paramaters-and-start-exploring">Let’s define a grid of paramaters and start exploring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-the-chi-2-on-the-cpu">Calculating the <span class="math notranslate nohighlight">\(\chi^2\)</span> on the CPU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-the-chi-2-on-the-gpu">Calculating the <span class="math notranslate nohighlight">\(\chi^2\)</span> on the GPU</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-gpu-code-with-sophisticated-algorithms">Combining GPU code with sophisticated algorithms</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-distant-supernova-explosion">Example: A distant supernova explosion</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <fieldset style="padding:10px; border:1px solid #ccc; box-shadow:2px 2px 5px rgba(0,0,0,0.1);">
+<legend style="font-size: 10px; color:#555;">Credits</legend>
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 80px; vertical-align: top;">
+            <img src="https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/logo/logo_b_text_lowres.png" alt="AstroStat Academy logo" width="100">
+        </td>
+        <td style="vertical-align: center; padding-left: 15px; font-size: 10px; line-height: 1.2;">
+            This notebook contains original work by the authors unless stated otherwise.
+            Any external material is properly credited to its sources.<br>
+            References to papers, datasets, and software are acknowledged.
+            Original content is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0 (GNU GPLv3)</a>.
+        </td>
+    </tr>
+</table>
+</fieldset>
+<!-- Allow these <br> or it will look ugly once rendered on Jupyter Book. -->
+<br><section class="tex2jax_ignore mathjax_ignore" id="optimization-with-graphics-processing-units">
+<h1>Optimization with Graphics Processing Units <a class="tocSkip"><a class="headerlink" href="#optimization-with-graphics-processing-units" title="Link to this heading">#</a></h1>
+<p>This notebook presents <strong>GPU parallelization</strong>, a coding framework/paradigm that can be used to dramatically speed up scientific computations.
+Using Graphics Processing Units (GPUs) requires a different way of thinking with respect to programming.
+An analogy could be the different perspective between sequential and object-oriented programming.
+In this case, we need to think ‘’in parallel’’.
+In this notebook, we will discuss:</p>
+<ul class="simple">
+<li><p>How to identify repeated and independent actions performed by some piece of code</p></li>
+<li><p>The important role of memory access in highly parallelizable code</p></li>
+<li><p>A simple example of calculating a function (the <span class="math notranslate nohighlight">\(\chi^2\)</span>) on a grid using brute force</p></li>
+<li><p>How brute force with GPUs can be combined with more sophisticated algorithms like MCMC, and how it can fit within a Bayesian framework.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### 20/06/2025: Currently, there is a mismatch between the GPU driver and compiler on Colab.</span>
+<span class="c1">### This causes a critical error and the GPU code cannot be compiled and executed.</span>
+<span class="c1">### Running the following cells is required for successful execution on Colab.</span>
+<span class="c1">### Maybe at a later date this problem will be fixed.</span>
+<span class="c1">### This also depends on the type of GPU (currently T4), so, in general, be careful when setting up the environment to run this notebook.</span>
+
+<span class="c1"># If the CUDA version from these two commands is not the same, then run the next cell </span>
+<span class="o">!</span>nvcc<span class="w"> </span>--version
+<span class="o">!</span>nvidia-smi
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This install the entire CUDA (toolkit and driver) and takes some time</span>
+<span class="o">!</span>apt-get<span class="w"> </span>-qq<span class="w"> </span>update<span class="w"> </span>-y
+<span class="o">!</span>apt-get<span class="w"> </span>-qq<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>cuda-12-4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Resetting some environment variables</span>
+<span class="o">!</span>sudo<span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/usr/local/cuda
+<span class="o">!</span>sudo<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>/usr/local/cuda-12.4<span class="w"> </span>/usr/local/cuda
+
+<span class="o">!</span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/cuda-12.4/bin:<span class="nv">$PATH</span>
+<span class="o">!</span><span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/cuda-12.4/lib64:<span class="nv">$LD_LIBRARY_PATH</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If the CUDA version for both compiler and driver is the same, then you are good to go!</span>
+<span class="o">!</span>nvcc<span class="w"> </span>--version
+<span class="o">!</span>nvidia-smi
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/colab/clone_and_cd_colab.py&quot;</span>
+<span class="n">colab</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">colab</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/styles/plot_style.py&quot;</span>
+<span class="n">style</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="excitement-vs-routine">
+<h1>Excitement vs Routine<a class="headerlink" href="#excitement-vs-routine" title="Link to this heading">#</a></h1>
+<a class="reference internal image-reference" href="../_images/rome_to_vatican.png"><img alt="../_images/rome_to_vatican.png" src="../_images/rome_to_vatican.png" style="width: 48%;" />
+</a>
+<a class="reference internal image-reference" href="../_images/new_york.png"><img alt="../_images/new_york.png" src="../_images/new_york.png" style="width: 48%;" />
+</a>
+<table><tr><td width=80%><center><br>
+    Figure 1. Excitement vs routine. <i>Left -</i> The route from the venue of the school in Rome to Vatican City. <i>Right -</i> The *same* route in New York. Both routes are roughly the same distance in a straight line.
+<br></center></td></tr></table>
+<p><em>“I say unto you: one must still have chaos in oneself to be able to give birth to a dancing star. I say unto you: you still have chaos in yourselves.”</em></p>
+<p>F. Nietzsche, ‘Thus spoke Zarathustra’</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h1>
+<p>Graphics Processing Units (GPUs) are massively parallel hardware devices, historically used for rendering graphics. These devices are capable of perfoming an incredible amount of computations in real time, leading to the realistic graphics we routinely see in video games nowadays. However, the same computational power can be harnessed to perform scientific computations. This has led, somewhat ironically, to the development of powerful GPUs without a port to connect a monitor to.</p>
+<p>Some “traditional” GPU jargon: shaders, textures, device memory, etc.</p>
+<p>At some point, somebody realized that these devices could be used just for computations - let there be GPGPU and CUDA.</p>
+<a class="reference internal image-reference" href="../_images/geforce256.webp"><img alt="../_images/geforce256.webp" src="../_images/geforce256.webp" style="width: 48%;" />
+</a>
+<a class="reference internal image-reference" href="../_images/nvidia-l4-qtr-left.jpeg"><img alt="../_images/nvidia-l4-qtr-left.jpeg" src="../_images/nvidia-l4-qtr-left.jpeg" style="width: 48%;" />
+</a>
+<table><tr><td width=600><center><br>
+    Figure 2. <i>Left -</i> A GPU from 1999 - notice the gaming roots (<a href="https://9gag.com/gag/av8jBpW?utm_source=copy_link&utm_medium=post_share" target="_blank">original image</a>). <i> Right -</i> One of the latest General Purpose GPUs (an Nvidia L4 Tensor Core). Notice the lack of a monitor port.
+<br></center></td></tr></table>
+<p>The highly parallel power of GPUs is ‘’raw’’, which means that the tremendous speed up they can offer will not necessarily occur for any type of computations. A necessary ‘’code analysis’’ step needs to be taken first. Specifically, quoting from <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2010MNRAS.408.1936B/abstract">Barsdell et al. (2010)</a>:</p>
+<blockquote>
+<div><p><i>Algorithms with well-defined memory access patterns and high arithmetic intensity stand to receive the greatest performance boost from massively parallel architectures.</i></p>
+</div></blockquote>
+<p>In simpler words, if your code needs to do the same ‘’dumb’’, mundane, repetitive task multiple times (the more the better), then GPUs could be very helpful. In contrast, quoting from the same paper:</p>
+<blockquote>
+<div><p><i> [Algorithms] that involve a significant amount of decision-making may struggle to take advantage of the available processing power.</i></p>
+</div></blockquote>
+<section id="have-you-heard-of-vectorization">
+<h2>Have you heard of “vectorization”?<a class="headerlink" href="#have-you-heard-of-vectorization" title="Link to this heading">#</a></h2>
+<p>You might have heard of this term when working with some python libraries. Let’s assume we want to multiply each number in an array with a fixed number (this could be a different simple algebraic operation, like dividing, adding, subtracting, taking the square or some other power, a sine or cosine, etc). Vectorization consists in re-coding the loop operations in such a way as to process the element-wise operations faster. This does not necessarily mean running the code in parallel, but is towards this direction: <strong>writing your code in a specific way can lead to faster execution</strong>.</p>
+<p>The simplest (sequential) programming way to achieve the result of the example above would be by writing a loop that goes over each element in the array and performs the required operation. However, this type of algorithm is a good candidate for parallel execution. For example, if the array is of size 500, we could use 5 CPU threads working at the same time, each processing 100 elements, with the total computation being roughly 5 times faster. Obviously, the more threads available the faster the computation. For example, if there is one thread available per array element we could speed this up by a factor of 500.</p>
+<a class="reference internal image-reference" href="../_images/np-vectorize-thumbnail.png"><img alt="../_images/np-vectorize-thumbnail.png" src="../_images/np-vectorize-thumbnail.png" style="width: 400px;" />
+</a>
+<table><tr><td width=600><center><br>
+        Figure 3. Example of a *vectorized* function in python: the element-wise sum of two arrays. Each summation can happen independently of and in parallel to the others.
+<br></center></td></tr></table>
+</section>
+<section id="examples-of-good-gpu-use-cases">
+<h2>Examples of good GPU use cases<a class="headerlink" href="#examples-of-good-gpu-use-cases" title="Link to this heading">#</a></h2>
+<p>Here is a tentative list of problems/algorithms that are efficiently (sometimes ridiculously) parallelizable:</p>
+<ul class="simple">
+<li><p><strong>N-body calculations:</strong> In an ensemble of particles, the force of gravity between any pair of particles is independent from any other particle (Newton’s law):
+$<span class="math notranslate nohighlight">\( \Large F_{ij} = G \frac{M_i M_j}{r_{ij}} \)</span>$
+<br><br></p></li>
+<li><p><strong>Ray shooting:</strong> in gravitational (micro)lensing, each ray deflection by a lens is independent of all other rays and lenses.</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/schematic.png"><img alt="../_images/schematic.png" src="../_images/schematic.png" style="width: 400px;" />
+</a>
+<table><tr><td width=700><center><br>
+Figure 4. Illustration of the ray-shooting technique used in gravitational lensing (and elsewhere). Each ray deflection by a microlens is independent of all the other rays and microlenses. Taken from <a href="https://ui.adsabs.harvard.edu/abs/2014A%26C.....6....1V/abstract">Vernardos & Fluke (2014)</a>.
+<br></center></td></tr></table>
+<ul class="simple">
+<li><p><strong>Neural networks:</strong> see perceptron, or fully-connected layers:
+$<span class="math notranslate nohighlight">\( \Large \hat{y} = f\left( \sum \mathbf{w} \cdot \mathbf{x} + b \right)\)</span>$
+<br><br></p></li>
+<li><p><strong>Convolutions</strong> are ridiculously parallelizable (either directly or through FFT transforms)
+<br><br></p></li>
+</ul>
+<p>On the other hand, a bad/not optimal GPU algorithm would be one that requires constant communication between threads/kernels, or does not have a well-defined memory access pattern - see figure below. We will see this in more detail.</p>
+<table>
+    <tr>
+        <td>
+            Good memory access pattern:            
+        </td>
+        <td width=700>
+            <img src="images/good_memory_access.png" alt="drawing" width="800"/>
+        </td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td>
+           Bad memory access pattern:            
+        </td>
+        <td width=700>
+            <img src="images/bad_memory_access.png" alt="drawing" width="800"/>
+        </td>
+    </tr>
+</table></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-do-gpu-codes-work">
+<h1>How do GPU codes work?<a class="headerlink" href="#how-do-gpu-codes-work" title="Link to this heading">#</a></h1>
+<section id="managing-memory">
+<h2>Managing memory<a class="headerlink" href="#managing-memory" title="Link to this heading">#</a></h2>
+<p>The last point raises an important question related to GPUs: <em>memory management</em>. Let us imagine the following example of calculating the mean of 1,000,000 values. We can break the problem into these steps:</p>
+<ol class="arabic simple">
+<li><p>Define 1,000 threads that will work in parallel each tasked with adding 1,000 numbers (in a loop).</p></li>
+<li><p>Wait for all partial sums to be computed.</p></li>
+<li><p>Add the computed 1,000 partial sums in a loop to obtain the final sum.</p></li>
+<li><p>Divide by 1,000,000 to get the mean (this can also happen in each thread to avoid very large numbers).</p></li>
+</ol>
+<p><strong>Using parallel CPUs</strong>: Imagine that we want to distribute this task to 1,000 CPUs, most likely available in several computing nodes of a computing cluster. To make things a bit more clear, let’s assume 50 nodes of 20 CPUs each. Each CPU will run one loop and provide a partial sum, but in order to do so <strong>it must have access to the particular chunk of 1,000 numbers it needs to add</strong>. Because our CPUs are physically located across different machines, we need to divide the inital 1,000,000 numbers into chunks of memory, each containing a set of 1,000 numbers, and transfer them to each node accordingly. The first 20 chunks will go to the first node, the next 20 to the second, etc. Once each CPU completes their task of calculating a partial sum, which is just a number, the resulting 1,000 partial sums will need to be gathered to a single node for a CPU to take over the task of summing them up. This is how MPI works.</p>
+<p><strong>Using a GPU</strong>: GPUs are separate hardware devices (think of them as a computing node within your computer) that have mutliple threads available, usually thousands. The GPU threads have some limitations compared to CPUs, but let’s not digress here, just remember that they are a bit ‘dummer’ and can handle simpler tasks. GPUs have their own memory independently from the RAM of the computer, just as a separate node would have. Hence, similarly to the CPU case above, we need to transfer the 1,000,000 numbers to GPU memory and then transfer the final result back to the CPU so that we can further process it, save it, make a plot, etc. The important difference here is that all memory will be visible to all the GPU threads, therefore, we have to <strong>instruct each thread which chunk of memory to work on</strong>.</p>
+</section>
+<section id="threads-blocks-and-memory-access">
+<h2>Threads, Blocks, and memory access<a class="headerlink" href="#threads-blocks-and-memory-access" title="Link to this heading">#</a></h2>
+<p>Our basic “executable unit” is called a thread (similarly to a CPU thread), which runs instances of a GPU kernel - this is how we call the units of code (or functions) that are ran by the GPU.</p>
+<p>Kernels are executed by 1D, 2D, or 3D grids of threads, and threads can be further organized into 1D, 2D, or 3D blocks.</p>
+<a class="reference internal image-reference" href="../_images/GPU_memory.png"><img alt="../_images/GPU_memory.png" src="../_images/GPU_memory.png" style="width: 1200px;" />
+</a>
+<table><tr><td width=600><center><br>
+Figure 5. GPU memory types. Taken from <a href="https://www.researchgate.net/figure/Structure-of-GPU-memory_fig2_365898686">Eum et al. (2022)</a>.
+<br></center></td></tr></table><div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p><strong>The most important challenge when writing GPU code</strong>, is handling the memory access. This boils down to matching each thread (that is running within a block) to a specific memory location (either a single variable or a chunk of larger memory, e.g. a part of an array).</p>
+<!-- **Let's illustrate this with a few sketches!** -->
+</div></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="working-example-a-simple-chi-2">
+<h1>Working example: a simple <span class="math notranslate nohighlight">\(\chi^2\)</span><a class="headerlink" href="#working-example-a-simple-chi-2" title="Link to this heading">#</a></h1>
+<p>One such ‘’ridiculously parallelizable’’ problem is the computation of a <span class="math notranslate nohighlight">\(\chi^2\)</span> metric:</p>
+<div class="math notranslate nohighlight">
+\[\Large \chi^2 = \sum_{i=0}^{N} \frac{(d_i - \mathcal{M}_i)^2}{\sigma_i^2}\]</div>
+<p>where <span class="math notranslate nohighlight">\(d\)</span> is a measurement, <span class="math notranslate nohighlight">\(\sigma\)</span> its associated uncertainty, and <span class="math notranslate nohighlight">\(\mathcal{M}\)</span> a model prediction. The index <span class="math notranslate nohighlight">\(i\)</span> runs through a collection of such measurements that have a logical association, for example, a time-series or an image.</p>
+<p>Below we show an example of fitting a straight line to some time-series/light curve data. The (linear) model is:</p>
+<div class="math notranslate nohighlight">
+\[ \Large \mathcal{M}(t|\alpha,\beta) = \alpha x + \beta\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(\beta\)</span> are the free parameters - in this case, the slope and intercept of a straight line. Given some values of the free parameters, we can calculate the <span class="math notranslate nohighlight">\(\chi^2\)</span>.</p>
+<section id="first-we-define-the-light-curve-data-as-a-list-of-observations-time-flux-error">
+<h2>First, we define the light curve data as a list of observations (time, flux, error)<a class="headerlink" href="#first-we-define-the-light-curve-data-as-a-list-of-observations-time-flux-error" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">measurements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">12.3</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.41</span><span class="p">,</span> <span class="mf">13.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.54</span><span class="p">,</span> <span class="mf">13.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">0.72</span><span class="p">,</span> <span class="mf">14.7</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.10</span><span class="p">,</span> <span class="mf">15.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.24</span><span class="p">,</span> <span class="mf">16.2</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.27</span><span class="p">,</span> <span class="mf">17.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.35</span><span class="p">,</span> <span class="mf">17.9</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.41</span><span class="p">,</span> <span class="mf">18.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.89</span><span class="p">,</span> <span class="mf">19.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">2.11</span><span class="p">,</span> <span class="mf">20.3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">2.13</span><span class="p">,</span> <span class="mf">20.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">2.19</span><span class="p">,</span> <span class="mf">21.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">2.39</span><span class="p">,</span> <span class="mf">22.0</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">2.37</span><span class="p">,</span> <span class="mf">22.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]</span>
+<span class="p">],</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">measurements</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># time in units of years</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">measurements</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># flux in arbitrary units</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mi">1</span><span class="o">*</span><span class="n">measurements</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># error in the same units as flux</span>
+<span class="n">N_data</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of data: &quot;</span><span class="p">,</span> <span class="n">N_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="second-we-define-the-model">
+<h2>Second, we define the model<a class="headerlink" href="#second-we-define-the-model" title="Link to this heading">#</a></h2>
+<p>In this case it is just a straight line with 2 free parameters, which we set to some initial values.
+We evaluate the model at the (time) location of each data point.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">alpha</span><span class="p">,</span><span class="n">beta</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">alpha</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">beta</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="mi">3</span> <span class="c1"># in units of flux/time</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">12</span> <span class="c1"># in units of flux</span>
+<span class="n">model</span> <span class="o">=</span> <span class="p">[</span> <span class="n">my_model</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span> <span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Length of model: &quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="third-we-compare-the-model-to-the-data-by-calculating-the-corresponding-chi-2">
+<h2>Third, we compare the model to the data by calculating the corresponding <span class="math notranslate nohighlight">\(\chi^2\)</span><a class="headerlink" href="#third-we-compare-the-model-to-the-data-by-calculating-the-corresponding-chi-2" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">chi2_cpu</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">N_data</span><span class="p">):</span>
+    <span class="n">chi2</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N_data</span><span class="p">):</span>
+        <span class="n">chi2_term</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">m</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">/</span><span class="n">e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">chi2</span> <span class="o">=</span> <span class="n">chi2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">chi2_term</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">chi2</span>
+
+<span class="n">chi2</span> <span class="o">=</span> <span class="n">chi2_cpu</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">N_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The chi^2 value is: &quot;</span><span class="p">,</span><span class="n">chi2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="finally-let-s-plot-the-data-our-model-and-its-chi-2-value">
+<h2>Finally, let’s plot the data, our model, and its <span class="math notranslate nohighlight">\(\chi^2\)</span> value<a class="headerlink" href="#finally-let-s-plot-the-data-our-model-and-its-chi-2-value" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">e</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+
+<span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="mi">50</span><span class="p">)</span> <span class="c1"># some t values on which to calculate the model, just for plotting purposes</span>
+<span class="n">model</span> <span class="o">=</span> <span class="p">[</span><span class="n">my_model</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tt</span><span class="p">]</span>
+<span class="n">model_plot</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">tt</span><span class="p">,</span><span class="n">model</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Model&quot;</span><span class="p">)</span>
+
+<span class="c1"># Cosmetics (labels, legend, etc)</span>
+<span class="n">my_text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;a = </span><span class="si">{</span><span class="n">a</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> &quot;</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">b = </span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> &quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="sa">rf</span><span class="s2">&quot;$\chi^2$ = </span><span class="si">{</span><span class="n">chi2</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span> <span class="n">my_text</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time [years]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux [arbitrary units]&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><b>Exercise 1: assign different model parameters by hand and try to minimize the <span class="math notranslate nohighlight">\(\chi^2\)</span></b></font></p>
+<p>Lets see how close to the minimum you can get!</p>
+</div></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="brute-force-parameter-estimation-cpu-vs-gpu">
+<h1>Brute force parameter estimation - CPU vs GPU<a class="headerlink" href="#brute-force-parameter-estimation-cpu-vs-gpu" title="Link to this heading">#</a></h1>
+<p>How do we find the best-fit (lowest <span class="math notranslate nohighlight">\(\chi^2\)</span>) <span class="math notranslate nohighlight">\(a,b\)</span> parameters?
+Or how do we explore the entire <span class="math notranslate nohighlight">\(a,b\)</span> parameter space and get confidence intervals on <span class="math notranslate nohighlight">\(a,b\)</span>?</p>
+<p>Remember from lectures on Optimization and MCMC:</p>
+<a class="reference internal image-reference" href="../_images/S.png"><img alt="../_images/S.png" src="../_images/S.png" style="width: 48%;" />
+</a>
+<a class="reference internal image-reference" href="../_images/testfunc.png"><img alt="../_images/testfunc.png" src="../_images/testfunc.png" style="width: 48%;" />
+</a>
+<table><tr><td width=600><center><br>
+    Figure 6. Probability (likelihood or posterior) surfaces. These surfaces were used as examples in the lecture on Optimization (Left) and MCMC (Right).
+<br></center></td></tr></table><section id="let-s-define-a-plotting-function-for-convenience">
+<h2>Let’s define a plotting function for convenience.<a class="headerlink" href="#let-s-define-a-plotting-function-for-convenience" title="Link to this heading">#</a></h2>
+<p>We plot the <span class="math notranslate nohighlight">\(\chi^2\)</span> and likelihood surfaces as a function of <span class="math notranslate nohighlight">\(a,b\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_likelihood_surf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">z_like</span><span class="p">):</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1">#fig.set_figheight(9)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">set_figwidth</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+
+    <span class="c1">#im = axs[0].pcolor(a_grid,b_grid,chi2_surf,cmap=&#39;viridis&#39;)</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span><span class="mi">400</span><span class="p">,</span><span class="mi">800</span><span class="p">],</span><span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\chi^2$&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;b - intercept [flux]&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;a - slope [time/flux]&#39;</span><span class="p">)</span>
+
+    <span class="n">im</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pcolor</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z_like</span><span class="p">,</span><span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$e^{-\chi^2}$&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;b - intercept [flux]&#39;</span><span class="p">)</span>
+    <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;a - slope [time/flux]&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="let-s-define-a-convenient-function-that-calculates-the-chi-2-on-the-cpu-3-nested-loops">
+<h2>Let’s define a convenient function that calculates the <span class="math notranslate nohighlight">\(\chi^2\)</span> on the CPU (3 nested loops).<a class="headerlink" href="#let-s-define-a-convenient-function-that-calculates-the-chi-2-on-the-cpu-3-nested-loops" title="Link to this heading">#</a></h2>
+<p>We can easily revisit this function and implement a different model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">CPU_full_chi2</span><span class="p">(</span><span class="n">a_grid</span><span class="p">,</span><span class="n">b_grid</span><span class="p">,</span><span class="n">N_a</span><span class="p">,</span><span class="n">N_b</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">N_data</span><span class="p">):</span>
+    <span class="n">chi2_surf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">N_a</span><span class="p">,</span><span class="n">N_b</span><span class="p">])</span>
+    <span class="n">like_surf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">([</span><span class="n">N_a</span><span class="p">,</span><span class="n">N_b</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">a_grid</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">b_grid</span><span class="p">)):</span>
+            <span class="c1">#model = [ my_model(x,a_grid[i],b_grid[j]) for x in t ]</span>
+            <span class="c1">#chi2_tmp = chi2_cpu(f,e,model,N_data)</span>
+            
+            <span class="n">chi2</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N_data</span><span class="p">):</span>
+                <span class="n">my_model</span> <span class="o">=</span> <span class="n">a_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">t</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">b_grid</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">chi2_term</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">my_model</span><span class="p">)</span><span class="o">/</span><span class="n">e</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="n">chi2</span> <span class="o">=</span> <span class="n">chi2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">chi2_term</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+            
+            <span class="n">like</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">chi2</span><span class="p">)</span>
+            
+            <span class="n">chi2_surf</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">chi2</span>
+            <span class="n">like_surf</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">like</span>
+            
+    <span class="k">return</span> <span class="n">chi2_surf</span><span class="p">,</span><span class="n">like_surf</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="let-s-define-the-gpu-kernel-that-calculates-chi-2-and-a-convenient-function-that-transfers-memory-to-and-from-the-gpu">
+<h2>Let’s define the GPU kernel that calculates <span class="math notranslate nohighlight">\(\chi^2\)</span> and a convenient function that transfers memory to and from the GPU.<a class="headerlink" href="#let-s-define-the-gpu-kernel-that-calculates-chi-2-and-a-convenient-function-that-transfers-memory-to-and-from-the-gpu" title="Link to this heading">#</a></h2>
+<p>We will examine this code in detail.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1">### These two lines are needed if you are running this notebook locally on your laptop.</span>
+<span class="c1">#os.environ[&#39;NUMBAPRO_LIBDEVICE&#39;] = &quot;/anaconda3/pkgs/cuda-nvcc-12.3.52-0/nvvm/libdevice&quot;</span>
+<span class="c1">#os.environ[&#39;NUMBAPRO_NVVM&#39;] = &quot;/anaconda3/pkgs/cuda-nvcc-12.3.52-0/nvvm/lib64/libnvvm.so&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">cuda</span><span class="p">,</span><span class="n">float64</span>
+
+
+<span class="nd">@cuda</span><span class="o">.</span><span class="n">jit</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">chi2_kernel</span><span class="p">(</span><span class="n">d_a</span><span class="p">,</span> <span class="n">d_b</span><span class="p">,</span> <span class="n">d_t</span><span class="p">,</span> <span class="n">d_f</span><span class="p">,</span> <span class="n">d_e</span><span class="p">,</span> <span class="n">N_data</span><span class="p">,</span> <span class="n">k_chi2</span><span class="p">,</span> <span class="n">k_like</span><span class="p">):</span>
+    <span class="c1"># Converting thread and block indices to input and output memory indices </span>
+    <span class="c1">#id_x,id_y = cuda.grid(2)</span>
+    <span class="n">id_a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cuda</span><span class="o">.</span><span class="n">threadIdx</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">id_b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cuda</span><span class="o">.</span><span class="n">blockIdx</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">cuda</span><span class="o">.</span><span class="n">blockDim</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">id_out</span> <span class="o">=</span> <span class="n">id_a</span><span class="o">*</span><span class="n">size</span> <span class="o">+</span> <span class="n">id_b</span>
+
+    <span class="c1"># Managing &quot;small&quot; memory</span>
+    <span class="n">k_t</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">512</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">k_f</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">512</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">k_e</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">512</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="n">float64</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cuda</span><span class="o">.</span><span class="n">threadIdx</span><span class="o">.</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">N_data</span><span class="p">:</span>
+        <span class="n">k_t</span><span class="p">[</span><span class="n">cuda</span><span class="o">.</span><span class="n">threadIdx</span><span class="o">.</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">d_t</span><span class="p">[</span><span class="n">cuda</span><span class="o">.</span><span class="n">threadIdx</span><span class="o">.</span><span class="n">x</span><span class="p">]</span>
+        <span class="n">k_f</span><span class="p">[</span><span class="n">cuda</span><span class="o">.</span><span class="n">threadIdx</span><span class="o">.</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">d_f</span><span class="p">[</span><span class="n">cuda</span><span class="o">.</span><span class="n">threadIdx</span><span class="o">.</span><span class="n">x</span><span class="p">]</span>
+        <span class="n">k_e</span><span class="p">[</span><span class="n">cuda</span><span class="o">.</span><span class="n">threadIdx</span><span class="o">.</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">d_e</span><span class="p">[</span><span class="n">cuda</span><span class="o">.</span><span class="n">threadIdx</span><span class="o">.</span><span class="n">x</span><span class="p">]</span>
+    <span class="n">cuda</span><span class="o">.</span><span class="n">syncthreads</span><span class="p">()</span>
+    
+    <span class="c1"># Getting parameter values</span>
+    <span class="n">a_val</span> <span class="o">=</span> <span class="n">d_a</span><span class="p">[</span><span class="n">id_a</span><span class="p">]</span>
+    <span class="n">b_val</span> <span class="o">=</span> <span class="n">d_b</span><span class="p">[</span><span class="n">id_b</span><span class="p">]</span>
+    
+    <span class="c1"># Calculating chi^2</span>
+    <span class="n">chi2_val</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N_data</span><span class="p">):</span>
+        <span class="n">model_val</span> <span class="o">=</span> <span class="n">a_val</span><span class="o">*</span><span class="n">k_t</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">b_val</span>
+        <span class="n">chi2_term</span> <span class="o">=</span> <span class="p">(</span><span class="n">k_f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">model_val</span><span class="p">)</span><span class="o">/</span><span class="n">k_e</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">chi2_val</span> <span class="o">=</span> <span class="n">chi2_val</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">chi2_term</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+    
+    <span class="c1"># Storing chi^2</span>
+    <span class="n">k_chi2</span><span class="p">[</span><span class="n">id_out</span><span class="p">]</span> <span class="o">=</span> <span class="n">chi2_val</span>
+    <span class="n">k_like</span><span class="p">[</span><span class="n">id_out</span><span class="p">]</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">chi2_val</span><span class="p">)</span>
+
+    
+<span class="k">def</span><span class="w"> </span><span class="nf">GPU_set_run_chi2</span><span class="p">(</span><span class="n">a_grid</span><span class="p">,</span><span class="n">b_grid</span><span class="p">,</span><span class="n">N_a</span><span class="p">,</span><span class="n">N_b</span><span class="p">,</span><span class="n">N_blocks</span><span class="p">,</span><span class="n">N_threads</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">N_data</span><span class="p">):</span>
+    <span class="c1"># Move input data to the device</span>
+    <span class="n">d_a</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">a_grid</span><span class="p">)</span>
+    <span class="n">d_b</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">b_grid</span><span class="p">)</span>
+    <span class="n">d_t</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+    <span class="n">d_f</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+    <span class="n">d_e</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_device</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+
+    <span class="c1"># Create output data on the device</span>
+    <span class="n">d_chi2</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">device_array</span><span class="p">(</span><span class="n">N_a</span><span class="o">*</span><span class="n">N_b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">d_like</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">device_array</span><span class="p">(</span><span class="n">N_a</span><span class="o">*</span><span class="n">N_b</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># Launch the kernels</span>
+    <span class="n">chi2_kernel</span><span class="p">[</span><span class="n">N_blocks</span><span class="p">,</span> <span class="n">N_threads</span><span class="p">](</span><span class="n">d_a</span><span class="p">,</span><span class="n">d_b</span><span class="p">,</span><span class="n">d_t</span><span class="p">,</span><span class="n">d_f</span><span class="p">,</span><span class="n">d_e</span><span class="p">,</span><span class="n">N_data</span><span class="p">,</span><span class="n">d_chi2</span><span class="p">,</span><span class="n">d_like</span><span class="p">)</span>
+
+    <span class="c1"># Wait for all threads to complete</span>
+    <span class="n">cuda</span><span class="o">.</span><span class="n">synchronize</span><span class="p">()</span>
+
+    <span class="c1"># Copy the output array back to the host system</span>
+    <span class="n">chi2_gpu</span> <span class="o">=</span> <span class="n">d_chi2</span><span class="o">.</span><span class="n">copy_to_host</span><span class="p">()</span>
+    <span class="n">chi2_surf_gpu</span> <span class="o">=</span> <span class="n">chi2_gpu</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_a</span><span class="p">,</span><span class="n">N_b</span><span class="p">)</span>
+    <span class="n">like_gpu</span> <span class="o">=</span> <span class="n">d_like</span><span class="o">.</span><span class="n">copy_to_host</span><span class="p">()</span>
+    <span class="n">like_surf_gpu</span> <span class="o">=</span> <span class="n">like_gpu</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">N_a</span><span class="p">,</span><span class="n">N_b</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">chi2_surf_gpu</span><span class="p">,</span><span class="n">like_surf_gpu</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="let-s-define-a-grid-of-paramaters-and-start-exploring">
+<h2>Let’s define a grid of paramaters and start exploring<a class="headerlink" href="#let-s-define-a-grid-of-paramaters-and-start-exploring" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We need to ensure that our ranges are broad enough.</span>
+<span class="n">min_a</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">max_a</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">N_a</span> <span class="o">=</span> <span class="mi">256</span> <span class="c1"># number of grid points</span>
+<span class="n">a_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_a</span><span class="p">,</span><span class="n">max_a</span><span class="p">,</span><span class="n">N_a</span><span class="p">)</span>
+
+<span class="n">min_b</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">max_b</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">N_b</span> <span class="o">=</span> <span class="mi">256</span> <span class="c1"># number of grid points</span>
+<span class="n">b_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">min_b</span><span class="p">,</span><span class="n">max_b</span><span class="p">,</span><span class="n">N_b</span><span class="p">)</span>
+
+
+<span class="c1"># The following two variables correspond to the sizes of the a and b grids on the GPU, but this is purely due to the chosen algorithmic design.</span>
+<span class="c1"># These should be set to &quot;power of 2&quot; values (128, 256, 512, etc).</span>
+<span class="n">blocks_per_grid</span> <span class="o">=</span> <span class="n">N_a</span>
+<span class="n">threads_per_block</span> <span class="o">=</span> <span class="n">N_b</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Likelihood calculations on CPU: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">N_a</span><span class="o">*</span><span class="n">N_b</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total number of GPU threads launched: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">blocks_per_grid</span><span class="o">*</span><span class="n">threads_per_block</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculating-the-chi-2-on-the-cpu">
+<h2>Calculating the <span class="math notranslate nohighlight">\(\chi^2\)</span> on the CPU<a class="headerlink" href="#calculating-the-chi-2-on-the-cpu" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">chi2_surf</span><span class="p">,</span><span class="n">like_surf</span> <span class="o">=</span> <span class="n">CPU_full_chi2</span><span class="p">(</span><span class="n">a_grid</span><span class="p">,</span><span class="n">b_grid</span><span class="p">,</span><span class="n">N_a</span><span class="p">,</span><span class="n">N_b</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">N_data</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">cpu_time</span> <span class="o">=</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;CPU time: &quot;</span><span class="p">,</span> <span class="n">cpu_time</span><span class="p">)</span> 
+
+<span class="n">plot_likelihood_surf</span><span class="p">(</span><span class="n">a_grid</span><span class="p">,</span><span class="n">b_grid</span><span class="p">,</span><span class="n">chi2_surf</span><span class="p">,</span><span class="n">like_surf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculating-the-chi-2-on-the-gpu">
+<h2>Calculating the <span class="math notranslate nohighlight">\(\chi^2\)</span> on the GPU<a class="headerlink" href="#calculating-the-chi-2-on-the-gpu" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">chi2_surf_gpu</span><span class="p">,</span><span class="n">like_surf_gpu</span> <span class="o">=</span> <span class="n">GPU_set_run_chi2</span><span class="p">(</span><span class="n">a_grid</span><span class="p">,</span><span class="n">b_grid</span><span class="p">,</span><span class="n">N_a</span><span class="p">,</span><span class="n">N_b</span><span class="p">,</span><span class="n">blocks_per_grid</span><span class="p">,</span><span class="n">threads_per_block</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">f</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">N_data</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">gpu_time</span> <span class="o">=</span> <span class="n">t1</span><span class="o">-</span><span class="n">t0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GPU time: &quot;</span><span class="p">,</span><span class="n">gpu_time</span><span class="p">)</span>
+<span class="n">speedup</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cpu_time</span><span class="p">)</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">gpu_time</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Speed up: </span><span class="si">{speedup:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">speedup</span><span class="o">=</span><span class="n">speedup</span><span class="p">))</span>
+
+<span class="n">plot_likelihood_surf</span><span class="p">(</span><span class="n">a_grid</span><span class="p">,</span><span class="n">b_grid</span><span class="p">,</span><span class="n">chi2_surf_gpu</span><span class="p">,</span><span class="n">like_surf_gpu</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<b>In-class discussion: what do you notice if you run the GPU code more than one time?</b>
+<br>
+<i>Discuss with your teammate, then report.</i>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<p>The code runs even faster the second time! This is because Just-In-Time (JIT) compilation is used as opposed to a language like C++ or CUDA and even python code using GPUs. From wikipedia:</p>
+<p><i>A system implementing a JIT compiler typically continuously analyses the code being executed and identifies parts of the code where the speedup gained from compilation or recompilation would outweigh the overhead of compiling that code.</i></p>
+</details>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><b>Exercise 2: repeat the above calculations by increasing the data error bars.</b></font></p>
+<p>For example, multiply the errors by by a factor of 2, 3, etc.</p>
+</div><div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><b>Exercise 3: repeat the above calculations by increasing the number of grid points.</b></font></p>
+<p>Do this for both CPU and GPU. What happens if you try values that are not “powers of 2”?</p>
+</div><div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p><strong>The model does not have to be linear</strong>. Any function can be evaluated inside the kernel.</p>
+</div></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="combining-gpu-code-with-sophisticated-algorithms">
+<h1>Combining GPU code with sophisticated algorithms<a class="headerlink" href="#combining-gpu-code-with-sophisticated-algorithms" title="Link to this heading">#</a></h1>
+<p>No matter what is your fancy sampler - MCMC, HMC, Nested sampling, gradient decent, etc - you will always need to evaluate the likelihood. The faster you can achieve this the better. But likelihood functions can be very costly to evaluate. For example, when there are <strong>nuissance parameters</strong> involved!</p>
+<p>But specifically with respect to Bayesian methods (see also lecture on Bayesian Statistics, there is a very interesting situation:</p>
+<div class="math notranslate nohighlight">
+\[ \Large P(\boldsymbol{\theta}| \boldsymbol{d}, I) = \frac{P(\boldsymbol{d}|\boldsymbol{\theta},I) \; P(\boldsymbol{\theta}|I) }{P(\boldsymbol{d}|I)} \]</div>
+<p>where the likelihood can be written as the evidence of another “hidden” or “inner” Bayesian problem:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned} \Large P(\boldsymbol{\eta}| \boldsymbol{d}, \boldsymbol{\theta},I) = \frac{P(\boldsymbol{d}|\boldsymbol{\eta},\boldsymbol{\theta},I) \; P(\boldsymbol{\eta}|\boldsymbol{\theta},I) }{P(\boldsymbol{d}|\boldsymbol{\theta},I)} $$  or\\$$ \Large P(\boldsymbol{d}|\boldsymbol{\theta},I) = \int P(\boldsymbol{d}|\boldsymbol{\theta}, \boldsymbol{\eta}, I) \; P(\boldsymbol{\eta}|\boldsymbol{\theta},I) \; \mathrm{d}\boldsymbol{\eta} \end{aligned}\end{align} \]</div>
+<section id="example-a-distant-supernova-explosion">
+<h2>Example: A distant supernova explosion<a class="headerlink" href="#example-a-distant-supernova-explosion" title="Link to this heading">#</a></h2>
+<p>Data - <span class="math notranslate nohighlight">\(\boldsymbol{d}\)</span>: a supernova light curve.</p>
+<p>Model parameters of interest - <span class="math notranslate nohighlight">\(\boldsymbol{\eta}\)</span>: the supernova luminosity, for example. This is what we are after!</p>
+<p>Nuissance parameters - <span class="math notranslate nohighlight">\(\boldsymbol{\nu}\)</span>: the location of the supernova within its host galaxy (unobservable). For example, the properties of the progenitor star depend on the local star formation history and Inter-Stellar Medium (ISM) composition.</p>
+<a class="reference internal image-reference" href="../_images/supernovae.jpg"><img alt="../_images/supernovae.jpg" src="../_images/supernovae.jpg" style="width: 64%;" />
+</a>
+<a class="reference internal image-reference" href="../_images/supernova_light_curve.jpg"><img alt="../_images/supernova_light_curve.jpg" src="../_images/supernova_light_curve.jpg" style="width: 32%;" />
+</a>
+<table><tr><td width=700><center><br>
+    Figure 7. <i>Left -</i> Some distant, barely resolved supernovae. <i>Right -</i> Light curve of SN 2017cfd from <a href="https://ui.adsabs.harvard.edu/abs/2020ApJ...892..142H/abstract" target="_blank">Han et al. 2020</a>.
+<br></center></td></tr></table>
+<p>We can formulate this problem as:</p>
+<div class="math notranslate nohighlight">
+\[ \Large P(\boldsymbol{\eta}| \boldsymbol{d}) = \frac{P(\boldsymbol{d}|\boldsymbol{\eta}) \; P(\boldsymbol{\eta}) }{P(\boldsymbol{d})} \]</div>
+<p>where each value of the likelihood has been calculated for all the locations:</p>
+<div class="math notranslate nohighlight">
+\[ \Large P(\boldsymbol{d}|\boldsymbol{\eta}) = \int P(\boldsymbol{d}|\boldsymbol{\eta},\boldsymbol{\nu}) \; P(\boldsymbol{\nu}|\boldsymbol{\eta}) \; \mathrm{d}\boldsymbol{\nu} \]</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Task:</strong>  Come up with one such real world scenario and write down the main Bayes formula and the likelihood as the evidence of an “inner” problem.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#EOF</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./GPU_Parallelization"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../DL_Intro_n_Regression/Intro_n_Regression.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Deep Learning and Regression Workshop</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../NN_Explainability/NN_explainability.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Neural Network Explainability <a class="tocSkip"></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#excitement-vs-routine">Excitement vs Routine</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#have-you-heard-of-vectorization">Have you heard of “vectorization”?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-of-good-gpu-use-cases">Examples of good GPU use cases</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#how-do-gpu-codes-work">How do GPU codes work?</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#managing-memory">Managing memory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#threads-blocks-and-memory-access">Threads, Blocks, and memory access</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#working-example-a-simple-chi-2">Working example: a simple <span class="math notranslate nohighlight">\(\chi^2\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#first-we-define-the-light-curve-data-as-a-list-of-observations-time-flux-error">First, we define the light curve data as a list of observations (time, flux, error)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#second-we-define-the-model">Second, we define the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#third-we-compare-the-model-to-the-data-by-calculating-the-corresponding-chi-2">Third, we compare the model to the data by calculating the corresponding <span class="math notranslate nohighlight">\(\chi^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finally-let-s-plot-the-data-our-model-and-its-chi-2-value">Finally, let’s plot the data, our model, and its <span class="math notranslate nohighlight">\(\chi^2\)</span> value</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#brute-force-parameter-estimation-cpu-vs-gpu">Brute force parameter estimation - CPU vs GPU</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-define-a-plotting-function-for-convenience">Let’s define a plotting function for convenience.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-define-a-convenient-function-that-calculates-the-chi-2-on-the-cpu-3-nested-loops">Let’s define a convenient function that calculates the <span class="math notranslate nohighlight">\(\chi^2\)</span> on the CPU (3 nested loops).</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-define-the-gpu-kernel-that-calculates-chi-2-and-a-convenient-function-that-transfers-memory-to-and-from-the-gpu">Let’s define the GPU kernel that calculates <span class="math notranslate nohighlight">\(\chi^2\)</span> and a convenient function that transfers memory to and from the GPU.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-define-a-grid-of-paramaters-and-start-exploring">Let’s define a grid of paramaters and start exploring</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-the-chi-2-on-the-cpu">Calculating the <span class="math notranslate nohighlight">\(\chi^2\)</span> on the CPU</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-the-chi-2-on-the-gpu">Calculating the <span class="math notranslate nohighlight">\(\chi^2\)</span> on the GPU</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-gpu-code-with-sophisticated-algorithms">Combining GPU code with sophisticated algorithms</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-a-distant-supernova-explosion">Example: A distant supernova explosion</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

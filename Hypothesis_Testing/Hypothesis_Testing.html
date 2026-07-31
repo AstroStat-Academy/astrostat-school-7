@@ -1,0 +1,1808 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Hypothesis Testing &#8212; AstroStat School 2026 — Rome</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Hypothesis_Testing/Hypothesis_Testing';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Maximum Likelihood Estimation" href="../MLE/MLE.html" />
+    <link rel="prev" title="Introduction to Classical Statistics" href="../Intro/Intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — Rome</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — Rome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Intro/Intro.html">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Hypothesis Testing <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MLE/MLE.html">Maximum Likelihood Estimation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Intro_and_Clustering.html">Introduction to Machine Learning and Clustering <a class="tocSkip"></a></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_1.html">Introduction to Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_2.html">Applied Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">Basics of Markov Chain Monte Carlo <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Classification.html">Classification <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Gaussian_Processes/Gaussian_Processes.html">Gaussian Processes <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Time_Series/Time_Series.html">Time Series Analysis <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Best_Practices.html">Machine Learning Practices and Protocols</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Intro_n_Regression/Intro_n_Regression.html">Introduction to Deep Learning and Regression Workshop</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../GPU_Parallelization/GPU_parallelization.html">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../NN_Explainability/NN_explainability.html">Neural Network Explainability <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_short.html">Introduction to Simulation Based Inference</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_exercise.html">Simulation Based Inference: Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Diffusion/Diffusion.html">Diffusion Models</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../AI_Agents/AI_Agents.html">Intro to AI Agents<a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroStat-Academy/astrostat-school-7/blob/main/./Hypothesis_Testing/Hypothesis_Testing.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Hypothesis_Testing/Hypothesis_Testing.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Hypothesis Testing <a class="tocSkip"></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Hypothesis Testing <a class="tocSkip"></a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preamble">Preamble</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-step-by-step-case-to-build-intuition">A step-by-step case to build intuition</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sample">The sample</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model">The model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-property">The property</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hypothesis">The hypothesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-statistic">The statistic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-statistic">Evaluating the statistic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-statistic-s-pdf">Building the statistic’s PDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-this-probability">What is this probability?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thresholding-decision">Thresholding &amp; Decision</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hypothesis-testing-framework">The Hypothesis Testing Framework</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-null-and-alternative-hypothesis">Step 1. Null and Alternative Hypothesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-decide-on-a-significance-level">Step 2. Decide on a significance level</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-pick-the-statistic">Step 3. Pick the statistic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-compute-the-p-value">Step 4. Compute the <span class="math notranslate nohighlight">\(p\)</span>-value</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-decision">Step 5. Decision</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#common-tests-do-not-reinvent-the-wheel">Common Tests: do not reinvent the wheel</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-test">t-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kolmogorovsmirnov-test">Kolmogorov–Smirnov test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mannkendall-test">Mann–Kendall test</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#when-you-don-t-have-the-pdf">When you don’t have the PDF</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-hypothesis-testing">Bootstrap Hypothesis Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-median-gc-log-mass">Example: median GC log-mass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caveats-the-bootstrap-is-not-magic">Caveats — the bootstrap is not magic.</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-remarks">Closing remarks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-conclude">What we conclude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-particular-p-values">In particular: p-values</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-kolmogorovsmirnov-test-exercise">Solution — Kolmogorov–Smirnov test exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-bootstrap-agn-flux-exercise">Solution — Bootstrap AGN flux exercise</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <fieldset style="padding:10px; border:1px solid #ccc; box-shadow:2px 2px 5px rgba(0,0,0,0.1);">
+<legend style="font-size: 10px; color:#555;">Credits</legend>
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 80px; vertical-align: top;">
+            <img src="https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/logo/logo_b_text_lowres.png" alt="AstroStat Academy logo" width="100">
+        </td>
+        <td style="vertical-align: center; padding-left: 15px; font-size: 10px; line-height: 1.2;">
+            This notebook contains original work by the authors unless stated otherwise.
+            Any external material is properly credited to its sources.<br>
+            References to papers, datasets, and software are acknowledged.
+            Original content is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0 (GNU GPLv3)</a>.
+        </td>
+    </tr>
+</table>
+</fieldset>
+<!-- Allow these <br> or it will look ugly once rendered on Jupyter Book. -->
+<br><section class="tex2jax_ignore mathjax_ignore" id="hypothesis-testing">
+<h1>Hypothesis Testing <a class="tocSkip"><a class="headerlink" href="#hypothesis-testing" title="Link to this heading">#</a></h1>
+<p>In this notebook we will see:</p>
+<ul class="simple">
+<li><p>the <strong>hypothesis testing framework</strong>: <span class="math notranslate nohighlight">\(H_0\)</span>, significance level <span class="math notranslate nohighlight">\(\alpha\)</span>, test statistic, <span class="math notranslate nohighlight">\(p\)</span>-value, decision,</p></li>
+<li><p><strong>common tests</strong> ready to use off-the-shelf: z-test, t-test, Kolmogorov–Smirnov, Mann–Kendall,</p></li>
+<li><p>the <strong>bootstrap</strong>, to build the PDF of the statistic when no theoretical one is available,</p></li>
+<li><p>what we can — and <u>cannot</u> — <strong>conclude</strong> from a test and its <span class="math notranslate nohighlight">\(p\)</span>-value.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install pymannkendall --quiet</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/colab/clone_and_cd_colab.py&quot;</span>
+<span class="n">colab</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">colab</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running locally, skipping Colab setup.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/styles/plot_style.py&quot;</span>
+<span class="n">style</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Imported matplotlib.
+Imported seaborn.
+Plotting style set.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="preamble">
+<h2>Preamble<a class="headerlink" href="#preamble" title="Link to this heading">#</a></h2>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Q:</strong> If we have a statistic <span class="math notranslate nohighlight">\(T\)</span> distributed as in the plot below, how can we calculate the probability of obtaining a value as large as <span class="math notranslate nohighlight">\(\bar{T}\)</span> or larger?</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># A distribution bounded at 0 and unbounded for large T (e.g. a chi-square shape)</span>
+<span class="n">T_dist</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">chi2</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="n">T_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">pdf_plot</span> <span class="o">=</span> <span class="n">T_dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">T_plot</span><span class="p">)</span>
+
+<span class="n">T_bar</span> <span class="o">=</span> <span class="mf">12.0</span>  <span class="c1"># the observed value we mark on the plot</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">T_plot</span><span class="p">,</span> <span class="n">pdf_plot</span><span class="p">,</span> <span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">T_bar</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\bar</span><span class="si">{T}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$T$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;PDF&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/cd1e06a3969c820fbd04fca9c7a156bdf2b15732b5db4139ec88bced9943e5bd.png" src="../_images/cd1e06a3969c820fbd04fca9c7a156bdf2b15732b5db4139ec88bced9943e5bd.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="a-step-by-step-case-to-build-intuition">
+<h1>A step-by-step case to build intuition<a class="headerlink" href="#a-step-by-step-case-to-build-intuition" title="Link to this heading">#</a></h1>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p>A <strong>hypothesis test</strong> evaluates whether the observed <strong>sample</strong><br>
+            <span class="math notranslate nohighlight">\(\dots\)</span> is compatible with a <strong>hypothesis</strong> about a <strong>model</strong><br>
+                  <span class="math notranslate nohighlight">\(\dots\)</span> representing the unknown <strong>data-generating process</strong>.</p>
+</div><br>
+<p>Let us use a practical scenario to build an <strong>intuition</strong> about how Hypothesis Testing works.</p>
+<section id="the-sample">
+<h2>The sample<a class="headerlink" href="#the-sample" title="Link to this heading">#</a></h2>
+<p>A research team has studied a sample of <strong>Globular Clusters</strong> (<strong>GCs</strong>) and measured their masses.</p>
+<blockquote>
+<div><p><em>PS: We will work in log-scale.</em></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+
+<span class="n">df_masses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/GC_masses.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;mass&quot;</span><span class="p">])</span>
+
+<span class="c1"># Extract the data as a numpy array, in log-scale</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">df_masses</span><span class="p">[</span><span class="s2">&quot;mass&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log M\ [M_\odot]$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of GCs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e37307d828c0b0a45f93ce06a21449f934565f4c5e5f4824f655cffc226ad5eb.png" src="../_images/e37307d828c0b0a45f93ce06a21449f934565f4c5e5f4824f655cffc226ad5eb.png" />
+</div>
+</div>
+</section>
+<section id="the-model">
+<h2>The model<a class="headerlink" href="#the-model" title="Link to this heading">#</a></h2>
+<p><strong>Globis &amp; Clusterton (2022)</strong> suggest a model described by a <strong>normal distribution</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\log_{10}(M/M_\odot) \sim \mathcal{N}(\mu_0,\, 1)\]</div>
+<p>peaking at <span class="math notranslate nohighlight">\(\mu_0 = 5.5\)</span>.</p>
+<p>Let’s <strong>overplot</strong> the model on the data for a quick comparison.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu_0</span>  <span class="o">=</span> <span class="mf">5.5</span>
+<span class="n">std_0</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">logm_for_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">model_prob_for_plot</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mu_0</span><span class="p">,</span> <span class="n">std_0</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">logm_for_plot</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">logm_for_plot</span><span class="p">,</span> <span class="n">model_prob_for_plot</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Model&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log M\ [M_\odot]$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;PDF&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/10926fd0426436255a1255f99bcd0ff2ab91669f7cf11eecfa3fba3fcfd620d9.png" src="../_images/10926fd0426436255a1255f99bcd0ff2ab91669f7cf11eecfa3fba3fcfd620d9.png" />
+</div>
+</div>
+</section>
+<section id="the-property">
+<h2>The property<a class="headerlink" href="#the-property" title="Link to this heading">#</a></h2>
+<p><strong>Q:</strong> The model and the data look similar. Is this enough to say they are <strong>compatible</strong>?</p>
+<p><strong>A:</strong> No <span class="math notranslate nohighlight">\(\rightarrow\)</span> we must translate it into a <strong>measurable quantity</strong>: a model <strong>property</strong> that we can <u>also estimate</u> from the <strong>data</strong>, and then compare.</p>
+<p>Let’s go simple <span class="math notranslate nohighlight">\(\rightarrow\)</span> We use the <strong>location</strong> of the peak — the <strong>mean <span class="math notranslate nohighlight">\(\mu\)</span></strong>.</p>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p>In this case, the <strong>property</strong> we investigate is a <strong>parameter</strong>.</p>
+<p>But, in principle, we may use <u>any</u> property we can think of — e.g.:</p>
+<ul class="simple">
+<li><p>the <strong>location</strong> of the peak of the model (<em>to be compared with that of the data</em>)</p></li>
+<li><p>the <strong>height</strong> of the peak (<em>to be compared with that of the data</em>)</p></li>
+<li><p>the <strong>shape</strong> of the model (<em>to be compared with that of the data</em>)</p></li>
+<li><p><em>etc.</em></p></li>
+</ul>
+</div>
+</section>
+<section id="the-hypothesis">
+<h2>The hypothesis<a class="headerlink" href="#the-hypothesis" title="Link to this heading">#</a></h2>
+<p>The authors propose the <strong>hypothesis</strong>:</p>
+<blockquote>
+<div><p><em>GC formation in galaxies (the <strong>data-generating process</strong>) produces masses whose distribution (described by our <strong>model</strong>) has an average equal to 5.5.</em></p>
+</div></blockquote>
+<p>Or, equivalently:</p>
+<blockquote>
+<div><p><em>The true mean <span class="math notranslate nohighlight">\(\mu\)</span> of the GC distribution equals the model value <span class="math notranslate nohighlight">\(\mu_0\)</span>:</em></p>
+<p><span class="math notranslate nohighlight">\(H_0:\mu=\mu_0.\)</span></p>
+</div></blockquote>
+</section>
+<section id="the-statistic">
+<h2>The statistic<a class="headerlink" href="#the-statistic" title="Link to this heading">#</a></h2>
+<p>We cannot measure <span class="math notranslate nohighlight">\(\mu\)</span> on the population <span class="math notranslate nohighlight">\(\rightarrow\)</span> We now need a <strong>statistic</strong> <u>on the sample</u> to verify the claim.</p>
+<p>We will use the <strong>sample mean</strong>:</p>
+<div class="math notranslate nohighlight">
+\[ \bar{x} = \frac{1}{n} \sum_{i=1}^{n} x_i \tag{1} \]</div>
+<p>Here, <span class="math notranslate nohighlight">\(\bar{x}\)</span> serves as a replacement of the <em>unknown</em> <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p>So, to summarize:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Data-generating process</strong></p></td>
+<td><p>GC formation in real galaxies</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Hypothesis</strong></p></td>
+<td><p>The population has mean <span class="math notranslate nohighlight">\(\mu\)</span> equal to <span class="math notranslate nohighlight">\(\mu_0 = 5.5\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Statistic to probe the claim</strong></p></td>
+<td><p>The sample mean <span class="math notranslate nohighlight">\(\bar{x}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div></section>
+<section id="evaluating-the-statistic">
+<h2>Evaluating the statistic<a class="headerlink" href="#evaluating-the-statistic" title="Link to this heading">#</a></h2>
+<p>We shall now calculate <span class="math notranslate nohighlight">\(\bar{x}\)</span> and compare against <span class="math notranslate nohighlight">\(\mu_0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_bar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MODEL:  mu_0  = </span><span class="si">{</span><span class="n">mu_0</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SAMPLE: x_bar = </span><span class="si">{</span><span class="n">x_bar</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MODEL:  mu_0  = 5.5
+SAMPLE: x_bar = 5.35
+</pre></div>
+</div>
+</div>
+</div>
+<p>We shall check whether:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu_0\)</span> <strong>very different</strong> from <span class="math notranslate nohighlight">\(\bar{x}\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <strong>reject</strong> the hypothesis that the data were generated by the model</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_0\)</span> <strong>similar</strong> to <span class="math notranslate nohighlight">\(\bar{x}\)</span>       <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>we discuss this later …</em></p></li>
+</ul>
+<p>We need the <strong>Probability Distribution Function</strong> (<strong>PDF</strong>) of the test <strong>statistic</strong>.</p>
+<p>If we know the PDF of the statistic, we can calculate <strong>probabilities</strong> — In our example, we can calculate the probability of:</p>
+<blockquote>
+<div><p><em>Having measured a sample’s <strong><span class="math notranslate nohighlight">\(\bar{x}\)</span></strong> if the expectation is <span class="math notranslate nohighlight">\(\mu_0 = 5.5\)</span></em></p>
+</div></blockquote>
+</section>
+<section id="building-the-statistic-s-pdf">
+<h2>Building the statistic’s PDF<a class="headerlink" href="#building-the-statistic-s-pdf" title="Link to this heading">#</a></h2>
+<p>We can build the PDF of the statistic if we consider the <em>implicit</em> <strong>assumptions</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Assumption</strong> that the data are <strong>i.i.d.</strong>.</p></li>
+<li><p><strong>Assumption</strong>, under <span class="math notranslate nohighlight">\(H_0\)</span>, that the <strong>model</strong> describes the data-generating process.</p></li>
+</ol>
+<p>Assumptions have <strong>implications</strong> we can exploit.</p>
+<ol class="arabic">
+<li><p>Assumption 1 implies, via the <strong>Central Limit Theorem</strong>, that the PDF of <span class="math notranslate nohighlight">\(\bar{x}\)</span> is a <strong>Gaussian</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\bar{x} \sim \mathcal{N}(\mu_{\bar{x}}, \sigma_{\bar{x}})\]</div>
+</li>
+<li><p>Assumption 2 implies that the Gaussian shall be centered on <span class="math notranslate nohighlight">\(\mu_0\)</span> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <span class="math notranslate nohighlight">\(\mu_{\bar{x}} = \mu_0\)</span>.</p></li>
+</ol>
+<p><strong>Q:</strong> Ok, but what about <span class="math notranslate nohighlight">\(\sigma_{\bar{x}}\)</span>?</p>
+<p><strong>A:</strong> We can estimate it with the <strong>standard error of the mean</strong>, <span class="math notranslate nohighlight">\(s_{\bar{x}}\)</span>.</p>
+<p>Therefore the PDF for <span class="math notranslate nohighlight">\(\bar{x}\)</span>, under <span class="math notranslate nohighlight">\(H_0\)</span>, is:</p>
+<div class="math notranslate nohighlight">
+\[\bar{x} \sim \mathcal{N}(\mu_0, s_{\bar{x}})\]</div>
+<br>
+<p>With the PDF at hand, calculating the probability of observing the measured <span class="math notranslate nohighlight">\(\bar{x}\)</span> is just the <strong>integral of the extremes</strong>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_x_bar</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">sem</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="n">diff</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_bar</span> <span class="o">-</span> <span class="n">mu_0</span><span class="p">)</span>
+
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu_0</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">s_x_bar</span><span class="p">,</span> <span class="n">mu_0</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">s_x_bar</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">xx_before</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu_0</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">s_x_bar</span><span class="p">,</span> <span class="n">mu_0</span> <span class="o">-</span> <span class="n">diff</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">xx_after</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mu_0</span> <span class="o">+</span> <span class="n">diff</span><span class="p">,</span> <span class="n">mu_0</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">s_x_bar</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">null_distribution</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">mu_0</span><span class="p">,</span> <span class="n">s_x_bar</span><span class="p">)</span>
+<span class="n">y_plot</span> <span class="o">=</span> <span class="n">null_distribution</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_plot</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xx_before</span><span class="p">,</span> <span class="n">null_distribution</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xx_before</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Area more extreme&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xx_after</span><span class="p">,</span> <span class="n">null_distribution</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xx_after</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span> <span class="s2">&quot;k-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\mathcal</span><span class="si">{N}</span><span class="s2">(\mu_0, s_{\bar</span><span class="si">{x}</span><span class="s2">})$ — PDF under $H_0$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x_bar</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Sample mean $\bar</span><span class="si">{x}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mu_0</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Model prediction $\mu_0$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log M\ [M_\odot]$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;PDF of $\bar</span><span class="si">{x}</span><span class="s2">$ under $H_0$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/e45110a5020a55eb9a3aeaadfd6d5f48da708c45b6e0e8f7a34bc17091673422.png" src="../_images/e45110a5020a55eb9a3aeaadfd6d5f48da708c45b6e0e8f7a34bc17091673422.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">area_more_extreme</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">null_distribution</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">mu_0</span><span class="o">+</span><span class="n">diff</span><span class="p">)</span> <span class="o">-</span> <span class="n">null_distribution</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">mu_0</span><span class="o">-</span><span class="n">diff</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Area more extreme — p: </span><span class="si">{</span><span class="n">area_more_extreme</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Area more extreme — p: 0.0716
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>NOTE: We consider both <strong>wings</strong> because we want to test both a very <strong>large</strong> and a very <strong>low</strong> value for <span class="math notranslate nohighlight">\(\bar{x}\)</span>.</em></p>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<p><strong>One/Two-sided</strong> tests:</p>
+<ul class="simple">
+<li><p>Two-sided test asks <em>is the parameter different?</em></p></li>
+<li><p>One-sided test asks <em>is the parameter larger / smaller?</em></p></li>
+</ul>
+</div></section>
+<section id="what-is-this-probability">
+<h2>What is this probability?<a class="headerlink" href="#what-is-this-probability" title="Link to this heading">#</a></h2>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p><strong>p-value</strong></p>
+<p>The probability, under <span class="math notranslate nohighlight">\(H_0\)</span>, of observing a test statistic at least as extreme as the one actually measured<br></p>
+</div>
+<p><em>i.e. the area under the PDF (assumed true under <span class="math notranslate nohighlight">\(H_0\)</span>) that lies at least as far from <span class="math notranslate nohighlight">\(\mu_0\)</span> as the observed value.</em></p>
+<p>Equivalently:</p>
+<blockquote>
+<div><p><em>How <strong>surprising</strong> the data is, in a world where the model is true.</em></p>
+</div></blockquote>
+<p>The smaller this number, the more safely we can reject the model.</p>
+</section>
+<section id="thresholding-decision">
+<h2>Thresholding &amp; Decision<a class="headerlink" href="#thresholding-decision" title="Link to this heading">#</a></h2>
+<p>We found a <strong><span class="math notranslate nohighlight">\(p\)</span>-value</strong> of 0.07 — if the model were true, data this extreme would occur only <span class="math notranslate nohighlight">\(\sim 7\%\)</span> of the time.</p>
+<p><strong>Q:</strong> Can we risk it?</p>
+<p><strong>A:</strong> It is <strong>our choice</strong> to consider our “threshold” or <strong>significance level</strong> <span class="math notranslate nohighlight">\(\alpha\)</span>!</p>
+<p>If we had decided <strong>before looking at the data</strong> to use a 5% threshold, then our conclusion would be:</p>
+<blockquote>
+<div><p><em>“We do not reject the model, with a significance level of 5%”</em></p>
+</div></blockquote>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<p><strong>Choosing the significance level</strong></p>
+<p>There is <u>no</u> rule <span class="math notranslate nohighlight">\(\rightarrow\)</span> Just that it should be decided <strong>before</strong> the analysis.</p>
+<p>This is to avoid <strong>biasing</strong> our conclusions by:</p>
+<ul class="simple">
+<li><p><strong>relaxing</strong> our criteria for models that we like, or</p></li>
+<li><p>making it <strong>harder</strong> for models that we don’t like.</p></li>
+</ul>
+</div>
+<p>In Astronomy, <span class="math notranslate nohighlight">\(2 + 2 \simeq 5\)</span>, so we often use 0.5, 1 or 5%. In Nuclear Physics and precision experiments often <span class="math notranslate nohighlight">\(10^{-7}\)</span> or <span class="math notranslate nohighlight">\(10^{-10}\)</span> are used!</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-hypothesis-testing-framework">
+<h1>The Hypothesis Testing Framework<a class="headerlink" href="#the-hypothesis-testing-framework" title="Link to this heading">#</a></h1>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Let&#39;s formalize what we learnt
+</pre></div>
+</div>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p>Hypothesis Testing answers the following:</p>
+<blockquote>
+<div><p><em>Is the observed data compatible with a claim about a model, or unusual enough that we should reject it?</em></p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\dots\)</span> while keeping the probability of falsely rejecting bounded by a level <strong><span class="math notranslate nohighlight">\(\alpha\)</span></strong> chosen up front.</p>
+</div>
+<br>
+<p>The <em>whole process</em> is outlined as follows:</p>
+<blockquote>
+<div><p><strong>Step 1</strong>: Define the <strong>null hypothesis</strong> (<span class="math notranslate nohighlight">\(H_0\)</span>).</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Step 2</strong>: Decide on a <strong>significance level</strong> <span class="math notranslate nohighlight">\(\alpha\)</span> that we are comfortable with.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Step 3</strong>: Pick the <strong>statistic</strong> and corresponding PDF under <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Step 4</strong>: Compute the <strong><span class="math notranslate nohighlight">\(p\)</span>-value</strong>.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Step 5</strong>: Decision.</p>
+</div></blockquote>
+<section id="step-1-null-and-alternative-hypothesis">
+<h2>Step 1. Null and Alternative Hypothesis<a class="headerlink" href="#step-1-null-and-alternative-hypothesis" title="Link to this heading">#</a></h2>
+<p>Any test starts with 2 mutually-exclusive statements about the world.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_{0}\)</span>: <strong>Null Hypothesis</strong>; encodes the <em>status quo</em> — the claim we are willing to keep if the data does not strongly contradict it.</p></li>
+<li><p><span class="math notranslate nohighlight">\(H_{1}\)</span>: <strong>Alternative Hypothesis</strong>; encodes the <em>challenger</em> — the claim we accept only if the data points clearly away from <span class="math notranslate nohighlight">\(H_{0}\)</span>.</p></li>
+</ul>
+<p>The test is <strong>conservative</strong>: <span class="math notranslate nohighlight">\(H_{0}\)</span> is innocent until proven guilty.</p>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> Pick the null so that <em>incorrectly rejecting it</em> is the <strong>more expensive</strong> mistake.</p>
+<p><em>Examples:</em></p>
+<ul>
+<li><p>If you are evaluating a new detection pipeline against the standard one:<br></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(H_0\)</span> should be <span class="math notranslate nohighlight">\(\rightarrow\)</span> “the new pipeline does not perform better than the standard one”</p>
+</div></blockquote>
+<p><em>(You do not want to adopt a pipeline that is actually worse)</em></p>
+</li>
+<li><p>If you are evaluating whether a telescope’s calibration has drifted:<br></p>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(H_0\)</span> should be <span class="math notranslate nohighlight">\(\rightarrow\)</span> “the calibration has not drifted”</p>
+</div></blockquote>
+<p><em>(You do not want to falsely flag good data as unreliable)</em></p>
+</li>
+</ul>
+</div>
+</section>
+<section id="step-2-decide-on-a-significance-level">
+<h2>Step 2. Decide on a significance level<a class="headerlink" href="#step-2-decide-on-a-significance-level" title="Link to this heading">#</a></h2>
+<p>This is the <strong>false-alarm rate</strong> we accept: if <span class="math notranslate nohighlight">\(H_0\)</span> were true, our procedure would wrongly reject it in a fraction <span class="math notranslate nohighlight">\(\alpha\)</span> of experiments.</p>
+<blockquote>
+<div><p><em>E.g., a significance level of <span class="math notranslate nohighlight">\(5\%\)</span>, i.e. <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>.</em></p>
+</div></blockquote>
+</section>
+<section id="step-3-pick-the-statistic">
+<h2>Step 3. Pick the statistic<a class="headerlink" href="#step-3-pick-the-statistic" title="Link to this heading">#</a></h2>
+<p>Pick a sample statistic that can measure the property under claim.</p>
+<blockquote>
+<div><p><em>E.g., the sample mean for the location of the central value.</em></p>
+</div></blockquote>
+</section>
+<section id="step-4-compute-the-p-value">
+<h2>Step 4. Compute the <span class="math notranslate nohighlight">\(p\)</span>-value<a class="headerlink" href="#step-4-compute-the-p-value" title="Link to this heading">#</a></h2>
+<p>Use the integral on the statistic’s PDF:</p>
+<a class="reference internal image-reference" href="../_images/critical_pvalue.png"><img alt="../_images/critical_pvalue.png" src="../_images/critical_pvalue.png" style="width: 600px;" />
+</a>
+<table><tr><td width=600><center><br>
+    Figure 1. Critical value and corresponding <code>p</code>-value for a two-tailed test, meaning that we want to quantify how extreme the difference is, regardless of whether the actual sample statistic is greater or lower than the theory.
+<br></center></td></tr></table>
+<section id="step-5-decision">
+<h3>Step 5. Decision<a class="headerlink" href="#step-5-decision" title="Link to this heading">#</a></h3>
+<p>This is <strong>deterministic</strong> — it is all set by the previous decisions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">alpha</span><span class="p">:</span>
+    <span class="n">reject</span> <span class="n">H_0</span><span class="p">,</span> <span class="n">accept</span> <span class="n">H_1</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">cannot</span> <span class="n">reject</span> <span class="n">H_0</span><span class="p">,</span> <span class="n">no</span> <span class="n">conclusion</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="common-tests-do-not-reinvent-the-wheel">
+<h1>Common Tests: do not reinvent the wheel<a class="headerlink" href="#common-tests-do-not-reinvent-the-wheel" title="Link to this heading">#</a></h1>
+<p>Thankfully, there exist many tests where the <strong>statistic</strong> and its <strong>PDF under <span class="math notranslate nohighlight">\(H_0\)</span></strong> are <em>already derived</em>.</p>
+<p>BUT <span class="math notranslate nohighlight">\(\dots\)</span> mind the <strong>assumptions</strong>!</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Test</p></th>
+<th class="head"><p>Statistic</p></th>
+<th class="head"><p>PDF under <span class="math notranslate nohighlight">\(H_0\)</span></p></th>
+<th class="head"><p>Assumptions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>z-test</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(z = \dfrac{\bar{x} - \mu_0}{\sigma / \sqrt{n}}\)</span></p></td>
+<td><p>standard Normal, <span class="math notranslate nohighlight">\(\mathcal{N}(0, 1)\)</span></p></td>
+<td><p><ul><li>population <strong>standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> known</strong></li><li>data i.i.d.</li><li>Normal population (or large <span class="math notranslate nohighlight">\(n\)</span>, via the Central Limit Theorem)</li></ul></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>t-test</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(t = \dfrac{\bar{x} - \mu_0}{s / \sqrt{n}}\)</span></p></td>
+<td><p>Student’s <span class="math notranslate nohighlight">\(t\)</span>, with <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom</p></td>
+<td><p><ul><li>population standard deviation <strong>unknown</strong>, estimated by <span class="math notranslate nohighlight">\(s\)</span></li><li>data i.i.d.</li><li>Normal population (or large <span class="math notranslate nohighlight">\(n\)</span>)</li></ul></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Kolmogorov–Smirnov (K-S) test</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(D = \sup_x \left\lvert F_n(x) - F_0(x) \right\rvert\)</span></p></td>
+<td><p>Kolmogorov distribution</p></td>
+<td><p><ul><li>data i.i.d.</li><li>continuous distribution (no ties)</li><li><span class="math notranslate nohighlight">\(F_0\)</span> fully specified in advance</li></ul></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Monotonicity test (Mann–Kendall)</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(S = \sum_{i&lt;j} \mathrm{sign}(x_j - x_i)\)</span></p></td>
+<td><p>approximately Normal for large <span class="math notranslate nohighlight">\(n\)</span></p></td>
+<td><p><ul><li>data i.i.d. under <span class="math notranslate nohighlight">\(H_0\)</span> (no trend)</li><li>no assumption on the shape of the distribution</li></ul></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<p>The table shows the <strong>one-sample</strong> version of each test: 1 <em>sample</em> compared against a <em>fixed</em> reference.</p>
+<p>Most tests also exist in a <strong>2-sample</strong> version, which compares 2 samples <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> with each other — e.g.:</p>
+<ul class="simple">
+<li><p><strong>2-sample t-test</strong> <span class="math notranslate nohighlight">\(H_0: \mu_A = \mu_B\)</span></p></li>
+<li><p><strong>2-sample KS-test</strong> <span class="math notranslate nohighlight">\(H_0: F_A = F_B\)</span>.</p></li>
+</ul>
+<p>The demos below use the <strong>two-sample</strong> tests.</p>
+</div>
+<p>Let’s work on these 2 samples:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">X_a</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">5.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">X_b</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">5.6</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X_a</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Sample A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X_b</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Sample B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">X_a</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\bar</span><span class="si">{x}</span><span class="s2">_A$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">X_b</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\bar</span><span class="si">{x}</span><span class="s2">_B$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/aba1eb3f44f79d9194262883522ff98fc71104de73f89fbd033dbd8998903c3b.png" src="../_images/aba1eb3f44f79d9194262883522ff98fc71104de73f89fbd033dbd8998903c3b.png" />
+</div>
+</div>
+<section id="t-test">
+<h2>t-test<a class="headerlink" href="#t-test" title="Link to this heading">#</a></h2>
+<p><strong>Model:</strong> the data in each sample are i.i.d. draws from a Normal distribution.<br>
+<strong>Hypothesis:</strong> the means are equal (<span class="math notranslate nohighlight">\(\mu_A = \mu_B\)</span>).</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">stats.ttest_ind</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c1"># This is always set first!</span>
+
+<span class="n">t_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">X_a</span><span class="p">,</span> <span class="n">X_b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;t-statistic = </span><span class="si">{</span><span class="n">t_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value     = </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">alpha</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decision: reject H0 (p &lt; </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decision: cannot reject H0 (p &gt;= </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>t-statistic = -4.828
+p-value     = 0.0000
+Decision: reject H0 (p &lt; 0.05)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="kolmogorovsmirnov-test">
+<h2>Kolmogorov–Smirnov test<a class="headerlink" href="#kolmogorovsmirnov-test" title="Link to this heading">#</a></h2>
+<p><strong>Model:</strong> the data in each sample are i.i.d. draws from a continuous distribution (no ties).<br>
+<strong>Hypothesis:</strong> the whole shape of the distribution matches (<span class="math notranslate nohighlight">\(F_A = F_B\)</span>) — not just the mean.</p>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Exercise [15 min]</strong></font></p>
+<p><strong>Objective:</strong> Run a 2-sample Kolmogorov–Smirnov test on the same 2 samples used for the t-test, and compare its conclusion with the t-test’s.</p>
+<p><strong>Task:</strong> Test whether <code class="docutils literal notranslate"><span class="pre">X_a</span></code> and <code class="docutils literal notranslate"><span class="pre">X_b</span></code> come from the same distribution.</p>
+<p><em>In particular, you must:</em></p>
+<ol class="arabic simple">
+<li><p><strong>Use</strong> the function <code class="docutils literal notranslate"><span class="pre">stats.ks_2samp</span></code> from <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code>.</p></li>
+<li><p><strong>Pass</strong> <code class="docutils literal notranslate"><span class="pre">X_a</span></code> and <code class="docutils literal notranslate"><span class="pre">X_b</span></code> to it — it returns the <strong>D-statistic</strong> and the <strong>p-value</strong>, in that order.</p></li>
+<li><p><strong>Print</strong> the D-statistic and the p-value.</p></li>
+<li><p><strong>Decide</strong> at <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>: reject <span class="math notranslate nohighlight">\(H_0\)</span> if the p-value is below <span class="math notranslate nohighlight">\(\alpha\)</span>, otherwise do not reject.</p></li>
+<li><p><strong>Compare</strong> your conclusion with the t-test’s conclusion above — are they the same? Why (not)?</p></li>
+</ol>
+<p><strong>Data:</strong> <code class="docutils literal notranslate"><span class="pre">X_a</span></code> and <code class="docutils literal notranslate"><span class="pre">X_b</span></code>, already generated above.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Student: Write your code here. Add blocks as you deem fit.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="c1"># This is always set first!</span>
+
+<span class="n">D_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ks_2samp</span><span class="p">(</span><span class="n">X_a</span><span class="p">,</span> <span class="n">X_b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;D-statistic = </span><span class="si">{</span><span class="n">D_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value     = </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">alpha</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decision: reject H0 (p &lt; </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decision: cannot reject H0 (p &gt;= </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KS tests the full distribution shape, not just the mean.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mannkendall-test">
+<h2>Mann–Kendall test<a class="headerlink" href="#mannkendall-test" title="Link to this heading">#</a></h2>
+<p><strong>Model:</strong> the data are i.i.d. under <span class="math notranslate nohighlight">\(H_0\)</span> (no assumption on the shape of the distribution).<br>
+<strong>Hypothesis:</strong> there is <strong>no monotonic trend</strong> over time.</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">pymannkendall.original_test</span></code> on a simulated time series of yearly measurements.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pymannkendall</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mk</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">years</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1990</span><span class="p">,</span> <span class="mi">2025</span><span class="p">)</span>
+<span class="n">trend</span> <span class="o">=</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="p">(</span><span class="n">years</span> <span class="o">-</span> <span class="n">years</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">noise</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">years</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">trend</span> <span class="o">+</span> <span class="n">noise</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="s2">&quot;o-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;year&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;measurement&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a9313f77704bcaacdd5b7aa500794702c62b7df75c0a9c4b3c85dc5b5436d27c.png" src="../_images/a9313f77704bcaacdd5b7aa500794702c62b7df75c0a9c4b3c85dc5b5436d27c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">mk</span><span class="o">.</span><span class="n">original_test</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;S-statistic = </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">s</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value     = </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">p</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">p</span> <span class="o">&lt;</span> <span class="n">alpha</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decision: reject H0 (p &lt; </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decision: cannot reject H0 (p &gt;= </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S-statistic = 203.0
+p-value     = 0.0041
+Decision: reject H0 (p &lt; 0.05)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="when-you-don-t-have-the-pdf">
+<h1>When you don’t have the PDF<a class="headerlink" href="#when-you-don-t-have-the-pdf" title="Link to this heading">#</a></h1>
+<p>Every test seen so far rests on a <strong>theoretical</strong> reference PDF for the test statistic under <span class="math notranslate nohighlight">\(H_{0}\)</span>.<br></p>
+<p>That ingredient is not always available <span class="math notranslate nohighlight">\(\rightarrow\)</span> 2 situations where the theoretical PDF is <strong>missing</strong>:</p>
+<ul class="simple">
+<li><p>The statistic of interest is <strong>non-standard</strong> — <em>e.g., a median, a quantile, a hardness ratio between 2 energy bands, a custom variability index of a light curve.</em><br></p></li>
+<li><p>The data clearly violates the <strong>assumptions</strong> of the standard test — <em>heavy tails, strong asymmetry, very small <span class="math notranslate nohighlight">\(n\)</span>, or dependence</em> — so the theoretical reference PDF is not trustworthy <em>even</em> when it exists.</p></li>
+</ul>
+<section id="bootstrap-hypothesis-testing">
+<h2>Bootstrap Hypothesis Testing<a class="headerlink" href="#bootstrap-hypothesis-testing" title="Link to this heading">#</a></h2>
+<p>The <strong>bootstrap</strong> sidesteps the problem by building the reference distribution <strong>directly from the data</strong>.</p>
+<p><strong>Bootstrapping == random sampling with replacement</strong></p>
+<a class="reference internal image-reference" href="../_images/anim_bootstrap.gif"><img alt="../_images/anim_bootstrap.gif" src="../_images/anim_bootstrap.gif" style="width: 700px;" />
+</a>
+<table><tr><td width=700><center><br>
+    Figure 2. Bootstrap resampling: each bootstrap sample is built by drawing 9 circles with replacement from the original sample, so the same circle can appear more than once in a row.
+<br></center></td></tr></table>
+<p><u>IMPORTANT:</u> There is <strong>replacement</strong> <span class="math notranslate nohighlight">\(-\)</span> some samples can appear multiple times in a bootstrapped dataset.</p>
+<p>Bootstrapping is a <strong>heuristic</strong> procedure: it treats the empirical sample as a proxy for the population and resamples from it.</p>
+<blockquote>
+<div><p><em>It follows that</em> <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em><span class="math notranslate nohighlight">\(\hat{T}\)</span> recomputed across bootstrapped samples scatters like across real new samples — giving us its PDF.</em></p>
+</div></blockquote>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p><strong>Bootstrap one-sample test</strong></p>
+<p>For a generic statistic <span class="math notranslate nohighlight">\(\hat{T}\)</span> with null <span class="math notranslate nohighlight">\(H_{0}: T = T_{0}\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Compute <span class="math notranslate nohighlight">\(\hat{T}_{\rm obs}\)</span> on the original sample <span class="math notranslate nohighlight">\(\{x_{1}, \dots, x_{n}\}\)</span>.</p></li>
+<li><p><strong>Shift the sample</strong> so that the null holds — produce <span class="math notranslate nohighlight">\(\{x_{i}^{\prime}\}\)</span> such that the statistic evaluated on it equals <span class="math notranslate nohighlight">\(T_{0}\)</span>.<br>
+<em>For tests on a centre, this is <span class="math notranslate nohighlight">\(x_{i}^{\prime} = x_{i} - \hat{T}_{\rm obs} + T_{0}\)</span>.</em></p></li>
+<li><p>Draw <span class="math notranslate nohighlight">\(B\)</span> samples of size <span class="math notranslate nohighlight">\(n\)</span> with replacement from <span class="math notranslate nohighlight">\(\{x_{i}^{\prime}\}\)</span>; on each, compute <span class="math notranslate nohighlight">\(\hat{T}_{b}^{*}\)</span>.</p></li>
+<li><p>The collection <span class="math notranslate nohighlight">\(\{\hat{T}_{1}^{*}, \dots, \hat{T}_{B}^{*}\}\)</span> is the bootstrap reference distribution <strong>under <span class="math notranslate nohighlight">\(H_{0}\)</span></strong>.</p></li>
+<li><p>The two-sided p-value is the empirical tail mass beyond the observed deviation:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ p_{\rm value} \;\approx\; \frac{1}{B}\sum_{b=1}^{B} \mathbf{1}\!\left[\,\bigl|\hat{T}_{b}^{*} - T_{0}\bigr| \;\geq\; \bigl|\hat{T}_{\rm obs} - T_{0}\bigr|\,\right]. \tag{2}\]</div>
+</div>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<p>The <strong>price</strong>: we lose the clean theoretical guarantee — bootstrap works because of asymptotic results and accumulated empirical evidence.</p>
+<p>The <strong>reward</strong>: it works for almost any statistic, on almost any data, with the same handful of lines of code.</p>
+</div></section>
+<section id="example-median-gc-log-mass">
+<h2>Example: median GC log-mass<a class="headerlink" href="#example-median-gc-log-mass" title="Link to this heading">#</a></h2>
+<p>Let’s suppose we want to compare the <strong>median</strong> value of a model with the data.</p>
+<ul class="simple">
+<li><p><strong>Data:</strong> log-masses of 120 GCs from another survey.</p></li>
+<li><p><strong>Model:</strong> predicts a <strong>median</strong> log-mass <span class="math notranslate nohighlight">\(m_{0} = 5.2\)</span>.</p></li>
+<li><p><strong>Hypothesis:</strong> <span class="math notranslate nohighlight">\(H_0: m = m_0\)</span>.</p></li>
+</ul>
+<p>Let’s look at the data first.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Load and display the new GC sample ─────────────────────────────────────</span>
+<span class="n">df_gc</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/GC_logmasses_skewed.csv&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;log_mass&quot;</span><span class="p">])</span>
+<span class="n">X_GC</span> <span class="o">=</span> <span class="n">df_gc</span><span class="p">[</span><span class="s2">&quot;log_mass&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+
+<span class="n">n_GC</span> <span class="o">=</span> <span class="n">X_GC</span><span class="o">.</span><span class="n">size</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X_GC</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log M\ [M_\odot]$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of GCs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">m0</span> <span class="o">=</span> <span class="mf">5.2</span>
+<span class="n">m_obs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">X_GC</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n GCs          = </span><span class="si">{</span><span class="n">n_GC</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sample median  = </span><span class="si">{</span><span class="n">m_obs</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;model m0       = </span><span class="si">{</span><span class="n">m0</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;observed gap   = </span><span class="si">{</span><span class="n">m_obs</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">m0</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8025ba1f9692d4348f13854a8ce13c15c6a6fe352ae4cdc86f4a6606189c5459.png" src="../_images/8025ba1f9692d4348f13854a8ce13c15c6a6fe352ae4cdc86f4a6606189c5459.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n GCs          = 120
+sample median  = 5.19
+model m0       = 5.2
+observed gap   = -0.01
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now bootstrap <strong>10,000</strong> samples and apply Equation 2.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Bootstrap null distribution of the median ─────────────────────────────</span>
+
+<span class="c1"># Seed the random generator, so the resampling is reproducible.</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Number of bootstrapped samples to draw.</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mi">10_000</span>
+
+<span class="c1"># Shift the sample so that its median is exactly m0.</span>
+<span class="sd">&#39;&#39;&#39;This enforces H0 on the resampling pool: the bootstrapped samples will</span>
+<span class="sd">scatter around m0, i.e. they describe a world where H0 is true.&#39;&#39;&#39;</span>
+<span class="n">X_GC_shifted</span> <span class="o">=</span> <span class="n">X_GC</span> <span class="o">-</span> <span class="n">m_obs</span> <span class="o">+</span> <span class="n">m0</span>
+
+<span class="c1"># Draw B x n random indices between 0 and n-1, with repetitions allowed.</span>
+<span class="n">boot_idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_GC</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">n_GC</span><span class="p">))</span>
+
+<span class="c1"># Apply indexes to obtained B bootstrapped samples.</span>
+<span class="n">boot_samples</span> <span class="o">=</span> <span class="n">X_GC_shifted</span><span class="p">[</span><span class="n">boot_idx</span><span class="p">]</span>
+
+<span class="c1"># Compute the statistic (the median) on each row.</span>
+<span class="sd">&#39;&#39;&#39;These B values are the empirical PDF of the median under H0.&#39;&#39;&#39;</span>
+<span class="n">boot_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">boot_samples</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">boot_samples</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10000, 120)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also visualize our <strong>empirical PDF for the median</strong>.</p>
+<p>This is simply the <strong>histogram</strong> of the 10,000 medians measured on the 10,000 bootstrapped samples!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">boot_T</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">m_obs</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;$m_</span><span class="se">{{</span><span class="s2">\mathrm</span><span class="se">{{</span><span class="s2">obs</span><span class="se">}}}}</span><span class="s2"> = </span><span class="si">{</span><span class="n">m_obs</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">m0</span><span class="p">,</span>    <span class="n">color</span><span class="o">=</span><span class="s2">&quot;firebrick&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;$m_0 = </span><span class="si">{</span><span class="n">m0</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;bootstrap median  (under $H_0$)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Bootstrapped PDF for the median (B = 10$\,$000)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/db87ffcf157196b4a12ae68c44bd00383557a9dc3750432bdbeaa06cd6fec407.png" src="../_images/db87ffcf157196b4a12ae68c44bd00383557a9dc3750432bdbeaa06cd6fec407.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Two-sided bootstrap p-value</span>
+<span class="n">p_boot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">boot_T</span> <span class="o">-</span> <span class="n">m0</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">m_obs</span> <span class="o">-</span> <span class="n">m0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bootstrap p-value (two-sided) = </span><span class="si">{</span><span class="n">p_boot</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bootstrap p-value (two-sided) = 0.6980
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="caveats-the-bootstrap-is-not-magic">
+<h2>Caveats — the bootstrap is not magic.<a class="headerlink" href="#caveats-the-bootstrap-is-not-magic" title="Link to this heading">#</a></h2>
+<p>It <strong>inherits the limits of the sample</strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> A <em>small</em> or <em>biased</em> sample produces a <em>small</em> or <em>biased</em> PDF.</p>
+<ul>
+<li><p>The PDF is <strong>discrete</strong>: a bootstrapped sample only contains values copied from the original one.</p>
+<blockquote>
+<div><p><em>A statistic like the median can only take a few distinct values — hence the spiky histogram above.</em></p>
+</div></blockquote>
+</li>
+<li><p>It is <strong>unsuitable</strong> for statistics dominated by the <strong>extremes</strong> (<em>maximum, minimum</em>), where resampling cannot create new tail behaviour.</p></li>
+<li><p>It assumes <strong>independent</strong> observations.<br></p>
+<blockquote>
+<div><p><em>Time-series and clustered data require block or stratified bootstrap variants.</em></p>
+</div></blockquote>
+</li>
+<li><p>The number of resamples <span class="math notranslate nohighlight">\(B\)</span> controls the <strong>resolution</strong> of the p-value <span class="math notranslate nohighlight">\(\leftarrow\)</span> <span class="math notranslate nohighlight">\(B = 10\,000\)</span> resolves p-values down to about <span class="math notranslate nohighlight">\(10^{-4}\)</span>.</p></li>
+</ul>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p><strong>Bootstrap two-sample test</strong></p>
+<p>For a difference between 2 samples, the natural counterpart is a <strong>permutation test</strong>:</p>
+<ol class="arabic simple">
+<li><p>Merge the 2 samples into 1 single dataset</p></li>
+<li><p>Shuffle the labels</p></li>
+<li><p>Recompute the statistic of interest</p></li>
+<li><p>Repeat <span class="math notranslate nohighlight">\(B\)</span> times.</p></li>
+</ol>
+<p>The shuffle enforces the null “there is no difference between the samples”. A two-sample bootstrap variant resamples each sample separately and tracks the difference of statistics across the resamples.</p>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Exercise [45 min]</strong></font></p>
+<p><strong>Objective:</strong> Run a bootstrap hypothesis test on the <strong>mean</strong> of a heavy-tailed distribution.</p>
+<p><strong>Context:</strong> An X-ray monitoring campaign observes an Active Galactic Nucleus (AGN).<br>
+Archival data set its <strong>quiescent</strong> (non-flaring) mean flux at <span class="math notranslate nohighlight">\(\mu_{0} = 60\)</span> (in units of <span class="math notranslate nohighlight">\(10^{-14}\ \mathrm{erg\ s^{-1}\ cm^{-2}}\)</span>).</p>
+<p>The campaign collected <strong>180 flux measurements</strong> and we want to test whether the source’s true mean flux is <strong>above</strong> the quiescent baseline<br>
+<em>i.e. whether the AGN has brightened.</em></p>
+<p><strong>Task</strong>: Run a bootstrapped hypothesis test.</p>
+<p><em>In particular, you must:</em></p>
+<ol class="arabic simple">
+<li><p><strong>Generate</strong> the dataset using the cell provided right below — do <strong>not</strong> change the seed.</p></li>
+<li><p><strong>Set</strong> an <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span>.</p></li>
+<li><p><strong>Compute</strong> the observed sample mean <span class="math notranslate nohighlight">\(\bar{x}\)</span>.</p></li>
+<li><p><strong>State</strong> <span class="math notranslate nohighlight">\(H_{0}\)</span> and <span class="math notranslate nohighlight">\(H_{1}\)</span>, choose a <strong>one-sided</strong> alternative (<span class="math notranslate nohighlight">\(H_{1}: \mu &gt; \mu_{0}\)</span>).</p></li>
+<li><p><strong>Build</strong> the bootstrap reference distribution of the mean under <span class="math notranslate nohighlight">\(H_{0}\)</span> with <span class="math notranslate nohighlight">\(B = 10\,000\)</span> resamples.</p></li>
+<li><p><strong>Shift</strong> <span class="math notranslate nohighlight">\(x_{i}^{\prime} = x_{i} - \bar{x} + \mu_{0}\)</span> to enforce the null on the resampling pool.</p></li>
+<li><p><strong>Compute</strong> the one-sided bootstrap p-value.</p></li>
+<li><p><strong>Plot</strong> the bootstrap null distribution with <span class="math notranslate nohighlight">\(\bar{x}\)</span> and <span class="math notranslate nohighlight">\(\mu_{0}\)</span> marked.</p></li>
+<li><p><strong>Report</strong> the conclusion in plain language.</p></li>
+</ol>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ── Given data — do not change the seed ───────────────────────────────────</span>
+<span class="n">n_AGN</span> <span class="o">=</span> <span class="mi">180</span>
+
+<span class="n">exercise_rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">2604_4003</span><span class="p">)</span>
+<span class="n">X_AGN</span> <span class="o">=</span> <span class="n">exercise_rng</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">60</span><span class="p">),</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.55</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n_AGN</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n measurements = </span><span class="si">{</span><span class="n">n_AGN</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sample mean    = </span><span class="si">{</span><span class="n">X_AGN</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  (1e-14 erg/s/cm2)&quot;</span><span class="p">)</span>
+<span class="c1"># print(f&quot;sample median  = {np.median(X_AGN):.1f}  (1e-14 erg/s/cm2)&quot;)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>n measurements = 180
+sample mean    = 70.3  (1e-14 erg/s/cm2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_AGN</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(180,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Student: Write your code here. Add blocks as you deem fit.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># H0: the AGN fluxes are consistent with the null model centered at the quiescent baseline</span>
+<span class="n">mu0</span> <span class="o">=</span> <span class="mf">60.0</span>
+<span class="n">x_bar</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">X_AGN</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;observed sample mean = </span><span class="si">{</span><span class="n">x_bar</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  (1e-14 erg/s/cm2)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;quiescent baseline   = </span><span class="si">{</span><span class="n">mu0</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;observed gap         = </span><span class="si">{</span><span class="n">x_bar</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mu0</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="mi">10_000</span>
+<span class="n">X_AGN_shifted</span> <span class="o">=</span> <span class="n">X_AGN</span> <span class="o">-</span> <span class="n">x_bar</span> <span class="o">+</span> <span class="n">mu0</span>
+<span class="n">boot_idx</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_AGN</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">n_AGN</span><span class="p">))</span>
+<span class="n">boot_samples</span> <span class="o">=</span> <span class="n">X_AGN_shifted</span><span class="p">[</span><span class="n">boot_idx</span><span class="p">]</span>
+<span class="n">boot_T</span> <span class="o">=</span> <span class="n">boot_samples</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">p_boot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">boot_T</span> <span class="o">&gt;=</span> <span class="n">x_bar</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bootstrap p-value (one-sided) = </span><span class="si">{</span><span class="n">p_boot</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">boot_T</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x_bar</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;observed $\bar x = </span><span class="si">{</span><span class="n">x_bar</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mu0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;$\mu_0 = </span><span class="si">{</span><span class="n">mu0</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;bootstrap sample mean  (under $H_0$,  $10^{-14}$ erg s$^{-1}$ cm$^{-2}$)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Bootstrap reference distribution of the mean (one-sided)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="closing-remarks">
+<h1>Closing remarks<a class="headerlink" href="#closing-remarks" title="Link to this heading">#</a></h1>
+<section id="what-we-conclude">
+<h2>What we conclude<a class="headerlink" href="#what-we-conclude" title="Link to this heading">#</a></h2>
+<p>In Science, we can only <strong>disprove</strong> theories, <u>never</u> prove them.</p>
+<p>For example, if a theory postulates:</p>
+<blockquote>
+<div><p><em>“All Neutron Stars (NSs) have masses below 2.5 <span class="math notranslate nohighlight">\(M_\odot\)</span>”</em></p>
+</div></blockquote>
+<ul class="simple">
+<li><p>to confirm it, one needs to observe all NSs in existence.</p></li>
+<li><p>to disprove it, one just needs a single NS above 2.5 <span class="math notranslate nohighlight">\(M_\odot\)</span>.</p></li>
+</ul>
+<p><strong>Implication 1</strong>: “<em>Rejecting at <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span></em>” means that, in a world where <span class="math notranslate nohighlight">\(H_0\)</span> is true, our procedure would wrongly reject 5% of the time.</p>
+<blockquote>
+<div><p><em>Note the fine print: it’s a guarantee about the procedure’s long-run behavior assuming <span class="math notranslate nohighlight">\(H_0\)</span> is true.</em><br>
+<em><u>Not</u> the probability that <u>this</u> particular rejection is a mistake.</em></p>
+</div></blockquote>
+<p>We make this statement <strong>before</strong> even running the test!</p>
+<p><strong>Implication 2</strong>: 100%-<span class="math notranslate nohighlight">\(p\)</span>-value is <u>not</u> the probability for the model (<em>hypothesis</em>) to be correct</p>
+<blockquote>
+<div><p><em>There are infinite other models under which the <span class="math notranslate nohighlight">\(p\)</span>-value would be above <span class="math notranslate nohighlight">\(\alpha\)</span>.</em></p>
+</div></blockquote>
+</section>
+<section id="in-particular-p-values">
+<h2>In particular: p-values<a class="headerlink" href="#in-particular-p-values" title="Link to this heading">#</a></h2>
+<div style="border-left: 4px solid #4CAF50; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #e8f5e9; color: #1a1a1a;">
+<p>The <strong>p-value</strong> is the probability, computed under <span class="math notranslate nohighlight">\(H_{0}\)</span>, of observing a test statistic <strong>at least as extreme</strong> as the one we obtained:</p>
+<div class="math notranslate nohighlight">
+\[ p = P(\,|T| \geq |t_{\rm obs}|\, \mid H_{0}). \tag{3}\]</div>
+<p>Decision rule: reject <span class="math notranslate nohighlight">\(H_{0}\)</span> if <span class="math notranslate nohighlight">\(p &lt; \alpha\)</span>, do not reject otherwise.</p>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<p><strong>Common misinterpretations of the p-value — all wrong:</strong></p>
+<p><em>“The p-value is the probability that <span class="math notranslate nohighlight">\(H_0\)</span> is true.”</em><br></p>
+<blockquote>
+<div><p>No. <span class="math notranslate nohighlight">\(H_0\)</span> is a fixed claim, not a random variable.</p>
+</div></blockquote>
+<p><em>“A small p-value proves the alternative.”</em><br></p>
+<blockquote>
+<div><p>No. It only quantifies how surprising the data is under <span class="math notranslate nohighlight">\(H_0\)</span>.</p>
+</div></blockquote>
+<p><em>“A large p-value means <span class="math notranslate nohighlight">\(H_0\)</span> is true.”</em><br></p>
+<blockquote>
+<div><p>No. It only means the data does not contradict <span class="math notranslate nohighlight">\(H_0\)</span> strongly enough at the chosen <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+</div></blockquote>
+<p><em>“The p-value measures effect size.”</em><br></p>
+<blockquote>
+<div><p>No. A trivially small effect can yield a tiny <span class="math notranslate nohighlight">\(p\)</span>-value with a large enough sample.</p>
+</div></blockquote>
+</div><p>Two extra hazards to know about:</p>
+<ul class="simple">
+<li><p><strong>p-hacking.</strong> Trying many tests and reporting only the smallest p-value<br>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span> Choose the appropriate test <u>before</u> testing, and stick to it!</p></li>
+<li><p><strong>Multiple comparisons.</strong> Running <span class="math notranslate nohighlight">\(m\)</span> independent tests at <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> inflates the chance of <em>at least one</em> false positive to roughly <span class="math notranslate nohighlight">\(1 - (1 - \alpha)^{m}\)</span>.<br>
+<span class="math notranslate nohighlight">\(\rightarrow\)</span> Corrections such as <strong>Bonferroni</strong> or <strong>FDR</strong> are the standard remedies.</p></li>
+</ul>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<p>Always report <strong>three things</strong> together: the <strong>p-value</strong>, the <strong>effect size</strong> (<em>e.g., difference w.r.t. the expected value</em>), and a <strong>confidence interval</strong>.</p>
+<p>The trio answers <em>is it real, how big is it, and how precise are we</em> — none of them alone is enough.</p>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="solutions">
+<h1>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h1>
+<section id="solution-kolmogorovsmirnov-test-exercise">
+<h2>Solution — Kolmogorov–Smirnov test exercise<a class="headerlink" href="#solution-kolmogorovsmirnov-test-exercise" title="Link to this heading">#</a></h2>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution below]</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ks_stat</span><span class="p">,</span> <span class="n">p_value</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">ks_2samp</span><span class="p">(</span><span class="n">X_a</span><span class="p">,</span> <span class="n">X_b</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;D-statistic = </span><span class="si">{</span><span class="n">ks_stat</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;p-value     = </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="k">if</span> <span class="n">p_value</span> <span class="o">&lt;</span> <span class="n">alpha</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decision: reject H0 (p &lt; </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Decision: cannot reject H0 (p &gt;= </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>D-statistic = 0.475
+p-value     = 0.0002
+Decision: reject H0 (p &lt; 0.05)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Observations</strong>:</p>
+<p>Both the t-test AND the K-S test reject <span class="math notranslate nohighlight">\(H_0\)</span> (since <code class="docutils literal notranslate"><span class="pre">X_a</span></code> and <code class="docutils literal notranslate"><span class="pre">X_b</span></code> differ by construction).</p>
+<p>In general, 2 tests can <strong>disagree</strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> Always pick the one whose hypothesis is closer to your needs.</p>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[End of solution]</b></p>
+</div></section>
+<section id="solution-bootstrap-agn-flux-exercise">
+<h2>Solution — Bootstrap AGN flux exercise<a class="headerlink" href="#solution-bootstrap-agn-flux-exercise" title="Link to this heading">#</a></h2>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution below]</b></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># H0: mu = 60     H1: mu &gt; 60     (one-sided, right tail)</span>
+
+<span class="n">mu0</span>    <span class="o">=</span> <span class="mf">60.0</span>
+<span class="n">x_bar</span>  <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">X_AGN</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;observed sample mean = </span><span class="si">{</span><span class="n">x_bar</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">  (1e-14 erg/s/cm2)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;quiescent baseline   = </span><span class="si">{</span><span class="n">mu0</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;observed gap         = </span><span class="si">{</span><span class="n">x_bar</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">mu0</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>observed sample mean = 70.26  (1e-14 erg/s/cm2)
+quiescent baseline   = 60.00
+observed gap         = +10.26
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>   <span class="c1"># seed, so the resampling is reproducible</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="mi">10_000</span>
+<span class="n">X_AGN_shifted</span> <span class="o">=</span> <span class="n">X_AGN</span> <span class="o">-</span> <span class="n">x_bar</span> <span class="o">+</span> <span class="n">mu0</span>     <span class="c1"># enforce H0 on the resampling pool</span>
+
+<span class="n">boot_idx</span>     <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_AGN</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">n_AGN</span><span class="p">))</span>
+<span class="n">boot_samples</span> <span class="o">=</span> <span class="n">X_AGN_shifted</span><span class="p">[</span><span class="n">boot_idx</span><span class="p">]</span>
+<span class="n">boot_T</span>       <span class="o">=</span> <span class="n">boot_samples</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">p_boot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">boot_T</span> <span class="o">&gt;=</span> <span class="n">x_bar</span><span class="p">)</span>            <span class="c1"># one-sided, right tail</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bootstrap p-value (one-sided) = </span><span class="si">{</span><span class="n">p_boot</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bootstrap p-value (one-sided) = 0.0036
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualise the bootstrap reference distribution</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">8.5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">boot_T</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x_bar</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C3&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;observed $\bar x = </span><span class="si">{</span><span class="n">x_bar</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mu0</span><span class="p">,</span>   <span class="n">color</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;$\mu_0 = </span><span class="si">{</span><span class="n">mu0</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;bootstrap sample mean  (under $H_0$,  $10^{-14}$ erg s$^{-1}$ cm$^{-2}$)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Bootstrap reference distribution of the mean (one-sided)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/73752e796a409a994f24e73890990a272e3cc6c94ab8afa5013a951b799d940a.png" src="../_images/73752e796a409a994f24e73890990a272e3cc6c94ab8afa5013a951b799d940a.png" />
+</div>
+</div>
+<p><strong>Observations:</strong></p>
+<p>The observed mean flux is well above the quiescent baseline of 60, and the one-sided bootstrap p-value falls below 0.05 — the data <strong>rejects</strong> <span class="math notranslate nohighlight">\(H_{0}\)</span> at the 5% level.</p>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> We can claim the AGN’s true mean flux is statistically higher than the quiescent baseline: the source has brightened.</p>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[End of solution]</b></p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#EOF</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Hypothesis_Testing"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Intro/Intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Classical Statistics  <a class="tocSkip"></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../MLE/MLE.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Maximum Likelihood Estimation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Hypothesis Testing <a class="tocSkip"></a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preamble">Preamble</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-step-by-step-case-to-build-intuition">A step-by-step case to build intuition</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-sample">The sample</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model">The model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-property">The property</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hypothesis">The hypothesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-statistic">The statistic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-the-statistic">Evaluating the statistic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#building-the-statistic-s-pdf">Building the statistic’s PDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-this-probability">What is this probability?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thresholding-decision">Thresholding &amp; Decision</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-hypothesis-testing-framework">The Hypothesis Testing Framework</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-null-and-alternative-hypothesis">Step 1. Null and Alternative Hypothesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-decide-on-a-significance-level">Step 2. Decide on a significance level</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-pick-the-statistic">Step 3. Pick the statistic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-compute-the-p-value">Step 4. Compute the <span class="math notranslate nohighlight">\(p\)</span>-value</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-decision">Step 5. Decision</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#common-tests-do-not-reinvent-the-wheel">Common Tests: do not reinvent the wheel</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#t-test">t-test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kolmogorovsmirnov-test">Kolmogorov–Smirnov test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mannkendall-test">Mann–Kendall test</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#when-you-don-t-have-the-pdf">When you don’t have the PDF</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-hypothesis-testing">Bootstrap Hypothesis Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-median-gc-log-mass">Example: median GC log-mass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#caveats-the-bootstrap-is-not-magic">Caveats — the bootstrap is not magic.</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#closing-remarks">Closing remarks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-we-conclude">What we conclude</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-particular-p-values">In particular: p-values</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-kolmogorovsmirnov-test-exercise">Solution — Kolmogorov–Smirnov test exercise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-bootstrap-agn-flux-exercise">Solution — Bootstrap AGN flux exercise</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

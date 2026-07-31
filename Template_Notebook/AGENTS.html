@@ -1,0 +1,866 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>AGENTS &#8212; AstroStat School 2026 — Rome</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Template_Notebook/AGENTS';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — Rome</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — Rome
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Intro/Intro.html">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Hypothesis_Testing/Hypothesis_Testing.html">Hypothesis Testing <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MLE/MLE.html">Maximum Likelihood Estimation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Intro_and_Clustering.html">Introduction to Machine Learning and Clustering <a class="tocSkip"></a></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_1.html">Introduction to Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_2.html">Applied Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">Basics of Markov Chain Monte Carlo <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Classification.html">Classification <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Gaussian_Processes/Gaussian_Processes.html">Gaussian Processes <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Time_Series/Time_Series.html">Time Series Analysis <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Best_Practices.html">Machine Learning Practices and Protocols</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Intro_n_Regression/Intro_n_Regression.html">Introduction to Deep Learning and Regression Workshop</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../GPU_Parallelization/GPU_parallelization.html">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../NN_Explainability/NN_explainability.html">Neural Network Explainability <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_short.html">Introduction to Simulation Based Inference</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_exercise.html">Simulation Based Inference: Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Diffusion/Diffusion.html">Diffusion Models</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../AI_Agents/AI_Agents.html">Intro to AI Agents<a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Template_Notebook/AGENTS.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>AGENTS</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-overview">Project Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#audience-learning-objectives">Audience &amp; Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-folder-layout">Topic Folder Layout</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-new-topic">Adding A New Topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">Environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-development">Build &amp; Development</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-format">Lecture Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-conventions">Notebook Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#required-structure">Required structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#global-style">Global Style</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#color-blocks-html-div-do-not-invent-new-variants">Color blocks (HTML <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> — do not invent new variants)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sections">Sections</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="agents">
+<h1>AGENTS<a class="headerlink" href="#agents" title="Link to this heading">#</a></h1>
+<p>This file provides guidance to Claude Code (claude.ai/code), Codex, or other agents when working with code in this repository.</p>
+<section id="project-overview">
+<h2>Project Overview<a class="headerlink" href="#project-overview" title="Link to this heading">#</a></h2>
+<p>Jupyter Book site for the 7th AstroStatistics School (Rome, 2026). Contains lecture notebooks for astrostatistics topics. Deployed to GitHub Pages automatically on push to <code class="docutils literal notranslate"><span class="pre">main</span></code>.</p>
+<p>The course will use:</p>
+<ol class="arabic simple">
+<li><p>Jupyter Notebooks</p></li>
+<li><p>pptx files</p></li>
+<li><p>Other formats a teacher may choose</p></li>
+</ol>
+<p>The instructions in this file solely refer to the Jupyter Notebooks.</p>
+<p>When instructed to produce other file types, ask the user and work interactively.</p>
+</section>
+<section id="audience-learning-objectives">
+<h2>Audience &amp; Learning Objectives<a class="headerlink" href="#audience-learning-objectives" title="Link to this heading">#</a></h2>
+<p>The audience is composed by an international mixture of Master’s, PhDs, and Postdocs who work in the field of Astrophysics, Astronomy, or very closely related fields.</p>
+<p>Remember that the main learning objectives the students shall achieve are:</p>
+<ul class="simple">
+<li><p>Understand the statistical or machine learning methods presented in the lecture.</p></li>
+<li><p>Apply the practical methods that convert the thory into Python coding.</p></li>
+<li><p>Understand how to simply re-utilize what they have seen in the lectures in their own daily work.</p></li>
+</ul>
+</section>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">_config.yml</span></code></strong> — Jupyter Book configuration (title, repo link, Colab launch buttons, MyST extensions)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code></strong> — Table of contents defining chapter order; each chapter points to a notebook file</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">index.md</span></code></strong> — Landing page</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">environment.yml</span></code></strong> — Conda environment (Python 3.13, jupyter-book &lt;2, scientific stack)</p></li>
+<li><p><strong>Topic directories</strong>  named as <code class="docutils literal notranslate"><span class="pre">&lt;Topic_Name&gt;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">Gaussian_Processes/</span></code>, <code class="docutils literal notranslate"><span class="pre">Template_Notebook/</span></code>) — contain <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code> notebooks.</p></li>
+</ul>
+<p>Other top-level items:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">docs/superpowers/{specs,plans}/</span></code></strong> — dated design specs and implementation plans for lectures (e.g. <code class="docutils literal notranslate"><span class="pre">2026-06-22-l06-design.md</span></code>), produced via the brainstorming/planning skills before building a notebook.</p></li>
+</ul>
+<section id="topic-folder-layout">
+<h3>Topic Folder Layout<a class="headerlink" href="#topic-folder-layout" title="Link to this heading">#</a></h3>
+<p>Each topic lives in its own top-level folder <code class="docutils literal notranslate"><span class="pre">&lt;Topic_Name&gt;</span></code>. The folders are self-contained: a topic reads only from its own <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">images/</span></code> subfolders, never from another topic’s.
+A topic folder may contain more lectures in the form of notebooks, although it is usually only one lecture per topic.</p>
+<p>Per-topic folder contents:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&lt;Topic_Name&gt;/&lt;Lecture</span> <span class="pre">title&gt;.ipynb</span></code></strong> — a deliverable lecture notebook. These are the only notebooks you create or edit when asked for “the lecture”.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&lt;Topic_Name&gt;/&lt;Lecture</span> <span class="pre">title&gt;</span> <span class="pre">inclass.ipynb</span></code></strong> — the teacher’s in-class variant of a lecture, maintained by the user. <strong>Never create, edit, or read these</strong> when authoring a lecture. These files may or may not exist.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&lt;Topic_Name&gt;/data/</span></code></strong> — datasets the notebook loads. Often synthetic and <strong>generated by a committed script</strong> (e.g. <code class="docutils literal notranslate"><span class="pre">make_dataset.py</span></code>, <code class="docutils literal notranslate"><span class="pre">make_dataset_outliers.py</span></code>) that writes the CSV/DB the notebook reads. When a lecture needs data, prefer generating it with such a script (seeded, reproducible) over hand-editing files.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">&lt;Topic_Name&gt;/images/</span></code></strong> — illustration assets. Illustrations can simply be images stored there by the user, or generated via scripts contained in the very same folder. Each generated illustration is a <code class="docutils literal notranslate"><span class="pre">fig_*.py</span></code> generator script paired with its output <code class="docutils literal notranslate"><span class="pre">fig_*.png</span></code> (see the Figures rules below). The notebook imports the <code class="docutils literal notranslate"><span class="pre">.png</span></code>; the <code class="docutils literal notranslate"><span class="pre">.py</span></code> is never run from inside the notebook.</p></li>
+</ul>
+<p>Separate exercise notebooks: most exercises live inline in the lecture notebook, but a lecture may also ship a standalone exercise.</p>
+</section>
+</section>
+<section id="adding-a-new-topic">
+<h2>Adding A New Topic<a class="headerlink" href="#adding-a-new-topic" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Create a directory named <code class="docutils literal notranslate"><span class="pre">&lt;Topic_Name&gt;/</span></code> with <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">images/</span></code> subdirectories as needed.</p></li>
+<li><p>Register the notebook path in <code class="docutils literal notranslate"><span class="pre">_toc.yml</span></code> under <code class="docutils literal notranslate"><span class="pre">chapters:</span></code>.</p></li>
+<li><p>Add static paths for <code class="docutils literal notranslate"><span class="pre">data/</span></code> and <code class="docutils literal notranslate"><span class="pre">images/</span></code> subdirs in <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code> under <code class="docutils literal notranslate"><span class="pre">html.static_path</span></code>.</p></li>
+<li><p>Add a short description in <code class="docutils literal notranslate"><span class="pre">index.md</span></code>.</p></li>
+<li><p>Add any new dependencies to <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>.</p></li>
+</ol>
+</section>
+<section id="environment">
+<h2>Environment<a class="headerlink" href="#environment" title="Link to this heading">#</a></h2>
+<p>Notebooks run under the <strong><code class="docutils literal notranslate"><span class="pre">astrostat-7</span></code> conda env</strong>; <code class="docutils literal notranslate"><span class="pre">python</span></code>/<code class="docutils literal notranslate"><span class="pre">jupyter</span></code> are not on the base <code class="docutils literal notranslate"><span class="pre">PATH</span></code>. Activate it (<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span> <span class="pre">astrostat-7</span></code>) before running notebooks or data-generation scripts. The pinned stack is in <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>: numpy, pandas, matplotlib, seaborn, statsmodels, scipy.</p>
+<section id="build-development">
+<h3>Build &amp; Development<a class="headerlink" href="#build-development" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create/activate conda environment</span>
+micromamba<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>environment.yml
+micromamba<span class="w"> </span>activate<span class="w"> </span>astrostat-school
+
+<span class="c1"># Install Jupyter kernel (needed for notebook execution)</span>
+python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--name<span class="w"> </span>astrostat-school<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (astrostat-school)&quot;</span><span class="w"> </span>--user
+
+<span class="c1"># Build the book locally</span>
+jupyter-book<span class="w"> </span>build<span class="w"> </span>.
+
+<span class="c1"># Output goes to _build/html/</span>
+</pre></div>
+</div>
+<p>Notebook execution is set to <code class="docutils literal notranslate"><span class="pre">&quot;off&quot;</span></code> in <code class="docutils literal notranslate"><span class="pre">_config.yml</span></code> — the build does not re-run notebooks; it uses stored outputs.</p>
+</section>
+<section id="deployment">
+<h3>Deployment<a class="headerlink" href="#deployment" title="Link to this heading">#</a></h3>
+<p>Pushing to <code class="docutils literal notranslate"><span class="pre">main</span></code> triggers <code class="docutils literal notranslate"><span class="pre">.github/workflows/deploy.yml</span></code>, which builds the book with micromamba and deploys <code class="docutils literal notranslate"><span class="pre">_build/html/</span></code> to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch via GitHub Pages.</p>
+</section>
+</section>
+<section id="lecture-format">
+<h2>Lecture Format<a class="headerlink" href="#lecture-format" title="Link to this heading">#</a></h2>
+<p>Always structure each individual lecture with the Audience &amp; Learning Objectives in mind (see relevant chapter), compatibly with the idea that the students may be exposed to the presented topic for the first time.</p>
+<p>For this reason, make sure that:</p>
+<ul class="simple">
+<li><p>The jergon is suitable for the Audience, who are experts in the field of Astrophysics, but not in that of statistical analysis or machine learning; therefore, do not give for granted any formula (provide derivation and explanation), expand the acronyms you introduce, etc.</p></li>
+<li><p>The code implementation is as simple as possible, without fancy solutions unless specifically requested by the user; if in doubt, opt for the simplest code solution.</p></li>
+</ul>
+<section id="notebook-conventions">
+<h3>Notebook Conventions<a class="headerlink" href="#notebook-conventions" title="Link to this heading">#</a></h3>
+<p><strong>Every notebook must follow <a class="reference internal" href="#Template_Notebook/Template_Notebook.ipynb"><span class="xref myst">Template_Notebook/Template_Notebook.ipynb</span></a> exactly.</strong> This ensures consistent style and correct rendering on Jupyter Book (the primary target). Diverging from the <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> block patterns below will break rendering.</p>
+<section id="required-structure">
+<h4>Required structure<a class="headerlink" href="#required-structure" title="Link to this heading">#</a></h4>
+<p>The following blocks are <strong>mandatory</strong> to be present for each lecture:</p>
+<ul class="simple">
+<li><p><strong>Credits block</strong> — must be the first cell (fieldset with logo table and <code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code> after)</p></li>
+<li><p><strong>Title</strong> — <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">Title</span> <span class="pre">&lt;a</span> <span class="pre">class=&quot;tocSkip&quot;&gt;</span></code> so it does not appear in the ToC</p></li>
+<li><p><strong>Setup section</strong> — commented-out <code class="docutils literal notranslate"><span class="pre">#!pip</span> <span class="pre">install</span> <span class="pre">...</span></code> cell, then the Colab clone snippet, then the plot style loader (fetched via <code class="docutils literal notranslate"><span class="pre">requests</span></code> from the assets-public repo)</p></li>
+<li><p><strong>End marker</strong> — last code cell must be <code class="docutils literal notranslate"><span class="pre">###EOF</span></code></p></li>
+</ul>
+<p>The remaining blocks are at the discretion of the user.</p>
+</section>
+<section id="global-style">
+<h4>Global Style<a class="headerlink" href="#global-style" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Template is the ground truth:</strong>
+If any of the rules in this chapter contradict the Template Notebook, use the standard in the  Template Notebook.</p></li>
+<li><p><strong>Language:</strong> English</p></li>
+<li><p><strong>Code style:</strong>
+Students are demanding but not necessarily expert in Python.
+When creating the notebooks, <strong>never</strong> opt for fancy solutions like:</p>
+<ul>
+<li><p>using fancy plots,</p></li>
+<li><p>use fancy display of data and dataframe,</p></li>
+<li><p>use extra widgets and libraries that can embellish the layout of the products.
+Keep an up-to-date <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> with exact versions of the packages that are required.</p></li>
+<li><p><strong>DataFrame naming:</strong>
+All pandas DataFrame variables must be named with a <code class="docutils literal notranslate"><span class="pre">df_</span></code> prefix (e.g. <code class="docutils literal notranslate"><span class="pre">df_fx</span></code>, <code class="docutils literal notranslate"><span class="pre">df_data</span></code>, <code class="docutils literal notranslate"><span class="pre">df_clean</span></code>). Using <code class="docutils literal notranslate"><span class="pre">df</span></code> alone is acceptable only for the single main working dataframe. Never use suffixed forms like <code class="docutils literal notranslate"><span class="pre">clean_df</span></code>, or bare names like <code class="docutils literal notranslate"><span class="pre">fx</span></code>, <code class="docutils literal notranslate"><span class="pre">result</span></code>.</p></li>
+<li><p><strong>Logic code must be simple and explicit:</strong>
+No lambda functions, no chained one-liners, no clever idioms. Break operations into multiple lines with named intermediate variables. A plain <code class="docutils literal notranslate"><span class="pre">for</span></code> loop or <code class="docutils literal notranslate"><span class="pre">if/else</span></code> block is always preferable to a compact expression.</p></li>
+<li><p><strong>Document main code blocks:</strong>
+Functions must have a docstring. Non-trivial code blocks (transformation steps, joins, validation logic) must have inline comments explaining what the code does and why.</p></li>
+</ul>
+</li>
+<li><p><strong>Titles:</strong></p>
+<ul>
+<li><p>Do not use numbering in titles/sub-titles: the markdown hashing is enough.</p></li>
+</ul>
+</li>
+<li><p><strong>Text:</strong>
+When asked to create or edit text, respect the following rules.</p>
+<ul>
+<li><p>The text in the markdown blocks must be complete and descriptive.</p></li>
+<li><p>Use short sentences.</p></li>
+<li><p>Do not stack more than 2 sentences without a spacing.</p></li>
+<li><p>When markdown prose mentions a count or number of repetitions, write it as a numeral, regardless of standard style conventions. Example: write “This notebook shows 2 ways”, not “This notebook shows two ways”.</p></li>
+<li><p>Use formulas as deem fit.</p></li>
+<li><p>Boldface 1 term per sentence when you want to stress some concept.</p></li>
+<li><p>Boldface terms corresponding to definitions, at first appearance.</p></li>
+<li><p><strong>Never combine <code class="docutils literal notranslate"><span class="pre">**</span></code> with <code class="docutils literal notranslate"><span class="pre">`</span></code>:</strong>
+Do not bold an inline-code term. Use either bold (for prose terms) or backticks (for code/identifiers), never both on the same token — e.g. write <code class="docutils literal notranslate"><span class="pre">`GET`</span></code> or <strong>GET</strong>, never <strong><code class="docutils literal notranslate"><span class="pre">GET</span></code></strong>.</p></li>
+<li><p><strong>No unexplained acronyms:</strong>
+Always spell out the full term at first appearance, with the short form in brackets, e.g. “Active Galcatic Nucleii (AGNs)”. Use the short form thereafter. This applies to every acronym, including Astrophysics ones — never assume one is known.</p></li>
+<li><p><strong>Simple lexicon; introduce every term:</strong>
+Prefer plain, everyday words over jargon. Do not take any technical or astrophysical concept for granted: when a domain term first appears, define it in one short, plain sentence. Write so a non-specialist can follow, even though examples stay grounded in Astrophysics, Statistics and Machine Learning. When a plain word works as well as a specialist one, use the plain word.</p></li>
+<li><p><strong>Never reference other lectures explicitly:</strong>
+Do not write “previous lecture”, “next lecture”, “earlier/later lecture”, or similar. Each notebook must read as self-contained. If a concept from elsewhere is needed, restate it briefly in neutral terms (e.g. “as is common when cleaning data”) without pointing to another lecture.</p></li>
+</ul>
+</li>
+<li><p><strong>Formulas:</strong></p>
+<ul>
+<li><p>Do not use “\mathbf”, but “\boldsymbol”.</p></li>
+<li><p>You do not need double “&quot; inside formulas, e.g. this works: <span class="math notranslate nohighlight">\(\lambda\)</span>, this not: <span class="math notranslate nohighlight">\(\\lambda\)</span></p></li>
+<li><p>Surround formulas using “<span class="math notranslate nohighlight">\(&quot; (inline) or &quot;\)</span>$” (centered), not “(“.</p></li>
+<li><p>For italics variables, use “$”, not “(“.</p></li>
+<li><p>Lower-case “x” and “y” are for univariate variables, upper-case “X” and “Y” are for multivariate variables.</p></li>
+<li><p>Use “\hat{.}” for best-fitting parameters, and estimates (e.g, \hat{\theta} or \hat{y}).</p></li>
+<li><p>If not already introduced, explain each variable in a formula, with a text starting with “where” right after the formula. If less than 3, explain in a sentence, otherwise as a bullet point list.</p></li>
+</ul>
+</li>
+<li><p><strong>Equations:</strong>
+Use <code class="docutils literal notranslate"><span class="pre">$\tag$</span></code> to number equations, so you can recall them in text; e.g. <code class="docutils literal notranslate"><span class="pre">Equation</span> <span class="pre">&lt;nn&gt;</span></code>.</p></li>
+<li><p><strong>Figures:</strong></p>
+<ul>
+<li><p>When inserting a figure always add a caption, and update the sequential caption numbering (e.g., <code class="docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">1.</span></code>, <code class="docutils literal notranslate"><span class="pre">Figure</span> <span class="pre">2.</span></code>, etc.) across the notebook if necessary.</p></li>
+<li><p>Caption format: use <code class="docutils literal notranslate"><span class="pre">&lt;figure&gt;</span></code> / <code class="docutils literal notranslate"><span class="pre">&lt;figcaption&gt;</span></code> HTML tags as shown in <code class="docutils literal notranslate"><span class="pre">Template_Notebook.ipynb</span></code>. Do not use italics on the caption text itself; <code class="docutils literal notranslate"><span class="pre">&lt;i&gt;</span></code> is only for references. Use <code class="docutils literal notranslate"><span class="pre">&lt;code&gt;</span></code> for inline code in captions.</p></li>
+<li><p>Consider 2 types of figures: <strong>plots</strong> and <strong>illustrations</strong>.</p></li>
+<li><p><strong>Plots:</strong>
+Plots are part of the lecture flow, and are generated in-notebook; their code is integral part of the notebook.</p></li>
+<li><p><strong>Illustrations:</strong>
+Illustrations are diagrams, infographics, flows, diagrams, concept schematics, visual summaries of frameworks, etc.; this can be <strong>uploaded</strong> by the user in the <code class="docutils literal notranslate"><span class="pre">images/</span></code> folder, or <strong>generated</strong>.</p>
+<ul>
+<li><p>When you are asked to generate an <strong>illustration</strong>, create it programmatically using Python (<code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, <code class="docutils literal notranslate"><span class="pre">PIL</span></code>, or SVG markup) unless specifically required otherwise.</p></li>
+<li><p>Do not place the code to generate illustrations inside the notebook, but place it in separate files “fig_*.py” inside the subfolder <code class="docutils literal notranslate"><span class="pre">/images</span></code>, then display the images as imports.</p></li>
+<li><p>Do not number illustration files: e.g., <code class="docutils literal notranslate"><span class="pre">fig_2_example.png</span></code> shall just be <code class="docutils literal notranslate"><span class="pre">fig_example.png</span></code>.</p></li>
+<li><p>Fonts must be readable: do not generate huge illustrations with tiny text.</p></li>
+<li><p>Default accent palette: <code class="docutils literal notranslate"><span class="pre">&quot;steelblue&quot;</span></code> (1st), <code class="docutils literal notranslate"><span class="pre">&quot;firebrick&quot;</span></code> (2nd), <code class="docutils literal notranslate"><span class="pre">&quot;mediumseagreen&quot;</span></code> (3rd); beyond that fall back to matplotlib’s default cycle (<code class="docutils literal notranslate"><span class="pre">&quot;C3&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;C4&quot;</span></code>, …).</p></li>
+<li><p>Where an illustration you cannot generate is needed, use an empty placeholder, and just write the caption and a reference to it, so that the user may obtain it.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="color-blocks-html-div-do-not-invent-new-variants">
+<h4>Color blocks (HTML <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> — do not invent new variants)<a class="headerlink" href="#color-blocks-html-div-do-not-invent-new-variants" title="Link to this heading">#</a></h4>
+<p>These are the only tested blocks that render on Jupyter Notebook, Jupyter Book, and GitHub preview:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Color</p></th>
+<th class="head"><p>Border</p></th>
+<th class="head"><p>Background</p></th>
+<th class="head"><p>Use</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Green</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#4CAF50</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#e8f5e9</span></code></p></td>
+<td><p>Notes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Blue</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#2196F3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#f0f8ff</span></code></p></td>
+<td><p>Proofs / long explanations (collapsable)</p></td>
+</tr>
+<tr class="row-even"><td><p>Red</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#e57373</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#fdecea</span></code></p></td>
+<td><p>Warnings / spoilers</p></td>
+</tr>
+<tr class="row-odd"><td><p>Orange</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#FFA500</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">rgba(255,165,0,0.15)</span></code></p></td>
+<td><p>Exercises only</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Use <code class="docutils literal notranslate"><span class="pre">&lt;details&gt;&lt;b&gt;&lt;summary&gt;[Label]</span> <span class="pre">(click</span> <span class="pre">here</span> <span class="pre">to</span> <span class="pre">expand)&lt;/summary&gt;&lt;/b&gt;</span> <span class="pre">...</span> <span class="pre">&lt;/details&gt;</span></code> inside blue or red blocks for collapsable content.</p>
+<p><strong>Warning:</strong> Color blocks do not render on Colab: <strong>never</strong> use any other variant that is not specified above.</p>
+</section>
+</section>
+<section id="exercises">
+<h3>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Do not number Exercises, do not use markdowns (<code class="docutils literal notranslate"><span class="pre">#</span></code>, <code class="docutils literal notranslate"><span class="pre">##</span></code>, <code class="docutils literal notranslate"><span class="pre">###</span></code>, etc.): they will break Jupyter Book.</p></li>
+<li><p>Each exercise title must include a time estimate in brackets, e.g. <code class="docutils literal notranslate"><span class="pre">**Exercise</span> <span class="pre">—</span> <span class="pre">Title</span> <span class="pre">[20</span> <span class="pre">min]**</span></code>.</p></li>
+<li><p>Use a <font size=...></font> tags to wrap the title, e.g. <font size=6><strong>Exercise [45 min]</strong></font></p></li>
+<li><p>The font size shall be relevant to the section the exercise refer to: an exercise shall be a sub-section of the section it refers to.
+In this sense:</p>
+<ul>
+<li><p><font size=6> corresponds to a markdown chapter (“#”)</p></li>
+<li><p><font size=4> corresponds to a markdown sub-chapter (“##”)</p></li>
+<li><p><font size=3> corresponds to a markdown sub-sub-chapter (“###”)</p></li>
+</ul>
+</li>
+<li><p>Overestimate time — students see the topic for the first time</p></li>
+<li><p><strong>Exercises are applications, not extensions.</strong> If asked to create an exercise, only demand students to use Python features, functions, and patterns that have already been introduced earlier in the same notebook. Never introduce new syntax, new library methods, or new concepts inside an exercise.</p></li>
+<li><p>Always provide a solution when asked to generate an exercise.</p></li>
+<li><p>Solution stays in the same notebook (not a separate file)</p></li>
+<li><p>Wrap solution between <code class="docutils literal notranslate"><span class="pre">&lt;div</span> <span class="pre">class=&quot;alert</span> <span class="pre">alert-danger&quot;</span> <span class="pre">...&gt;[Solution</span> <span class="pre">below]&lt;/div&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">[End</span> <span class="pre">of</span> <span class="pre">solution]</span></code> divs</p></li>
+</ul>
+<section id="sections">
+<h4>Sections<a class="headerlink" href="#sections" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">#</span></code> and <code class="docutils literal notranslate"><span class="pre">##</span></code> headings only; for deeper nesting use <strong>bold</strong>, underline, or caps in plain text</p></li>
+<li><p>Alternate short text blocks (1–2 sentences) with code, color blocks, or figures — avoid long prose</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Template_Notebook"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#project-overview">Project Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#audience-learning-objectives">Audience &amp; Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#topic-folder-layout">Topic Folder Layout</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-a-new-topic">Adding A New Topic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">Environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-development">Build &amp; Development</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment">Deployment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecture-format">Lecture Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-conventions">Notebook Conventions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#required-structure">Required structure</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#global-style">Global Style</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#color-blocks-html-div-do-not-invent-new-variants">Color blocks (HTML <code class="docutils literal notranslate"><span class="pre">&lt;div&gt;</span></code> — do not invent new variants)</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sections">Sections</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

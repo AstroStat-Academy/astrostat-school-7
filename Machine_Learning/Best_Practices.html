@@ -1,0 +1,2182 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Machine Learning Practices and Protocols &#8212; AstroStat School 2026 — Rome</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Machine_Learning/Best_Practices';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Deep Learning and Regression Workshop" href="../DL_Intro_n_Regression/Intro_n_Regression.html" />
+    <link rel="prev" title="Time Series Analysis" href="../Time_Series/Time_Series.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — Rome</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — Rome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Intro/Intro.html">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Hypothesis_Testing/Hypothesis_Testing.html">Hypothesis Testing <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MLE/MLE.html">Maximum Likelihood Estimation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Intro_and_Clustering.html">Introduction to Machine Learning and Clustering <a class="tocSkip"></a></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_1.html">Introduction to Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_2.html">Applied Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">Basics of Markov Chain Monte Carlo <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Classification.html">Classification <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Gaussian_Processes/Gaussian_Processes.html">Gaussian Processes <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Time_Series/Time_Series.html">Time Series Analysis <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Machine Learning Practices and Protocols</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Intro_n_Regression/Intro_n_Regression.html">Introduction to Deep Learning and Regression Workshop</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../GPU_Parallelization/GPU_parallelization.html">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../NN_Explainability/NN_explainability.html">Neural Network Explainability <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_short.html">Introduction to Simulation Based Inference</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_exercise.html">Simulation Based Inference: Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Diffusion/Diffusion.html">Diffusion Models</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../AI_Agents/AI_Agents.html">Intro to AI Agents<a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroStat-Academy/astrostat-school-7/blob/main/./Machine_Learning/Best_Practices.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Machine_Learning/Best_Practices.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Machine Learning Practices and Protocols</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Machine Learning Practices and Protocols</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-black-box-problem">The Black Box problem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-ingredients-for-a-successful-ml-model">Basic ingredients for a successful ML model</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-pre-processing">Data Pre-processing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-visualization">Data visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-visualization-corner-plot-with-seaborn">Quick visualization: corner plot with seaborn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-feature-redundancy-with-covariance-matrix">Exploring feature redundancy with covariance matrix</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-high-dimensional-data">Visualizing high-dimensional data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-with-pca">Dimensionality Reduction with PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-pca">Kernel PCA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling-features">Scaling features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-do-you-need-to-normalize">When do you need to normalize?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-scalers">Types of scalers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-on-data-pre-processing">More on Data Pre-processing</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#protocols">Protocols</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-against-baseline">Comparing against baseline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-a-k-a-k-fold-cross-validation">Cross Validation (a.k.a. <span class="math notranslate nohighlight">\(k\)</span>-fold Cross Validation)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-remarks-on-cv">Final remarks on CV</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-pca">Exercise 1 - PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-eigenvectors">Exercise 2 - eigenvectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-cross-validation">Exercise 3 - Cross validation</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <fieldset style="padding:10px; border:1px solid #ccc; box-shadow:2px 2px 5px rgba(0,0,0,0.1);">
+<legend style="font-size: 10px; color:#555;">Credits</legend>
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 80px; vertical-align: top;">
+            <img src="https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/logo/logo_b_text_lowres.png" alt="AstroStat Academy logo" width="100">
+        </td>
+        <td style="vertical-align: center; padding-left: 15px; font-size: 10px; line-height: 1.2;">
+            This notebook contains original work by the authors unless stated otherwise.
+            Any external material is properly credited to its sources.<br>
+            References to papers, datasets, and software are acknowledged.
+            Original content is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0 (GNU GPLv3)</a>.
+        </td>
+    </tr>
+</table>
+</fieldset>
+<!-- Allow these <br> or it will look ugly once rendered on Jupyter Book. -->
+<br><section class="tex2jax_ignore mathjax_ignore" id="machine-learning-practices-and-protocols">
+<h1>Machine Learning Practices and Protocols<a class="headerlink" href="#machine-learning-practices-and-protocols" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p>or: “How I Learned to Stop Worrying and Love the Black Box”</p>
+</div></blockquote>
+<p>In this session we will focus on the fundamentals of the <strong>Machine Learning</strong> (<strong>ML</strong>) approach. We will:<br></p>
+<ul class="simple">
+<li><p>formalize some <strong>concepts</strong> encountered in previous lectures</p></li>
+<li><p>outline procedural <strong>protocols</strong></p></li>
+<li><p>highlight <strong>good practises</strong> and common <strong>mistakes</strong></p></li>
+</ul>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> The target is to understand <u>how to operate</u> “the black box” and make it transparent (<em>to us, not the referee :p</em>).</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>wget<span class="w"> </span>--quiet
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/colab/clone_and_cd_colab.py&quot;</span>
+<span class="n">colab</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">colab</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/styles/plot_style.py&quot;</span>
+<span class="n">style</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="the-black-box-problem">
+<h1>The Black Box problem<a class="headerlink" href="#the-black-box-problem" title="Link to this heading">#</a></h1>
+<p><em>One step back <span class="math notranslate nohighlight">\(-\)</span> what is <strong>Machine Learning</strong>?</em>
+<br></p>
+<blockquote>
+<div><p>A branch of <em>Artificial Intelligence</em> (<em>AI</em>) which regards algorithms that can <u>improve their performance through experience and data</u>.</p>
+</div></blockquote>
+<a class="reference internal image-reference" href="../_images/ML_AI.png"><img alt="../_images/ML_AI.png" src="../_images/ML_AI.png" style="width: 600px;" />
+</a>
+<table><tr>
+    <td width=600>
+        <center>
+            <br>
+            Figure 1.  The ML landscape.
+        </center>
+    </td>
+</tr></table>
+<p>ML can be best understood when compared to the <strong>traditional</strong> approach:</p>
+<a class="reference internal image-reference" href="../_images/traditional_vs_ML.png"><img alt="../_images/traditional_vs_ML.png" src="../_images/traditional_vs_ML.png" style="width: 600px;" />
+</a>
+<table><tr>
+    <td width=600>
+        <center>
+            <br>
+            Figure 2.  The traditional approach (<i>top</i>) compared to the ML one (<i>bottom</i>).
+            <br>
+            (From <a href="https://github.com/ageron/handson-ml2">Gerone, A. "<i>Hands-on Machine Learning with Scikit-Learn, Keras and TensorFlow</i>"</a>)
+        </center>
+    </td>
+</tr></table>
+<p>Differently from the hard-coded approaches followed by traditional modelling, ML proposes a <strong>train-application</strong> scheme.</p>
+<p>The idea is that:</p>
+<ul class="simple">
+<li><p>a machine (<em>a computer</em>) can learn the <strong>parameters</strong> of an arbitrarily complex model by <strong>training</strong> over some input <strong>data</strong></p></li>
+<li><p>the “<strong>Analyze errors</strong>” task is performed by the machine itself</p></li>
+<li><p>once the model is trained, the machine can predict the response for previously <strong>unseen data</strong>.</p></li>
+</ul>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>Hence, the <strong>Black Box problem</strong> arises:</p>
+<blockquote>
+<div><p><em>“We will <u>always</u> get an output, but … is that correct?”</em></p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> In order to evaluate our “box” we need to have:</p>
+<ul class="simple">
+<li><p>complete control over <strong>inputs</strong> and <strong>outputs</strong></p></li>
+<li><p>a solid <strong>assessement</strong> protocol</p></li>
+</ul>
+<p><em>This brings us to …</em></p>
+<section id="basic-ingredients-for-a-successful-ml-model">
+<h2>Basic ingredients for a successful ML model<a class="headerlink" href="#basic-ingredients-for-a-successful-ml-model" title="Link to this heading">#</a></h2>
+<ol class="arabic">
+<li><p><strong>Metrics of performance (<em>previous notebooks</em>)</strong></p>
+<blockquote>
+<div><p><em>“Wait <span class="math notranslate nohighlight">\(-\)</span> is this a bug or a feature?”</em></p>
+</div></blockquote>
+</li>
+<li><p><strong>Know your data</strong><br></p>
+<blockquote>
+<div><p><em>“garbage in, garbage out”</em><br>
+<em>~literally any wannabe data analyst on youtube</em></p>
+</div></blockquote>
+</li>
+<li><p><strong>Protocols: training, validation, and test sets</strong></p>
+<blockquote>
+<div><p><em>“Divide [train de probatio] et impera”</em></p>
+</div></blockquote>
+</li>
+</ol>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="data-pre-processing">
+<h1>Data Pre-processing<a class="headerlink" href="#data-pre-processing" title="Link to this heading">#</a></h1>
+<section id="data-visualization">
+<h2>Data visualization<a class="headerlink" href="#data-visualization" title="Link to this heading">#</a></h2>
+<p>When possible, let’s <strong>see</strong> the data (or at least their <strong>statistical properties</strong>).</p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>We will generate and observe some <strong>mock data</strong> with <code class="docutils literal notranslate"><span class="pre">sklearn.datasets.make_classification</span></code>:</p>
+<ul class="simple">
+<li><p>very useful tool to <strong>quickly test</strong> your algos!</p></li>
+<li><p>can set <strong>properties</strong> as the number of <em>samples</em> and <em>features</em>, of the <em>informative</em> and <em>redundant</em> features, etc.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prettytable</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrettyTable</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                           <span class="n">n_redundant</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_repeated</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                           <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                           <span class="n">class_sep</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">hypercube</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                           <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">()</span>
+<span class="n">table</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;Data shape&#39;</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">y</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+<span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="mi">1</span><span class="p">])]</span>
+
+<span class="c1"># Converting data to dataframe:</span>
+<span class="n">df_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">[:,</span><span class="kc">None</span><span class="p">],</span><span class="mi">1</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+<span class="c1"># Displaying first 5 rows:</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="quick-visualization-corner-plot-with-seaborn">
+<h3>Quick visualization: corner plot with seaborn<a class="headerlink" href="#quick-visualization-corner-plot-with-seaborn" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">Seaborn</span></code> is a powerful tool for quick visualizations.</p>
+<ul class="simple">
+<li><p>Deals <strong>automatically</strong> with plot limits etc.</p></li>
+<li><p><strong>Wide range</strong> of pre-set visualizations: <em>corner plots</em>, <em>violin plots</em>, etc.</p></li>
+<li><p>Needs <code class="docutils literal notranslate"><span class="pre">pandas.DataFrames</span></code> as inputs</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Corner plot:</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this image, which features are:</p>
+<ul class="simple">
+<li><p>redundant?</p></li>
+<li><p>informative?</p></li>
+</ul>
+<div class="alert alert-danger alertdanger" role="alert" style="border-radius: 8px; padding: 10px;">
+<details>
+<p><b><summary>[Spoiler]</summary></b></p>
+<p>We just need X<span class="math notranslate nohighlight">\(_{1}\)</span> or X<span class="math notranslate nohighlight">\(_{2}\)</span> for the classification of these data!</p>
+</details>
+</div>    
+<p><em>Sounds familiar?</em></p>
+<p>We have already seen a similar case in the application of the Clustering algorithm. We used two features that could separate (not optimally though…) the sources between the different OB classes of hot stars.</p>
+<a class="reference internal image-reference" href="../_images/EQW.png"><img alt="../_images/EQW.png" src="../_images/EQW.png" style="width: 600px;" />
+</a>
+</section>
+<section id="exploring-feature-redundancy-with-covariance-matrix">
+<h3>Exploring feature redundancy with covariance matrix<a class="headerlink" href="#exploring-feature-redundancy-with-covariance-matrix" title="Link to this heading">#</a></h3>
+<p>The <strong>covariance</strong> is defined as:</p>
+<div class="math notranslate nohighlight">
+\[ Cov(x_1, x_2) = \frac{1}{n-1} \sum_{i=1}^{n} (x_1^i - \overline{x}_1)(x_2^i - \overline{x}_2) \]</div>
+<p>This is for 2 features <span class="math notranslate nohighlight">\(-\)</span> when we have <span class="math notranslate nohighlight">\(d\)</span> features:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X = \begin{pmatrix}
+x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1d} \\
+x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2d} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{nd}
+\end{pmatrix}
+\end{split}\]</div>
+<p>… the <strong>covariance matrix</strong> can be written as:</p>
+<div class="math notranslate nohighlight">
+\[ C_X = {1 \over (n-1)} X^TX \]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+=
+\begin{array}{c}
+\begin{bmatrix}
+    x_{11} &amp; x_{21} &amp; \cdots &amp; x_{n1} \\
+    x_{12} &amp; x_{22} &amp; \cdots &amp; x_{n2} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    x_{1d} &amp; x_{2d} &amp; \cdots &amp; x_{nd}
+\end{bmatrix}
+\begin{bmatrix}
+    x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1d} \\
+    x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2d} \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{nd}
+\end{bmatrix}
+=
+\begin{bmatrix}
+    \text{Var}(x_1)      &amp; \text{Cov}(x_1, x_2) &amp; \cdots &amp; \text{Cov}(x_1, x_d) \\
+    \text{Cov}(x_2, x_1) &amp; \text{Var}(x_2)      &amp; \cdots &amp; \text{Cov}(x_2, x_d) \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    \text{Cov}(x_d, x_1) &amp; \cdots        &amp;         &amp; \text{Var}(x_d)
+\end{bmatrix} \\
+\text{d} \times \text{n)} \cdot \text{n} \times \text{d} = \text{d} \times \text{d}
+\end{array}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the covariance matrix:</span>
+<span class="n">cov_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">df_data</span><span class="p">,</span> <span class="n">rowvar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Plot the covariance matrix:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">cov_matrix</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;magma&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Covariance Matrix&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">df_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">df_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">df_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">df_data</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> Notice how X1 and X2 are co-varing !</p>
+<p><u><strong>Take-home points</strong></u></p>
+<ul class="simple">
+<li><p>Only explains <strong>linear</strong> dependecies</p></li>
+<li><p>Diagonal matrix <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> [linearly-] <strong>independent features</strong></p></li>
+</ul>
+</section>
+</section>
+<section id="visualizing-high-dimensional-data">
+<h2>Visualizing high-dimensional data<a class="headerlink" href="#visualizing-high-dimensional-data" title="Link to this heading">#</a></h2>
+<p>As you can imagine, <em>visualizing multidimensonal data</em> / <em>feature selection</em> becomes quickly <strong>untractable</strong> as the number of features grows.</p>
+<blockquote>
+<div><p><em>How can we get a hint of, e.g. <strong>outliers</strong> and source <strong>clustering</strong>?</em></p>
+</div></blockquote>
+<p>We can use tools that “summarize” the features into a lower-dimensional space (<strong>embedding</strong>)<br>
+  <span class="math notranslate nohighlight">\(\rightarrow\)</span> <em>e.g., reduce to 2D or 3D, to directly visualize the data.</em><br></p>
+<p>These techniques belong to the category of “<strong>Dimensionality Reduction</strong>”.</p>
+<section id="dimensionality-reduction-with-pca">
+<h3>Dimensionality Reduction with PCA<a class="headerlink" href="#dimensionality-reduction-with-pca" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(\hspace{1.3cm}\)</span> <strong>(a.k.a. Principal Component Analysis)</strong></p>
+<p>Let’s build an “easy” dataset with lots of features …</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prettytable</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrettyTable</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">900</span><span class="p">,</span>
+                           <span class="n">n_redundant</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">n_repeated</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                           <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
+                           <span class="n">class_sep</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span> <span class="n">hypercube</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                           <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># NOTE: &lt;class_sep&gt; sets how far apart are the clusters: larger values produce</span>
+<span class="c1">#       easier sets, in the sense that they are more easily separable.</span>
+
+<span class="n">classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are </span><span class="si">%s</span><span class="s1"> classes&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">))</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">()</span>
+<span class="n">table</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;Data shape&#39;</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">y</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+
+<span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;X&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="mi">1</span><span class="p">])]</span>
+
+<span class="c1"># Converting data to dataframe:</span>
+<span class="n">df_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">[:,</span><span class="kc">None</span><span class="p">],</span><span class="mi">1</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+<span class="c1"># Displaying first 5 rows:</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><u><strong>What is PCA?</strong></u></p>
+<p><strong><em>Principal Component Analysis</em></strong> (<strong>PCA</strong>) is an unsupervised method which finds the directions (<strong>Principal Components; PCs</strong>) which maximize the variance of the data.</p>
+<a class="reference internal image-reference" href="../_images/PCA.png"><img alt="../_images/PCA.png" src="../_images/PCA.png" style="width: 800px;" />
+</a>
+<table><tr>
+    <td width=800>
+        <center>
+            <br>
+            Figure 3.  Detection of Principal Components (<i>b</i>) and reduction of dimensionality from 3D to 2D  (<i>c</i>).
+            <br>
+            (From <a href="https://www.davidzeleny.net/anadat-r/doku.php/en:pca">here</a>)
+        </center>
+    </td>
+</tr></table>
+<p><u><strong>Algorithm</strong></u></p>
+<p>The algorithm essentially works by finding a linear transformation which <strong>diagonalizes</strong> at the <strong>covariance matrix</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}    
+\begin{bmatrix}
+    \text{Var}(x_1)      &amp; \text{Cov}(x_1, x_2) &amp; \cdots &amp; \text{Cov}(x_1, x_d) \\
+    \text{Cov}(x_2, x_1) &amp; \text{Var}(x_2)      &amp; \cdots &amp; \text{Cov}(x_2, x_d) \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    \text{Cov}(x_d, x_1) &amp; \cdots        &amp;         &amp; \text{Var}(x_d)\\
+\end{bmatrix}
+\Rightarrow
+\begin{bmatrix}
+    \text{Var}(PC_1)      &amp; 0 &amp; \cdots &amp; 0 \\
+    0  &amp; \text{Var}(PC_2)      &amp; \cdots &amp; 0 \\
+    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+    0 &amp; \cdots        &amp;         &amp; \text{Var}(PC_d)\\
+\end{bmatrix}
+\end{split}\]</div>
+<a class="reference internal image-reference" href="../_images/Woosh_Cat.png"><img alt="../_images/Woosh_Cat.png" src="../_images/Woosh_Cat.png" style="width: 150px;" />
+</a>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> this automatically yields the <strong>Principal Components</strong></p>
+<p><u>NOTE:</u> It turns out that the covariance matrix eigenvalues and eigenvectors represent:</p>
+<blockquote>
+<div><p><strong>eigenvectors</strong> <span class="math notranslate nohighlight">\(\leftrightarrow\)</span> unit array giving the direction of the PC</p>
+<p><strong>eigenvalues</strong> <span class="math notranslate nohighlight">\(~\leftrightarrow\)</span> lenght of the PC vector == explained variance along that PC</p>
+</div></blockquote>
+<p><span class="math notranslate nohighlight">\(\triangleright\)</span> <em>Consult <a class="reference external" href="https://arxiv.org/abs/1404.1100">Shlens, 2014</a> for the derivation of the PCs.</em></p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p><u>IMPORTANT:</u> We <u>must</u> first normalize the features or else the ones with the largest <em>dynamic range</em> will dominate (<em>i.e., artificially display the largest variace</em>)!<br></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="n">X_n</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Good, now we can apply the PCA decomposition:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="c1"># ^This is here to show how fast PCA is!</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">()</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_n</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_n</span><span class="p">)</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">NOTE: The &quot;embedding&quot; is the new feature matrix, i.e. the original features</span>
+<span class="sd">      once projected on the orthogonal base composed by the PCs.</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">;</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">()</span>
+<span class="n">table</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;Embedding shape&#39;</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Dimensions&#39;</span><span class="p">]</span>
+<span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">embedding</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><u>NOTE 1:</u> The <em>embedding</em> has dimensions of:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>(n_samples, n_PCs)
+</pre></div>
+</div>
+<p><u>BUT:</u> You <em>cannot</em> have more PCs than original features or samples (see e.g. <a class="reference external" href="https://arxiv.org/abs/1404.1100">Shlens, 2014</a>):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>n_PCs == min(n_samples, n_features)
+</pre></div>
+</div>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>Let’s <strong>display</strong> the first 2 dimensions of our embedding:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">preprocessing</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_pca</span><span class="p">(</span><span class="n">pca</span><span class="p">,</span> <span class="n">embedding</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">PC_idxs</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">xlims</span><span class="o">=</span><span class="p">[],</span> <span class="n">ylims</span><span class="o">=</span><span class="p">[]):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Plots the first 2 Principal Components (PCs) projections, along with PC</span>
+<span class="sd">    importance.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pca : sklearn.decomposition.PCA</span>
+<span class="sd">        A trained PCA object.</span>
+<span class="sd">    embedding  : np.array</span>
+<span class="sd">        The data embeddings.</span>
+<span class="sd">    y : np.array (optional)</span>
+<span class="sd">        The embedding labels.</span>
+<span class="sd">    PCs_n : list (optional)</span>
+<span class="sd">        The indexes of the two PCs to be plotted.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">fontsize_first</span>  <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">fontsize_second</span> <span class="o">=</span> <span class="mi">12</span>
+
+    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">embedding</span><span class="p">))</span>
+
+    <span class="c1"># Checking whether we are using linear PCA, to plot explained variance:</span>
+    <span class="k">if</span> <span class="s1">&#39;kernel&#39;</span> <span class="ow">in</span> <span class="n">pca</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">kernel</span>  <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">kernel</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="kc">None</span>
+        
+    <span class="c1"># Encoding labels in case they are categorical:</span>
+    <span class="n">le</span> <span class="o">=</span> <span class="n">preprocessing</span><span class="o">.</span><span class="n">LabelEncoder</span><span class="p">()</span>
+    <span class="n">y_e</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    
+    <span class="n">classes</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">classes_</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Data embedded via PCA&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize_first</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;PC&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">PC_idxs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize_second</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;PC&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">PC_idxs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize_second</span><span class="p">)</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">embedding</span><span class="p">[:,</span> <span class="n">PC_idxs</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">embedding</span><span class="p">[:,</span> <span class="n">PC_idxs</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+                          <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">y_e</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;tab20b&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">boundaries</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">)))</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">set_ticklabels</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">xlims</span><span class="p">:</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">xlims</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">ylims</span><span class="p">:</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ylims</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">kernel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax2</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;PC importance&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize_first</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;PC index&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize_second</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Explained variance [%]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize_second</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Explained variance (cumulative) [%]&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize_second</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">)</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)),</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>       
+        <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;crimson&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And here is how our 100-dimensional data look like when embedded in 2D:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_pca</span><span class="p">(</span><span class="n">pca</span><span class="p">,</span> <span class="n">embedding</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The beauty is <span class="math notranslate nohighlight">\(-\)</span> the PCs are <strong>sorted</strong> by importance!</p>
+<p>We can look at the Explained variance and decide how many components to keep!<br>
+  <em>E.g. the first <strong>k</strong> components that together explain 50% of the variance</em></p>
+<p><u>IMPORTANT:</u> <strong>We didn’t use the labels</strong> to perform PCA <span class="math notranslate nohighlight">\(-\)</span> those were added later, just for the visualization!</p>
+<p><u><strong>Physical intuition</strong></u></p>
+<p>Imagine you have a system which has an <em>intrinsical</em> direction of movement:</p>
+<a class="reference internal image-reference" href="../_images/PCA_intuition.png"><img alt="../_images/PCA_intuition.png" src="../_images/PCA_intuition.png" style="width: 500px;" />
+</a>
+<table><tr>
+    <td width=500>
+        <center>
+            <br>
+        Figure 4. A poorly-chosen set of features which could benefit from PCA to find the underlying direction of motion.
+            <br>
+            (From <a href="https://arxiv.org/pdf/1404.1100.pdf">here</a>)        </center>
+    </td>
+</tr></table>
+<p>The X, Y, and Z variables <strong>are correlated</strong> by the motion along the spring axis.</p>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> PCA might help us bypass the issue!</p>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Exercise 1: Run your own PCA</strong></font></p>
+<p><strong>Objective</strong>: Let’s assume we want to have a snapshot of our data, see if the data clusters in any way.</p>
+<p><strong>Dataset</strong>: We will use a dataset of galaxy images, the <a class="reference external" href="https://astronn.readthedocs.io/en/latest/galaxy10.html">Galaxy10 DECals Dataset</a>, nicely packaged into a dataframe.</p>
+<p>Data type: images (21785 images)</p>
+<p>Classes<br>
+  ├── Class 0 (3461 images): Disk, Face-on, No Spiral<br>
+  ├── Class 1 (6997 images): Smooth, Completely round<br>
+  ├── Class 2 (6292 images): Smooth, in-between round<br>
+  ├── Class 3 (394 images): Smooth, Cigar shaped<br>
+  ├── Class 4 (1534 images): Disk, Edge-on, Rounded Bulge<br>
+  ├── Class 5 (17 images): Disk, Edge-on, Boxy Bulge<br>
+  ├── Class 6 (589 images): Disk, Edge-on, No Bulge<br>
+  ├── Class 7 (1121 images): Disk, Face-on, Tight Spiral<br>
+  ├── Class 8 (906 images): Disk, Face-on, Medium Spiral<br>
+  └── Class 9 (519 images): Disk, Face-on, Loose Spiral<br></p>
+<p><strong>Task</strong>: You will have to apply PCA to the dataset, project into the first two PCs, and identify the clusters (by eye).</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">ssl</span><span class="o">,</span><span class="w"> </span><span class="nn">wget</span><span class="o">,</span><span class="w"> </span><span class="nn">threading</span><span class="o">,</span><span class="w"> </span><span class="nn">time</span><span class="p">;</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">clear_output</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="n">script_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">Path</span><span class="p">()</span><span class="o">.</span><span class="n">absolute</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Current path: </span><span class="si">%s</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">script_path</span><span class="p">)</span>
+
+<span class="n">path_data</span> <span class="o">=</span> <span class="n">script_path</span> <span class="o">+</span> <span class="s1">&#39;/data&#39;</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">path_data</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Downloading if dataset not found:</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path_data</span><span class="o">+</span><span class="s2">&quot;/Galaxy10.h5&quot;</span><span class="p">):</span>
+    <span class="n">ssl</span><span class="o">.</span><span class="n">_create_default_https_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">_create_unverified_context</span>
+    <span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">spinner</span><span class="p">():</span> 
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">chars</span> <span class="o">=</span> <span class="s2">&quot;⠁⠂⠄⡀⢀⠠⠐⠈&quot;</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">stop</span><span class="p">:</span>
+            <span class="n">clear_output</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Downloading ~200 MB data [might take a few mins ...] </span><span class="si">{</span><span class="n">chars</span><span class="p">[</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">chars</span><span class="p">)]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">);</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">spinner</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">wget</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">&quot;http://astro.utoronto.ca/~bovy/Galaxy10/Galaxy10.h5&quot;</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">path_data</span><span class="p">)</span>
+    <span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span><span class="p">;</span> <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span> <span class="n">clear_output</span><span class="p">();</span> <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done!</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Loading catalogue:</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">prettytable</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrettyTable</span>
+
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path_data</span><span class="o">+</span><span class="s2">&quot;/Galaxy10.h5&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">F</span><span class="p">:</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="s2">&quot;images&quot;</span><span class="p">][:]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="s2">&quot;ans&quot;</span><span class="p">][:]</span>
+    
+<span class="c1"># Dropping class 5, which only has 17 galaxies:</span>
+<span class="n">idxs_valid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labels</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">images</span><span class="p">[</span><span class="n">idxs_valid</span><span class="p">]</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">idxs_valid</span><span class="p">]</span>
+
+<span class="c1"># In case we wanted to keep only 1 color:</span>
+<span class="c1">#images = images[:,:,:,0]</span>
+<span class="c1">#images = images[..., np.newaxis]</span>
+
+<span class="n">classes</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;There are </span><span class="si">%s</span><span class="s1"> classes&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Image array shape: </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">images</span><span class="p">)))</span>
+
+<span class="c1"># Displaying one image for each class:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Galaxy class examples&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">class_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">classes</span><span class="p">):</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">labels</span> <span class="o">==</span> <span class="n">class_</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># index of first galaxy in the list, for class &lt;classs&gt;</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Class: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">class_</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">xticks</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Grabbing image properties:</span>
+<span class="n">n_y</span><span class="p">,</span> <span class="n">n_x</span><span class="p">,</span> <span class="n">n_colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">images</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">images</span><span class="p">)[</span><span class="mi">2</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">images</span><span class="p">)[</span><span class="mi">3</span><span class="p">]</span>
+<span class="c1"># NOTE: Image dimensions are always transposed, when represented as matrices!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Original shape of the images: (n_x = </span><span class="si">%s</span><span class="s1">, n_y = </span><span class="si">%s</span><span class="s1">, n_colors = </span><span class="si">%s</span><span class="s1">)</span><span class="se">\n\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+      <span class="p">(</span><span class="n">n_x</span><span class="p">,</span> <span class="n">n_y</span><span class="p">,</span> <span class="n">n_colors</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s “<strong>flatten</strong>” the dataset, so we can use it in <code class="docutils literal notranslate"><span class="pre">sklearn</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1 row == 1 image
+1 pixel == 1 feature
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/Flattened_Image.png"><img alt="../_images/Flattened_Image.png" src="../_images/Flattened_Image.png" style="width: 500px;" />
+</a>
+<table><tr>
+    <td width=500>
+        <center>
+            <br>
+            Figure 5. Re-arrangement of pixels into features to "<i>flatten</i>" an image.
+        </center>
+    </td>
+</tr></table>    <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="c1"># Flattening images to 1D arrays (and casting to float):</span>
+<span class="n">X_</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">reshape</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">images</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">images</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">images</span><span class="p">)[</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">X_</span> <span class="o">=</span> <span class="n">X_</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="c1"># TRICK: These are RGB images (integer values 0--255): we can convert to a</span>
+<span class="c1">#        low-encoding float (32 instead of e.g. 64 bits) without losing information.</span>
+
+<span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;pixel&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X_</span><span class="p">)[</span><span class="mi">1</span><span class="p">])]</span>
+
+<span class="c1"># Converting data to dataframe:</span>
+<span class="n">df_data_orig</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">X_</span><span class="p">,</span> <span class="n">labels</span><span class="p">[:,</span><span class="kc">None</span><span class="p">],</span><span class="mi">1</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">feature_names</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">])</span>
+
+<span class="c1"># Balancing classes using pandas:</span>
+<span class="c1">#</span>
+<span class="c1"># For each class, keeping as many objects as for the class with min number</span>
+<span class="c1"># of objects ...</span>
+<span class="n">min_size</span> <span class="o">=</span> <span class="n">df_data_orig</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">df_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">min_size</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">df_data_orig</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)],</span>
+    <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Re-extracting the matrices after rebalancing ...</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="n">feature_names</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Normalizing the total flux of each image to 1:</span>
+<span class="c1"># (to prioritize morphological differences over luminosity differences)</span>
+<span class="c1">#X = X / X.sum(axis=1, keepdims=1)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Each class contains ~</span><span class="si">%s</span><span class="s1"> galaxies&#39;</span> <span class="o">%</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">classes</span><span class="p">))))</span>
+
+<span class="c1"># Keeping only a [random] subset of the data to speed up calculations:</span>
+<span class="n">n_samples_keep</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># max: len(X)</span>
+<span class="n">idxs_keep</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="n">n_samples_keep</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">idxs_keep</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">idxs_keep</span><span class="p">]</span>
+
+<span class="c1"># Displaying first 5 rows:</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">PrettyTable</span><span class="p">()</span>
+<span class="n">table</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;Data shape&#39;</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<span class="n">table</span><span class="o">.</span><span class="n">add_row</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">y</span><span class="p">)])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p>Now the data are ready for PCA decomposition!</p>
+<p><u>NOTE:</u> <code class="docutils literal notranslate"><span class="pre">X</span></code> are the data you have to run PCA on, <code class="docutils literal notranslate"><span class="pre">y</span></code> only contains the labels!
+<br><br></p>
+<p><strong>Hint:</strong> In summary, you have to:</p>
+<ol class="arabic simple">
+<li><p>normalize the data</p></li>
+<li><p>run the PCA algorithm</p></li>
+<li><p>plot the projections</p></li>
+</ol>
+<p>Nobody can stop you from copy-pasting the code from above, *<em>wink</em> *<em>wink</em></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># write your code here...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution at the end of the notebook]</b></p>
+</div><p>Mh, not a perfect class separation. If only it existed a <strong><em>non</em>-linear</strong> PCA …</p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;"></section>
+<section id="kernel-pca">
+<h3>Kernel PCA<a class="headerlink" href="#kernel-pca" title="Link to this heading">#</a></h3>
+<p>PCA can use the <strong>kernel trick</strong> (just like in <code class="docutils literal notranslate"><span class="pre">SVM</span></code>)<br>
+  <span class="math notranslate nohighlight">\(\rightarrow\)</span> <strong>Kernelization</strong> applies non-linear transformations to the data, then performs PCA in the transformed space.</p>
+<div style="border-left: 4px solid #2196F3; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #f0f8ff; color: #1a1a1a;">
+<details>
+<p><b><summary>How? <span class="math notranslate nohighlight">\(-\)</span> <u>Intuition</u></summary></b></p>
+<p>The covariance matrix contains the cross-multiplications of the data vectors between themselves (<strong>dot products</strong>):</p>
+<div class="math notranslate nohighlight">
+\[ C_X = {1 \over n} X^TX \]</div>
+<p>Now, you can imagine that if use a trasformation <span class="math notranslate nohighlight">\(\Phi(.)\)</span> to trasform the data to a new “<strong>feature space</strong>”:</p>
+<div class="math notranslate nohighlight">
+\[ X \rightarrow \Phi(X)\]</div>
+<p>… in such feature space the covariance matrix will be composed of dot products of the type:</p>
+<div class="math notranslate nohighlight">
+\[~\langle \Phi(X_i), \Phi(X_j)~\rangle\]</div>
+<p>where <span class="math notranslate nohighlight">\(i\)</span>, <span class="math notranslate nohighlight">\(j\)</span> are feature vectors corresponding to different samples.</p>
+<p>The kernel trick allows us to express this in terms of a function applied to the original features:</p>
+<div class="math notranslate nohighlight">
+\[~\langle \Phi(X_i), \Phi(X_j)~\rangle = K({X_i, X_j}) \]</div>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p><u>NOTE:</u></p>
+<p>We <u>don’t</u> define <span class="math notranslate nohighlight">\(\Phi(.)\)</span> and <em>then</em> find the associated <span class="math notranslate nohighlight">\(K(.,.)\)</span>.</p>
+<p>On the contrary, we adopt a <span class="math notranslate nohighlight">\(K(.,.)\)</span>, and <em>assume</em> there exists an associated <span class="math notranslate nohighlight">\(\Phi(.)\)</span> (<em>which we never use anyways</em>) <span class="math notranslate nohighlight">\(-\)</span> see <a class="reference external" href="https://arxiv.org/pdf/2106.08443">Mercer’s theorem</a>.</p>
+<p><span class="math notranslate nohighlight">\(\rightarrow\)</span> in principle, <span class="math notranslate nohighlight">\(\Phi(X)\)</span> may belong to <span class="math notranslate nohighlight">\(\mathbb{R}^\infty\)</span></p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+</details>
+</div>
+<p>E.g., <strong>R</strong>adial <strong>B</strong>asis <strong>F</strong>unction (<strong>rbf</strong>) kernel:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[K({X_i, X_j}) = exp\big({|| X_i - X_j ||^2 \over \gamma^2}\big)\]</div>
+</div></blockquote>
+<p>E.g., <strong>Cosine</strong> kernel:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[K({X_i, X_j}) = { X_i \cdot~ X_j \over ||X_i||~||X_j||}\]</div>
+</div></blockquote>
+<p><u>SUMMARY:</u> Real data are <strong>tough</strong>, usually we cannot easily spot clusters …</p>
+<a class="reference internal image-reference" href="../_images/MITM.jpg"><img alt="../_images/MITM.jpg" src="../_images/MITM.jpg" style="width: 640px;" />
+</a>
+<p><u>IMPORTANT:</u> The result is <em>strongly dependent</em> on the <strong>hyperparameters</strong>!
+(<em>e.g., try with <code class="docutils literal notranslate"><span class="pre">kernel</span></code>=’poly’ and vary <code class="docutils literal notranslate"><span class="pre">degree</span></code></em>)<br>
+       <span class="math notranslate nohighlight">\(\rightarrow\)</span> In kernel PCA, the embedding space is <em>not</em> interpretable.</p>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Exercise 2: Eigen-galaxies</strong></font></p>
+<p><strong>Objective</strong>: Let’s now try and <u>visualize the Principal Components</u>!</p>
+<p><strong>Dataset</strong>: The <a class="reference external" href="https://astronn.readthedocs.io/en/latest/galaxy10.html">Galaxy10 DECals Dataset</a>.</p>
+<p>First of all, let’s perform the <i>linear</i> PCA decomposition as usual …</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_n</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">()</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_n</span><span class="p">)</span>
+
+<span class="n">plot_pca</span><span class="p">(</span><span class="n">pca</span><span class="p">,</span> <span class="n">embedding</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p>The vector representing the <span class="math notranslate nohighlight">\(i\)</span>-th Principal Component (<strong>PC<span class="math notranslate nohighlight">\(_i\)</span></strong>) is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{PC_i} = \underbrace{\mathrm{eigenvector_i}}_{\text{direction}} \times \underbrace{\mathrm{eigenvalue_i}}_{\text{length}}
+\]</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> PCA stores the <strong>eigenvectors</strong> (== <em>unit array giving the direction of the PC</em>) in:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">pca.components_</span></code></p>
+</div></blockquote>
+<p>and the <strong>eigenvalues</strong> (== <em>lenght of the PC vector</em>) in:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">pca.explained_variance_</span></code></p>
+</div></blockquote>
+<p><strong>Part 1:</strong></p>
+<p><strong>Task 1</strong>: Each entry in <code class="docutils literal notranslate"><span class="pre">pca.components_</span></code> is 1 eigenvector. Try to print one, just to see its content.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># write your code here...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution at the end of the notebook]</b></p>
+</div><div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Part 2</strong>:</p>
+<p>Let’s now plot the first 10 PCs.</p>
+<p>Yeah, we call them ‘vectors’, but they are <em>actually</em> <strong>images</strong>, sooooo … we shall reshape them from 1D to (<code class="docutils literal notranslate"><span class="pre">n_x</span></code>, <code class="docutils literal notranslate"><span class="pre">n_y</span></code>, <code class="docutils literal notranslate"><span class="pre">n_colors</span></code>), to plot them right.</p>
+<p><strong>Task 2</strong>: Define PC<span class="math notranslate nohighlight">\(_i\)</span> and resize it appropriately, from array to image.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># write your code here...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution at the end of the notebook]</b></p>
+</div><p><span class="math notranslate nohighlight">\(\rightarrow\)</span> We can think of PCs as the <em>basic</em> “<strong>ingredients</strong>” composing a galaxy.<br>
+<em>  - PC1 maps the intensity scale</em><br>
+<em>  - subsequent PCs map finer and finer morphological details</em></p>
+<p>The “<strong>recipe</strong>” to obtain galaxy <em>XYZ</em> is to mix the “<strong>ingredients</strong>” (the PCs) using the right “<strong>dosage</strong>” (the embedding values).</p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>More generally, PCA <strong>decomposition</strong> allows to break down data along their <em>significant</em> components.</p>
+</section>
+</section>
+<section id="scaling-features">
+<h2>Scaling features<a class="headerlink" href="#scaling-features" title="Link to this heading">#</a></h2>
+<p><u>NOTE</u>: “Scaling” shall be interpreted as a generic form of <strong>normalization</strong>.</p>
+<section id="when-do-you-need-to-normalize">
+<h3>When do you need to normalize?<a class="headerlink" href="#when-do-you-need-to-normalize" title="Link to this heading">#</a></h3>
+<ul>
+<li><p>Normalizing is <u>fundamental</u> when adopting algorithms that make use of <strong>distance</strong>.</p>
+<p><em>Example: <strong>SVM</strong>, <strong><span class="math notranslate nohighlight">\(k\)</span>NN</strong>, or some <strong>hierarchical clustering</strong></em><br>
+     <span class="math notranslate nohighlight">\(k\)</span>NN Measures the distance between a <em>test</em> point <span class="math notranslate nohighlight">\(\hat{X}\)</span> and all the <em>training</em> points <span class="math notranslate nohighlight">\(X_i\)</span>, i.e., <span class="math notranslate nohighlight">\(|| \hat{X} -  {X_i} ||^2\)</span>
+<br></p>
+</li>
+<li><p>Normalizing is <u>fundamental</u> with algorithms that <strong>compare</strong> the contribution of <strong>features</strong>.</p>
+<p><em>Example: <strong>PCA</strong></em><br>
+     PCA requires to scale and center features around 0
+<br></p>
+</li>
+<li><p>Normalizing <u>is not necessary</u> with algorithms which look at each feature <strong>independently</strong></p>
+<p><em>Example: <strong>Random Forests</strong></em><br></p>
+</li>
+</ul>
+<br>
+<p>… However, normalizing features is usually a good habit because:</p>
+<ul>
+<li><p>Scaling <u>helps</u> convergence when features have very different <strong>dynamic ranges</strong>.</p>
+<p><em>Example: algorithms using <strong>gradient descent</strong> (including <strong>neural networks</strong>)</em><br></p>
+</li>
+</ul>
+<p><u><strong>Example with</strong> <i>k</i><strong>NN classifier</strong></u></p>
+<p>The <strong><span class="math notranslate nohighlight">\(k\)</span>NN classifier</strong> is arguably the simplest ML algorithm:</p>
+<blockquote>
+<div><p><strong>Train</strong> <span class="math notranslate nohighlight">\(\leftarrow\)</span> <em>Store all the data (or relative distances)</em></p>
+<p><strong>Predict</strong> <span class="math notranslate nohighlight">\(\leftarrow\)</span> <em>Return majority label of the closest <span class="math notranslate nohighlight">\(k\)</span> instances</em></p>
+</div></blockquote>
+<a class="reference internal image-reference" href="../_images/kNN_decision_function_animation.gif"><img alt="../_images/kNN_decision_function_animation.gif" src="../_images/kNN_decision_function_animation.gif" style="width: 1200px;" />
+</a>
+<table><tr>
+    <td width=1200>
+        <center>
+            <br>
+            Figure 6. Application of a <i>k</i>NN classifier considering <i>k</i>=3 neighbors.
+            <i>Left -</i> Given the <b>test point</b> "<i>? </i>", the algorithm seeks the 3 closest points in the train set, and adopts the majority vote to classify it as "class red".
+            <i>Right -</i> By iteratively repeating the prediction over the whole feature space (<i>X1</i>, <i>X2</i> ), one can depict the "<b>decision function</b>".
+            <br><br>
+            (Image by P. Bonfini, Astrostatistics in Crete, free reproduction)
+        </center>
+    </td>
+</tr></table>
+<p>Let’s try to see what happens to the accuracy when we try a <span class="math notranslate nohighlight">\(k\)</span>NN classifier <strong>with</strong> and <strong>without</strong> normalizing.</p>
+<blockquote>
+<div><p>3 classes, 2 features.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_classification</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.neighbors</span><span class="w"> </span><span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.inspection</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionBoundaryDisplay</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">ListedColormap</span>
+
+<span class="c1"># Let&#39;s create the usual mock data:</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_classification</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_classes</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_informative</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_redundant</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                           <span class="n">n_clusters_per_class</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">class_sep</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">flip_y</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                           <span class="n">shift</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="c1"># NOTE1: We set &quot;scale&quot; to &quot;None&quot; to generate randomly scaled features!</span>
+<span class="c1"># NOTE2: flip_y=0.5 makes the classification more difficult!</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> \
+    <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s fit directly:</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">()</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy on non-normalized data: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+
+<span class="c1"># Now, let&#39;s normalize with respect to the max of each feature, and re-fit:</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+<span class="n">X_train_n</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_n</span>  <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">clf_n</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">clf_n</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_n</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accuracy on normalized data: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">clf_n</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test_n</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+
+<span class="c1"># Plotting decision boundaries:</span>
+<span class="c1"># See:</span>
+<span class="c1">#    https://scikit-learn.org/stable/auto_examples/neighbors/plot_classification.html#sphx-glr-auto-examples-neighbors-plot-classification-py</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">cmap_light</span> <span class="o">=</span> <span class="n">ListedColormap</span><span class="p">([</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;C3&quot;</span><span class="p">])</span>
+
+<span class="n">DecisionBoundaryDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
+    <span class="n">clf</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_light</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">response_method</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_light</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">DecisionBoundaryDisplay</span><span class="o">.</span><span class="n">from_estimator</span><span class="p">(</span>
+    <span class="n">clf_n</span><span class="p">,</span> <span class="n">X_train_n</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_light</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">response_method</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train_n</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">X_train_n</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">c</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap_light</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Decision boundaries on native X_train&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Decision boundaries on normalized X_train&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X1&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;X2&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X1$_n$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;X2$_n$&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="types-of-scalers">
+<h3>Types of scalers<a class="headerlink" href="#types-of-scalers" title="Link to this heading">#</a></h3>
+<p>Theoretically, infinite.</p>
+<p>The <code>sklearn</code> library implements several scalers:</p>
+<ul class="simple">
+<li><p>check this <a class="reference external" href="https://scikit-learn.org/stable/modules/preprocessing.html">showcase of <code>sklearn</code>scalers</a></p></li>
+<li><p>check the <a class="reference external" href="https://scikit-learn.org/stable/auto_examples/preprocessing/plot_all_scaling.html">effects of different scalers on outliers</a> for their effects on oultiers</p></li>
+</ul>
+<a class="reference internal image-reference" href="../_images/Scalers_Showcase.png"><img alt="../_images/Scalers_Showcase.png" src="../_images/Scalers_Showcase.png" style="width: 1000px;" />
+</a>
+<table><tr>
+    <td width=800>
+        <center>
+            <br>
+            Figure 7. A showcase of the effect of different <code>sklearn</code> scalers aiming to ''normalize'' different distributions.<br>
+            (From <a href="https://scikit-learn.org/stable/modules/preprocessing.html">here</a>)
+        </center>
+    </td>
+</tr></table>
+<p><u>Basic transformations</u></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MinMax</span></code></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ X^{\prime} = {X - X_{min} \over X_{max} - X_{min}} \]</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">StandardScaler</span></code></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ X^{\prime} = {X - &lt;X&gt; \over \sigma_X} \]</div>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">QuantileTransformer</span></code></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>  Transforms the values to become a uniform or a normal distribution.
+</pre></div>
+</div>
+</li>
+</ul>
+<p>Imports:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">QuantileTransformer</span>
+</pre></div>
+</div>
+<p><u>Remember the golden rule:</u></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>Train on train, apply on test!
+</pre></div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Question (discuss with your partner)</strong></font></p>
+<p>Algorithm <strong>Do_Classification</strong></p>
+<p><strong>Input</strong>: <strong><span class="math notranslate nohighlight">\(X\)</span></strong> (data matrix), <span class="math notranslate nohighlight">\(y\)</span> (labels), classifier<br>
+<strong>Output</strong>: classifier accuracy</p>
+<hr class="docutils" />
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><strong>Normalize data</strong><br>
+<span class="math notranslate nohighlight">\(\mu_X\)</span> <span class="math notranslate nohighlight">\(\leftarrow\)</span> <span class="math notranslate nohighlight">\(mean~\)</span>(<strong><span class="math notranslate nohighlight">\(X\)</span></strong>)<br>
+<span class="math notranslate nohighlight">\(X_n\)</span> = <span class="math notranslate nohighlight">\(X\)</span> / <span class="math notranslate nohighlight">\(\mu_X\)</span></p></li>
+<li><p><strong>Split train/test</strong><br>
+<span class="math notranslate nohighlight">\(indexes\_train, indexes\_test \leftarrow split\_indexes(~size(X)~)\)</span><br><br>
+<span class="math notranslate nohighlight">\(X_n\_train \leftarrow X_n~[indexes\_train]\)</span><br>
+<span class="math notranslate nohighlight">\(X_n\_test ~~\leftarrow X_n~[indexes\_test]\)</span><br>
+<span class="math notranslate nohighlight">\(y\_train \leftarrow~y~[indexes\_train]\)</span><br>
+<span class="math notranslate nohighlight">\(y\_test ~~\leftarrow~y~[indexes\_test]\)</span><br></p></li>
+<li><p><strong>Train on <span class="math notranslate nohighlight">\(train\)</span> set</strong><br>
+<code>classifier.fit</code>(<span class="math notranslate nohighlight">\(X_n\_train, y\_train\)</span>)</p></li>
+<li><p><strong>Predict <span class="math notranslate nohighlight">\(test\)</span> labels with trained classifier</strong><br>
+<span class="math notranslate nohighlight">\(\hat{y}\_test\)</span> <span class="math notranslate nohighlight">\(\leftarrow\)</span> <code>classifier.predict</code>(<span class="math notranslate nohighlight">\(X_n\_test\)</span>)</p></li>
+<li><p><strong>Calculate accuracy</strong><br>
+<span class="math notranslate nohighlight">\(acc \leftarrow calculate\_accuracy~(\hat{y}\_test, y\_test)\)</span><br>
+return <span class="math notranslate nohighlight">\(acc\)</span></p></li>
+</ol>
+</div></blockquote>
+<hr class="docutils" />
+<p><strong>Where was the mistake?</strong></p>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<details>
+<p><b><summary>[Spoiler]</summary></b></p>
+<div>
+  <img src="images/Refit.png">
+</div>
+<table><tr>
+    <td width=800>
+        <center>
+            <br>
+            Space-time continuum is at risk when you use the test data during the <i>learning</i> process.
+        </center>
+    </td>
+</tr></table>
+<p><b>Golden Rule of Machine Learning</b>: Treat the <b>test</b> data as if they come from the future!</p>
+</details>
+</div></section>
+</section>
+<section id="more-on-data-pre-processing">
+<h2>More on Data Pre-processing<a class="headerlink" href="#more-on-data-pre-processing" title="Link to this heading">#</a></h2>
+<p>Aside from the <strong>pre-processing</strong> practices seen here, <em>many</em> more exist.</p>
+<p>In <a class="reference external" href="https://github.com/astrostatistics-in-crete/2022_summer_school/blob/main/ML_Practices/ML_Practices_S.ipynb">2022 Summer School for Astrostatistics in Crete - ML Practices S
+</a>, you will find:</p>
+<p><span class="math notranslate nohighlight">\(\triangleright\)</span> <strong>Feature construction</strong><br>
+<span class="math notranslate nohighlight">\(\triangleright\)</span> <strong>Feature selection</strong><br>
+    <em>sklearn.SelectKBest, Sequential Forward Selection</em><br>
+<span class="math notranslate nohighlight">\(\triangleright\)</span> <strong>Non-linear feature reduction</strong><br>
+    <em>t-SNE, UMAP</em><br>
+<span class="math notranslate nohighlight">\(\triangleright\)</span> <strong>Feature encoding</strong><br>
+    <em>One Hot Encoding</em><br></p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p>Other techniques regard:</p>
+<p><span class="math notranslate nohighlight">\(\triangleright\)</span> <strong>Inputing missing values</strong><br>
+    <em>e.g., missingno, MICE and its variants</em>  <span class="math notranslate nohighlight">\(\rightarrow\)</span>
+<a class="reference external" href="https://github.com/ResidentMario/missingno"><code class="docutils literal notranslate"><span class="pre">missingno</span></code></a>,
+<a class="reference external" href="https://scikit-learn.org/stable/modules/impute.html"><code class="docutils literal notranslate"><span class="pre">sklearn.impute.IterativeImputer</span></code></a>,
+<a class="reference external" href="https://pypi.org/project/miceforest/"><code class="docutils literal notranslate"><span class="pre">miceforest</span></code></a><br>
+<span class="math notranslate nohighlight">\(\triangleright\)</span> <strong>Dealing with imbalanced classes</strong><br>
+    <em>e.g.,
+<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/svm/plot_weighted_samples.html">sample weighting</a>,
+<a class="reference external" href="https://machinelearningmastery.com/probability-calibration-for-imbalanced-classification/">probability calibration</a>,
+<a class="reference external" href="https://imbalanced-learn.org/stable/references/generated/imblearn.over_sampling.SMOTE.html">SMOTE</a>
+(… however, always make sure to check your <a class="reference external" href="https://stats.stackexchange.com/questions/357466/are-unbalanced-datasets-problematic-and-how-does-oversampling-purport-to-he">assumptions</a>!)</em><br>
+<span class="math notranslate nohighlight">\(\triangleright\)</span> <strong>Removing outliers</strong> (?)<br>
+<span class="math notranslate nohighlight">\(\triangleright\)</span> <strong>Handling numerical exceptions</strong> (zeros, NaNs!)<br></p>
+<p>… and many more!</p>
+<p>Have a look at this <a class="reference external" href="https://towardsdatascience.com/automated-data-cleaning-with-python-94d44d854423">post about Data Cleaning</a> as a starting point!</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="protocols">
+<h1>Protocols<a class="headerlink" href="#protocols" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>Protocols</strong> = Correct methodologies to assess out ML model</p>
+</div></blockquote>
+<p>Let’s see a couple.</p>
+<section id="comparing-against-baseline">
+<h2>Comparing against baseline<a class="headerlink" href="#comparing-against-baseline" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Which is the minimum achievable score?</em></p>
+</div></blockquote>
+<p>Let’s consider a simple dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">df_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;x2&#39;</span><span class="p">,</span> <span class="s1">&#39;class&#39;</span><span class="p">])</span>
+
+<span class="n">display</span><span class="p">(</span><span class="n">df_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[[</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span><span class="s1">&#39;x2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[[</span><span class="s1">&#39;class&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;LogisticRegression | accuracy: </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">clf</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>How good is this result?</p>
+<div class="alert alert-danger alertdanger" role="alert" style="border-radius: 8px; padding: 10px;">
+<details>
+<p><b><summary>[Spoiler]</summary></b></p>
+<p>A <strong>Majority Class</strong> classifier, i.e. a <em>trivial</em> classifier which always returns the most frequent class seen in training, would have scored 90% accuracy!</p>
+</details>
+</div><p><u><strong>Always compare against dummy estimators!</strong></u></p>
+<p>… or at least keep in mind the minimum achievable score <span class="math notranslate nohighlight">\(=\)</span> <strong>baseline</strong>.  Having a comparison reference is <u>very important</u> when publishing, to convince about the goodness of your model.</p>
+<p>In some cases, the baseline can also be found <strong>theoretically</strong>, it does not matter.</p>
+<p>Some examples of dummy estimators:</p>
+<ul>
+<li><p><u>Classification</u>:</p>
+<ul class="simple">
+<li><p><strong>Random (Trivial) Classifier</strong>: a classifier which returns a random class</p></li>
+<li><p><strong>Stratified Classifier</strong>: a classifier which returns a class with a probability following the distribution of classes seen in training</p></li>
+</ul>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyClassifier.html"><code>sklearn</code> Dummy Classifiers</a></p>
+</li>
+<li><p><u>Regression</u>:</p>
+<ul class="simple">
+<li><p><strong>Constant Regressor</strong>: a regressor which alwyas returns a value, e.g. the mean (<span class="math notranslate nohighlight">\(y_{train}\)</span>) or median (<span class="math notranslate nohighlight">\(y_{train}\)</span>)</p></li>
+</ul>
+<p><a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.dummy.DummyRegressor.html"><code>sklearn</code> Dummy Regressors</a></p>
+</li>
+</ul>
+<p>… or create your own based on the problem you are addressing!</p>
+</section>
+<section id="cross-validation-a-k-a-k-fold-cross-validation">
+<h2>Cross Validation (a.k.a. <span class="math notranslate nohighlight">\(k\)</span>-fold Cross Validation)<a class="headerlink" href="#cross-validation-a-k-a-k-fold-cross-validation" title="Link to this heading">#</a></h2>
+<blockquote>
+<div><p><em>Am I overfitting the train set?</em></p>
+</div></blockquote>
+<p>We have seen the basic <strong>train/[validation]/test</strong> split:</p>
+<a class="reference internal image-reference" href="../_images/Train_Test.png"><img alt="../_images/Train_Test.png" src="../_images/Train_Test.png" style="width: 640px;" />
+</a>
+<table><tr>
+    <td width=640>
+        <center>
+            <br>
+            Figure 8.  Indicative recipe for splitting a dataset into the train and test sets.
+            <br>
+        </center>
+    </td>
+</tr></table>
+<p><em>Would the results change if we shuffled the data differently?</em></p>
+<p><u><strong>Cross Validation</strong></u></p>
+<p>It involves <em>re-fitting</em> the model over different partitionings of the dataset:</p>
+<a class="reference internal image-reference" href="../_images/CV_k4.jpg"><img alt="../_images/CV_k4.jpg" src="../_images/CV_k4.jpg" style="width: 800px;" />
+</a>
+<table><tr>
+    <td width=800>
+        <center>
+            <br>
+            Figure 9.  Data splitting for a Cross Validation with <i>k</i>=4 folds.
+        </center>
+    </td>
+</tr></table>
+<p>A <strong><span class="math notranslate nohighlight">\(k\)</span>-fold CV</strong> splits the data in <span class="math notranslate nohighlight">\(k\)</span> parts (<strong>folds</strong>), and, at each iteration:</p>
+<ul class="simple">
+<li><p>uses <strong><span class="math notranslate nohighlight">\(k\)</span>-1</strong> folds for training</p></li>
+<li><p>uses the <strong>remaining</strong> fold for testing (<em>though it is interchangeably referred to as <strong>validation</strong> set in this context</em>)</p></li>
+</ul>
+<p>The model is tested <span class="math notranslate nohighlight">\(k\)</span> times, always on unseen data.</p>
+<p>In this way, CV actually tackles 2 issues:</p>
+<ul class="simple">
+<li><p>Assessment of <strong>bias</strong><br>
+<em>(i.e. how much the model depends on a specific training set)</em></p></li>
+<li><p>Exploitation of the <strong>whole dataset</strong><br>
+<em>(i.e. all data are eventually used for both training and testing)</em></p></li>
+</ul>
+<p>Each model fit produces a performance score, therefore we can obtain both an <strong>average</strong> estimate, and a <strong>uncertainty</strong> on it.</p>
+<p><u>IMPORTANT:</u> While the CV gives performance estimates, the final model shall be <strong><em>re</em>-trained on all</strong> the data.<br>
+<span class="math notranslate nohighlight">\(~~~~~~~~~~~~~~~~~~~\)</span> We can reasonably assume that the re-trained model will be at least as performing as the CV average.<br>
+<span class="math notranslate nohighlight">\(~~~~~~~~~~~~~~~~~~~\)</span> (<em>Actually, you shall <em>re</em>-fit on all data also when you use the simpler train/[validation]/test protocol</em>).</p>
+<hr style="height:0.5px; border:none; color:lightgray; background-color:lightgray;">
+<p><strong>Q:</strong> What is the right <span class="math notranslate nohighlight">\(k\)</span>?<br>
+<strong>R:</strong> Common values range between 3 and 10, but depends on:</p>
+<ul class="simple">
+<li><p>how many data we have<br></p></li>
+<li><p>how much time we have<br></p></li>
+</ul>
+<p>because for larger <span class="math notranslate nohighlight">\(k\)</span> we got more estimates, but in exchange we get:</p>
+<ul class="simple">
+<li><p>a smaller test set at each iteration</p></li>
+<li><p>more computations</p></li>
+</ul>
+<p>For the optimal number, you may need to look at the <strong>learning curves</strong> <span class="math notranslate nohighlight">\(\rightarrow\)</span> see this <a class="reference external" href="https://stats.stackexchange.com/questions/61783/bias-and-variance-in-leave-one-out-vs-k-fold-cross-validation/357749#357749">discussion</a></p>
+<p><u><strong>Variants</strong></u></p>
+<ul class="simple">
+<li><p><strong>Repeated CV</strong>: CV, but repeated <span class="math notranslate nohighlight">\(n\)</span> times with different shuffling</p></li>
+<li><p><strong>Stratified CV</strong>: CV, but the demographics of each fold is representative of the data (e.g. same class demoographics)</p></li>
+</ul>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Exercise 3: Make your own CV</strong></font></p>
+<p><strong>Objective</strong>: Compare the <em>distributions</em> of the performances of 2 classifiers.</p>
+<p><strong>Dataset</strong>: We will use  Kaggle’s <a class="reference external" href="https://www.kaggle.com/datasets/fedesoriano/stellar-classification-dataset-sdss17">Stellar Classification Dataset - SDSS17</a>, restricted to just a few magnitudes.<br>
+The target of the classification is the object type.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="n">df_star</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/star_classification.csv&quot;</span><span class="p">)</span>
+<span class="n">df_star</span> <span class="o">=</span> <span class="n">df_star</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="c1"># keeping only a few objects to speed up calculations</span>
+
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;u&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">]</span><span class="c1">#, &#39;i&#39;, &#39;z&#39;, &#39;redshift&#39;]</span>
+<span class="n">df_star_</span> <span class="o">=</span> <span class="n">df_star</span><span class="p">[</span><span class="n">features</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dataset for our exercise:&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_star_</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df_star_</span><span class="p">[</span><span class="n">features</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df_star_</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">KFold</span>
+
+<span class="n">cv</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># number of CV folds (change, if you like)</span>
+
+<span class="c1"># Splitting the folds:</span>
+<span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">cv</span><span class="p">)</span>
+<span class="n">kf</span><span class="o">.</span><span class="n">get_n_splits</span><span class="p">(</span><span class="n">X</span><span class="p">);</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">The `KFold` method allows us to directly get the train and validation indexes</span>
+<span class="sd">across the iterations, sparing us the tedious index tracking.</span>
+<span class="sd">&#39;&#39;&#39;</span><span class="p">;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">kf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Task</strong>: You will have to:</p>
+<ol class="arabic simple">
+<li><p>Loop over the CV iterations</p></li>
+<li><p>Inside each iteration:</p>
+<ul class="simple">
+<li><p>Split the data in <em>train</em> and <em>validation</em></p></li>
+<li><p>Fit both classifiers</p></li>
+<li><p>Assess the accuracy of both classifiers</p></li>
+<li><p>Store the accuracies for the curent iteration</p></li>
+</ul>
+</li>
+<li><p>Create 2 histograms showing the distributions of accuracies of the classifiers across the iterations.</p></li>
+</ol>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">svm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="c1"># Defining the classifiers of choice:</span>
+<span class="n">clf_1</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">clf_2</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+
+<span class="n">scores_1</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">scores_2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># list of scores across the iterations</span>
+
+<span class="c1"># CV iterations:</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">idxs_train</span><span class="p">,</span> <span class="n">idxs_valid</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    # `idxs_train` and `idxs_valid` respectively contain the indexes of the</span>
+<span class="sd">    # train and validation samples for iteration `k`.</span>
+<span class="sd">    &#39;&#39;&#39;</span><span class="p">;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iteration </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Splitting folds&#39;</span><span class="p">)</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">X_valid</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">y_valid</span> <span class="o">=</span> <span class="o">...</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Fitting on train fold&#39;</span><span class="p">)</span>
+    <span class="n">clf_1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+    <span class="n">clf_2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Predicting on validation fold&#39;</span><span class="p">)</span>
+    <span class="n">yhat_valid_1</span> <span class="o">=</span> <span class="n">clf_1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="n">yhat_valid_2</span> <span class="o">=</span> <span class="n">clf_2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Assessing accuracy score and storing&#39;</span><span class="p">)</span>
+    <span class="n">score_1</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+    <span class="n">score_2</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+    <span class="c1"># NOTE: We could just as well use the `clf.score()` method, but better</span>
+    <span class="c1">#       to always explicitly specify the score we pick.</span>
+    
+    <span class="n">scores_1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score_1</span><span class="p">)</span>
+    <span class="n">scores_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score_2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Re-fitting on all the available data&#39;</span><span class="p">)</span>    
+<span class="c1"># NOTE: We don&#39;t need it for this exercise, it is just here as a reminder of</span>
+<span class="c1">#       good practice.</span>
+<span class="n">clf_1_final</span> <span class="o">=</span> <span class="n">clf_1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">clf_2_final</span> <span class="o">=</span> <span class="n">clf_2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Plotting score distributions and their average values&#39;</span><span class="p">)</span>    
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores_1</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;clf$_</span><span class="si">{1}</span><span class="s1">$ (mean)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores_2</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;clf$_</span><span class="si">{2}</span><span class="s1">$ (mean)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Accuracy score&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number density&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><b>[Solution at the end of the notebook]</b></p>
+</div><p><strong><font size=5>Ah!</font> As you can see, the result <em>does</em> depend on the split!</strong></p>
+<p>Without CV, i.e. if we only picked 1 specific train/test split <span class="math notranslate nohighlight">\(-\)</span> and with some bad luck <span class="math notranslate nohighlight">\(-\)</span> we might have got to the [<u>wrong</u>] conclusion that SVM performed better than RF.</p>
+<p><u>IMPORTANT:</u> The <strong>best model</strong> is the one that <strong>generalizes best</strong>.</p>
+<section id="final-remarks-on-cv">
+<h3>Final remarks on CV<a class="headerlink" href="#final-remarks-on-cv" title="Link to this heading">#</a></h3>
+<p>Clearly, we do not need to reinvent the wheel <span class="math notranslate nohighlight">\(\rightarrow\)</span> <code class="docutils literal notranslate"><span class="pre">sklearn.model_selection.cross_val_score</span></code></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">svm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">cross_val_score</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">&quot;accuracy&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Scores for classifier </span><span class="si">%s</span><span class="s1"> over the CV:&#39;</span> <span class="o">%</span> <span class="n">clf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><u><strong>Summary</strong></u></p>
+<ul class="simple">
+<li><p>CV can be used to assess the <strong>generalized behaviour</strong> of an estimator.</p></li>
+<li><p>You should <strong>retrain your estimator to the whole dataset</strong> (then you expect better results than the CV).</p></li>
+<li><p>When <strong>comparing</strong> 2 estimators, the one with a (meaningfull) larger score with be the best.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="solutions">
+<h1>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h1>
+<section id="exercise-1-pca">
+<h2>Exercise 1 - PCA<a class="headerlink" href="#exercise-1-pca" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="n">X_n</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> 
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">()</span>
+<span class="n">embedding</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_n</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_n</span><span class="p">)</span>
+
+<span class="n">plot_pca</span><span class="p">(</span><span class="n">pca</span><span class="p">,</span> <span class="n">embedding</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-2-eigenvectors">
+<h2>Exercise 2 - eigenvectors<a class="headerlink" href="#exercise-2-eigenvectors" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The first eigenvector is:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;... it has </span><span class="si">%s</span><span class="s1"> dimensions ...&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;... and its corresponding eigenvalue is: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span>
+
+<span class="n">n_eigenvectors_to_plot</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_eigenvectors_to_plot</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">xticks</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[])</span>
+    
+    <span class="n">PC_i</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">components_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="c1"># PC_i == eigenvector_i * eigenvalue_i</span>
+    
+    <span class="c1"># Scaling to [0, 1] for visualization purposes:</span>
+    <span class="n">PC_i</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">PC_i</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Eigen-galaxy </span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">PC_i</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_x</span><span class="p">,</span> <span class="n">n_y</span><span class="p">,</span> <span class="n">n_colors</span><span class="p">),</span>
+              <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">bone</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-3-cross-validation">
+<h2>Exercise 3 - Cross validation<a class="headerlink" href="#exercise-3-cross-validation" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">svm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="c1"># Defining the classifiers of choice:</span>
+<span class="n">clf_1</span> <span class="o">=</span> <span class="n">svm</span><span class="o">.</span><span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">clf_2</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span>
+
+<span class="n">scores_1</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">scores_2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># list of scores across the iterations</span>
+
+<span class="c1"># CV iterations:</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">idxs_train</span><span class="p">,</span> <span class="n">idxs_valid</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    # `idxs_train` and `idxs_valid` respectively contain the indexes of the</span>
+<span class="sd">    # train and validation samples for iteration `k`.</span>
+<span class="sd">    &#39;&#39;&#39;</span><span class="p">;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iteration </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Splitting folds&#39;</span><span class="p">)</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">idxs_train</span><span class="p">]</span>
+    <span class="n">X_valid</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">idxs_valid</span><span class="p">]</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">idxs_train</span><span class="p">]</span>
+    <span class="n">y_valid</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">idxs_valid</span><span class="p">]</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Fitting on train fold&#39;</span><span class="p">)</span>
+    <span class="n">clf_1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+    <span class="n">clf_2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Predicting on validation fold&#39;</span><span class="p">)</span>
+    <span class="n">yhat_valid_1</span> <span class="o">=</span> <span class="n">clf_1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+    <span class="n">yhat_valid_2</span> <span class="o">=</span> <span class="n">clf_2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_valid</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">- Assessing accuracy score and storing&#39;</span><span class="p">)</span>
+    <span class="n">score_1</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">yhat_valid_1</span><span class="p">)</span>
+    <span class="n">score_2</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_valid</span><span class="p">,</span> <span class="n">yhat_valid_2</span><span class="p">)</span>
+    <span class="c1"># NOTE: We could just as well use the `clf.score()` method, but better</span>
+    <span class="c1">#       to always explicitly specify the score we pick.</span>
+    
+    <span class="n">scores_1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score_1</span><span class="p">)</span>
+    <span class="n">scores_2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score_2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Re-fitting on all the available data&#39;</span><span class="p">)</span>    
+<span class="c1"># NOTE: We don&#39;t need it for this exercise, it is just here as a reminder of</span>
+<span class="c1">#       good practice.</span>
+<span class="n">clf_1_final</span> <span class="o">=</span> <span class="n">clf_1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">clf_2_final</span> <span class="o">=</span> <span class="n">clf_2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Results:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SVM: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores_1</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;RF: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores_2</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Plotting score distributions and their average values&#39;</span><span class="p">)</span>    
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">scores_1</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C0&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">scores_2</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores_1</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;clf$_</span><span class="si">{1}</span><span class="s1">$ - SVM (mean)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores_2</span><span class="p">),</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;clf$_</span><span class="si">{2}</span><span class="s1">$ - RF (mean)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Accuracy score&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number density&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###EOF</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Machine_Learning"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Time_Series/Time_Series.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Time Series Analysis <a class="tocSkip"></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../DL_Intro_n_Regression/Intro_n_Regression.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Deep Learning and Regression Workshop</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Machine Learning Practices and Protocols</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#the-black-box-problem">The Black Box problem</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-ingredients-for-a-successful-ml-model">Basic ingredients for a successful ML model</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#data-pre-processing">Data Pre-processing</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-visualization">Data visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-visualization-corner-plot-with-seaborn">Quick visualization: corner plot with seaborn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploring-feature-redundancy-with-covariance-matrix">Exploring feature redundancy with covariance matrix</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-high-dimensional-data">Visualizing high-dimensional data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-with-pca">Dimensionality Reduction with PCA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernel-pca">Kernel PCA</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#scaling-features">Scaling features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-do-you-need-to-normalize">When do you need to normalize?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-scalers">Types of scalers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-on-data-pre-processing">More on Data Pre-processing</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#protocols">Protocols</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-against-baseline">Comparing against baseline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cross-validation-a-k-a-k-fold-cross-validation">Cross Validation (a.k.a. <span class="math notranslate nohighlight">\(k\)</span>-fold Cross Validation)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#final-remarks-on-cv">Final remarks on CV</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">Solutions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-1-pca">Exercise 1 - PCA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-2-eigenvectors">Exercise 2 - eigenvectors</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-3-cross-validation">Exercise 3 - Cross validation</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

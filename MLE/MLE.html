@@ -1,0 +1,1604 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Maximum Likelihood Estimation &#8212; AstroStat School 2026 — Rome</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'MLE/MLE';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to Machine Learning and Clustering" href="../Machine_Learning/Intro_and_Clustering.html" />
+    <link rel="prev" title="Hypothesis Testing" href="../Hypothesis_Testing/Hypothesis_Testing.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — Rome</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — Rome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Intro/Intro.html">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Hypothesis_Testing/Hypothesis_Testing.html">Hypothesis Testing <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Maximum Likelihood Estimation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Intro_and_Clustering.html">Introduction to Machine Learning and Clustering <a class="tocSkip"></a></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_1.html">Introduction to Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_2.html">Applied Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">Basics of Markov Chain Monte Carlo <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Classification.html">Classification <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Gaussian_Processes/Gaussian_Processes.html">Gaussian Processes <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Time_Series/Time_Series.html">Time Series Analysis <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Best_Practices.html">Machine Learning Practices and Protocols</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Intro_n_Regression/Intro_n_Regression.html">Introduction to Deep Learning and Regression Workshop</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../GPU_Parallelization/GPU_parallelization.html">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../NN_Explainability/NN_explainability.html">Neural Network Explainability <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_short.html">Introduction to Simulation Based Inference</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_exercise.html">Simulation Based Inference: Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Diffusion/Diffusion.html">Diffusion Models</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../AI_Agents/AI_Agents.html">Intro to AI Agents<a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroStat-Academy/astrostat-school-7/blob/main/./MLE/MLE.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/MLE/MLE.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Maximum Likelihood Estimation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Maximum Likelihood Estimation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rr-lyrae-stars-in-m4">RR Lyrae stars in M4</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rr-lyrae-the-data">RR Lyrae: The data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-python-code-for-fitting">Quick Python code for fitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-a-likelihood-function">Constructing a likelihood function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-log-trick">The log trick</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-with-chi-2">Connection with <span class="math notranslate nohighlight">\(\chi^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-uncertainties-are-equal">If the uncertainties are equal…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-plot-the-likelihood-close-to-the-solution-we-found-before">Let’s plot the likelihood close to the solution we found before</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-fitting-for-slope-only">Exercise: fitting for slope only</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-log-likelihood">Plotting the (log-)likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-uncertainty-through-the-cdf">Estimating the uncertainty through the CDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-confidence-interval">Finding the confidence interval</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-considerations">Additional considerations</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-spectral-line-using-mle">Fitting a spectral line using MLE</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-focus-on-the-lithium-line">Let’s focus on the lithium line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-start-by-describing-our-model-a-linear-continuum-plus-a-gaussian-absorption-feature">Let’s start by describing our model: a linear continuum plus a Gaussian absorption feature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-start-with-a-trial-solution-and-use-scipy-minimize-to-find-a-solution">Let’s start with a trial solution and use scipy minimize to find a solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-the-likelihood-vary-with-model-parameters">How does the likelihood vary with model parameters?</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <fieldset style="padding:10px; border:1px solid #ccc; box-shadow:2px 2px 5px rgba(0,0,0,0.1);">
+<legend style="font-size: 10px; color:#555;">Credits</legend>
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 80px; vertical-align: top;">
+            <img src="https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/logo/logo_b_text_lowres.png" alt="AstroStat Academy logo" width="100">
+        </td>
+        <td style="vertical-align: center; padding-left: 15px; font-size: 10px; line-height: 1.2;">
+            Summer School for AstroStatistics in Sharjah 2025<br>
+            This notebook contains original work by the authors unless stated otherwise.
+            Any external material is properly credited to its sources.<br>
+            References to papers, datasets, and software are acknowledged.
+            Original content is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0 (GNU GPLv3)</a>.
+        </td>
+    </tr>
+</table>
+</fieldset>
+<!-- Allow these <br> or it will look ugly once rendered on Jupyter Book. -->
+<br><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;The Maximum Likelihood Estimation notebook.&quot;&quot;&quot;</span>
+
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/colab/clone_and_cd_colab.py&quot;</span>
+<span class="n">colab</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">colab</span><span class="p">)</span>
+
+<span class="n">URL</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/styles/plot_style.py&quot;</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">URL</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Imported matplotlib.
+Imported seaborn.
+Plotting style set.
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="maximum-likelihood-estimation">
+<h1>Maximum Likelihood Estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">astropy.table</span><span class="w"> </span><span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="rr-lyrae-stars-in-m4">
+<h1>RR Lyrae stars in M4<a class="headerlink" href="#rr-lyrae-stars-in-m4" title="Link to this heading">#</a></h1>
+<p>RR Lyrae stars are variable pulsators that obey a precise period-luminosity relation. Here we have a sample of RR Lyrae stars in the globular cluster M4, observed with Spitzer by Neeley et al. (2015): https://ui.adsabs.harvard.edu/abs/2015ApJ…808…11N/abstract</p>
+<p>Since the stars are at the same distance, then the apparent magnitude will also depend on the period:</p>
+<div class="math notranslate nohighlight">
+\[ m = a\ {\rm log}\ P + b \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RR_lyrae_table2</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./data/table2.dat&#39;</span><span class="p">,</span> <span class="n">readme</span><span class="o">=</span><span class="s1">&#39;./data/ReadMe&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;cds&#39;</span><span class="p">)</span>
+<span class="n">RR_lyrae</span> <span class="o">=</span> <span class="n">RR_lyrae_table2</span><span class="p">[</span><span class="n">RR_lyrae_table2</span><span class="p">[</span><span class="s1">&#39;Mode&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;RRab&#39;</span><span class="p">]</span>
+
+<span class="c1"># Now remove sources V20 and V21 due to blending</span>
+<span class="n">RR_lyrae</span> <span class="o">=</span> <span class="n">RR_lyrae</span><span class="p">[</span><span class="n">RR_lyrae</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;V20&#39;</span><span class="p">]</span>
+<span class="n">RR_lyrae</span> <span class="o">=</span> <span class="n">RR_lyrae</span><span class="p">[</span><span class="n">RR_lyrae</span><span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;V21&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Columns:&quot;</span><span class="p">,</span> <span class="n">RR_lyrae</span><span class="o">.</span><span class="n">colnames</span><span class="p">)</span>
+<span class="n">logP</span><span class="p">,</span> <span class="n">m36</span><span class="p">,</span> <span class="n">e_m36</span> <span class="o">=</span> <span class="n">RR_lyrae</span><span class="p">[</span><span class="s2">&quot;logP&quot;</span><span class="p">],</span> <span class="n">RR_lyrae</span><span class="p">[</span><span class="s1">&#39;[3.6]&#39;</span><span class="p">],</span> <span class="n">RR_lyrae</span><span class="p">[</span><span class="s1">&#39;e_[3.6]&#39;</span><span class="p">]</span>
+<span class="n">logP</span><span class="p">,</span> <span class="n">m36</span><span class="p">,</span> <span class="n">e_m36</span> <span class="o">=</span> <span class="n">logP</span><span class="p">[</span><span class="o">~</span><span class="n">m36</span><span class="o">.</span><span class="n">mask</span><span class="p">],</span> <span class="n">m36</span><span class="p">[</span><span class="o">~</span><span class="n">m36</span><span class="o">.</span><span class="n">mask</span><span class="p">],</span> <span class="n">e_m36</span><span class="p">[</span><span class="o">~</span><span class="n">m36</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Columns: [&#39;ID&#39;, &#39;RAh&#39;, &#39;RAm&#39;, &#39;RAs&#39;, &#39;DE-&#39;, &#39;DEd&#39;, &#39;DEm&#39;, &#39;DEs&#39;, &#39;Per&#39;, &#39;logP&#39;, &#39;[3.6]&#39;, &#39;e_[3.6]&#39;, &#39;f_[3.6]&#39;, &#39;[4.5]&#39;, &#39;e_[4.5]&#39;, &#39;f_[4.5]&#39;, &#39;3.6amp&#39;, &#39;e_3.6amp&#39;, &#39;4.5amp&#39;, &#39;e_4.5amp&#39;, &#39;Mode&#39;, &#39;f_Mode&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="rr-lyrae-the-data">
+<h2>RR Lyrae: The data<a class="headerlink" href="#rr-lyrae-the-data" title="Link to this heading">#</a></h2>
+<p>Let’s plot the data from the 3.6μ band:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">logP</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">logP</span><span class="p">),</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">logP</span><span class="p">,</span> <span class="n">m36</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">e_m36</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;b.&quot;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log P$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$m_</span><span class="si">{3.6}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ed352b32e16b128da645fe4b00c89028ce7d0c53bbecff1ca4ef93347add4ed8.png" src="../_images/ed352b32e16b128da645fe4b00c89028ce7d0c53bbecff1ca4ef93347add4ed8.png" />
+</div>
+</div>
+</section>
+<section id="quick-python-code-for-fitting">
+<h2>Quick Python code for fitting<a class="headerlink" href="#quick-python-code-for-fitting" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">numpy.polyfit</span></code> method for fitting polynomials</p></li>
+</ol>
+<blockquote>
+<div><p>It actually performs an ordinary least squares fit, obviously without taking into account the uncertainties</p>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li><p><code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code> can minimize any function</p></li>
+</ol>
+<blockquote>
+<div><p>…so we can apply it to minimize the <span class="math notranslate nohighlight">\(\chi^2\)</span> (using the uncertainties). Note that the optimization method is selected because it’s not always successful</p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p><strong>A trick</strong></p></li>
+</ol>
+<blockquote>
+<div><p><span class="math notranslate nohighlight">\(\chi^2\)</span> fitting can be seen as a <em>weighted version</em> of ordinary least squares. The weights are applied on the unsquared residuals: <span class="math notranslate nohighlight">\( w_i \left[y_i - \hat{y}(x_i)\right]\)</span>.
+By comparing with the <span class="math notranslate nohighlight">\(\chi^2\)</span> formula we can use <span class="math notranslate nohighlight">\(1/\sigma_i\)</span> as weights in <code class="docutils literal notranslate"><span class="pre">numpy.polyfit</span></code> where <span class="math notranslate nohighlight">\(\sigma_i\)</span> are the uncertainties of each data point.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Tasks:</strong></p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>Make <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code> work</p></li>
+<li><p>Select the initial guess for minimizing <code class="docutils literal notranslate"><span class="pre">chi_square</span></code></p></li>
+<li><p>Make <code class="docutils literal notranslate"><span class="pre">np.polyfit</span></code> work with the correct weights</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ordinary least squares fit</span>
+
+<span class="n">ols_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">logP</span><span class="p">,</span> <span class="n">m36</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Polyfit output:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ols_params</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+
+<span class="c1"># chi-square fitting using minimization</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chi_square</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the chi-square value for a given set of parameters.&quot;&quot;&quot;</span>
+    <span class="n">slope_for_chi</span><span class="p">,</span> <span class="n">intercept_for_chi</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">m36_model</span> <span class="o">=</span> <span class="n">slope_for_chi</span> <span class="o">*</span> <span class="n">logP</span> <span class="o">+</span> <span class="n">intercept_for_chi</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">m36</span> <span class="o">-</span> <span class="n">m36_model</span><span class="p">)</span> <span class="o">**</span> <span class="mf">2.0</span> <span class="o">/</span> <span class="n">e_m36</span><span class="o">**</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="n">initial_estimate</span> <span class="o">=</span> <span class="n">ols_params</span>       <span class="c1"># use the OLS results as an initial estimate</span>
+<span class="n">min_result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">chi_square</span><span class="p">,</span> <span class="n">x0</span><span class="o">=</span><span class="n">initial_estimate</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;Nelder-Mead&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Minimization output:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">min_result</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimal Parameters:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">min_result</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+
+
+<span class="c1"># chi-square fitting using weighted OLS fit: w = 1/sigma here!</span>
+
+<span class="n">ch2_params</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">logP</span><span class="p">,</span> <span class="n">m36</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mf">1.0</span><span class="o">/</span><span class="n">e_m36</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;chi-square fitting using weighted polyfit:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ch2_params</span><span class="p">)</span>
+
+
+<span class="c1"># plotting the results</span>
+
+<span class="n">OLS_LABEL</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;OLS:</span><span class="se">\t</span><span class="s2"> $m_{{3.6}} = &quot;</span>
+             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ols_params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2"> </span><span class="se">\\</span><span class="s2">log P$ + </span><span class="si">{</span><span class="n">ols_params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="n">CHI_LABEL</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">chi^2$:</span><span class="se">\t</span><span class="s2"> $m_{{3.6}} = &quot;</span>
+             <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ch2_params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2"> </span><span class="se">\\</span><span class="s2">log P$ + </span><span class="si">{</span><span class="n">ch2_params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="n">x_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">logP</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">logP</span><span class="p">),</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">logP</span><span class="p">,</span> <span class="n">m36</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">e_m36</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;b.&quot;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">ols_params</span><span class="p">,</span> <span class="n">x_plot</span><span class="p">),</span> <span class="s2">&quot;k-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">OLS_LABEL</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">ch2_params</span><span class="p">,</span> <span class="n">x_plot</span><span class="p">),</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">CHI_LABEL</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log P$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$m_</span><span class="si">{3.6}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Polyfit output:
+[-2.369672   10.29960037]
+
+Minimization output:
+       message: Optimization terminated successfully.
+       success: True
+        status: 0
+           fun: 186.90598361947207
+             x: [-2.338e+00  1.030e+01]
+           nit: 34
+          nfev: 66
+ final_simplex: (array([[-2.338e+00,  1.030e+01],
+                       [-2.338e+00,  1.030e+01],
+                       [-2.338e+00,  1.030e+01]]), array([ 1.869e+02,  1.869e+02,  1.869e+02]))
+Optimal Parameters:
+[-2.33806527 10.30379998]
+
+chi-square fitting using weighted polyfit:
+[-2.33808939 10.30379338]
+</pre></div>
+</div>
+<img alt="../_images/755b74fd4f6e129fbe86e11135ae3d505098b908e1601066da4438dad0d18927.png" src="../_images/755b74fd4f6e129fbe86e11135ae3d505098b908e1601066da4438dad0d18927.png" />
+</div>
+</div>
+</section>
+<section id="constructing-a-likelihood-function">
+<h2>Constructing a likelihood function<a class="headerlink" href="#constructing-a-likelihood-function" title="Link to this heading">#</a></h2>
+<p>Our problem falls into the general case where we have a model connecting two quantities through a function with two parameters, <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span>: <span class="math notranslate nohighlight">\(y=f(x;a,b)=ax + b\)</span>.</p>
+<p>In the general case, we use <span class="math notranslate nohighlight">\(\theta\)</span> as a list of parameters: <span class="math notranslate nohighlight">\(\theta = \{\theta_1, \theta_2, \cdots, \theta_k\}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Large y = f(x; \theta) \]</div>
+<p>Therefore, if we get <span class="math notranslate nohighlight">\(N\)</span> data, <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> for <span class="math notranslate nohighlight">\(i \in [1, 2, \cdots, N]\)</span> based on the model we would expect:</p>
+<div class="math notranslate nohighlight">
+\[\Large y_i = f(x_i; \theta) \]</div>
+<p>However, all observations are <strong>subject to uncertainty</strong>, and we need to model this as well. More often than not, uncertainties are fluctuations of a certain magnitude <span class="math notranslate nohighlight">\(\sigma\)</span> around 0, following the Gaussian distribution:</p>
+<div class="math notranslate nohighlight">
+\[\Large y_i = f(x_i; \theta) + \epsilon_i \]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_i\)</span> is normally distributed:</p>
+<div class="math notranslate nohighlight">
+\[\Large \epsilon_i \sim \mathrm{Norm}(0, \sigma_i)\]</div>
+<p>The <span class="math notranslate nohighlight">\(\sigma_i\)</span> is the standard deviation of the datum error distribution, or an <strong>estimate</strong> of the typical difference between the observed <span class="math notranslate nohighlight">\(y_i\)</span> and the intrinsic, true value <span class="math notranslate nohighlight">\(y_i\)</span> which we <strong>assume that is described by the model</strong>.</p>
+<p>Consequently, according to our model, the probability to observe the <span class="math notranslate nohighlight">\(i\)</span>-th point’s <span class="math notranslate nohighlight">\(y\)</span>-value given it’s <span class="math notranslate nohighlight">\(x\)</span>-value, or the <strong>datum likelihood</strong> is</p>
+<div class="math notranslate nohighlight">
+\[\Large
+P(y_i | x_i) = \text{Norm}(y_i; f(\theta; x_i), \sigma_i) 
+   = \dfrac{1}{\sqrt{2\pi \sigma_i^2}} \exp \left[{-\dfrac{(y_i-f(x_i; \theta))^2}{2\sigma_i^2}} \right]
+\]</div>
+<p>Assuming that our measurements are independent (the probability of <span class="math notranslate nohighlight">\(y_2\)</span> does not depend on <span class="math notranslate nohighlight">\(y_1\)</span> or <span class="math notranslate nohighlight">\(x_3\)</span>), the overall probability to get our data, or <strong>likelihood</strong> (always <strong>according to our model</strong>) is the product of all likelihoods:</p>
+<div class="math notranslate nohighlight">
+\[\Large L = P(y_1, y_2, \cdots, y_N | x_1, x_2, \cdots x_N) = \prod_{i=1}^{N} P(y_i | x_i)\]</div>
+<p>Let’s do the math…</p>
+<div class="math notranslate nohighlight">
+\[\Large
+L = \prod_{i=1}^{N} \dfrac{1}{\sqrt{2\pi \sigma_i^2}} \exp \left[{-\dfrac{(y_i-f(x_i))^2}{2\sigma_i^2}} \right]
+\]</div>
+<div class="math notranslate nohighlight">
+\[\Large
+L = \left(\dfrac{1}{\sqrt{2\pi \sigma_i^2}}\right)^N \exp \left[ -\sum_{i=1}^{N} {\dfrac{(y_i-f(x_i))^2}{2\sigma_i^2}} \right]
+\]</div>
+<p>The parameters that maximize the likelihood are found by taking</p>
+<div class="math notranslate nohighlight">
+\[\Large \frac{\partial L}{\partial a} = 0 \qquad\text{and}\qquad \Large \frac{\partial L}{\partial b} = 0\]</div>
+</section>
+<section id="the-log-trick">
+<h2>The log trick<a class="headerlink" href="#the-log-trick" title="Link to this heading">#</a></h2>
+<p>The likelihoods are typicall very small quantities. To avoid numerical issues, we are allowd to work in log-space (they are positive):</p>
+<div class="math notranslate nohighlight">
+\[\Large
+l = \ln{L} = -\frac{N}{2} \ln\left(2\pi \sigma^2\right) - \sum_{i=1}^{N} {\dfrac{(y_i-f(x_i))^2}{2\sigma_i^2}}
+\]</div>
+<p>Not only it simplifies the equation, but it’s convenient for maximization with respect to any parameter <span class="math notranslate nohighlight">\(\theta_j\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \Large                      \frac{\partial \ln L}{\partial \theta_j}        = 0 
+   \quad\Leftrightarrow\quad   \frac{1}{L}\frac{\partial L}{\partial \theta_j} = 0 
+   \quad\Leftrightarrow\quad   \frac{\partial L}{\partial \theta_j}            = 0 \]</div>
+<p>Therefore, for our example we can maximizing the log-likelihood with respect to the two parameters:</p>
+<div class="math notranslate nohighlight">
+\[\Large \frac{\partial l}{\partial a} = 0 \qquad\text{and}\qquad \Large \frac{\partial l}{\partial b} = 0.\]</div>
+</section>
+<section id="connection-with-chi-2">
+<h2>Connection with <span class="math notranslate nohighlight">\(\chi^2\)</span><a class="headerlink" href="#connection-with-chi-2" title="Link to this heading">#</a></h2>
+<p>The <span class="math notranslate nohighlight">\(l\)</span> can be written as</p>
+<div class="math notranslate nohighlight">
+\[\Large
+l = \text{constant} - \frac{1}{2} \sum_{i=1}^{N} {\dfrac{(y_i-f(x_i))^2}{\sigma_i^2}} = \text{constant} - \frac{\chi^2}{2}
+\]</div>
+<p>Consequently, maximizing the likelihood is equivalent to minimizing the <span class="math notranslate nohighlight">\(\chi^2\)</span>!</p>
+</section>
+<section id="if-the-uncertainties-are-equal">
+<h2>If the uncertainties are equal…<a class="headerlink" href="#if-the-uncertainties-are-equal" title="Link to this heading">#</a></h2>
+<p>If <span class="math notranslate nohighlight">\(\sigma_i \equiv \sigma\)</span>, then…</p>
+<div class="math notranslate nohighlight">
+\[\Large
+l = \text{constant} - \frac{1}{2} \sum_{i=1}^{N} {\dfrac{(y_i-f(x_i))^2}{\sigma_i^2}} =
+\text{constant} - \frac{1}{2\sigma^2} \sum_{i=1}^{N} {(y_i-f(x_i))^2}
+\]</div>
+<p>So maximizing the likelihood corresponds to minimizing the quantity</p>
+<div class="math notranslate nohighlight">
+\[\Large \sum_{i=1}^{N} (y_i-f(x_i))^2 \]</div>
+<p>…or the <strong>sum of the squares</strong>!</p>
+<p>In fact, using <span class="math notranslate nohighlight">\(f(x) = a x + b\)</span> you will arrive at the known OLS formulae for linear fitting without using linear algebra at all!</p>
+</section>
+<section id="let-s-plot-the-likelihood-close-to-the-solution-we-found-before">
+<h2>Let’s plot the likelihood close to the solution we found before<a class="headerlink" href="#let-s-plot-the-likelihood-close-to-the-solution-we-found-before" title="Link to this heading">#</a></h2>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Task</strong></font>
+Complete the <code class="docutils literal notranslate"><span class="pre">log_likelihood</span></code> function.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># construct a 2D grid with 101 points in each direction</span>
+<span class="n">a_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.95</span> <span class="o">*</span> <span class="n">ch2_params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">1.05</span> <span class="o">*</span> <span class="n">ch2_params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">101</span><span class="p">))</span>
+<span class="n">b_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.997</span> <span class="o">*</span> <span class="n">ch2_params</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">1.003</span> <span class="o">*</span> <span class="n">ch2_params</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">101</span><span class="p">))</span>
+<span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">a_grid</span><span class="p">,</span> <span class="n">b_grid</span><span class="p">)</span>
+
+
+<span class="c1"># construct the likelihood function (and vectorize it to be applied directly on arrays)</span>
+<span class="nd">@np</span><span class="o">.</span><span class="n">vectorize</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_likelihood</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The log-likelihood function for the linear model.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">chi_square</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+
+
+<span class="n">ln_like</span> <span class="o">=</span> <span class="n">log_likelihood</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>    <span class="c1"># compute the likelihood in each grid point</span>
+<span class="n">ln_like</span> <span class="o">=</span> <span class="n">ln_like</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ln_like</span><span class="p">)</span>       <span class="c1"># normalizing it for the maximum to be 0.0</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_like</span><span class="p">)</span>               <span class="c1"># un-log it to better visualization</span>
+
+<span class="c1"># plot the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gnuplot2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">*</span><span class="n">ch2_params</span><span class="p">,</span> <span class="s2">&quot;xk&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$L / L_{\max}$&quot;</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/763d93c3395726c3b184ce3f420c8e3bce40c25c36472b39bbcb7777e824280d.png" src="../_images/763d93c3395726c3b184ce3f420c8e3bce40c25c36472b39bbcb7777e824280d.png" />
+</div>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Solution] (click here to expand)</summary></b></p>
+<p>As we saw above, the log-likelihood is connect to the <span class="math notranslate nohighlight">\(\chi^2\)</span> term. Therefore,
+we can use the function we created for this purpose:</p>
+<pre>
+    return -0.5 * chi_square([a, b])
+</pre>
+</details>
+</div></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="exercise-fitting-for-slope-only">
+<h1>Exercise: fitting for slope only<a class="headerlink" href="#exercise-fitting-for-slope-only" title="Link to this heading">#</a></h1>
+<p>Let’s assume that in the above relation, the intercept <span class="math notranslate nohighlight">\(b\)</span> is known (it mainly depends on the distance of the objects, and a calibration of the relation):</p>
+<div class="math notranslate nohighlight">
+\[ m = a\ {\rm log}\ P + 10.3 \]</div>
+<p><u><strong>In-class discussion: Can we fit the slope using standard methods for fitting a line (OLS)?</strong></u></p>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<p>We do not have an intercept any more. Even if we fit <span class="math notranslate nohighlight">\(m-10.3\)</span>, we might end up with a small “remainder”.
+Even if we take the logs again, we would have <span class="math notranslate nohighlight">\(\log(m-10.3) = \log a + \log\log P\)</span> which requires fitting for the intercept only.
+Perhaps, <span class="math notranslate nohighlight">\(a = (m - 10.3) / \log P\)</span> is telling us that from each point we have an estimate of the slope and we could average them.
+But none of these approaches takes into account the uncertainties.</p>
+</details>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols_params_1param</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">logP</span><span class="p">,</span> <span class="n">m36</span><span class="o">-</span><span class="mf">10.3</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">a_1param</span><span class="p">,</span> <span class="n">b_1param</span> <span class="o">=</span> <span class="n">ols_params_1param</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ordinary Least Squares result:     a=</span><span class="si">{</span><span class="n">a_1param</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b_1param</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">slope_estimates</span> <span class="o">=</span> <span class="p">(</span><span class="n">m36</span><span class="o">-</span><span class="mf">10.3</span><span class="p">)</span> <span class="o">/</span> <span class="n">logP</span>
+<span class="n">mean_slope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">slope_estimates</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average of slope estimates:        a=</span><span class="si">{</span><span class="n">mean_slope</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ordinary Least Squares result:     a=-2.370, b=-0.0004
+Average of slope estimates:        a=-2.380
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">logP</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">logP</span><span class="p">),</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">logP</span><span class="p">,</span> <span class="n">m36</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">e_m36</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;b.&quot;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="mf">10.3</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">ols_params_1param</span><span class="p">,</span> <span class="n">xx</span><span class="p">),</span> <span class="s2">&quot;k-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;OLS: $m_</span><span class="se">{{</span><span class="s2">3.6</span><span class="se">}}</span><span class="s2">$-10.3=</span><span class="si">{</span><span class="n">a_1param</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2"> $</span><span class="se">\\</span><span class="s2">log P$ </span><span class="si">{</span><span class="n">b_1param</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="mf">10.3</span> <span class="o">+</span> <span class="n">mean_slope</span> <span class="o">*</span> <span class="n">xx</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$</span><span class="se">\\</span><span class="s2">bar</span><span class="se">{{</span><span class="s2">a</span><span class="se">}}</span><span class="s2">$: $m_</span><span class="se">{{</span><span class="s2">3.6</span><span class="se">}}</span><span class="s2"> - 10.3 = $</span><span class="si">{</span><span class="n">mean_slope</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2"> $</span><span class="se">\\</span><span class="s2">log P$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log P$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$m_</span><span class="si">{3.6}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1a4e31c55a720ec4624c42c7c8acfd15a0a677e4f7007f470a0e375171566d94.png" src="../_images/1a4e31c55a720ec4624c42c7c8acfd15a0a677e4f7007f470a0e375171566d94.png" />
+</div>
+</div>
+<p><u><strong>In-class discussion: Can we fit the slope using <span class="math notranslate nohighlight">\(\chi^2\)</span>-fitting?</strong></u></p>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<br>
+    Sure! This includes the uncertainties, and we are using directly the likelihood we want.
+</details>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chi2_min_result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">m36</span><span class="o">-</span><span class="mf">10.3</span><span class="o">-</span><span class="n">a</span><span class="o">*</span><span class="n">logP</span><span class="p">)</span><span class="o">**</span><span class="mf">2.0</span> <span class="o">/</span> <span class="n">e_m36</span><span class="o">**</span><span class="mf">2.0</span><span class="p">),</span> <span class="n">x0</span><span class="o">=</span><span class="n">mean_slope</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Chi-square minimization estimate:  a=</span><span class="si">{</span><span class="n">chi2_min_result</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Chi-square minimization estimate:  a=-2.352
+</pre></div>
+</div>
+</div>
+</div>
+<p><u><strong>In-class discussion: What is the uncertainty on the slope?</strong></u></p>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Spoiler] (click here to expand)</summary></b></p>
+<br>
+Most methods (OLS, $\chi^2$) have ways to get the uncertainties of the parameters. These are based on Gaussian approximations of the likelihood itself! 
+Here we have the likelihood, why not use it?
+</details>
+</div><section id="plotting-the-log-likelihood">
+<h2>Plotting the (log-)likelihood<a class="headerlink" href="#plotting-the-log-likelihood" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">log_likelihood_1param</span><span class="p">(</span><span class="n">slope</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The log-likelihood for a fit with fixed intercept at 10.3.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">m36</span><span class="o">-</span><span class="mf">10.3</span> <span class="o">-</span> <span class="n">slope</span><span class="o">*</span><span class="n">logP</span><span class="p">)</span><span class="o">**</span><span class="mf">2.0</span> <span class="o">/</span> <span class="n">e_m36</span><span class="o">**</span><span class="mf">2.0</span><span class="p">)</span>
+
+<span class="c1"># the slope values to try</span>
+<span class="n">a_values</span> <span class="o">=</span> <span class="n">a_grid</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="c1"># the corresponding log-likelihood values</span>
+<span class="n">ln_like_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">log_likelihood_1param</span><span class="p">(</span><span class="n">a_value</span><span class="p">)</span> <span class="k">for</span> <span class="n">a_value</span> <span class="ow">in</span> <span class="n">a_values</span><span class="p">])</span>
+
+<span class="c1"># the likelihood values, normalized to 1</span>
+<span class="n">L_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">ln_like_values</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ln_like_values</span><span class="p">))</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_values</span><span class="p">,</span> <span class="n">ln_like_values</span><span class="p">,</span> <span class="s2">&quot;k-&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_values</span><span class="p">,</span> <span class="n">L_values</span><span class="p">,</span> <span class="s2">&quot;k-&quot;</span><span class="p">)</span>
+
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\ln L$&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$L$&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Slope, $a$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/93598c7911c38fddfa4545b3ce5b04b63b0b1dd3fa59ed1496570fab156cd322.png" src="../_images/93598c7911c38fddfa4545b3ce5b04b63b0b1dd3fa59ed1496570fab156cd322.png" />
+</div>
+</div>
+</section>
+<section id="estimating-the-uncertainty-through-the-cdf">
+<h2>Estimating the uncertainty through the CDF<a class="headerlink" href="#estimating-the-uncertainty-through-the-cdf" title="Link to this heading">#</a></h2>
+<p>What does the <em>uncertainty on the slope</em> mean? The likelihood function gives all the information. Sigma values, upper and lower limits, are simply summarizing the likelihood using 1-2 values.</p>
+<p>We can <strong>define</strong> as 68% confidence interval on the slope, the region around the median, where the area under the (properly normalized) likelihood is 68%:</p>
+<div class="math notranslate nohighlight">
+\[\Large \int\limits_{lo}^{up} L(a) da = 0.68 \]</div>
+<p>where <span class="math notranslate nohighlight">\(lo\)</span> and <span class="math notranslate nohighlight">\(hi\)</span> are the lower and upper bounds of the CI. Since we defined the CI as something around the median, this implies that the <span class="math notranslate nohighlight">\(lo\)</span> and <span class="math notranslate nohighlight">\(up\)</span> values correspond to the 16 and 84 percentiles. Therefore:</p>
+<div class="math notranslate nohighlight">
+\[\Large \int\limits_{-\infty}^{lo} L(a) da = 0.16 \]</div>
+<div class="math notranslate nohighlight">
+\[\Large \int\limits_{-\infty}^{up} L(a) da = 0.84 \]</div>
+<p>This is why the <strong>cumulative density function</strong> (CDF) is very useful! We can obtain the CDF by integrating the likelihood:</p>
+<div class="math notranslate nohighlight">
+\[\Large F(a') = \int\limits_{-\infty}^{a'} L(a) da \]</div>
+<p>We have calculated <span class="math notranslate nohighlight">\(f(x)\)</span> on a regular and fine grid of <span class="math notranslate nohighlight">\(x\)</span>: <span class="math notranslate nohighlight">\(\Delta x\)</span> is constant and a small value. Consequently, the integral calculated in the same grid, is simply the <strong>cumulative sum</strong> of the likelihood values in the grid. Of course, we need to <strong>normalize</strong> it so that the CDF goes from 0 to 1 (- to +infinity). Since we started with a wide range of <span class="math notranslate nohighlight">\(x\)</span> (including most of the area of the likelihood), we can assume that the CDF goes from 0 to 1 in our grid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cdf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">L_values</span><span class="p">)</span>
+<span class="n">cdf</span> <span class="o">/=</span> <span class="n">cdf</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_values</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="s2">&quot;k.&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Slope, $a$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Cumulative Distribution Function&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/75ecfd0853ae596f9dc9b4104694e2e1cbd003bc6420e80dffee9aed5af642ec.png" src="../_images/75ecfd0853ae596f9dc9b4104694e2e1cbd003bc6420e80dffee9aed5af642ec.png" />
+</div>
+</div>
+</section>
+<section id="finding-the-confidence-interval">
+<h2>Finding the confidence interval<a class="headerlink" href="#finding-the-confidence-interval" title="Link to this heading">#</a></h2>
+<p>The CDF calculated in the grid is a series of point. To find the value at which the CDF is say, 0.16, we can use interpolation! But not the typical one where we interpolate <span class="math notranslate nohighlight">\(y\)</span> values from <span class="math notranslate nohighlight">\(x\)</span> values, but the opposite!</p>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Task</strong></font>
+Use interpolation to find the confidence interval and the median of the slope.</p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lo68</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">hi68</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Slope = </span><span class="si">{</span><span class="n">median</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> +</span><span class="si">{</span><span class="n">hi68</span><span class="o">-</span><span class="n">median</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> -</span><span class="si">{</span><span class="n">median</span><span class="o">-</span><span class="n">lo68</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhspan</span><span class="p">(</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">lo68</span><span class="p">,</span> <span class="n">hi68</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">median</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">0.50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_values</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="s2">&quot;k-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">18</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">lo68</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">hi68</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Slope = </span><span class="si">{</span><span class="n">median</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> +</span><span class="si">{</span><span class="n">hi68</span><span class="o">-</span><span class="n">median</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> -</span><span class="si">{</span><span class="n">median</span><span class="o">-</span><span class="n">lo68</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="nn">File ~/miniforge3/lib/python3.12/site-packages/numpy/lib/_function_base_impl.py:1664,</span> in <span class="ni">interp</span><span class="nt">(x, xp, fp, left, right, period)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1661</span>     <span class="n">xp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">xp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">period</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">xp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">period</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1662</span>     <span class="n">fp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">fp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:],</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fp</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]))</span>
+<span class="ne">-&gt; </span><span class="mi">1664</span> <span class="k">return</span> <span class="n">interp_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">)</span>
+
+<span class="ne">ValueError</span>: object of too small depth for desired array
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Solution] (click here to expand)</summary></b></p>
+<p>We need to calculate the slope values (<span class="math notranslate nohighlight">\(a\)</span> values) for which the CDF evaluates
+to 0.16 (lower bound of the 68% confidence interval), 0.5 (median) and 0.84
+(upper bound):</p>
+<pre>
+lo68, median, hi68 = np.interp([0.16, 0.50, 0.84], cdf, a_values)
+</pre>
+</details>
+</div><div style="border-left: 4px solid #4CAF50; padding: 10px; border-radius: 4px; background: rgba(76, 175, 80, 0.12); color: inherit;">
+<p><b>Full solution (complete, runnable code)</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lo68</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">hi68</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">([</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">],</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">a_values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Slope = </span><span class="si">{</span><span class="n">median</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> +</span><span class="si">{</span><span class="n">hi68</span><span class="o">-</span><span class="n">median</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> -</span><span class="si">{</span><span class="n">median</span><span class="o">-</span><span class="n">lo68</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhspan</span><span class="p">(</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.84</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;0.75&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">lo68</span><span class="p">,</span> <span class="n">hi68</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">median</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">0.50</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">a_values</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="s2">&quot;k-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Slope = -2.353 +0.011 -0.011
+</pre></div>
+</div>
+<img alt="../_images/e2c0aac322e43c0a164ec2373aacc8e86fd158ebafa507def85be79b4b81b6d1.png" src="../_images/e2c0aac322e43c0a164ec2373aacc8e86fd158ebafa507def85be79b4b81b6d1.png" />
+</div>
+</div>
+</section>
+<section id="additional-considerations">
+<h2>Additional considerations<a class="headerlink" href="#additional-considerations" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>The grid is not necessary. We can directly calculate any percentile by defining the CDF as a function that integrates (e.g., with <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code>), and then using root finders or minimizers (e.g., with <code class="docutils literal notranslate"><span class="pre">scipy.optimize</span></code>), find the value for which it gives 0.16 or 0.84!</p></li>
+<li><p>We can directly use the likelihood to calculate other statistics using formulas applied on distribution functions (don’t forget to normalize your likelihood!):</p></li>
+</ol>
+<p>Mean: <span class="math notranslate nohighlight">\( \mu = \int\limits_{-\infty}^{+\infty} x L(x)\, dx\)</span></p>
+<p>Variance: <span class="math notranslate nohighlight">\(\text{Var} = \int\limits_{-\infty}^{+\infty} \left(x - \mu\right)^2 L(x) dx\)</span></p>
+<p>Standard deviation: <span class="math notranslate nohighlight">\(\sigma = \sqrt{\text{Var}}\)</span></p>
+<p>…and so on! It involves integrations that are typically easy to calculate with standard methods.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="fitting-a-spectral-line-using-mle">
+<h1>Fitting a spectral line using MLE<a class="headerlink" href="#fitting-a-spectral-line-using-mle" title="Link to this heading">#</a></h1>
+<p>Astrophysics loves spectra since extracting features from them is extremely informative regarding the physical processes of astronomical objects.</p>
+<p>In this example we’ll try to fit the LiI spectral line using a stellar spectrum.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;data/lithium_line_example.npy&quot;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_all</span><span class="p">,</span> <span class="n">ax_zoom</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax_all</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">spectrum</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">],</span> <span class="n">spectrum</span><span class="p">[</span><span class="s1">&#39;flux&#39;</span><span class="p">])</span>
+<span class="n">ax_zoom</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">spectrum</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">],</span> <span class="n">spectrum</span><span class="p">[</span><span class="s1">&#39;flux&#39;</span><span class="p">],</span>
+                 <span class="n">yerr</span><span class="o">=</span><span class="n">spectrum</span><span class="p">[</span><span class="s1">&#39;flux_error&#39;</span><span class="p">],</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;. &#39;</span><span class="p">)</span>
+
+<span class="n">ax_zoom</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">6705</span><span class="p">,</span> <span class="mi">6709</span><span class="p">)</span>
+<span class="n">ax_zoom</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">2700</span><span class="p">)</span>
+
+<span class="n">ax_all</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;All data&quot;</span><span class="p">)</span>
+<span class="n">ax_zoom</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Zoomed in on the lithium line&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ax_all</span><span class="p">,</span> <span class="n">ax_zoom</span><span class="p">]:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Wavelength ($\AA$)&#39;</span><span class="p">)</span>
+<span class="n">ax_all</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4ecd5b029ef6de85ab7d7577412aa9a60d7c96b85ac5f378decd912d2433cb7b.png" src="../_images/4ecd5b029ef6de85ab7d7577412aa9a60d7c96b85ac5f378decd912d2433cb7b.png" />
+</div>
+</div>
+<section id="let-s-focus-on-the-lithium-line">
+<h2>Let’s focus on the lithium line<a class="headerlink" href="#let-s-focus-on-the-lithium-line" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lithium_line</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="n">spectrum</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">6705</span><span class="p">]</span>
+<span class="n">lithium_line</span> <span class="o">=</span> <span class="n">lithium_line</span><span class="p">[</span><span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">6709</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">],</span> <span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;flux&#39;</span><span class="p">],</span>
+             <span class="n">yerr</span><span class="o">=</span><span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;flux_error&#39;</span><span class="p">],</span>
+             <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39; .&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Wavelength ($\AA$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dcd9053df8a916bfc8451570757426f8b8f18f8fc6ebd954ac5ff78658e2f3a2.png" src="../_images/dcd9053df8a916bfc8451570757426f8b8f18f8fc6ebd954ac5ff78658e2f3a2.png" />
+</div>
+</div>
+</section>
+<section id="let-s-start-by-describing-our-model-a-linear-continuum-plus-a-gaussian-absorption-feature">
+<h2>Let’s start by describing our model: a linear continuum plus a Gaussian absorption feature<a class="headerlink" href="#let-s-start-by-describing-our-model-a-linear-continuum-plus-a-gaussian-absorption-feature" title="Link to this heading">#</a></h2>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><font size=4><strong>Tasks</strong></font></p>
+<ol class="arabic simple">
+<li><p>Create the model: continuum + Gaussian line</p></li>
+<li><p>Decide the return value of <code class="docutils literal notranslate"><span class="pre">ln_likelihood</span></code> for values outside the permitted ranges of the parameters</p></li>
+<li><p>Complete the <code class="docutils literal notranslate"><span class="pre">ln_likelihood</span></code> function</p></li>
+</ol>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">model_flux</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the flux for our model.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    p : tuple</span>
+<span class="sd">        The model parameters</span>
+<span class="sd">    wavelength : float</span>
+<span class="sd">        The input wavelength(s) at which we wish to calculate our model</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    flux : float</span>
+<span class="sd">        The model flux(es) calculated by our model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># You can unpack the parameters if you want to use them by name</span>
+    <span class="c1"># m, b, c, sigma, loc = p</span>
+
+    <span class="n">linear_part</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">wavelength</span> <span class="o">-</span> <span class="mi">6707</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">gaussian_part</span> <span class="o">=</span> <span class="o">...</span>
+
+    <span class="k">return</span> <span class="n">linear_part</span> <span class="o">+</span> <span class="n">gaussian_part</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ln_likelihood</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the likelihood of our model.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    p : tuple</span>
+<span class="sd">        The model parameters</span>
+<span class="sd">    data : ndarray</span>
+<span class="sd">        The observed data from which we wish to calculate the likelihood of our model</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ln_likelihood : float</span>
+<span class="sd">        The log likelihood of our model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="k">if</span> <span class="n">sigma</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">...</span>
+    <span class="k">if</span> <span class="n">loc</span> <span class="o">&lt;</span> <span class="mi">6706</span> <span class="ow">or</span> <span class="n">loc</span> <span class="o">&gt;</span> <span class="mi">6708</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">...</span>
+
+    <span class="c1"># First, calculate the model fluxes at the observed wavelengths</span>
+    <span class="n">model_fluxes</span> <span class="o">=</span> <span class="n">model_flux</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Now capture our observed fluxes</span>
+    <span class="n">observed_fluxes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;flux&#39;</span><span class="p">]</span>
+    <span class="n">observed_flux_errors</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;flux_error&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Compare the two</span>
+    <span class="n">ln_likelihood</span> <span class="o">=</span> <span class="o">...</span>
+
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ln_likelihood</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">neg_ln_likelihood</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for ln_likelihood to return the negative of the log likelihood.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    p : tuple</span>
+<span class="sd">        The model parameters</span>
+<span class="sd">    data : ndarray</span>
+<span class="sd">        The observed data from which we wish to calculate the likelihood of our model</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    neg_ln_likelihood : float</span>
+<span class="sd">        The negative of the log likelihood of our model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="n">ln_likelihood</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Solution] (click here to expand)</summary></b></p>
+<p>In the model that describes the fluxes, we add a Gaussian absorption feature
+(therefore we subtract the normalization factor <code class="docutils literal notranslate"><span class="pre">c</span></code>), the shape of which is
+conveniently given by the <code class="docutils literal notranslate"><span class="pre">st.norm.pdf</span></code> function that takes as an input the
+<code class="docutils literal notranslate"><span class="pre">x</span></code> values to be applied to, the location of the mean (<code class="docutils literal notranslate"><span class="pre">loc</span></code>), and the standard
+deviation (<code class="docutils literal notranslate"><span class="pre">sigma</span></code>):</p>
+<pre>
+
+    gaussian_part = -c * st.norm.pdf(wavelength, loc=loc, scale=sigma)
+</pre>
+<p>In the log-likelihood function we treat “illegal values/ranges”. The standard
+deviation cannot be 0 or negative, or the location should be in the expected
+range (to constrain the search to this line). In these cases, the likelihood
+is 0, and therefore the log-likelihood is <span class="math notranslate nohighlight">\(-\infty\)</span>:</p>
+<pre>
+    if sigma <= 0:
+        return -np.inf
+    if loc < 6706 or loc > 6708:
+        return -np.inf
+</pre>
+<p>Meanwhile, the overall likelihood function return the values expressed in the
+equation we saw earlier: the constant term (can be omitted) containing the
+flux errors, and the <span class="math notranslate nohighlight">\(\chi^2\)</span> term that compares the observed fluxes with the
+modeled ones:</p>
+<pre>
+    ln_likelihood = (
+        -np.log(observed_flux_errors * np.sqrt(2*np.pi))
+        - (model_fluxes - observed_fluxes)**2 / (2 * observed_flux_errors**2)
+        )
+</pre>
+</details>
+</div><div style="border-left: 4px solid #4CAF50; padding: 10px; border-radius: 4px; background: rgba(76, 175, 80, 0.12); color: inherit;">
+<p><b>Full solution (complete, runnable code)</b></p>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">model_flux</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the flux for our model.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    p : tuple</span>
+<span class="sd">        The model parameters</span>
+<span class="sd">    wavelength : float</span>
+<span class="sd">        The input wavelength(s) at which we wish to calculate our model</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    flux : float</span>
+<span class="sd">        The model flux(es) calculated by our model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Unpack the parameters to use them by name</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">p</span>
+
+    <span class="n">linear_part</span> <span class="o">=</span> <span class="n">m</span> <span class="o">*</span> <span class="p">(</span><span class="n">wavelength</span> <span class="o">-</span> <span class="mi">6707</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">gaussian_part</span> <span class="o">=</span> <span class="o">-</span><span class="n">c</span> <span class="o">*</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">linear_part</span> <span class="o">+</span> <span class="n">gaussian_part</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">ln_likelihood</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the likelihood of our model.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    p : tuple</span>
+<span class="sd">        The model parameters</span>
+<span class="sd">    data : ndarray</span>
+<span class="sd">        The observed data from which we wish to calculate the likelihood of our model</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    ln_likelihood : float</span>
+<span class="sd">        The log likelihood of our model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">m</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">loc</span> <span class="o">=</span> <span class="n">p</span>
+    <span class="k">if</span> <span class="n">sigma</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">if</span> <span class="n">loc</span> <span class="o">&lt;</span> <span class="mi">6706</span> <span class="ow">or</span> <span class="n">loc</span> <span class="o">&gt;</span> <span class="mi">6708</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+
+    <span class="c1"># First, calculate the model fluxes at the observed wavelengths</span>
+    <span class="n">model_fluxes</span> <span class="o">=</span> <span class="n">model_flux</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Now capture our observed fluxes</span>
+    <span class="n">observed_fluxes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;flux&#39;</span><span class="p">]</span>
+    <span class="n">observed_flux_errors</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;flux_error&#39;</span><span class="p">]</span>
+
+    <span class="c1"># Compare the two</span>
+    <span class="n">ln_likelihood</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">observed_flux_errors</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+        <span class="o">-</span> <span class="p">(</span><span class="n">model_fluxes</span> <span class="o">-</span> <span class="n">observed_fluxes</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">observed_flux_errors</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ln_likelihood</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">neg_ln_likelihood</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Wrapper for ln_likelihood to return the negative of the log likelihood.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">    p : tuple</span>
+<span class="sd">        The model parameters</span>
+<span class="sd">    data : ndarray</span>
+<span class="sd">        The observed data from which we wish to calculate the likelihood of our model</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    neg_ln_likelihood : float</span>
+<span class="sd">        The negative of the log likelihood of our model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="n">ln_likelihood</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="let-s-start-with-a-trial-solution-and-use-scipy-minimize-to-find-a-solution">
+<h2>Let’s start with a trial solution and use scipy minimize to find a solution<a class="headerlink" href="#let-s-start-with-a-trial-solution-and-use-scipy-minimize-to-find-a-solution" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">INITIAL_M</span> <span class="o">=</span> <span class="mi">40</span>
+<span class="n">INITIAL_B</span> <span class="o">=</span> <span class="mi">2400</span>
+<span class="n">INITIAL_C</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="n">INITIAL_SIGMA</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">INITIAL_LOC</span> <span class="o">=</span> <span class="mf">6707.1</span>
+
+<span class="n">p0</span> <span class="o">=</span> <span class="p">(</span><span class="n">INITIAL_M</span><span class="p">,</span> <span class="n">INITIAL_B</span><span class="p">,</span> <span class="n">INITIAL_C</span><span class="p">,</span> <span class="n">INITIAL_SIGMA</span><span class="p">,</span> <span class="n">INITIAL_LOC</span><span class="p">)</span>
+
+<span class="n">model_wavelengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]),</span>
+                                <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">model_fluxes</span> <span class="o">=</span> <span class="n">model_flux</span><span class="p">(</span><span class="n">p0</span><span class="p">,</span> <span class="n">model_wavelengths</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model_wavelengths</span><span class="p">,</span> <span class="n">model_fluxes</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">],</span> <span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;flux&#39;</span><span class="p">],</span>
+             <span class="n">yerr</span><span class="o">=</span><span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;flux_error&#39;</span><span class="p">],</span>
+             <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Wavelength ($\AA$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/08dc7bf9136ca9456fa617868c3f2b8cd6b96f7aefee78f6f754eeb4222480b2.png" src="../_images/08dc7bf9136ca9456fa617868c3f2b8cd6b96f7aefee78f6f754eeb4222480b2.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">neg_ln_likelihood</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;Nelder-Mead&#39;</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="n">lithium_line</span><span class="p">)</span>
+<span class="n">m_sol</span><span class="p">,</span> <span class="n">b_sol</span><span class="p">,</span> <span class="n">c_sol</span><span class="p">,</span> <span class="n">sigma_sol</span><span class="p">,</span> <span class="n">loc_sol</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best-fit parameters: m=</span><span class="si">{</span><span class="n">m_sol</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, b=</span><span class="si">{</span><span class="n">b_sol</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, c=</span><span class="si">{</span><span class="n">c_sol</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;sigma=</span><span class="si">{</span><span class="n">sigma_sol</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, loc=</span><span class="si">{</span><span class="n">loc_sol</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">best_p</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+<span class="n">model_wavelengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]),</span>
+                                <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">]),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">model_fluxes</span> <span class="o">=</span> <span class="n">model_flux</span><span class="p">(</span><span class="n">best_p</span><span class="p">,</span> <span class="n">model_wavelengths</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model_wavelengths</span><span class="p">,</span> <span class="n">model_fluxes</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;wavelength&#39;</span><span class="p">],</span> <span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;flux&#39;</span><span class="p">],</span>
+             <span class="n">yerr</span><span class="o">=</span><span class="n">lithium_line</span><span class="p">[</span><span class="s1">&#39;flux_error&#39;</span><span class="p">],</span>
+             <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Wavelength ($\AA$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Counts&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best-fit parameters: m=29.043, b=2435.356, c=374.253, sigma=0.155, loc=6707.109
+</pre></div>
+</div>
+<img alt="../_images/416e98f06030789e01c3cff7abb4a591714fdaa996ddfef025c115a54a043aff.png" src="../_images/416e98f06030789e01c3cff7abb4a591714fdaa996ddfef025c115a54a043aff.png" />
+</div>
+</div>
+</section>
+<section id="how-does-the-likelihood-vary-with-model-parameters">
+<h2>How does the likelihood vary with model parameters?<a class="headerlink" href="#how-does-the-likelihood-vary-with-model-parameters" title="Link to this heading">#</a></h2>
+<p>Let’s see how the likelihood will vary with the the model parameters</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\sigma$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$\mu$&#39;</span><span class="p">]</span>
+<span class="n">width_perc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.000003</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">axes</span><span class="p">)):</span>
+    <span class="c1"># get the best-fitting values</span>
+    <span class="n">trial_p</span> <span class="o">=</span> <span class="n">best_p</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># take a range around the j-th parameter&#39;s best-fiting value</span>
+    <span class="n">test_set</span> <span class="o">=</span> <span class="n">best_p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">width_perc</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">width_perc</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="mi">1000</span><span class="p">)</span>
+
+    <span class="c1"># get the log-likelihood for the different values (keeping fixed the rest of the parameters)</span>
+    <span class="n">ll</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">test_set</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">test_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_set</span><span class="p">):</span>
+        <span class="n">trial_p</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_val</span>
+        <span class="n">ll</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ln_likelihood</span><span class="p">(</span><span class="n">trial_p</span><span class="p">,</span> <span class="n">lithium_line</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">test_set</span><span class="p">,</span> <span class="n">ll</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">best_p</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\ln \mathcal</span><span class="si">{L}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1843994bc04dd37b10fd0636fa5c29ce2814caf93218501ba0ec6b70b34eaa2f.png" src="../_images/1843994bc04dd37b10fd0636fa5c29ce2814caf93218501ba0ec6b70b34eaa2f.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">###EOF</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./MLE"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../Hypothesis_Testing/Hypothesis_Testing.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Hypothesis Testing <a class="tocSkip"></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Machine_Learning/Intro_and_Clustering.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Machine Learning and Clustering <a class="tocSkip"></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Maximum Likelihood Estimation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#rr-lyrae-stars-in-m4">RR Lyrae stars in M4</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rr-lyrae-the-data">RR Lyrae: The data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-python-code-for-fitting">Quick Python code for fitting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-a-likelihood-function">Constructing a likelihood function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-log-trick">The log trick</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-with-chi-2">Connection with <span class="math notranslate nohighlight">\(\chi^2\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#if-the-uncertainties-are-equal">If the uncertainties are equal…</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-plot-the-likelihood-close-to-the-solution-we-found-before">Let’s plot the likelihood close to the solution we found before</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-fitting-for-slope-only">Exercise: fitting for slope only</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plotting-the-log-likelihood">Plotting the (log-)likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-the-uncertainty-through-the-cdf">Estimating the uncertainty through the CDF</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#finding-the-confidence-interval">Finding the confidence interval</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-considerations">Additional considerations</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-spectral-line-using-mle">Fitting a spectral line using MLE</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-focus-on-the-lithium-line">Let’s focus on the lithium line</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-start-by-describing-our-model-a-linear-continuum-plus-a-gaussian-absorption-feature">Let’s start by describing our model: a linear continuum plus a Gaussian absorption feature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-start-with-a-trial-solution-and-use-scipy-minimize-to-find-a-solution">Let’s start with a trial solution and use scipy minimize to find a solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-does-the-likelihood-vary-with-model-parameters">How does the likelihood vary with model parameters?</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1381 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Introduction to Classical Statistics &#8212; AstroStat School 2026 — Rome</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Intro/Intro';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Hypothesis Testing" href="../Hypothesis_Testing/Hypothesis_Testing.html" />
+    <link rel="prev" title="AstroStat School 2026 — Rome" href="../index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — Rome</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — Rome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Hypothesis_Testing/Hypothesis_Testing.html">Hypothesis Testing <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MLE/MLE.html">Maximum Likelihood Estimation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Intro_and_Clustering.html">Introduction to Machine Learning and Clustering <a class="tocSkip"></a></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_1.html">Introduction to Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_2.html">Applied Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">Basics of Markov Chain Monte Carlo <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Classification.html">Classification <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Gaussian_Processes/Gaussian_Processes.html">Gaussian Processes <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Time_Series/Time_Series.html">Time Series Analysis <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Best_Practices.html">Machine Learning Practices and Protocols</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Intro_n_Regression/Intro_n_Regression.html">Introduction to Deep Learning and Regression Workshop</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../GPU_Parallelization/GPU_parallelization.html">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../NN_Explainability/NN_explainability.html">Neural Network Explainability <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_short.html">Introduction to Simulation Based Inference</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../SBI/SBI_exercise.html">Simulation Based Inference: Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Diffusion/Diffusion.html">Diffusion Models</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../AI_Agents/AI_Agents.html">Intro to AI Agents<a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroStat-Academy/astrostat-school-7/blob/main/./Intro/Intro.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Intro/Intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Introduction to Classical Statistics  <a class="tocSkip"></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">1. Probability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-calculus">Probability calculus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factoring-probabilities">Factoring probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence">Independence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marginalization">Marginalization</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-variables">2. Continuous variables</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density">Probability density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-probability-density-functions-pdfs">Common Probability Density Functions (PDFs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cumulative-distribution-function-cdf">The Cumulative Distribution Function (CDF)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-variables">3. Discrete variables</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-function-pmf">Probability Mass Function (PMF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-discrete-distributions">CDF of discrete distributions</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <fieldset style="padding:10px; border:1px solid #ccc; box-shadow:2px 2px 5px rgba(0,0,0,0.1);">
+<legend style="font-size: 10px; color:#555;">Credits</legend>
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 80px; vertical-align: top;">
+            <img src="https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/logo/logo_b_text_lowres.png" alt="AstroStat Academy logo" width="100">
+        </td>
+        <td style="vertical-align: center; padding-left: 15px; font-size: 10px; line-height: 1.2;">
+            This notebook contains original work by the authors unless stated otherwise.
+            Any external material is properly credited to its sources.<br>
+            References to papers, datasets, and software are acknowledged.
+            Original content is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0 (GNU GPLv3)</a>.
+        </td>
+    </tr>
+</table>
+</fieldset>
+<!-- Allow these <br> or it will look ugly once rendered on Jupyter Book. -->
+<br><section class="tex2jax_ignore mathjax_ignore" id="introduction-to-classical-statistics">
+<h1>Introduction to Classical Statistics  <a class="tocSkip"><a class="headerlink" href="#introduction-to-classical-statistics" title="Link to this heading">#</a></h1>
+<p>This notebook serves as a recap of the definitions in classical statistics, and it forms the basis upon which we build the rest of the terminology and tools we present during the school. Specifically, we will see:</p>
+<ul class="simple">
+<li><p>Conditional probabilities, dependent/independent events, marginalization</p></li>
+<li><p>Probability density and probability mass</p></li>
+<li><p>Cumulative probability functions</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="s2">&quot;&lt;style&gt;.container { width:100% !important; }&lt;/style&gt;&quot;</span><span class="p">))</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/colab/clone_and_cd_colab.py&quot;</span>
+<span class="n">colab</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">colab</span><span class="p">)</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/styles/plot_style.py&quot;</span>
+<span class="n">style</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+<span class="n">exec</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style>.container { width:100% !important; }</style></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Running locally, skipping Colab setup.
+Imported matplotlib.
+Imported seaborn.
+Plotting style set.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="probability">
+<h1>1. Probability<a class="headerlink" href="#probability" title="Link to this heading">#</a></h1>
+<p>The fundamental concept in statistics is the probability, denoted as:</p>
+<div class="math notranslate nohighlight">
+\[\Large P(A)\]</div>
+<p>which represents the frequency of the occurance of an event <span class="math notranslate nohighlight">\(A\)</span> (or our belief in a statement).</p>
+<p>The basic property of a probability is that</p>
+<div class="math notranslate nohighlight">
+\[\Large  0 \leq P(A) \leq 1 \]</div>
+<p>where 0 is the value of an impossible event, while 1 that of a certain event!</p>
+<section id="probability-calculus">
+<h2>Probability calculus<a class="headerlink" href="#probability-calculus" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>In most cases, A is not certain. There is a scenario of A not happening. This event is “complementary” to A:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\Large  P(A^c) = P(\bar{A}) =  1 - P(A) \]</div>
+<ol class="arabic simple" start="2">
+<li><p>This can be extended to a series of alternative scenarios/events: A, B, C, …</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\Large  P(A) + P(B) + P(C) + \cdots = 1 \]</div>
+<blockquote>
+<div><p>Note that the events are alternatives: when one is true, the others are false!</p>
+</div></blockquote>
+<ol class="arabic simple" start="3">
+<li><p>Sum rule: the probability of either A or B happening is equal to the sum of the probabilities minus the probability of both happening:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\Large  P(A \cup B) = P(A \text{ or } B) = P(A) + P(B) - P(A \cap B) = P(A) + P(B) - P(A \text{ and } B)\]</div>
+<a class="reference internal image-reference" href="../_images/A_B.png"><img alt="../_images/A_B.png" src="../_images/A_B.png" style="width: 600px;" />
+</a>
+<table><tr><td width=600><center><br>
+        Figure 1. Example of logical relations between events (Venn diagram) and their corresponding probabilities. The "dimensions" of this abstract space where events A and B occur could be anything, e.g. space (2D, 3D), time (1D), or anything else (including combinations).<br></center></td></tr></table></section>
+<section id="conditional-probability">
+<h2>Conditional probability<a class="headerlink" href="#conditional-probability" title="Link to this heading">#</a></h2>
+<p>The probability of <span class="math notranslate nohighlight">\(A\)</span> given <span class="math notranslate nohighlight">\(B\)</span>, is the probability of <span class="math notranslate nohighlight">\(A\)</span> happening given that <span class="math notranslate nohighlight">\(B\)</span> is true as well:</p>
+<div class="math notranslate nohighlight">
+\[\Large  P(A | B) \quad \small \text{and the reverse} \Large \quad P(B|A)\]</div>
+<p>which are not necessarily equal.</p>
+<p>Take for example rain (event A) and cloudy weather (event B). The probability of rain when it’s already cloudy, <span class="math notranslate nohighlight">\(P(A|B)\)</span>, is usually lower than the probability of clouds when it is already raining, <span class="math notranslate nohighlight">\(P(B|A)\)</span>.</p>
+<blockquote>
+<div><p>The conditional probability is useful to express dependencies between events.</p>
+</div></blockquote>
+</section>
+<section id="factoring-probabilities">
+<h2>Factoring probabilities<a class="headerlink" href="#factoring-probabilities" title="Link to this heading">#</a></h2>
+<p>The <strong>joint</strong> probability of <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> can be expressed using the conditional probability:</p>
+<div class="math notranslate nohighlight">
+\[\Large P(A \small \text{ and } \Large B) =  P(A, B) = P(A|B) P(B)\]</div>
+<p>which simply states that the probability of both <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> happening is equal to the probability of A given B, times the probability of <span class="math notranslate nohighlight">\(B\)</span>.</p>
+<p>Again, as an example, think of the probability of rain when it is cloudy, multiplied by the probability of being cloudy.</p>
+<blockquote>
+<div><p>Factorization is a way to <strong>break</strong> the expressions into simpler, or more understood terms!</p>
+</div></blockquote>
+</section>
+<section id="independence">
+<h2>Independence<a class="headerlink" href="#independence" title="Link to this heading">#</a></h2>
+<p>If <span class="math notranslate nohighlight">\(A\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are completely independent, i.e. whether <span class="math notranslate nohighlight">\(A\)</span> is true or false has nothing to do with the state of <span class="math notranslate nohighlight">\(B\)</span>, then the conditional probability is equal to the probability of the event itself:</p>
+<div class="math notranslate nohighlight">
+\[\Large  P(A | B) = P(A) \]</div>
+<p>which simplifies the factorization:</p>
+<div class="math notranslate nohighlight">
+\[\Large P(A, B) = P(A) P(B) \]</div>
+<p>Think of the probability of flipping a coin and finding heads (or tails) on a rainy day.</p>
+<blockquote>
+<div><p>Independence is a useful property (or assumption) which simplifies probability terms and conditional probabilities.</p>
+</div></blockquote>
+</section>
+<section id="marginalization">
+<h2>Marginalization<a class="headerlink" href="#marginalization" title="Link to this heading">#</a></h2>
+<p>The probability of <span class="math notranslate nohighlight">\(A\)</span> can be expressed as the probability of A and B plus the probability of A and not B:</p>
+<div class="math notranslate nohighlight">
+\[\Large  P(A) = P(A, B) + P(A, \bar{B}).\]</div>
+<p>Or if <span class="math notranslate nohighlight">\(B\)</span> has multiple <em>mutually exclusive</em> and <em>exhaustive</em> outcomes <span class="math notranslate nohighlight">\(B_1\)</span>, <span class="math notranslate nohighlight">\(B_2\)</span>, <span class="math notranslate nohighlight">\(\dots\)</span>, <span class="math notranslate nohighlight">\(B_k\)</span>, such that <span class="math notranslate nohighlight">\(P(B_1)+P(B_2)+\cdots+P(B_k)=1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Large  P(A) = \sum\limits_{i=1}^k P(A, B_i) \]</div>
+<p>Rain can occur both when it is cloudy as well as when it is not and the total probablity of rain should reflect this (by a sum).</p>
+<blockquote>
+<div><p>Marginalization is a way to <strong>introduce</strong> other events / parameters / models in the probability of interest.</p>
+</div></blockquote>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="continuous-variables">
+<h1>2. Continuous variables<a class="headerlink" href="#continuous-variables" title="Link to this heading">#</a></h1>
+<section id="probability-density">
+<h2>Probability density<a class="headerlink" href="#probability-density" title="Link to this heading">#</a></h2>
+<p>What if we don’t have distinct events, and our set is infinite?</p>
+<p>This is typical of continuous variables, such as magnitude, color, distance, mass, etc.</p>
+<p>Let’s load SDSS data for white dwarfs of spectral type DB (no hydrogen but helium absoption lines, <a class="reference external" href="https://arxiv.org/abs/1212.1222">Kleinman et al. 2013</a>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># let&#39;s get the data...</span>
+<span class="n">DB_WDs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;data/DB_kleinman.npz&quot;</span><span class="p">)[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span>
+<span class="c1"># ...and compute the g-r color </span>
+<span class="n">g_r</span> <span class="o">=</span> <span class="n">DB_WDs</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">DB_WDs</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">g_r</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s2">&quot;fd&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$g-r$ [mag]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of DB WDs&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/cc8a7d14f49b84bfba773b8b90cc2aaddcece202f856b59469bee4c8f49dd66b.png" src="../_images/cc8a7d14f49b84bfba773b8b90cc2aaddcece202f856b59469bee4c8f49dd66b.png" />
+</div>
+</div>
+<p><strong>Question</strong></p>
+<p>What is the probability of a DB WD to have <span class="math notranslate nohighlight">\(g-r = -0.3\)</span>?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># computing the fraction of values with g-r = -0.3</span>
+<span class="c1"># find how many items match the value exactly</span>
+<span class="c1"># mean provides their frequency, so the probability</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(g-r = </span><span class="si">{</span><span class="o">-</span><span class="mf">0.3</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">g_r</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">-</span><span class="mf">0.3</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># equivalent to :</span>
+<span class="c1"># print((g_r == -0.3).sum()/len(g_r))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(g-r = -0.300000) = 0.000000
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># finding the value closest to -0.3 and </span>
+<span class="c1"># computing the fraction of the data having it</span>
+<span class="n">value_close_to_it</span> <span class="o">=</span> <span class="n">g_r</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">g_r</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.3</span><span class="p">)))]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P(g-r = </span><span class="si">{</span><span class="n">value_close_to_it</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">g_r</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">value_close_to_it</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># equivalent to </span>
+<span class="c1"># print((g_r == value_close_to_it).sum()/len(g_r))</span>
+<span class="c1"># or even:</span>
+<span class="c1"># print( 1/ len(g_r))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P(g-r = -0.300028) = 0.0011
+</pre></div>
+</div>
+</div>
+</div>
+<p>Consequently, for continuous <span class="math notranslate nohighlight">\(x\)</span>, the quantity <span class="math notranslate nohighlight">\(P(x)\)</span> will always be 0! On the other hand, we can calculate the probabilities in a given range of values. For example, the probability of <span class="math notranslate nohighlight">\(g-r &lt; -0.3\)</span>?</p>
+<div class="math notranslate nohighlight">
+\[\Large P(g-r &lt; -0.3)\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the fraction of colors less than -0.3</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">g_r</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.4198645598194131)
+</pre></div>
+</div>
+</div>
+</div>
+<p>which is complementary to the alternative scenario, <span class="math notranslate nohighlight">\(g-r \geq -0.3\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Large P(g-r \geq -0.3)\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the fraction of colors greater or equal to -0.3</span>
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">g_r</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.5801354401805869)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Therefore, <span class="math notranslate nohighlight">\(P(x)\)</span> can still be used as a <strong>probability density</strong> which is supposed to be multiplied by <span class="math notranslate nohighlight">\(dx\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\Large  P(x) \; dx \simeq P(x &lt; x' &lt; x+\Delta x) \; \Delta x\]</div>
+<p>(so, the correct statement is that <em>“<span class="math notranslate nohighlight">\(P(x)\)</span> should go to zero as <span class="math notranslate nohighlight">\(\Delta x\)</span> becomes infinitely small”</em>)</p>
+<p>The total probability is therefore:</p>
+<div class="math notranslate nohighlight">
+\[\Large \int\limits_{-\infty}^{+\infty} P(x)\,dx = 1 \]</div>
+<p>From this, it’s easy to see that…</p>
+<blockquote>
+<div><p>..the probability density <span class="math notranslate nohighlight">\(P(x)\)</span> should be in units of <span class="math notranslate nohighlight">\(x^{-1}\)</span> (hence, it is a <em>density</em>)</p>
+</div></blockquote>
+<p>Arguably the most famous and useful of all probability density functions is the <strong>normal</strong> or <strong>Gaussian</strong> distribution:</p>
+<div class="math notranslate nohighlight">
+\[\Large f(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp \left[ -\frac{\left(x-\mu\right)^2}{2\sigma^2} \right] \]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span> are the mean value and standard deviation. If our data follow the normal distribution, then the sample mean and stadard deviation can be used to express the distribution function with this parametric formula!</p>
+<div class="alert alert-block alert-warning" style="margin-top: 20px">
+<p><font size=4><strong>Exercise 1:</strong></font></p>
+<p><strong>Objective:</strong> Draw the sample and the corresponding normal distribution.</p>
+<p><strong>Task:</strong> It this exercise you are asked to fill in the missing code in order to plot a histogram of the sample along with a Gaussian distribution that best describes it. For this you need to perform the following:</p>
+<ol class="arabic simple">
+<li><p>Find the mean and the standard deviation of the sample (check <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.mean.html">numpy’s <code class="docutils literal notranslate"><span class="pre">np.mean</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.std.html"><code class="docutils literal notranslate"><span class="pre">np.std</span></code></a>).</p></li>
+<li><p>Restrict the <span class="math notranslate nohighlight">\(x\)</span> values within 5 sigmas around the mean.</p></li>
+<li><p>Calculate the Gaussian PDF values.</p></li>
+<li><p>Add the necessary quantities in the plot functions.</p></li>
+</ol>
+</div><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_mean</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">sample_std</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1"># let&#39;s plot 5 sigmas around the mean value...</span>
+<span class="n">x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">...</span> <span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="c1"># ...the Gaussian PDF</span>
+<span class="n">y_values</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span> <span class="o">...</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;$g-r$ [mag]&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;PDF($g-r$)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="alert alert-danger" role="alert" style="border-radius: 8px; padding: 10px;">
+<p><strong>Caution:</strong> By default <code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code> will use <code class="docutils literal notranslate"><span class="pre">density=False</span></code>, showing the aboslute numbers of events at each bin. To normalize this, so that is comparable to the total probability of 1 form the PDF, you need to change it to True.</p>
+</div><div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Solution] (click here to expand)</summary></b></p>
+<p>Routines to find the mean and standard deviation:</p>
+<pre>
+sample_mean = np.mean(g_r)
+sample_std = np.std(g_r)
+</pre>
+<p>Let’s plot 5 sigmas around the mean value:</p>
+<pre>
+x_values = np.linspace(sample_mean-5*sample_std, sample_mean+5*sample_std, 50)
+</pre>
+<p>The Gaussian PDF:</p>
+<pre>
+y_values = 1 / np.sqrt(2*np.pi*sample_std**2.0) * np.exp(-(x_values-sample_mean)**2.0/(2*sample_std**2.0))
+</pre>
+<p>Defining some plotting optiions:</p>
+<pre>
+plt.hist(g_r, bins=30, density=True)
+plt.plot(x_values, y_values, "r-")
+</pre>
+</details>
+</div></section>
+<section id="common-probability-density-functions-pdfs">
+<h2>Common Probability Density Functions (PDFs)<a class="headerlink" href="#common-probability-density-functions-pdfs" title="Link to this heading">#</a></h2>
+<p>In <code class="docutils literal notranslate"><span class="pre">scipy.stats</span></code> we can find most of the popular distributions, providing functions to calculate the PDF, PMF (see below), and even <span class="math notranslate nohighlight">\(\log\)</span>-versions of them that are optimized for accuracy when small numbers are expected. Let’s first check the simplest example of the Gaussian distribution, using the methods from this library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+
+<span class="c1"># taking the PDF of a Gaussian distribution</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">sample_mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sample_std</span><span class="p">)</span>
+
+<span class="c1"># comparing with our &quot;manual&quot; PDF</span>
+<span class="n">offset</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="o">+</span><span class="n">offset</span><span class="p">,</span> <span class="s2">&quot;g--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;manual+</span><span class="si">{</span><span class="n">offset</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;scipy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;g-r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PDF(g-r)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">st</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="c1"># taking the PDF of a Gaussian distribution</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">pdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">sample_mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sample_std</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># comparing with our &quot;manual&quot; PDF</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="n">offset</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+<span class="ne">NameError</span>: name &#39;x_values&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s take a look in a number of distributions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># various distributions to try</span>
+<span class="n">distributions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="p">(),</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">gamma</span><span class="p">(</span><span class="mf">1.5</span><span class="p">),</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">cauchy</span><span class="p">(),</span>
+    <span class="n">st</span><span class="o">.</span><span class="n">weibull_max</span><span class="p">(</span><span class="mf">1.05</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">distribution</span> <span class="ow">in</span> <span class="n">distributions</span><span class="p">:</span>
+    <span class="n">pdf</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_points</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_points</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">distribution</span><span class="o">.</span><span class="n">dist</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;PDF(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0e48df00da9916ddc26e725ff4b06919fea4d3ec2c41d15a55f4667d715e35ed.png" src="../_images/0e48df00da9916ddc26e725ff4b06919fea4d3ec2c41d15a55f4667d715e35ed.png" />
+</div>
+</div>
+</section>
+<section id="the-cumulative-distribution-function-cdf">
+<h2>The Cumulative Distribution Function (CDF)<a class="headerlink" href="#the-cumulative-distribution-function-cdf" title="Link to this heading">#</a></h2>
+<p>Simply, the probability of “less than a value”:</p>
+<div class="math notranslate nohighlight">
+\[\Large F(x) = \int\limits_{-\infty}^{x} f(x')\,dx'\]</div>
+<p>where <span class="math notranslate nohighlight">\(f(x)\)</span> is the probability density function.</p>
+<blockquote>
+<div><p>The CDF is useful for finding confidence intervals: 50% chance of your event in the range from <span class="math notranslate nohighlight">\(x_1\)</span> to <span class="math notranslate nohighlight">\(x_2\)</span> (see lecture on Hypothesis Testing).</p>
+</div></blockquote>
+<p>Let’s see how it looks by using the previous set of distributions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">distribution</span> <span class="ow">in</span> <span class="n">distributions</span><span class="p">:</span>
+    <span class="n">cdf</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x_points</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_points</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">distribution</span><span class="o">.</span><span class="n">dist</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;CDF(x)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/93fcdb9200bb377748b0ceda84defd7d4cef0f35dc435969856f9d403bc96c91.png" src="../_images/93fcdb9200bb377748b0ceda84defd7d4cef0f35dc435969856f9d403bc96c91.png" />
+</div>
+</div>
+<p>Notice the difference between the various distibutions (e.g. for a population following the Weibull distribution the peak is achieved much faster rather than the Gamma one).</p>
+<div class="alert alert-block alert-warning" style="margin-top: 20px">
+<p><font size=4><strong>Exercise 2:</strong></font></p>
+<p><strong>Objective:</strong> Draw the sample and the corresponding normal cumulative distributions.</p>
+<p><strong>Task:</strong> Similar to the previous exercise, fill in the missing code in order to plot the CDFs for the sample and its corresponding Gaussian distribution.</p>
+<blockquote>
+<div><p>TIP: Use the option <code class="docutils literal notranslate"><span class="pre">cumulative=1</span></code> for the <code class="docutils literal notranslate"><span class="pre">plt.hist()</span></code> converts automatically the plot. </div></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_mean</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">sample_std</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sample_mean</span><span class="p">,</span> <span class="n">sample_std</span><span class="p">)</span>
+<span class="c1"># let&#39;s plot 5 sigmas around the mean value...</span>
+<span class="n">x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">...</span> <span class="p">,</span> <span class="o">...</span> <span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># ...the Gaussian CDF</span>
+<span class="n">cdf</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="o">...</span> <span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+         <span class="o">...</span> <span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">...</span> <span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;g-r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CDF(g-r)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">13</span><span class="p">],</span> <span class="n">line</span> <span class="mi">12</span>
+    <span class="o">...</span> <span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+                                       <span class="o">^</span>
+<span class="ne">SyntaxError</span>: positional argument follows keyword argument
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">g_r</span><span class="p">)</span>
+<span class="n">sample_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">g_r</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sample_mean</span><span class="p">,</span> <span class="n">sample_std</span><span class="p">)</span>
+<span class="c1"># let&#39;s plot 5 sigmas around the mean value...</span>
+<span class="n">x_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">sample_mean</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">sample_std</span><span class="p">,</span> <span class="n">sample_mean</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">sample_std</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># ...the Gaussian CDF</span>
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">sample_mean</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">sample_std</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">g_r</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+         <span class="n">cumulative</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Data&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="s2">&quot;r-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;g-r&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CDF(g-r)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.284704658013544 0.07806358346006693
+</pre></div>
+</div>
+<img alt="../_images/a6748ea687a228756f7f68b325d91de708fb430a13557c92f75a5395776249af.png" src="../_images/a6748ea687a228756f7f68b325d91de708fb430a13557c92f75a5395776249af.png" />
+</div>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Solution] (click here to expand)</summary></b></p>
+<p>See the previous exercise for some elements of this solution.</p>
+<p>The Gaussian CDF:</p>
+<pre>
+cdf = st.norm.cdf(x_values, loc=sample_mean, scale=sample_std)
+</pre>
+<p>Defining some plotting options:</p>
+<pre>
+plt.hist(g_r, bins=30, density=True, cumulative=1, histtype="step", label="Data")
+plt.plot(x_values, cdf, "r-", label='CDF')
+</pre>
+</details>
+</div></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="discrete-variables">
+<h1>3. Discrete variables<a class="headerlink" href="#discrete-variables" title="Link to this heading">#</a></h1>
+<section id="probability-mass-function-pmf">
+<h2>Probability Mass Function (PMF)<a class="headerlink" href="#probability-mass-function-pmf" title="Link to this heading">#</a></h2>
+<p>Let’s go back to the discrete case! Events A, B, etc do not necessarily have an order but there are cases where order matters, e.g. in counting experiments. For example, the numbers of astronomical objects in a certain galaxy/volume/region in Milky Way, or the photon counts in high energy astrophysics, are Poisson-distributed.</p>
+<p>Let’s plot the probability of getting 0, 1, …, N counts when the mean photon count is known (assuming Poisson distribution). We will use the <code class="docutils literal notranslate"><span class="pre">.pmf()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_photon_count</span> <span class="o">=</span> <span class="mf">4.7</span>
+<span class="n">distribution</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">mean_photon_count</span><span class="p">)</span>
+
+<span class="n">photon_counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mean_photon_count</span><span class="o">*</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">photon_pmf</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">photon_counts</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">photon_counts</span><span class="p">,</span> <span class="n">photon_pmf</span><span class="p">,</span> <span class="s2">&quot;ks&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/801fbcbdaa706a06f2bdac2756c1427a16a9314f7d3cfe3576e794e3fdfc4163.png" src="../_images/801fbcbdaa706a06f2bdac2756c1427a16a9314f7d3cfe3576e794e3fdfc4163.png" />
+</div>
+</div>
+<p>This is not a probability density any more. We have a measurable probability for 0, 1, 2, 3, … photons! We often use indices to signify the discrete integer values of such <em>probability mass functions</em>:</p>
+<div class="math notranslate nohighlight">
+\[ \Large \sum\limits_{k=0}^{\infty} P(k) = 1 \]</div>
+<blockquote>
+<div><p><em>“Probability mass”</em> is a term used in analogy to <em>“probability density”</em> because the latter cannot be defined for discrete variables.</p>
+</div></blockquote>
+<p>Let’s test this with the values in the plot:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">photon_pmf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9998822825234644)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cdf-of-discrete-distributions">
+<h2>CDF of discrete distributions<a class="headerlink" href="#cdf-of-discrete-distributions" title="Link to this heading">#</a></h2>
+<p>The cumulative distribution function is always an integral even if the variable is discrete.</p>
+<p>However, because of the discrete nature of the probability mass function, it’s a <strong>discontinuous</strong> function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_photon_count</span> <span class="o">=</span> <span class="mf">4.7</span>
+<span class="n">distribution</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">poisson</span><span class="p">(</span><span class="n">mean_photon_count</span><span class="p">)</span>
+
+
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">mean_photon_count</span><span class="o">*</span><span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">photon_cdf</span> <span class="o">=</span> <span class="n">distribution</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">photon_cdf</span><span class="p">,</span> <span class="s2">&quot;k-&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;P&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/47b57a61d8348d0b03ed7739ba3e6f388348466e60d5402c9c7e6d113b31c97c.png" src="../_images/47b57a61d8348d0b03ed7739ba3e6f388348466e60d5402c9c7e6d113b31c97c.png" />
+</div>
+</div>
+<div class="alert alert-block alert-warning" style="margin-top: 20px">
+<p><font size=4><strong>Exercise 3:</strong></font></p>
+<p><strong>Objective:</strong> Working with probability density/mass functions</p>
+<p><strong>Task:</strong> In this exercise you are asked to fill in the missing code in order to plot a sample from a specific distribution (two options) and calculate various characteristic properties. More specifically:</p>
+<ol class="arabic simple">
+<li><p>Make a sample of 10000 points from the distribution </br>(<em>hint:</em> use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.sampling.TransformedDensityRejection.rvs.html#rvs">.rvs()</a> method, that generates random samples from a distribution). Plot the sample using a histogram.</p></li>
+<li><p>Make and plot the pdf and cdf of the distribution.</p></li>
+<li><p>Calculate the mean, median, standard deviation of the distribution.</p></li>
+<li><p>Calculate the 5% percentile <br>
+(<em>hint:</em> use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rv_continuous.ppf.html#ppf">.ppf()</a> method, that finds the point of the distribution that satisfies the given percent).</p></li>
+<li><p>Find the 68% Confidence Interval<br>
+(<em>hint:</em> use the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rv_continuous.interval.html#interval">.interval()</a> method)</p></li>
+</ol>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the plotting range (your random variable, in some units)</span>
+<span class="n">x_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="c1"># dist = st.norm(2.0, 0.35)</span>
+
+<span class="c1"># the Fisk (or lof-logistic) distribution to use, </span>
+<span class="c1"># check https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.fisk.html</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">fisk</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+
+<span class="c1"># draw a (large) sample from the distribution</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1"># calculate the PDF in the plotting range</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1"># calculate the CDF in the plotting range</span>
+<span class="n">cdf</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1"># compute the mean, median, and standard deviation</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">median</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">std</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1"># find the 5% percentile, and the 68% confidence interval</span>
+<span class="n">p05</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">lo68</span><span class="p">,</span> <span class="n">hi68</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1"># search for the maximum of the distribution (mode)</span>
+<span class="n">mode</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x0</span><span class="o">=</span><span class="n">median</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
+
+
+<span class="c1"># report what we found</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard deviation: </span><span class="si">{</span><span class="n">std</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s2">&quot;fd&quot;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+         <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Sample&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s2">&quot;k-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PDF&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s2">&quot;k:&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;68% CI&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mode&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Median&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;5% percentile&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x [in some units]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># the plotting range (your random variable, in some units)</span>
+<span class="n">x_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+
+<span class="c1"># the Fisk (or log-logistic) distribution to use</span>
+<span class="c1"># check https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.fisk.html</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">fisk</span><span class="p">(</span><span class="mf">2.5</span><span class="p">)</span>
+
+<span class="n">sample</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+
+<span class="c1"># calculate the PDF in the plotting range</span>
+<span class="n">pdf</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x_points</span><span class="p">)</span>
+
+<span class="c1"># calculate the CDF in the plotting range</span>
+<span class="n">cdf</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">x_points</span><span class="p">)</span>
+
+<span class="c1"># compute the mean, median, and standard deviation</span>
+<span class="n">mean</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">median</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">std</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="c1"># find the 5% percentile, and the 68% confidence interval</span>
+<span class="n">p05</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">ppf</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="n">lo68</span><span class="p">,</span> <span class="n">hi68</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">interval</span><span class="p">(</span><span class="mf">0.68</span><span class="p">)</span>
+
+<span class="c1"># search for the maximum of the distribution (mode)</span>
+<span class="n">mode</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="o">-</span><span class="n">dist</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x0</span><span class="o">=</span><span class="n">median</span><span class="p">)</span><span class="o">.</span><span class="n">x</span>
+
+
+<span class="c1"># report what we found</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard deviation: </span><span class="si">{</span><span class="n">std</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s2">&quot;fd&quot;</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+         <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Sample&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_points</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="s2">&quot;k-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PDF&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_points</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="s2">&quot;k:&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CDF&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">lo68</span><span class="p">,</span> <span class="n">hi68</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;68% CI&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mode&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Mean&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">median</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Median&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">p05</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;5% percentile&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;center right&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x [in some units]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;PDF&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">ymin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Standard deviation: 1.5906
+</pre></div>
+</div>
+<img alt="../_images/0aa0948d90f8d356001cf4e262476a7b2749477117b025c78c17b53f88a41422.png" src="../_images/0aa0948d90f8d356001cf4e262476a7b2749477117b025c78c17b53f88a41422.png" />
+</div>
+</div>
+<div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>[Solution] (click here to expand)</summary></b></p>
+<p>Draw a (large) sample from the distribution:</p>
+<pre>
+sample = dist.rvs(size=10000)
+</pre>
+<p>Calculate the PDF in the plotting range:</p>
+<pre>
+pdf = dist.pdf(x_points)
+</pre>
+<p>Calculate the CDF in the plotting range:</p>
+<pre>
+cdf = dist.cdf(x_points)
+</pre>
+<p>Compute the mean, median, and standard deviation:</p>
+<pre>
+mean = dist.mean()
+median = dist.median()
+std = dist.std()
+</pre>
+<p>Find the 5% percentile, and the 68% confidence interval:</p>
+<pre>
+p05 = dist.ppf(0.05)
+lo68, hi68 = dist.interval(0.68)
+</pre>
+<p>Defining some plotting options:</p>
+<pre>
+plt.hist(sample, bins="fd", density=True, histtype="step", color="b", lw=1, label="Sample")
+plt.plot(x_points, pdf, "k-", lw=2, label="PDF")
+plt.plot(x_points, cdf, "k:", lw=2, label="CDF")
+plt.axvspan(lo68, hi68, color="m", alpha=0.3, ec="none", label="68% CI")
+plt.axvline(mode, color="k", ls="-", lw=4, label="Mode")
+plt.axvline(mean, color="r", ls="-", lw=3, label="Mean")
+plt.axvline(median, color="g", lw=2, label="Median")
+plt.axvline(p05, color="m", label="5% percentile")
+</pre>
+</details>
+</div><p>Notice that when the distribution is not symmetric:</p>
+<ol class="arabic simple">
+<li><p>The confidence intervals correspond to regions with different probability density - the wings or edges of the distribution. These are not necessarily regions of high probability.</p></li>
+<li><p>The “mode” is the most probable value. Typically we search for this value in many statistical applications but it is not given by standard functions (e.g., unlike the mean).</p></li>
+<li><p>Knowing the distribution of your data, statistics, etc., and knowing how to work with it can make a huge difference!</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># EOF</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Intro"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">AstroStat School 2026 — Rome</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Hypothesis_Testing/Hypothesis_Testing.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Hypothesis Testing <a class="tocSkip"></p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#probability">1. Probability</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-calculus">Probability calculus</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-probability">Conditional probability</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#factoring-probabilities">Factoring probabilities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence">Independence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#marginalization">Marginalization</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-variables">2. Continuous variables</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-density">Probability density</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-probability-density-functions-pdfs">Common Probability Density Functions (PDFs)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cumulative-distribution-function-cdf">The Cumulative Distribution Function (CDF)</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#discrete-variables">3. Discrete variables</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-mass-function-pmf">Probability Mass Function (PMF)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cdf-of-discrete-distributions">CDF of discrete distributions</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

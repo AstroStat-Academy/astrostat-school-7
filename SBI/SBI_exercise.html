@@ -1,0 +1,1118 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Simulation Based Inference: Exercises &#8212; AstroStat School 2026 — Rome</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'SBI/SBI_exercise';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Diffusion Models" href="../DL_Diffusion/Diffusion.html" />
+    <link rel="prev" title="Introduction to Simulation Based Inference" href="SBI_short.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">AstroStat School 2026 — Rome</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    AstroStat School 2026 — Rome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Intro/Intro.html">Introduction to Classical Statistics  <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Hypothesis_Testing/Hypothesis_Testing.html">Hypothesis Testing <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MLE/MLE.html">Maximum Likelihood Estimation</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Intro_and_Clustering.html">Introduction to Machine Learning and Clustering <a class="tocSkip"></a></a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_1.html">Introduction to Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Bayesian/Bayesian_2.html">Applied Bayesian Statistics</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../MCMC/MCMC.html">Basics of Markov Chain Monte Carlo <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Classification.html">Classification <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Gaussian_Processes/Gaussian_Processes.html">Gaussian Processes <a class="tocSkip"></a></a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Time_Series/Time_Series.html">Time Series Analysis <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../Machine_Learning/Best_Practices.html">Machine Learning Practices and Protocols</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Intro_n_Regression/Intro_n_Regression.html">Introduction to Deep Learning and Regression Workshop</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../GPU_Parallelization/GPU_parallelization.html">Optimization with Graphics Processing Units <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../NN_Explainability/NN_explainability.html">Neural Network Explainability <a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="SBI_short.html">Introduction to Simulation Based Inference</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Simulation Based Inference: Exercises</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../DL_Diffusion/Diffusion.html">Diffusion Models</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../AI_Agents/AI_Agents.html">Intro to AI Agents<a class="tocSkip"></a></a></li>
+
+
+
+
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/AstroStat-Academy/astrostat-school-7/blob/main/./SBI/SBI_exercise.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/SBI/SBI_exercise.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Simulation Based Inference: Exercises</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Simulation Based Inference: Exercises</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-solving-with-gaussian-likelihood">Part 1: Solving with Gaussian likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-solving-with-neural-posterior-estimation">Part 2: Solving with Neural Posterior Estimation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">🔑 Solutions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-task-1-prior-likelihood-and-posterior">Part 1, Task 1 — Prior, likelihood, and posterior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-task-2-mcmc-sampling">Part 1, Task 2 — MCMC sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-task-3-corner-plot">Part 1, Task 3 — Corner plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-task-1-the-simulator">Part 2, Task 1 — The simulator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-task-2-training-data">Part 2, Task 2 — Training data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-task-3-npe-class">Part 2, Task 3 — NPE class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-tasks-4-5-sample-and-plot">Part 2, Tasks 4 &amp; 5 — Sample and plot</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <fieldset style="padding:10px; border:1px solid #ccc; box-shadow:2px 2px 5px rgba(0,0,0,0.1);">
+<legend style="font-size: 10px; color:#555;">Credits</legend>
+<table style="width: 100%; border-collapse: collapse;">
+    <tr>
+        <td style="width: 80px; vertical-align: top;">
+            <img src="https://raw.githubusercontent.com/AstroStat-Academy/assets-public/main/logo/logo_b_text_lowres.png" alt="AstroStat Academy logo" width="100">
+        </td>
+        <td style="vertical-align: center; padding-left: 15px; font-size: 10px; line-height: 1.2;">
+            This notebook contains original work by the authors unless stated otherwise.
+            Any external material is properly credited to its sources.<br>
+            References to papers, datasets, and software are acknowledged.
+            Original content is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License v3.0 (GNU GPLv3)</a>.
+        </td>
+    </tr>
+</table>
+</fieldset>
+<!-- Allow these <br> or it will look ugly once rendered on Jupyter Book. -->
+<br><section class="tex2jax_ignore mathjax_ignore" id="simulation-based-inference-exercises">
+<h1>Simulation Based Inference: Exercises<a class="headerlink" href="#simulation-based-inference-exercises" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Compatibility patch for GetDist + NumPy 2.0 ---</span>
+<span class="c1"># NumPy 2.0 removed np.infty, but older versions of GetDist still use it.</span>
+<span class="c1"># This patch restores it at runtime before importing GetDist.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s1">&#39;infty&#39;</span><span class="p">):</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">infty</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>  <span class="c1"># Restore deprecated alias for compatibility</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch.utils.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">TensorDataset</span><span class="p">,</span> <span class="n">DataLoader</span><span class="p">,</span> <span class="n">random_split</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">emcee</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">poisson</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">chi2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">basinhopping</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tqdm</span><span class="w"> </span><span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytorch_lightning</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pl</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">getdist</span><span class="w"> </span><span class="kn">import</span> <span class="n">plots</span><span class="p">,</span> <span class="n">MCSamples</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.integrate</span><span class="w"> </span><span class="kn">import</span> <span class="n">quad</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nflows.flows.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nflows.distributions.normal</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardNormal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nflows.transforms.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">CompositeTransform</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nflows.transforms.autoregressive</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaskedAffineAutoregressiveTransform</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">nflows.transforms.permutations</span><span class="w"> </span><span class="kn">import</span> <span class="n">ReversePermutation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sbi.inference</span><span class="w"> </span><span class="kn">import</span> <span class="n">SNPE</span>  <span class="c1"># old name used in v0.22.0</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sbi.utils.torchutils</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoxUniform</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>In the main notebook, our mock observations were generated by simply <span style="color:darkorange">adding some Gaussian noise to the theoretical data</span>. However, in a <span style="color:darkorange">real experiment</span>, our observations may be subject to various <span style="color:darkorange">other effects</span>, which may be caused by the instruments, the environment, physical processes, etc. These effects are often very <strong>hard to model with a simple analytical function</strong>, and may introduce additional <strong>biases</strong> in the data.</p>
+<p>In this exercise, we will assume that our observations are contaminated by two new effects: random instrumental drift and intermittent calibration errors.</p>
+<ol class="arabic">
+<li><p><strong>Random instrumental drift</strong>: The instrument that we use to measure the data is not perfect, and its <span style="color:darkorange">calibration may drift over time</span> due to environmental factors or aging hardware. This drift will accumulate over time and so the measurements that we take at different times may acquire a random offset. We can model this effect by adding a cumulative sum of normally distributed random values to the true magnitudes.</p>
+ <details> 
+ <summary>Why? [Click to expand]
+  <br><br>
+ </summary>
+ This simulates the effect of a drift that changes the measurements in a continuous but random manner. The random values are drawn from a normal distribution with a mean of zero, ensuring that the drift can go in either direction (positive or negative) and has a variance that reflects the magnitude of the drift per observation.
+ <br> <br>
+ </details>
+</li>
+<li><p><strong>Intermittent calibration errors</strong>: The instrument may also suffer from occasional <span style="color:darkorange">large calibration errors</span> that occur at random intervals. This may be caused by a variety of factors, such as power surges, cosmic rays, mechanical disturbances, miscalibrations during the data collection process etc. We model these errors by introducing occasional large spikes in the observed magnitudes.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#random seed</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1235</span><span class="p">)</span>
+<span class="n">torch</span><span class="o">.</span><span class="n">manual_seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>
+
+<span class="c1"># Constants</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">299792.458</span>  <span class="c1"># Speed of light in km/s</span>
+
+<span class="c1"># True cosmological parameters</span>
+<span class="n">true_Omega_m</span> <span class="o">=</span> <span class="mf">0.3</span>
+<span class="n">true_H0</span> <span class="o">=</span> <span class="mf">70.0</span>  <span class="c1"># Hubble constant in km/s/Mpc</span>
+
+<span class="c1"># Redshifts of the supernovae</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Noise level in the observed magnitudes</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.1</span>
+
+<span class="c1"># Luminosity distance function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">luminosity_distance</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Calculate the luminosity distance for a given redshift, Omega_m and H0 &quot;&quot;&quot;</span>
+    <span class="n">integrand</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z_prime</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Omega_m</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z_prime</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">Omega_m</span><span class="p">))</span>
+    <span class="n">d_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">quad</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">z_i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">z_i</span> <span class="ow">in</span> <span class="n">z</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span> <span class="o">*</span> <span class="n">d_L</span><span class="p">)</span> <span class="o">/</span> <span class="n">H0</span>
+
+<span class="c1"># Generate synthetic data</span>
+<span class="c1"># Generate synthetic data with non-linear transformation</span>
+<span class="n">d_L_true</span> <span class="o">=</span> <span class="n">luminosity_distance</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">true_Omega_m</span><span class="p">,</span> <span class="n">true_H0</span><span class="p">)</span>
+<span class="n">m_true</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">d_L_true</span><span class="p">)</span> <span class="o">+</span> <span class="mf">19.3</span>
+
+<span class="c1"># Introduce random walk drift</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">random_walk_drift</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="n">drift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">m</span> <span class="o">+</span> <span class="n">drift</span>
+
+<span class="c1"># Introduce intermittent calibration errors</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">intermittent_calibration_errors</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">error_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">errors</span><span class="p">[</span><span class="n">error_indices</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">error_indices</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">m</span> <span class="o">+</span> <span class="n">errors</span>
+
+<span class="c1"># Apply both effects to the observed magnitudes</span>
+<span class="n">m_obs_drift</span> <span class="o">=</span> <span class="n">random_walk_drift</span><span class="p">(</span><span class="n">m_true</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+<span class="n">m_obs</span> <span class="o">=</span> <span class="n">intermittent_calibration_errors</span><span class="p">(</span><span class="n">m_obs_drift</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">m_true</span><span class="p">))</span>
+
+
+<span class="c1"># Plot synthetic data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Observed magnitudes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">m_true</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True magnitudes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Redshift $z$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Apparent magnitude $m$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-1-solving-with-gaussian-likelihood">
+<h2>Part 1: Solving with Gaussian likelihood<a class="headerlink" href="#part-1-solving-with-gaussian-likelihood" title="Link to this heading">#</a></h2>
+<p><strong>Problem:</strong> Given the observed magnitudes <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span> and redshifts <span class="math notranslate nohighlight">\(z\)</span>, infer the cosmological parameters <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span> using the traditional Bayesian approach assuming a Gaussian likelihood:</p>
+<div class="math notranslate nohighlight">
+\[
+\Large \mathcal{L}(\Omega_m, H_0) = \prod_{i=1}^N \frac{1}{\sqrt{2\pi\sigma_i^2}} \exp\left(-\frac{(m_{\text{obs},i} - m_{\text{th},i})^2}{2\sigma_i^2}\right), \tag{3}
+\]</div>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Define the prior, a Gaussian likelihood with some <span class="math notranslate nohighlight">\(\sigma\)</span> and the posterior.</p></li>
+<li><p>Run MCMC to sample from the posterior.</p></li>
+<li><p>Plot the corner plot of the posterior samples and see if the results are consistent with the true values.</p></li>
+</ol>
+<p><em>(Worked solutions are in the <strong>Solutions</strong> section at the end of this notebook.)</em></p>
+</div><div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>Click for tip</summary></b></p>
+<p>Do <em><strong>exactly</strong></em> what was done in the main notebook:</p>
+<ul class="simple">
+<li><p>For the prior, use a flat prior over <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
+<li><p>For the Gaussian likelihood, you can assume a <span class="math notranslate nohighlight">\(\sigma\)</span> looking at the data (I would assume <span class="math notranslate nohighlight">\(\sigma=0.5\)</span>, as in the main notebook).</p></li>
+<li><p>For MCMC, you can use the <code class="docutils literal notranslate"><span class="pre">emcee</span></code> package.</p></li>
+</ul>
+</details>
+</div><p>Task 1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Log-prior function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_prior</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="k">if</span> <span class="o">...</span>
+        <span class="k">return</span> <span class="o">...</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">...</span>
+    
+<span class="c1"># Define the log-likelihood function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_like</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">):</span>
+    <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">d_L</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">m_th</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">sigma_m</span> <span class="o">=</span> <span class="o">...</span>  <span class="c1"># our assumed standard deviation of magnitudes</span>
+    <span class="k">return</span> <span class="o">...</span> 
+
+<span class="c1"># Log-posterior function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_post</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">):</span>
+    <span class="n">lp</span> <span class="o">=</span> <span class="n">log_prior</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">lp</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="c1"># If prior is -inf, return directly -inf</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lp</span> <span class="o">+</span> <span class="n">log_like</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Task 2:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sampling with `emcee` </span>
+<span class="n">ndim</span><span class="p">,</span> <span class="n">nwalkers</span> <span class="o">=</span> <span class="o">...</span> <span class="p">,</span> <span class="o">...</span>
+<span class="n">ncpus</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+
+<span class="c1"># Initialize walkers </span>
+<span class="n">pos</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">ncpus</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+    <span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_post</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">),</span> <span class="n">pool</span><span class="o">=</span><span class="n">pool</span><span class="p">)</span>
+    <span class="n">sampler_output</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">nsteps</span><span class="o">=...</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Task 3:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get samples and convert to GetDist MCSamples</span>
+<span class="n">flat_samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">get_chain</span><span class="p">(</span><span class="n">discard</span><span class="o">=...</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># GetDist plotting</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">MCSamples</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">flat_samples</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">])</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">plots</span><span class="o">.</span><span class="n">get_subplot_plotter</span><span class="p">(</span><span class="n">width_inch</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">triangle_plot</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">:</span> <span class="n">true_Omega_m</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">:</span> <span class="n">true_H0</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-2-solving-with-neural-posterior-estimation">
+<h2>Part 2: Solving with Neural Posterior Estimation<a class="headerlink" href="#part-2-solving-with-neural-posterior-estimation" title="Link to this heading">#</a></h2>
+<p><strong>Problem:</strong> Given the observed magnitudes <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span> and redshifts <span class="math notranslate nohighlight">\(z\)</span>, infer the cosmological parameters <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span> using the Neural Posterior Estimation approach.</p>
+<div style="border-left: 5px solid #FFA500; background-color: rgba(255, 165, 0, 0.15); padding: 10px; border-radius: 4px; color: inherit;">
+<p><strong>Tasks:</strong></p>
+<ol class="arabic simple">
+<li><p>Construct a <strong>simulator</strong> that generates the observed magnitudes <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span> given the cosmological parameters <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span>. Encode the random instrumental drifts and intermittent calibration errors in the simulator.</p></li>
+<li><p>Generate a <strong>training dataset</strong> of observed magnitudes <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span> and corresponding cosmological parameters <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span>, by running the simulator for a range of randomly drawn parameters <span class="math notranslate nohighlight">\(\Omega_m\)</span> and <span class="math notranslate nohighlight">\(H_0\)</span>.</p></li>
+<li><p>Define the <strong>Neural Posterior Estimator</strong> class using the <code class="docutils literal notranslate"><span class="pre">sbi</span></code> package that will estimate the posterior with a normalizing flow.</p></li>
+<li><p>Sample from the NPE, conditioning on the observed magnitudes <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span> that we had in the beginning.</p></li>
+<li><p>Plot the corner plot of the posterior samples and see if the results are consistent with the true values.</p></li>
+</ol>
+<p><em>(Worked solutions are in the <strong>Solutions</strong> section at the end of this notebook.)</em></p>
+</div><div style="border-left: 4px solid #e57373; padding-left: 1em; padding-top: 1em; padding-bottom: 1em; margin: 1em 0; background: #fdecea; color: #1a1a1a;">
+<details>
+<p><b><summary>Click for tip</summary></b></p>
+<p>Again, do <em><strong>exactly</strong></em> what was done in the main notebook. The actual changes that you need to implement are:</p>
+<ul class="simple">
+<li><p>In the simulator, introduce the random instrumental drifts and intermittent calibration errors.</p></li>
+<li><p>For the test data, use instead the observed magnitudes <span class="math notranslate nohighlight">\(m_{\text{obs}}\)</span> that we showed in the beginning.</p></li>
+</ul>
+</details>
+</div><p>Task 1:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Forward model to simulate observed magnitudes</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">luminosity_distance_simulator</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">d_L</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">m_th</span> <span class="o">=</span> <span class="o">...</span>
+    <span class="n">m_drift</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># add the random walk drift here</span>
+    <span class="n">m_drift_calibration</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># add the intermittent calibration errors here</span>
+    <span class="n">m_sim</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># add the standard noise here, to get the final simulated magnitudes</span>
+    
+    <span class="k">return</span> <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Task 2:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span> <span class="c1"># use random seed for reproducibility</span>
+
+<span class="c1"># Generate training data</span>
+<span class="n">n_train</span> <span class="o">=</span> <span class="mi">20_000</span>
+<span class="n">param_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_train</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1"># Parameter proposal</span>
+<span class="n">x_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">luminosity_distance_simulator</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">param_samples</span><span class="p">)])</span>
+
+<span class="c1"># Convert to tensors</span>
+<span class="n">param_samples</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">x_samples</span> <span class="o">=</span> <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Task 3:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prior</span> <span class="o">=</span> <span class="o">...</span> 
+<span class="n">inference</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">inference</span><span class="o">.</span><span class="n">append_simulations</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">density_estimator</span> <span class="o">=</span> <span class="o">...</span>
+<span class="n">posterior</span> <span class="o">=</span> <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tasks 4 &amp; 5:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples_npe</span> <span class="o">=</span> <span class="o">...</span>
+
+<span class="c1"># Convert to numpy (ensure on CPU and detached from graph)</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">samples_npe</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+    <span class="n">samples_npe</span> <span class="o">=</span> <span class="n">samples_npe</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">samples_npe</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">samples_npe</span><span class="p">)</span>
+
+
+<span class="c1"># Create a getdist MCSamples object</span>
+<span class="n">gd_samples_npe</span> <span class="o">=</span> <span class="n">MCSamples</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">samples_npe</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">],</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">])</span>
+
+<span class="c1"># Make a triangle/contour plot with getdist</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">plots</span><span class="o">.</span><span class="n">get_subplot_plotter</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">triangle_plot</span><span class="p">([</span><span class="n">gd_samples_npe</span><span class="p">,</span> <span class="n">samples</span><span class="p">],</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">:</span> <span class="n">true_Omega_m</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">:</span> <span class="n">true_H0</span><span class="p">},</span> <span class="n">legend_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NPE&#39;</span><span class="p">,</span> <span class="s1">&#39;MCMC&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr style="border: none; border-top: 4px solid #888; margin: 2.5em 0 1em 0;">
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="solutions">
+<h1>🔑 Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h1>
+<blockquote>
+<div><p><strong>End of the exercise — solutions below.</strong> Try the exercises yourself first, then check your work here. (These cells only need the imports and the data-generation cell from the top of the notebook.)</p>
+</div></blockquote>
+<section id="part-1-task-1-prior-likelihood-and-posterior">
+<h2>Part 1, Task 1 — Prior, likelihood, and posterior<a class="headerlink" href="#part-1-task-1-prior-likelihood-and-posterior" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Log-prior function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_prior</span><span class="p">(</span><span class="n">params</span><span class="p">):</span>
+    <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">Omega_m</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="mi">50</span> <span class="o">&lt;</span> <span class="n">H0</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    
+<span class="c1"># Define the log-likelihood function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_like</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">):</span>
+    <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">d_L</span> <span class="o">=</span> <span class="n">luminosity_distance</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span><span class="p">)</span>
+    <span class="n">m_th</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">d_L</span><span class="p">)</span> <span class="o">+</span> <span class="mf">19.3</span>
+    <span class="n">sigma_m</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># Assumed standard deviation of magnitudes</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">m_obs</span> <span class="o">-</span> <span class="n">m_th</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma_m</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>    
+
+<span class="c1"># Log-posterior function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_post</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">):</span>
+    <span class="n">lp</span> <span class="o">=</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">lp</span><span class="p">):</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lp</span> <span class="o">+</span> <span class="n">log_like</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-1-task-2-mcmc-sampling">
+<h2>Part 1, Task 2 — MCMC sampling<a class="headerlink" href="#part-1-task-2-mcmc-sampling" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sampling with `emcee` </span>
+<span class="n">ndim</span><span class="p">,</span> <span class="n">nwalkers</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span>
+<span class="n">ncpus</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+
+<span class="c1"># Initialize walkers around a random position withing the prior volume</span>
+<span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">))</span>
+
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">emcee</span><span class="o">.</span><span class="n">EnsembleSampler</span><span class="p">(</span><span class="n">nwalkers</span><span class="p">,</span> <span class="n">ndim</span><span class="p">,</span> <span class="n">log_post</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">m_obs</span><span class="p">))</span>
+<span class="n">sampler</span><span class="o">.</span><span class="n">run_mcmc</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-1-task-3-corner-plot">
+<h2>Part 1, Task 3 — Corner plot<a class="headerlink" href="#part-1-task-3-corner-plot" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get samples and convert to GetDist MCSamples</span>
+<span class="n">flat_samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">get_chain</span><span class="p">(</span><span class="n">discard</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">flat</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># GetDist plotting</span>
+<span class="n">samples</span> <span class="o">=</span> <span class="n">MCSamples</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">flat_samples</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">])</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">plots</span><span class="o">.</span><span class="n">get_subplot_plotter</span><span class="p">(</span><span class="n">width_inch</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">triangle_plot</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">:</span> <span class="n">true_Omega_m</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">:</span> <span class="n">true_H0</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-2-task-1-the-simulator">
+<h2>Part 2, Task 1 — The simulator<a class="headerlink" href="#part-2-task-1-the-simulator" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Forward model to simulate observed magnitudes</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">luminosity_distance_simulator</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span> <span class="o">=</span> <span class="n">params</span>
+    <span class="n">d_L</span> <span class="o">=</span> <span class="n">luminosity_distance</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">Omega_m</span><span class="p">,</span> <span class="n">H0</span><span class="p">)</span>
+    <span class="n">m_th</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">d_L</span><span class="p">)</span> <span class="o">+</span> <span class="mf">19.3</span>
+    <span class="n">m_sim_drift</span> <span class="o">=</span> <span class="n">random_walk_drift</span><span class="p">(</span><span class="n">m_th</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>
+    <span class="n">m_sim</span> <span class="o">=</span> <span class="n">intermittent_calibration_errors</span><span class="p">(</span><span class="n">m_sim_drift</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">m_th</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">m_sim</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-2-task-2-training-data">
+<h2>Part 2, Task 2 — Training data<a class="headerlink" href="#part-2-task-2-training-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span> <span class="c1"># use random seed for reproducibility</span>
+
+<span class="c1"># Generate training data</span>
+<span class="n">n_train</span> <span class="o">=</span> <span class="mi">20_000</span>
+<span class="n">param_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span> <span class="n">high</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">n_train</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1"># Parameter proposal</span>
+<span class="n">x_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">luminosity_distance_simulator</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">param_samples</span><span class="p">)])</span>
+
+<span class="c1"># Convert to tensors</span>
+<span class="n">param_samples</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">param_samples</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">x_samples</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">x_samples</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-2-task-3-npe-class">
+<h2>Part 2, Task 3 — NPE class<a class="headerlink" href="#part-2-task-3-npe-class" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the prior, and the SBI model and give it parameters theta and corresponding simulations x</span>
+<span class="n">prior</span> <span class="o">=</span> <span class="n">BoxUniform</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">]),</span> <span class="n">high</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">]))</span>
+
+<span class="n">inference</span> <span class="o">=</span> <span class="n">SNPE</span><span class="p">(</span><span class="n">prior</span><span class="o">=</span><span class="n">prior</span><span class="p">)</span>
+
+<span class="n">inference</span><span class="o">.</span><span class="n">append_simulations</span><span class="p">(</span><span class="n">param_samples</span><span class="p">,</span> <span class="n">x_samples</span><span class="p">)</span>
+
+<span class="n">density_estimator</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+<span class="n">posterior</span> <span class="o">=</span> <span class="n">inference</span><span class="o">.</span><span class="n">build_posterior</span><span class="p">(</span><span class="n">density_estimator</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="part-2-tasks-4-5-sample-and-plot">
+<h2>Part 2, Tasks 4 &amp; 5 — Sample and plot<a class="headerlink" href="#part-2-tasks-4-5-sample-and-plot" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples_npe</span> <span class="o">=</span> <span class="n">posterior</span><span class="o">.</span><span class="n">sample</span><span class="p">((</span><span class="mi">10000</span><span class="p">,),</span> <span class="n">x</span><span class="o">=</span><span class="n">m_obs</span><span class="p">)</span>
+
+<span class="c1"># Convert to numpy (ensure on CPU and detached from graph)</span>
+<span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">samples_npe</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+    <span class="n">samples_npe</span> <span class="o">=</span> <span class="n">samples_npe</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">samples_npe</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">samples_npe</span><span class="p">)</span>
+
+
+<span class="c1"># Create a getdist MCSamples object</span>
+<span class="n">gd_samples_npe</span> <span class="o">=</span> <span class="n">MCSamples</span><span class="p">(</span><span class="n">samples</span><span class="o">=</span><span class="n">samples_npe</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">],</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">])</span>
+
+<span class="c1"># Make a triangle/contour plot with getdist</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">plots</span><span class="o">.</span><span class="n">get_subplot_plotter</span><span class="p">()</span>
+<span class="n">g</span><span class="o">.</span><span class="n">triangle_plot</span><span class="p">([</span><span class="n">gd_samples_npe</span><span class="p">,</span> <span class="n">samples</span><span class="p">],</span> <span class="n">filled</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">markers</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;\Omega_m&#39;</span><span class="p">:</span> <span class="n">true_Omega_m</span><span class="p">,</span> <span class="s1">&#39;H_0&#39;</span><span class="p">:</span> <span class="n">true_H0</span><span class="p">},</span> <span class="n">legend_labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;NPE&#39;</span><span class="p">,</span> <span class="s1">&#39;MCMC&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./SBI"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="SBI_short.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Introduction to Simulation Based Inference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../DL_Diffusion/Diffusion.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Diffusion Models</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Simulation Based Inference: Exercises</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-solving-with-gaussian-likelihood">Part 1: Solving with Gaussian likelihood</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-solving-with-neural-posterior-estimation">Part 2: Solving with Neural Posterior Estimation</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions">🔑 Solutions</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-task-1-prior-likelihood-and-posterior">Part 1, Task 1 — Prior, likelihood, and posterior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-task-2-mcmc-sampling">Part 1, Task 2 — MCMC sampling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-task-3-corner-plot">Part 1, Task 3 — Corner plot</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-task-1-the-simulator">Part 2, Task 1 — The simulator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-task-2-training-data">Part 2, Task 2 — Training data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-task-3-npe-class">Part 2, Task 3 — NPE class</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-tasks-4-5-sample-and-plot">Part 2, Tasks 4 &amp; 5 — Sample and plot</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By AstroStat Academy
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
